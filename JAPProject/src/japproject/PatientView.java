@@ -10,13 +10,17 @@ import static japproject.HomePanel.if_;
 import iComponents.iFrame;
 import iComponents.iPanel;
 import iComponents.iSQL;
+import iComponents.iScrollPane;
 import iComponents.iTable;
+import static japproject.HomePanel.if_;
+import java.awt.Color;
 import java.awt.Point;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JScrollPane;
 
 /**
@@ -26,9 +30,10 @@ import javax.swing.JScrollPane;
 public class PatientView {
        
   public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
-    public Point initialClick;
     public  final int projectWidth = 1200;
     public  final int projectHeight = 900;
+    public static iPanel RePanel;
+ 
     
    
     
@@ -36,9 +41,9 @@ public class PatientView {
      public PatientView() {
         try {
 
-           iPanel RePanel = new iPanel(0, 0, 100.0f, 100.0f, 0, 0, if_);
+            RePanel = new iPanel(0, 0, 100.0f, 94.0f, 0, 60, if_);
             
-            if_.repaint();
+            
             ResultSet rs = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista 
             RePanel.repaint();
             ArrayList<String> Cols = new ArrayList();
@@ -52,8 +57,9 @@ public class PatientView {
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.getTableHeader().setResizingAllowed(false);
 
-            JScrollPane scrollPane2 = new JScrollPane(RegistrosTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+            iScrollPane  scrollPane2 = new iScrollPane (RePanel, Color.red);
             scrollPane2.setViewportView(RegistrosTable);
+            
 
 //            Codigo para manipular los sizes de las columnas 
             RegistrosTable.getColumnModel().getColumn(0).setWidth(0);
@@ -104,10 +110,10 @@ public class PatientView {
             RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
             //fin de los parametros de la tabla
 
-            if (sql.Exists(rs)) {
+            if (sql.Exists(rs)) {//verifica que el query sea valido
                 try {
 
-                    while (rs.next()) {
+                    while (rs.next()) {//llena los rows de la tabla
                         Object[] row = new Object[rs.getMetaData().getColumnCount()];
                         for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                             row[i - 1] = rs.getObject(i);
