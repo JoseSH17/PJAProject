@@ -10,6 +10,8 @@ import iComponents.iSQL;
 import java.awt.Color;
 import java.awt.Point;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import static japproject.PatientView.RePanel;
+import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -30,13 +32,11 @@ public class HomePanel {
         
     private final int projectWidth = 1200;
     private final int projectHeight = 900;
-    private final PatientView pv;
     
     
     
     public HomePanel() {
        if_ = new iFrame(projectWidth, projectHeight, 0, 30, "", EXIT_ON_CLOSE);  
-       this.pv = new PatientView();
        initComponents(); //Do not move InitComponents from this place.    
        if_.finalice();
     }
@@ -48,11 +48,12 @@ public class HomePanel {
     public void HeaderMenu() {
 
         JMenuBar menuBar = new JMenuBar(); //Adding Menu Bar, this holds all main menus and submenus             
-        JMenu MenuHome = new JMenu(); //This is the Home Menu, redirects the user to the main screen where the patients list is shown
-        MenuHome.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.HOME, 16, new Color(240, 240, 240))); //Adding an icon that looks like a tiny home for the menu.
-                
+        JButton MenuHome = new JButton(); //This is the Home Menu, redirects the user to the main screen where the patients list is shown
+        MenuHome.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.HOME, 16, Color.CYAN)); //Adding an icon that looks like a tiny home for the menu.
+                        
         MenuHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {            
+            public void actionPerformed(java.awt.event.ActionEvent evt) {  
+                RePanel.finalice();               
             }
         });
 
