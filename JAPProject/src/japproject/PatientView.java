@@ -29,9 +29,9 @@ import javax.swing.JScrollPane;
 public class PatientView {
        
   public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
-    public Point initialClick;
     public  final int projectWidth = 1200;
     public  final int projectHeight = 900;
+    public static iPanel RePanel;
  
     
    
@@ -40,7 +40,7 @@ public class PatientView {
      public PatientView() {
         try {
 
-           iPanel RePanel = new iPanel(0, 0, 100.0f, 94.0f, 0, 60, if_);
+            RePanel = new iPanel(0, 0, 100.0f, 94.0f, 0, 60, if_);
             
             
             ResultSet rs = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista 
