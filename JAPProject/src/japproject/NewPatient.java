@@ -7,6 +7,7 @@ package japproject;
 
 import iComponents.iButton;
 import iComponents.iFrame;
+import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iSQL;
 import iComponents.iTextField;
@@ -39,68 +40,68 @@ public class NewPatient {
     //fin cbo`s para Paciente
     
     //Controles swing para RePanel
-    private JLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
-    private JLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
+    private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
+    private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
     private iButton btnRegisterAction;//Boton para el registrar
     //FIN de Controles swing para RePanel
     
     //Controles Swing para Solicitante
-    private JLabel lbl_TituloSolicitante;//Lbl para el titulo de Solicitante
-    private JLabel lbl_CedulaSolicitante;//Lbl para la cedula del solicitante
+    private iLabel lbl_TituloSolicitante;//Lbl para el titulo de Solicitante
+    private iLabel lbl_CedulaSolicitante;//Lbl para la cedula del solicitante
     private iTextField txt_CedulaSolicitante;//TextField para la cedula del solicitante
-    private JLabel lbl_NombreSolicitante;//Lbl para el nombre del Solicitante
+    private iLabel lbl_NombreSolicitante;//Lbl para el nombre del Solicitante
     private iTextField txt_NombreSolicitante;//TextField para el nombre del solicitante
-    private JLabel lbl_DireccionSolicitante;//Lbl para la direccion del Solicitante
+    private iLabel lbl_DireccionSolicitante;//Lbl para la direccion del Solicitante
     private iTextField txt_DireccionSolicitante;//TextField para la direccion del solicitante(cambiar por JTextArea)
-    private JLabel lbl_TelefonoSolicitante;//Lbl para el telefono del Solicitante
+    private iLabel lbl_TelefonoSolicitante;//Lbl para el telefono del Solicitante
     private iTextField txt_TelefonoSolicitante;//TextField para el telefono del solicitante
-    private JLabel lbl_ProfesionSolicitante;//Lbl para la profesion del Solicitante
+    private iLabel lbl_ProfesionSolicitante;//Lbl para la profesion del Solicitante
     private iTextField txt_ProfesionSolicitante;//TextField para la profesion del solicitante
-    private JLabel lbl_ActividadLaboralSolicitante;//Lbl para la Actividad Laboral del Solicitante
+    private iLabel lbl_ActividadLaboralSolicitante;//Lbl para la Actividad Laboral del Solicitante
     private iTextField txt_ActividadLaboralSolicitante;//TextField para la Actividad Laboral del solicitante
-    private JLabel lbl_MotivoConsultaSolicitante;//Lbl para el Motivo Consulta del Solicitante
+    private iLabel lbl_MotivoConsultaSolicitante;//Lbl para el Motivo Consulta del Solicitante
     private iTextField txt_MotivoConsultaSolicitante;//TextField para el Motivo Consulta de  Solicitante(cambiar por JTextArea)
-    private JLabel lbl_FechaReporte;//Lbl para la FechaReporte del Solicitante
+    private iLabel lbl_FechaReporte;//Lbl para la FechaReporte del Solicitante
     private iTextField txt_FechaReporte;//TextField para FechaReporte del Solicitante(cambiar por JDateChooser)
-    private JLabel lbl_NOTA;//Lbl para la NOTA(si preciona el CheckBox) del Solicitante
+    private iLabel lbl_NOTA;//Lbl para la NOTA(si preciona el CheckBox) del Solicitante
     private JCheckBox chk_boxSolicitanteIgualPaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
     private JCheckBox chk_boxSolicitanteDiferentePaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
     //FIN de Controles Swing para Solicitante
     
     //Controles Swing para Paciente
     private JTabbedPane jTabbedPane0;//creo el JtabbedPane para hacer el JtabbedPane
-    private JPanel Panel_tab1;
-    private JPanel Panel_tab2;
-    private JPanel Panel_tab3;
+    private iPanel Panel_tab1;
+    private iPanel Panel_tab2;
+    private iPanel Panel_tab3;
     
     //Controles swing para paciente
     private iButton btnRegisterActionPaciente;//Boton para registrar el paciente
-    private JLabel lbl_TituloPaciente;//Lbl para el Titulo del Paciente
-    private JLabel lbl_CedulaPaciente;//Lbl para la Cedula del Solicitante
+    private iLabel lbl_TituloPaciente;//Lbl para el Titulo del Paciente
+    private iLabel lbl_CedulaPaciente;//Lbl para la Cedula del Solicitante
     private iTextField txt_CedulaPaciente;//TextField para cedula del Solicitante en la parte de paciente(hay que hacerle un setEditable(false))
-    private JLabel lbl_CedulaSolicitantePaciente;//Lbl para la Cedula del Paciente
+    private iLabel lbl_CedulaSolicitantePaciente;//Lbl para la Cedula del Paciente
     private iTextField txt_CedulaSolicitantePaciente;//TextField para cedula del Paciente
-    private JLabel lbl_NombrePaciente;//Lbl para el Nombre del Paciente
+    private iLabel lbl_NombrePaciente;//Lbl para el Nombre del Paciente
     private iTextField txt_NombrePaciente;//TextField para el Nombre del Paciente
-    private JLabel lbl_FechaNacimientoPaciente;//Lbl para la Fecha de Nacimiento del Paciente
+    private iLabel lbl_FechaNacimientoPaciente;//Lbl para la Fecha de Nacimiento del Paciente
     private iTextField txt_FechaNacimientoPaciente;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
-    private JLabel lbl_DireccionPaciente;//Lbl para la Direccion del Paciente
+    private iLabel lbl_DireccionPaciente;//Lbl para la Direccion del Paciente
     private iTextField txt_DireccionPaciente;//TextField para la Direccion del Paciente
-    private JLabel lbl_TelefonoPaciente;//Lbl para la el Telefono del Paciente
+    private iLabel lbl_TelefonoPaciente;//Lbl para la el Telefono del Paciente
     private iTextField txt_TelefonoPaciente;//TextField para el Telefono del Paciente
-    private JLabel lbl_ProfesionPaciente;//Lbl para la Profesion del Paciente
+    private iLabel lbl_ProfesionPaciente;//Lbl para la Profesion del Paciente
     private iTextField txt_ProfesionPaciente;//TextField para la Profesion del Paciente
-    private JLabel lbl_ActividadLaboralPaciente;//Lbl para la Actividad Laboral del Paciente
+    private iLabel lbl_ActividadLaboralPaciente;//Lbl para la Actividad Laboral del Paciente
     private iTextField txt_ActividadLaboralPaciente;//TextField para la Actividad Laboral del Paciente
-    private JLabel lbl_MotivoConsultaPaciente;//Lbl para la El Motivo Consulta del Paciente
+    private iLabel lbl_MotivoConsultaPaciente;//Lbl para la El Motivo Consulta del Paciente
     private iTextField txt_MotivoConsultaPaciente;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
-    private JLabel lbl_ParentescoPaciente;//Lbl para el Parentesco del Paciente
-    private JLabel lbl_ClasificacionPaciente;//Lbl para la Clasificacion del Paciente
-    private JLabel lbl_CursoPaciente;//Lbl para la el Curso del Paciente
-    private JLabel lbl_HorarioPaciente;//Lbl para la el Horario del Paciente
-    private JLabel lbl_DetalleHorarioPaciente;//Lbl para el Detalle Horario del Paciente
+    private iLabel lbl_ParentescoPaciente;//Lbl para el Parentesco del Paciente
+    private iLabel lbl_ClasificacionPaciente;//Lbl para la Clasificacion del Paciente
+    private iLabel lbl_CursoPaciente;//Lbl para la el Curso del Paciente
+    private iLabel lbl_HorarioPaciente;//Lbl para la el Horario del Paciente
+    private iLabel lbl_DetalleHorarioPaciente;//Lbl para el Detalle Horario del Paciente
     private iTextField txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
-    private JLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente
+    private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente
     //FIN de Controles Swing para Paciente
     
     public NewPatient(iFrame if_) {
