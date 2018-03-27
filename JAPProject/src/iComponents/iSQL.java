@@ -70,9 +70,9 @@ public final class iSQL {
      * @return
      */
     public Connection connect() {
-        SwingWorker sw = new SwingWorker<Boolean, Void>() {
-            @Override
-            protected Boolean doInBackground() throws Exception {
+//        SwingWorker sw = new SwingWorker<Boolean, Void>() {
+//            @Override
+//            protected Boolean doInBackground() throws Exception {
                 if (connection == null) {
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
@@ -82,10 +82,10 @@ public final class iSQL {
                         System.exit(0);
                     }
                 }
-                return true;
-            }
-        };
-        sw.execute();
+//                return true; 
+//            }
+//        };
+//        sw.execute();
         return connection;
     }
 
