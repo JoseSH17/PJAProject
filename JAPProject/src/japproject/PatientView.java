@@ -26,14 +26,14 @@ import javax.swing.JPanel;
  */
 public class PatientView {
 
-   public static iSQL sql;
+   public static iSQL sql=new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
 
     public static iPanel PatientView_panel;
 
     public PatientView(iFrame if_) {
         try {
             //        try {
-  sql=new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
+
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
 
             PatientView_panel.setBackground(Color.yellow);
