@@ -60,6 +60,12 @@ public class HomePanel {
         menuAgregarPaciente.setBorderPainted(false); 
         menuAgregarPaciente.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PERSON, 20, Color.BLACK));
         
+        menuAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {  
+                NewPatient NP = new NewPatient(if_);
+            }
+        });
+        
         JMenu menuMantenimiento = new JMenu("Mantenimiento");
         menuMantenimiento.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ADJUST, 20, Color.BLACK));
                 
