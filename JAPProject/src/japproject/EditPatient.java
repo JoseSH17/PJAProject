@@ -31,7 +31,7 @@ public class EditPatient {
         PatientView_panelLeft=new iPanel(0, 70,50.0f, 80.0f, 0, 0, if_);
         PatientView_panelLeft.setBackground(Color.BLUE);
         
-        PatientView_panelRight=new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
+        PatientView_panelRight=new iPanel(0, 70, 50.0f, 80.0f, 0, 0, if_);
         PatientView_panelRight.setBackground(Color.RED);
         
         PatientView_panelTable=new iPanel(0, 0, 100.0f, 10.0f, 0, 0, if_);
@@ -40,7 +40,7 @@ public class EditPatient {
         
         
         if_.AddObject(PatientView_panelLeft,if_.getWidth()/2,700,LEFT);
-        if_.AddObject(PatientView_panelRight,if_.getWidth()/2,700,RIGHT);
+        if_.AddObject(PatientView_panelRight,if_.getWidth()/2,80,RIGHT);
         if_.newLine();
         if_.AddObject(PatientView_panelTable,400,400,BOTTOM);
         if_.newLine();
