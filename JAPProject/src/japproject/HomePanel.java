@@ -62,7 +62,7 @@ public class HomePanel {
         
         menuAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {  
-                NewPatient NP = new NewPatient(if_); 
+                NewPatient NP = new NewPatient(if_);
             }
         });
         
