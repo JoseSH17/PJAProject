@@ -6,6 +6,7 @@
 package japproject;
 
 import static iComponents.ComponentInterfaz.CENTER;
+import static japproject.HomePanel.if_;
 import iComponents.iFrame;
 import iComponents.iPanel;
 import iComponents.iSQL;
@@ -32,7 +33,7 @@ public class PatientView {
    
     
 
-     public PatientView(iFrame if_) {
+     public PatientView() {
         try {
 
            iPanel RePanel = new iPanel(0, 0, 100.0f, 100.0f, 0, 0, if_);

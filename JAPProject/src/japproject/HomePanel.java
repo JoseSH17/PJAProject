@@ -6,7 +6,6 @@
 package japproject;
 
 import iComponents.iFrame;
-import iComponents.iPanel;
 import iComponents.iSQL;
 import java.awt.Color;
 import java.awt.Point;
@@ -14,6 +13,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import jiconfont.icons.GoogleMaterialDesignIcons;
+import jiconfont.swing.IconFontSwing;
 
 /**
  *
@@ -25,19 +26,18 @@ public class HomePanel {
 
     public Point initialClick;
     
-    public static  iFrame if_; //This is the main iFrame container, everything will be shown in here.
-     
-    public static  iPanel HomePanel; //This is the Home Panel, it contains the main table which shows the Patients information.
+    public static  iFrame if_; //This is the main iFrame container, everything will be shown in here.      
         
     private final int projectWidth = 1200;
     private final int projectHeight = 900;
+    private final PatientView pv;
+    
     
     
     public HomePanel() {
-       if_ = new iFrame(projectWidth, projectHeight, 0, 0, "", EXIT_ON_CLOSE);
-       HomePanel = new iPanel(0, 0, 100.0f, 100.0f, 0, 0, if_);       
-       initComponents(); //Do not move InitComponents from this place. 
-       if_.add(HomePanel);       
+       if_ = new iFrame(projectWidth, projectHeight, 0, 30, "", EXIT_ON_CLOSE);  
+       this.pv = new PatientView();
+       initComponents(); //Do not move InitComponents from this place.    
        if_.finalice();
     }
     
@@ -47,12 +47,12 @@ public class HomePanel {
         
     public void HeaderMenu() {
 
-        JMenuBar menuBar = new JMenuBar();
-        JMenu MenuHome = new JMenu("HOME");//Creo los Submenus
-
+        JMenuBar menuBar = new JMenuBar(); //Adding Menu Bar, this holds all main menus and submenus             
+        JMenu MenuHome = new JMenu(); //This is the Home Menu, redirects the user to the main screen where the patients list is shown
+        MenuHome.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.HOME, 16, new Color(240, 240, 240))); //Adding an icon that looks like a tiny home for the menu.
+                
         MenuHome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-             
+            public void actionPerformed(java.awt.event.ActionEvent evt) {            
             }
         });
 
@@ -71,17 +71,14 @@ public class HomePanel {
         menuArchivo.add(Exit);
 
         JMenu menuPers = new JMenu("PERSONALIZAR");
-        JMenuItem Pers1 = new JMenuItem("Color");
-        JMenuItem Pers2 = new JMenuItem("Color2");
-        menuPers.add(Pers1);
-        menuPers.add(Pers2);
+        JMenuItem ColorPallet = new JMenuItem("Color");        
+        menuPers.add(ColorPallet);        
 
         menuBar.add(MenuHome);
         menuBar.add(menuArchivo);
-        menuBar.add(menuPers);
-        menuBar.setBackground(Color.yellow);
+        menuBar.add(menuPers);        
 
-        HomePanel.AddObject(menuBar, projectWidth, 30);
-        HomePanel.newLine();        
+        if_.AddObject(menuBar, if_.getWidth(), 40);
+        if_.newLine();        
     }   
 }
