@@ -12,12 +12,16 @@ import iComponents.iPanel;
 import iComponents.iSQL;
 import iComponents.iTextField;
 import java.awt.Color;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 /**
@@ -28,6 +32,10 @@ public class NewPatient {
     
     public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");//hago la conexion a BD
     public static iPanel RePanel;//creo el iPanel
+    
+    private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
+    private final String USERNAME = "icompone_jose";
+    private final String PASSWORD = "m70Q(71X7k5v";
     
     //cbo`s para Paciente
     private JComboBox cbo_TipoPaciente;//son de seleccion por base de datos
@@ -62,7 +70,8 @@ public class NewPatient {
     private iLabel lbl_FechaReporte;//Lbl para la FechaReporte del Solicitante
     private iTextField txt_FechaReporte;//TextField para FechaReporte del Solicitante(cambiar por JDateChooser)
     private iLabel lbl_NOTA;//Lbl para la NOTA(si preciona el CheckBox) del Solicitante
-    private JCheckBox chk_boxSolicitanteIgualPaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
+    
+//    private JCheckBox chk_boxSolicitanteIgualPaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
     private JCheckBox chk_boxSolicitanteDiferentePaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
     //FIN de Controles Swing para Solicitante
     
@@ -293,9 +302,9 @@ public class NewPatient {
         ComponentesSolicitante();//cargo el metodo de los componentes swing de Solicitante
         ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
 
-        chk_boxSolicitanteIgualPaciente = new JCheckBox();
-        chk_boxSolicitanteIgualPaciente.setText("PACIENTE = Solicitante".toUpperCase());
-        chk_boxSolicitanteIgualPaciente.setBackground(Color.GRAY);
+//        chk_boxSolicitanteIgualPaciente = new JCheckBox();
+//        chk_boxSolicitanteIgualPaciente.setText("PACIENTE = Solicitante".toUpperCase());
+//        chk_boxSolicitanteIgualPaciente.setBackground(Color.GRAY);
         
         chk_boxSolicitanteDiferentePaciente = new JCheckBox();
         chk_boxSolicitanteDiferentePaciente.setText("PACIENTE != Solicitante".toUpperCase());
@@ -314,109 +323,110 @@ public class NewPatient {
 
         RePanel.AddObject(lbl_TituloSolicitante, 415, 30, 2);
         RePanel.AddObject(lbl_TituloPaciente, 415, 30, 600);//agrego el titulo para poner verlo con
-        lbl_TituloPaciente.setVisible(false);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
+        lbl_TituloPaciente.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         RePanel.newLine();
 
         RePanel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
         RePanel.AddObject(lbl_CedulaSolicitantePaciente, 146, 30, 600);//para paciente
-        lbl_CedulaSolicitantePaciente.setVisible(false);//para paciente
+        lbl_CedulaSolicitantePaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_CedulaSolicitante, 230, 30, 175);
         RePanel.AddObject(txt_CedulaSolicitantePaciente, 230, 30, 800);//para paciente
-        txt_CedulaSolicitantePaciente.setVisible(false);//para paciente
+        txt_CedulaSolicitantePaciente.setVisible(true);//para paciente
+        txt_CedulaSolicitantePaciente.setEnabled(true);
         RePanel.newLine();
 
         RePanel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
         RePanel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
-        lbl_CedulaPaciente.setVisible(false);//para paciente
+        lbl_CedulaPaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_NombreSolicitante, 230, 30, 175);
         RePanel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
-        txt_CedulaPaciente.setVisible(false);//para paciente
+        txt_CedulaPaciente.setVisible(true);//para paciente
         RePanel.newLine();
 
         
         RePanel.AddObject(lbl_DireccionSolicitante, 146, 30, 10);//para el paciente
         RePanel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 600);
-        lbl_FechaNacimientoPaciente.setVisible(false);//para paciente
+        lbl_FechaNacimientoPaciente.setVisible(true);//para paciente
 //        RePanel.AddObject(txt_FechaNacimiento, 230, 30, 175);
         RePanel.AddObject(txt_DireccionSolicitante, 230, 30, 175);
         RePanel.AddObject(txt_FechaNacimientoPaciente, 230, 30, 800);//para paciente
-        txt_FechaNacimientoPaciente.setVisible(false);//para paciente
+        txt_FechaNacimientoPaciente.setVisible(true);//para paciente
         RePanel.newLine();
 
         RePanel.AddObject(lbl_TelefonoSolicitante, 146, 30, 10);
         RePanel.AddObject(lbl_DireccionPaciente, 230, 30, 600);//para paciente
-        lbl_DireccionPaciente.setVisible(false);//para paciente
+        lbl_DireccionPaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_TelefonoSolicitante, 230, 30, 175);
         RePanel.AddObject(txt_DireccionPaciente, 230, 30, 800);//para paciente
-        txt_DireccionPaciente.setVisible(false);//para paciente
+        txt_DireccionPaciente.setVisible(true);//para paciente
         RePanel.newLine();
 
         RePanel.AddObject(lbl_ProfesionSolicitante, 146, 30, 10);
         RePanel.AddObject(lbl_TelefonoPaciente, 230, 30, 600);//para paciente
-        lbl_TelefonoPaciente.setVisible(false);//para paciente
+        lbl_TelefonoPaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_ProfesionSolicitante, 230, 30, 175);
         RePanel.AddObject(txt_TelefonoPaciente, 230, 30, 800);//para paciente
-        txt_TelefonoPaciente.setVisible(false);//para paciente
+        txt_TelefonoPaciente.setVisible(true);//para paciente
         RePanel.newLine();
 
         RePanel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 10);
         RePanel.AddObject(lbl_ProfesionPaciente, 230, 30, 600);//para paciente
-        lbl_ProfesionPaciente.setVisible(false);//para paciente
+        lbl_ProfesionPaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_ActividadLaboralSolicitante, 230, 30, 175);
         RePanel.AddObject(txt_ProfesionPaciente, 230, 30, 800);//para paciente
-        txt_ProfesionPaciente.setVisible(false);//para paciente
+        txt_ProfesionPaciente.setVisible(true);//para paciente
         RePanel.newLine();
 
         RePanel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 10);
         RePanel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 600);//para paciente
-        lbl_ActividadLaboralPaciente.setVisible(false);//para paciente
+        lbl_ActividadLaboralPaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_MotivoConsultaSolicitante, 230, 30, 175);
         RePanel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 800);//para paciente
-        txt_ActividadLaboralPaciente.setVisible(false);//para paciente
+        txt_ActividadLaboralPaciente.setVisible(true);//para paciente
         RePanel.newLine();
 
         RePanel.AddObject(lbl_FechaReporte, 146, 30, 10);
         RePanel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
-        lbl_MotivoConsultaPaciente.setVisible(false);//para paciente
+        lbl_MotivoConsultaPaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_FechaReporte, 230, 30, 175);
         RePanel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
-        txt_MotivoConsultaPaciente.setVisible(false);//para paciente
+        txt_MotivoConsultaPaciente.setVisible(true);//para paciente
         RePanel.newLine();
         
         RePanel.AddObject(lbl_ParentescoPaciente, 230, 30, 600);
-        lbl_ParentescoPaciente.setVisible(false);//para paciente
+        lbl_ParentescoPaciente.setVisible(true);//para paciente
         RePanel.AddObject(cbo_Parentesco, 230, 30, 800);
-        cbo_Parentesco.setVisible(false);//para paciente
+        cbo_Parentesco.setVisible(true);//para paciente
         RePanel.newLine();
         
         RePanel.AddObject(lbl_ClasificacionPaciente, 230, 30, 600);
-        lbl_ClasificacionPaciente.setVisible(false);//para paciente
+        lbl_ClasificacionPaciente.setVisible(true);//para paciente
         RePanel.AddObject(cbo_ClasificacionPaciente, 230, 30, 800);
-        cbo_ClasificacionPaciente.setVisible(false);//para paciente
+        cbo_ClasificacionPaciente.setVisible(true);//para paciente
         RePanel.newLine();
         
         RePanel.AddObject(lbl_CursoPaciente, 230, 30, 600);
-        lbl_CursoPaciente.setVisible(false);//para paciente
+        lbl_CursoPaciente.setVisible(true);//para paciente
         RePanel.AddObject(cbo_CursoPaciente, 230, 30, 800);
-        cbo_CursoPaciente.setVisible(false);//para paciente
+        cbo_CursoPaciente.setVisible(true);//para paciente
         RePanel.newLine();
         
         RePanel.AddObject(lbl_HorarioPaciente, 230, 30, 600);
-        lbl_HorarioPaciente.setVisible(false);//para paciente
+        lbl_HorarioPaciente.setVisible(true);//para paciente
         RePanel.AddObject(cbo_HorarioPaciente, 230, 30, 800);
-        cbo_HorarioPaciente.setVisible(false);//para paciente
+        cbo_HorarioPaciente.setVisible(true);//para paciente
         RePanel.newLine();
         
         RePanel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 600);
-        lbl_DetalleHorarioPaciente.setVisible(false);//para paciente
+        lbl_DetalleHorarioPaciente.setVisible(true);//para paciente
         RePanel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 800);
-        txt_DetalleHorarioPaciente.setVisible(false);//para paciente
+        txt_DetalleHorarioPaciente.setVisible(true);//para paciente
         RePanel.newLine();
         
         RePanel.AddObject(lbl_TipoPaciente, 230, 30, 600);
-        lbl_TipoPaciente.setVisible(false);//para paciente
+        lbl_TipoPaciente.setVisible(true);//para paciente
         RePanel.AddObject(cbo_TipoPaciente, 230, 30, 800);
-        cbo_TipoPaciente.setVisible(false);//para paciente
+        cbo_TipoPaciente.setVisible(true);//para paciente
         RePanel.newLine();
         
         RePanel.AddObject(lbl_NOTA, 500, 70, 10);
@@ -441,13 +451,16 @@ public class NewPatient {
 //        //Fin de crear los TabbedPane
 //        
         RePanel.newLine();
-        RePanel.AddObject(chk_boxSolicitanteIgualPaciente, 175, 30, 10);
-        RePanel.AddObject(chk_boxSolicitanteDiferentePaciente, 213, 30, 193);
+//        RePanel.AddObject(chk_boxSolicitanteIgualPaciente, 175, 30, 10);
+//        RePanel.AddObject(chk_boxSolicitanteDiferentePaciente, 213, 30, 193);
+        RePanel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
         RePanel.newLine();     
         RePanel.AddObject(btnRegisterAction, 175, 30, 10);
 
         btnRegisterAction.addActionListener((a) -> {
 
+            btn_RegisterAction_MouseClicked();
+            
         });
 //
         RePanel.newLine();
@@ -456,110 +469,163 @@ public class NewPatient {
 
 
         //Metodo para cuando el chk_boxSolicitanteIgualPaciente este marcado hara la funcion de no no muestra el msj
-        chk_boxSolicitanteIgualPaciente.addActionListener((e) -> {
-            if (chk_boxSolicitanteIgualPaciente.isSelected()) {
-                chk_boxSolicitanteDiferentePaciente.setSelected(false);//para que no
-                chk_boxSolicitanteDiferentePaciente.setSelected(false);
-                
-                System.out.println("MUESTRA MENSAJE MARCADO");
-                //PARA QUE SE MUESTREN
-                lbl_TituloPaciente.setVisible(true);
-                lbl_CedulaSolicitantePaciente.setVisible(true);
-                txt_CedulaSolicitantePaciente.setVisible(true);
-                lbl_CedulaPaciente.setVisible(true);
-                txt_CedulaPaciente.setVisible(true);
-                lbl_NombrePaciente.setVisible(true);
-                txt_NombrePaciente.setVisible(true);
-                lbl_FechaNacimientoPaciente.setVisible(true);
-                txt_FechaNacimientoPaciente.setVisible(true);
-                lbl_DireccionPaciente.setVisible(true);
-                txt_DireccionPaciente.setVisible(true);
-                lbl_TelefonoPaciente.setVisible(true);
-                txt_TelefonoPaciente.setVisible(true);
-                lbl_ProfesionPaciente.setVisible(true);
-                txt_ProfesionPaciente.setVisible(true);
-                lbl_ActividadLaboralPaciente.setVisible(true);
-                txt_ActividadLaboralPaciente.setVisible(true);
-                lbl_MotivoConsultaPaciente.setVisible(true);
-                txt_MotivoConsultaPaciente.setVisible(true);
-                lbl_ParentescoPaciente.setVisible(true);
-                cbo_Parentesco.setVisible(true);
-                lbl_ClasificacionPaciente.setVisible(true);
-                cbo_ClasificacionPaciente.setVisible(true);
-                lbl_CursoPaciente.setVisible(true);
-                cbo_CursoPaciente.setVisible(true);
-                lbl_HorarioPaciente.setVisible(true);
-                cbo_HorarioPaciente.setVisible(true);
-                lbl_DetalleHorarioPaciente.setVisible(true);
-                txt_DetalleHorarioPaciente.setVisible(true);
-                lbl_TipoPaciente.setVisible(true);
-                cbo_TipoPaciente.setVisible(true);
-                
-            } else {
-                //esto es debido a que arriba hay que agregar los objetos en la fila corresondiente
-                //y acomodarlo segun su posicion con los demas objetos
-//                chk_boxSolicitanteDiferentePaciente.setSelected(true);
-                chk_boxSolicitanteIgualPaciente.setSelected(false);
-                chk_boxSolicitanteDiferentePaciente.setSelected(false);
-                
-                lbl_TituloPaciente.setVisible(false);
-                lbl_CedulaSolicitantePaciente.setVisible(false);
-                txt_CedulaSolicitantePaciente.setVisible(false);
-                lbl_CedulaPaciente.setVisible(false);
-                txt_CedulaPaciente.setVisible(false);
-                lbl_NombrePaciente.setVisible(false);
-                txt_NombrePaciente.setVisible(false);
-                lbl_FechaNacimientoPaciente.setVisible(false);
-                txt_FechaNacimientoPaciente.setVisible(false);
-                lbl_DireccionPaciente.setVisible(false);
-                txt_DireccionPaciente.setVisible(false);
-                lbl_TelefonoPaciente.setVisible(false);
-                txt_TelefonoPaciente.setVisible(false);
-                lbl_ProfesionPaciente.setVisible(false);
-                txt_ProfesionPaciente.setVisible(false);
-                lbl_ActividadLaboralPaciente.setVisible(false);
-                txt_ActividadLaboralPaciente.setVisible(false);
-                lbl_MotivoConsultaPaciente.setVisible(false);
-                txt_MotivoConsultaPaciente.setVisible(false);
-                lbl_ParentescoPaciente.setVisible(false);
-                cbo_Parentesco.setVisible(false);
-                lbl_ClasificacionPaciente.setVisible(false);
-                cbo_ClasificacionPaciente.setVisible(false);
-                lbl_CursoPaciente.setVisible(false);
-                cbo_CursoPaciente.setVisible(false);
-                lbl_HorarioPaciente.setVisible(false);
-                cbo_HorarioPaciente.setVisible(false);
-                lbl_DetalleHorarioPaciente.setVisible(false);
-                txt_DetalleHorarioPaciente.setVisible(false);
-                lbl_TipoPaciente.setVisible(false);
-                cbo_TipoPaciente.setVisible(false);
-
-            }
-
-        });
+//        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
+//            if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
+//                
+////                chk_boxSolicitanteDiferentePaciente.setSelected(false);//para que no
+//                
+//                
+//                System.out.println("MUESTRA MENSAJE MARCADO");
+//                //PARA QUE SE MUESTREN
+//                lbl_TituloPaciente.setVisible(true);
+//                lbl_CedulaSolicitantePaciente.setVisible(true);
+//                txt_CedulaSolicitantePaciente.setVisible(true);
+//                lbl_CedulaPaciente.setVisible(true);
+//                txt_CedulaPaciente.setVisible(true);
+//                lbl_NombrePaciente.setVisible(true);
+//                txt_NombrePaciente.setVisible(true);
+//                lbl_FechaNacimientoPaciente.setVisible(true);
+//                txt_FechaNacimientoPaciente.setVisible(true);
+//                lbl_DireccionPaciente.setVisible(true);
+//                txt_DireccionPaciente.setVisible(true);
+//                lbl_TelefonoPaciente.setVisible(true);
+//                txt_TelefonoPaciente.setVisible(true);
+//                lbl_ProfesionPaciente.setVisible(true);
+//                txt_ProfesionPaciente.setVisible(true);
+//                lbl_ActividadLaboralPaciente.setVisible(true);
+//                txt_ActividadLaboralPaciente.setVisible(true);
+//                lbl_MotivoConsultaPaciente.setVisible(true);
+//                txt_MotivoConsultaPaciente.setVisible(true);
+//                lbl_ParentescoPaciente.setVisible(true);
+//                cbo_Parentesco.setVisible(true);
+//                lbl_ClasificacionPaciente.setVisible(true);
+//                cbo_ClasificacionPaciente.setVisible(true);
+//                lbl_CursoPaciente.setVisible(true);
+//                cbo_CursoPaciente.setVisible(true);
+//                lbl_HorarioPaciente.setVisible(true);
+//                cbo_HorarioPaciente.setVisible(true);
+//                lbl_DetalleHorarioPaciente.setVisible(true);
+//                txt_DetalleHorarioPaciente.setVisible(true);
+//                lbl_TipoPaciente.setVisible(true);
+//                cbo_TipoPaciente.setVisible(true);
+//                
+//            } else {
+//                //esto es debido a que arriba hay que agregar los objetos en la fila corresondiente
+//                //y acomodarlo segun su posicion con los demas objetos
+////                chk_boxSolicitanteDiferentePaciente.setSelected(true);
+////                chk_boxSolicitanteIgualPaciente.setSelected(false);
+//                chk_boxSolicitanteDiferentePaciente.setSelected(false);
+//                
+//                lbl_TituloPaciente.setVisible(false);
+//                lbl_CedulaSolicitantePaciente.setVisible(false);
+//                txt_CedulaSolicitantePaciente.setVisible(false);
+//                lbl_CedulaPaciente.setVisible(false);
+//                txt_CedulaPaciente.setVisible(false);
+//                lbl_NombrePaciente.setVisible(false);
+//                txt_NombrePaciente.setVisible(false);
+//                lbl_FechaNacimientoPaciente.setVisible(false);
+//                txt_FechaNacimientoPaciente.setVisible(false);
+//                lbl_DireccionPaciente.setVisible(false);
+//                txt_DireccionPaciente.setVisible(false);
+//                lbl_TelefonoPaciente.setVisible(false);
+//                txt_TelefonoPaciente.setVisible(false);
+//                lbl_ProfesionPaciente.setVisible(false);
+//                txt_ProfesionPaciente.setVisible(false);
+//                lbl_ActividadLaboralPaciente.setVisible(false);
+//                txt_ActividadLaboralPaciente.setVisible(false);
+//                lbl_MotivoConsultaPaciente.setVisible(false);
+//                txt_MotivoConsultaPaciente.setVisible(false);
+//                lbl_ParentescoPaciente.setVisible(false);
+//                cbo_Parentesco.setVisible(false);
+//                lbl_ClasificacionPaciente.setVisible(false);
+//                cbo_ClasificacionPaciente.setVisible(false);
+//                lbl_CursoPaciente.setVisible(false);
+//                cbo_CursoPaciente.setVisible(false);
+//                lbl_HorarioPaciente.setVisible(false);
+//                cbo_HorarioPaciente.setVisible(false);
+//                lbl_DetalleHorarioPaciente.setVisible(false);
+//                txt_DetalleHorarioPaciente.setVisible(false);
+//                lbl_TipoPaciente.setVisible(false);
+//                cbo_TipoPaciente.setVisible(false);
+//
+//            }
+//
+//        });
         
-        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
-            
-            if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
-                chk_boxSolicitanteDiferentePaciente.setSelected(true);
-                chk_boxSolicitanteIgualPaciente.setSelected(false);
-                lbl_TituloPaciente.setVisible(true);
-                System.out.println("MUESTRA MENSAJE 2 MARCADO");
-//                jTabbedPane0.setVisible(true);
-                
-            }else{
-                lbl_TituloPaciente.setVisible(false);
-                chk_boxSolicitanteDiferentePaciente.setSelected(false);
-                chk_boxSolicitanteIgualPaciente.setSelected(false);
-//                jTabbedPane0.setVisible(false);
-            }
-            
-        });
+//        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
+//            
+//            if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
+//                chk_boxSolicitanteDiferentePaciente.setSelected(true);
+//                chk_boxSolicitanteIgualPaciente.setSelected(false);
+//                System.out.println("MUESTRA MENSAJE 2 MARCADO");
+////                jTabbedPane0.setVisible(true);
+//                lbl_TituloPaciente.setVisible(true);
+//                
+//            }else{
+//                chk_boxSolicitanteDiferentePaciente.setSelected(false);
+//                chk_boxSolicitanteIgualPaciente.setSelected(false);
+////                jTabbedPane0.setVisible(false);
+//                lbl_TituloPaciente.setVisible(false);
+//                
+//                
+//            }
+//            
+//        });
 
         HomePanel.if_.add(RePanel);
 
     }//Fin del metodo ibtnIngresarPacienteaddActionListener
     
+    
+    public void btn_RegisterAction_MouseClicked(){
+        
+        try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)");
+        
+        pps.setString(1 , txt_CedulaSolicitante.getText());
+        pps.setString(2 , txt_NombreSolicitante.getText());
+        pps.setString(3 , txt_DireccionSolicitante.getText());
+        pps.setString(4 , txt_TelefonoSolicitante.getText());
+        pps.setString(5 , txt_ProfesionSolicitante.getText());
+        pps.setString(6 , txt_ActividadLaboralSolicitante.getText());
+        pps.setString(7 , txt_MotivoConsultaSolicitante.getText());
+        pps.setString(8 , txt_FechaReporte.getText());
+        
+        pps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+        try{
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
+        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        
+        pps.setString(1 , txt_CedulaSolicitantePaciente.getText());
+        pps.setString(2 , txt_CedulaPaciente.getText());
+        pps.setString(3 , txt_NombrePaciente.getText());
+        pps.setString(4 , txt_FechaNacimientoPaciente.getText());
+        pps.setString(5 , txt_DireccionPaciente.getText());
+        pps.setString(6 , txt_TelefonoPaciente.getText());
+        pps.setString(7 , txt_ProfesionPaciente.getText());
+        pps.setString(8 , txt_ActividadLaboralPaciente.getText());
+        pps.setString(9 , txt_MotivoConsultaPaciente.getText());
+        pps.setString(10 , cbo_Parentesco.getSelectedItem().toString());
+        pps.setString(11 , cbo_ClasificacionPaciente.getSelectedItem().toString());
+        pps.setString(12 , cbo_CursoPaciente.getSelectedItem().toString());
+        pps.setString(13 , cbo_HorarioPaciente.getSelectedItem().toString());
+        pps.setString(14 , txt_DetalleHorarioPaciente.getText());
+        pps.setString(15 , cbo_TipoPaciente.getSelectedItem().toString());
+        pps.setString(16 , null);
+        
+        pps.executeUpdate();
+        } catch (ClassNotFoundException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        
+    }
     
     
     //Metodos para cargar los cbo`s de Paciente
