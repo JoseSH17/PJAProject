@@ -20,8 +20,7 @@ public class JAPProject {
         // TODO code application logic here
         SwingUtilities.invokeLater(()
                 -> {
-//            HomePanel mp = new HomePanel();
-PatientView pv=new PatientView();
+            HomePanel mp = new HomePanel();
         });
     }
 

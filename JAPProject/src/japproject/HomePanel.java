@@ -10,7 +10,6 @@ import iComponents.iSQL;
 import java.awt.Color;
 import java.awt.Point;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import static japproject.PatientView.RePanel;
 import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -28,15 +27,10 @@ public class HomePanel {
 
     public Point initialClick;
     
-    public static  iFrame if_; //This is the main iFrame container, everything will be shown in here.      
-        
-    private final int projectWidth = 1200;
-    private final int projectHeight = 900;
-    
-    
-    
-    public HomePanel() {
-       if_ = new iFrame(projectWidth, projectHeight, 0, 30, "", EXIT_ON_CLOSE);  
+    public static  iFrame if_; //This is the main iFrame container, everything will be shown in here.   
+
+    public HomePanel() {       
+       if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);  
        initComponents(); //Do not move InitComponents from this place.    
        if_.finalice();
     }
@@ -48,36 +42,63 @@ public class HomePanel {
     public void HeaderMenu() {
 
         JMenuBar menuBar = new JMenuBar(); //Adding Menu Bar, this holds all main menus and submenus             
-        JButton MenuHome = new JButton(); //This is the Home Menu, redirects the user to the main screen where the patients list is shown
-        MenuHome.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.HOME, 16, Color.CYAN)); //Adding an icon that looks like a tiny home for the menu.
+        JButton MenuHome = new JButton(); //This is the Home Menu, redirects the user to the main screen where the patients list is shown        
+        MenuHome.setOpaque(false);
+        MenuHome.setContentAreaFilled(false);
+        MenuHome.setBorderPainted(false);        
+        MenuHome.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.HOME, 20, Color.BLACK)); //Adding an icon that looks like a tiny home for the menu.
                         
         MenuHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {  
-                RePanel.finalice();               
+                PatientView pv = new PatientView(if_);
             }
         });
-
-        JMenu menuArchivo = new JMenu("ARCHIVO");
-        JMenuItem Edit = new JMenuItem("Editar");
-        Edit.addActionListener((ei) -> {
+        
+        JButton menuAgregarPaciente = new JButton("Nuevo Paciente");
+        menuAgregarPaciente.setOpaque(false);
+        menuAgregarPaciente.setContentAreaFilled(false);
+        menuAgregarPaciente.setBorderPainted(false); 
+        menuAgregarPaciente.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PERSON, 20, Color.BLACK));
+        
+        JMenu menuMantenimiento = new JMenu("Mantenimiento");
+        menuMantenimiento.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ADJUST, 20, Color.BLACK));
+                
+        JMenuItem Cursos = new JMenuItem("Cursos");
+        Cursos.addActionListener((ei) -> {
           
         });
-        JMenuItem Print = new JMenuItem("Imprimir");
-        JMenuItem Exit = new JMenuItem("Salir");
-        Exit.addActionListener((o) -> {
+        JMenuItem Horarios = new JMenuItem("Horarios");
+        Horarios.addActionListener((ei) -> {
+          
+        });
+        JMenuItem TPaciente = new JMenuItem("Tipo Paciente");        
+        TPaciente.addActionListener((o) -> {
 
         });
-        menuArchivo.add(Edit);
-        menuArchivo.add(Print);
-        menuArchivo.add(Exit);
+        JMenuItem CPaciente = new JMenuItem("Clasificación Paciente"); 
+        CPaciente.addActionListener((ei) -> {
+          
+        });
+        JMenuItem Parentesco = new JMenuItem("Parentesco"); 
+        Parentesco.addActionListener((ei) -> {
+          
+        });
+        
+        menuMantenimiento.add(Cursos);
+        menuMantenimiento.add(Horarios);
+        menuMantenimiento.add(TPaciente);
+        menuMantenimiento.add(CPaciente);
+        menuMantenimiento.add(Parentesco);
 
-        JMenu menuPers = new JMenu("PERSONALIZAR");
-        JMenuItem ColorPallet = new JMenuItem("Color");        
-        menuPers.add(ColorPallet);        
+
+        JMenu menuPersonalizacion = new JMenu("Personalizar");
+        JMenuItem ColorPallet = new JMenuItem("Colores de Interfaz");        
+        menuPersonalizacion.add(ColorPallet);        
 
         menuBar.add(MenuHome);
-        menuBar.add(menuArchivo);
-        menuBar.add(menuPers);        
+        menuBar.add(menuAgregarPaciente);
+        menuBar.add(menuMantenimiento);
+        menuBar.add(menuPersonalizacion);        
 
         if_.AddObject(menuBar, if_.getWidth(), 40);
         if_.newLine();        
