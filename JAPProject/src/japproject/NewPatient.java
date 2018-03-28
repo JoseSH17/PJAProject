@@ -108,7 +108,7 @@ public class NewPatient {
     private iLabel lbl_HorarioPaciente;//Lbl para la el Horario del Paciente
     private iLabel lbl_DetalleHorarioPaciente;//Lbl para el Detalle Horario del Paciente
     private iTextField txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
-    private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente
+    private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente 
     //FIN de Controles Swing para Paciente
     
     public NewPatient(iFrame if_) {
@@ -118,7 +118,6 @@ public class NewPatient {
         Ingresar();
         
     }
-    
     
     /**
      * Método que crea los componentes en el RePanel de Paciente
