@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 /**
@@ -30,11 +29,11 @@ public class PatientView {
 
     public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
 
-    public static iPanel PatientView_panel;
+    public iPanel PatientView_panel;
 
     public PatientView(iFrame if_) {
         try {
-            //        try {
+            //        try {          
 
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
 

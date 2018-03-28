@@ -31,7 +31,7 @@ import javax.swing.JTabbedPane;
 public class NewPatient {
     
     public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");//hago la conexion a BD
-    public static iPanel RePanel;//creo el iPanel
+    public iPanel RePanel;//creo el iPanel
     
     private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
     private final String USERNAME = "icompone_jose";
@@ -111,11 +111,10 @@ public class NewPatient {
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente
     //FIN de Controles Swing para Paciente
     
-    public NewPatient(iFrame if_) {
-    
+    public NewPatient(iFrame if_) {        
         RePanel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         RePanel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
-        Ingresar();
+        Ingresar(if_);
         
     }
     
@@ -297,7 +296,7 @@ public class NewPatient {
      *
      * @return Muestra los componentes en el RePanel
     */
-    private void Ingresar() {
+    private void Ingresar(iFrame if_) {
 
         ComponentesSolicitante();//cargo el metodo de los componentes swing de Solicitante
         ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
@@ -572,7 +571,7 @@ public class NewPatient {
 //            
 //        });
 
-        HomePanel.if_.add(RePanel);
+        if_.add(RePanel);
 
     }//Fin del metodo ibtnIngresarPacienteaddActionListener
     

@@ -27,7 +27,11 @@ public class HomePanel {
 
     public Point initialClick;
     
-    public static  iFrame if_; //This is the main iFrame container, everything will be shown in here.   
+    public static  iFrame if_; //This is the main iFrame container, everything will be shown in here. 
+    
+    PatientView pv; //Panel to show Patient Data.
+    NewPatient NP; //Panel to add a new Patient.
+    
 
     public HomePanel() {       
        if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);  
@@ -37,12 +41,13 @@ public class HomePanel {
     
     private void initComponents() {
         HeaderMenu();
+        pv = new PatientView(if_); //PatientView is the first point that shows when program is initiated.
     }
         
     public void HeaderMenu() {
 
         JMenuBar menuBar = new JMenuBar(); //Adding Menu Bar, this holds all main menus and submenus             
-        JButton MenuHome = new JButton(); //This is the Home Menu, redirects the user to the main screen where the patients list is shown        
+        JButton MenuHome = new JButton("Inicio"); //This is the Home Menu, redirects the user to the main screen where the patients list is shown        
         MenuHome.setOpaque(false);
         MenuHome.setContentAreaFilled(false);
         MenuHome.setBorderPainted(false);        
@@ -50,7 +55,9 @@ public class HomePanel {
                         
         MenuHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {  
-                PatientView pv = new PatientView(if_);
+                NP.RePanel.dispose();  //Deletes all panel elements.
+                NP.RePanel.setVisible(false); //Sets Panel Visibility to False.                
+                pv = new PatientView(if_); //Calls PatientView class to show its Panel and contents
             }
         });
         
@@ -62,7 +69,9 @@ public class HomePanel {
         
         menuAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {  
-                NewPatient NP = new NewPatient(if_);
+                pv.PatientView_panel.dispose(); //Deletes all panel elements.
+                pv.PatientView_panel.setVisible(false); //Sets Panel Visibility to False. 
+                NP = new NewPatient(if_);   //Calls NewPatient class to show its Panel and contents             
             }
         });
         
