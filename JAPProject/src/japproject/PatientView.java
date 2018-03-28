@@ -6,6 +6,7 @@
 package japproject;
 
 import static iComponents.ComponentInterfaz.CENTER;
+import static japproject.HomePanel.currentPanel;
 import iComponents.iFrame;
 import iComponents.iPanel;
 import iComponents.iSQL;
@@ -38,6 +39,7 @@ public class PatientView {
     public static List<String> tbl_Data = new ArrayList();
 
     public PatientView(iFrame if_) {
+        currentPanel = "PatientView_panel";
         try {
             //        try {          
 

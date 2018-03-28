@@ -11,6 +11,7 @@ import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iSQL;
 import iComponents.iTextField;
+import static japproject.HomePanel.currentPanel;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -111,7 +112,8 @@ public class NewPatient {
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente
     //FIN de Controles Swing para Paciente
     
-    public NewPatient(iFrame if_) {        
+    public NewPatient(iFrame if_) {
+        currentPanel = "RePanel";
         RePanel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         RePanel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
         Ingresar(if_);
