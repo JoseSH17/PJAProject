@@ -123,13 +123,12 @@ public class PatientView {
                                 int selectedRow = tbl_viewAny.getSelectedRow();  
                                 
                                 for (int j = 0; j < tbl_viewAny.getColumnCount(); j++) {
-                                    System.out.println("Selected: " + j);
+                                  
                                     tbl_Data.add(tbl_viewAny.getColumnName(j) + "-" + tbl_viewAny.getValueAt(selectedRow, j).toString());
                                 }
-                                 System.out.println("Result: " + tbl_Data.toString());                                
+                                 System.out.println("seleccionado");                                
                             }
-                            int selectedRow = jModel.getMinSelectionIndex();
-                            JOptionPane.showMessageDialog(null, "Selected Row: " + selectedRow + " gathering data...");
+                            
                         }
                     });
     
