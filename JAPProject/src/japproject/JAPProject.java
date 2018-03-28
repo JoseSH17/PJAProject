@@ -30,13 +30,13 @@ public class JAPProject {
     }
 
     public void initComponents() {
-        iLabel lblIndicador = new iLabel("Accesando a base de datos local...");
-        lblIndicador.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.DATA_USAGE, 20, Color.BLACK));
-        LoadingFrame.AddSingleObject(lblIndicador, 140, 30, EXIT_ON_CLOSE);
+        iLabel lblIndicador = new iLabel("Accesando a base de datos local, un momento por favor...");        
+        lblIndicador.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.DATA_USAGE, 20, Color.BLACK));        
+        LoadingFrame.AddSingleObject(lblIndicador, 240, 30, EXIT_ON_CLOSE);
         LoadingFrame.AddSingleObject(pbSQL, 240, 30, EXIT_ON_CLOSE);
         LoadingFrame.finalice();
         
-         Thread t = new Thread((Runnable) new Threads("Loading"));
+         Thread t = new Thread(new Threads("Loading"));
          t.start();
     }
 
