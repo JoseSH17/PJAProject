@@ -16,10 +16,15 @@ import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -30,6 +35,7 @@ public class PatientView {
     public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
 
     public iPanel PatientView_panel;
+    public static List<String> tbl_Data = new ArrayList();
 
     public PatientView(iFrame if_) {
         try {
@@ -90,7 +96,7 @@ public class PatientView {
             JMenuItem ItemEditar = new JMenuItem("Editar paciente");
             ItemEditar.addActionListener((ae) -> {
                
-                addActionListenerEditarPopmenu();
+                addActionListenerEditarPopmenu(RegistrosTable);
                 
             });
 
@@ -104,9 +110,26 @@ public class PatientView {
  *
  * Metodo darle funcionalidad al ItemEditar del popmenu 
  */
-    public static void addActionListenerEditarPopmenu()
+    public static void addActionListenerEditarPopmenu(iTable tbl_viewAny )
     {
-    
+    ListSelectionModel jModel = tbl_viewAny.getSelectionModel();
+                    jModel.addListSelectionListener(new ListSelectionListener() {
+                        @Override
+                        public void valueChanged(ListSelectionEvent e) {
+                            tbl_Data.clear();
+                            if (!jModel.isSelectionEmpty()) {
+                                int selectedRow = tbl_viewAny.getSelectedRow();  
+                                
+                                for (int j = 0; j < tbl_viewAny.getColumnCount(); j++) {
+                                    System.out.println("Selected: " + j);
+                                    tbl_Data.add(tbl_viewAny.getColumnName(j) + "-" + tbl_viewAny.getValueAt(selectedRow, j).toString());
+                                }
+                                 System.out.println("Result: " + tbl_Data.toString());                                
+                            }
+                            int selectedRow = jModel.getMinSelectionIndex();
+                            JOptionPane.showMessageDialog(null, "Selected Row: " + selectedRow + " gathering data...");
+                        }
+                    });
     
     }
     
