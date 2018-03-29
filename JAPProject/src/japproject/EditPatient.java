@@ -501,44 +501,43 @@ public class EditPatient {
         PatientView_panelLeft.newLine();
 
         PatientView_panelLeft.AddObject(lbl_NOTA, 500, 70, 10);
-         PatientView_panelLeft.newLine();     
-            
-       PatientView_panelLeft.AddObject(btnEditarAction, 175, 30, 10);
+        PatientView_panelLeft.newLine();
+
+        PatientView_panelLeft.AddObject(btnEditarAction, 175, 30, 10);
 
         btnEditarAction.addActionListener((a) -> {
 
             btnEditarAction_MouseClicked();
-            
+
         });
 //
         PatientView_panelLeft.newLine();
-        
-         
-         
-        PatientView_panelLeft.AddObject(llenarTable(tbl_Data), 800, 200); 
-       if_.add(PatientView_panelLeft);
+
+        PatientView_panelLeft.AddObject(llenarTable(tbl_Data), 800, 200);
+        if_.add(PatientView_panelLeft);
     }
-    public iScrollPane llenarTable(List<String> info)
-    {
-        
-       ArrayList<String> cols = new ArrayList();
+
+    public iScrollPane llenarTable(List<String> info) {
+
+        ArrayList<String> cols = new ArrayList();
         ArrayList<String> rows = new ArrayList();
         info.forEach((jKeyPair) -> {
             cols.add(jKeyPair.split("-")[0]);
             rows.add(jKeyPair.split("-")[1]);
         });
-         iTable Table = new iTable(cols);
+        iTable Table = new iTable(cols);
         System.out.println("Cols " + cols);
+
         System.out.println("Rows " + rows);
-        //Table.addrow(rows);
-        iScrollPane ScrollPane=new iScrollPane(Table, null);
-        
-        
-        
-  return ScrollPane;
+
+        Table.addrow(rows.toArray());
+
+        iScrollPane ScrollPane = new iScrollPane(Table, null);
+
+        return ScrollPane;
     }
 
     private void btnEditarAction_MouseClicked() {
-        
+
     }
 }
