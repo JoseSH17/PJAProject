@@ -12,12 +12,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import static japproject.HomePanel.currentPanel;
 
 public class Maintenance {
     public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");//hago la conexion a BD
     public iPanel Maintenance_Curso;//creo el iPanel
-    
-    public Panels p; //Holds current panel running
     
     private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
     private final String USERNAME = "icompone_jose";
@@ -36,8 +35,7 @@ public class Maintenance {
     private iTextField txt_NombreCurso;//TextField para el nombre del curso
     
     public Maintenance(iFrame if_) {
-        p = new Panels(); //Instanciating the Panels Class
-        p.setcurrentPanel("Maintenance_Curso");  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
+        currentPanel = "Maintenance_Curso";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Curso = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Curso.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
         Mantenimiento_curso(if_);
