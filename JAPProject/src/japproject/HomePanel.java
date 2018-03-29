@@ -6,7 +6,6 @@
 package japproject;
 
 import iComponents.iFrame;
-import iComponents.iSQL;
 import java.awt.Color;
 import java.awt.Point;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
@@ -23,7 +22,7 @@ import jiconfont.swing.IconFontSwing;
  */
 public class HomePanel {
 
-    public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
+
     
     public static String currentPanel; //Holds current panel running
 
@@ -91,7 +90,8 @@ public class HomePanel {
         });
         JMenuItem Horarios = new JMenuItem("Horarios");
         Horarios.addActionListener((ei) -> {
-
+        RemovePanels();
+        EP=new EditPatient(if_);
         });
         JMenuItem TPaciente = new JMenuItem("Tipo Paciente");
         TPaciente.addActionListener((o) -> {
@@ -134,22 +134,22 @@ public class HomePanel {
         System.out.println("Panel actual : " + currentPanel);
 
         switch (currentPanel) {
-            case "RePanel":              //If current panel is PatientView then remove it.                                     
-                NP.RePanel.dispose();
-                NP.RePanel.setVisible(false);
+            case "NewPatient_Panel":              //If current panel is PatientView then remove it.                                     
+                NP.NewPatient_Panel.dispose();
+                NP.NewPatient_Panel.setVisible(false);
                 break;
             case "PatientView_panel":      //If current panel is PatientView then remove it.           
                 PV.PatientView_panel.dispose();
                 PV.PatientView_panel.setVisible(false);
                 break;
-            case "PatientView_panelLeft":  //If current panel is PatientView_panelLeft then remove it.     
-                EP.PatientView_panelLeft.dispose();
-                EP.PatientView_panelLeft.setVisible(false);
+            case "EditPatient_Panel":  //If current panel is EditPatient_Panel then remove it.     
+                EP.EditPatient_Panel.dispose();
+                EP.EditPatient_Panel.setVisible(false);
                 break;
 
-            case "Maintenance_Curso":    //If current panel is Maintenance_Curso then remove it.    
-                MT.Maintenance_Curso.dispose();     //THIS SHOULD BE UPDATED FOR THE TABBED PANEL WHEN ITS IMPLEMENTATION ITS COMPLETE
-                MT.Maintenance_Curso.setVisible(false);
+            case "Maintenance_Curso_Panel":    //If current panel is Maintenance_Curso_Panel then remove it.    
+                MT.Maintenance_Curso_Panel.dispose();     //THIS SHOULD BE UPDATED FOR THE TABBED PANEL WHEN ITS IMPLEMENTATION ITS COMPLETE
+                MT.Maintenance_Curso_Panel.setVisible(false);
                 break;
             default:
                 System.out.println("Panel not handled");

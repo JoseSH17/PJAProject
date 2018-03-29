@@ -4,7 +4,7 @@ import iComponents.iButton;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
-import iComponents.iSQL;
+
 import iComponents.iTextField;
 import java.awt.Color;
 import java.sql.Connection;
@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 import static japproject.HomePanel.currentPanel;
 
 public class Maintenance {
-    public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");//hago la conexion a BD
-    public iPanel Maintenance_Curso;//creo el iPanel
+  
+    public iPanel Maintenance_Curso_Panel;//creo el iPanel
     
     private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
     private final String USERNAME = "icompone_jose";
@@ -36,8 +36,8 @@ public class Maintenance {
     
     public Maintenance(iFrame if_) {
         currentPanel = "Maintenance_Curso";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
-        Maintenance_Curso = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        Maintenance_Curso.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
+        Maintenance_Curso_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
+        Maintenance_Curso_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
         Mantenimiento_curso(if_);
     }
     
@@ -66,35 +66,35 @@ public class Maintenance {
     private void Mantenimiento_curso(iFrame if_) {
         Componentes_Curso();
         
-        Maintenance_Curso.AddObject(lbl_LogoULatina, 415, 120, 10);
-        Maintenance_Curso.AddObject(lbl_LogoPsicologia, 415, 120, 440);//añade los logos oficiales de la clinica y de la universidad latina
-        Maintenance_Curso.newLine(); 
+        Maintenance_Curso_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+        Maintenance_Curso_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 440);//añade los logos oficiales de la clinica y de la universidad latina
+        Maintenance_Curso_Panel.newLine(); 
 
-        Maintenance_Curso.AddObject(lbl_idCurso, 415, 30, 2);
-        Maintenance_Curso.AddObject(txt_idCurso, 415, 30, 600);//agrega el label y el textfield del id curso
-        Maintenance_Curso.newLine();
+        Maintenance_Curso_Panel.AddObject(lbl_idCurso, 415, 30, 2);
+        Maintenance_Curso_Panel.AddObject(txt_idCurso, 415, 30, 600);//agrega el label y el textfield del id curso
+        Maintenance_Curso_Panel.newLine();
         
-        Maintenance_Curso.AddObject(lbl_NombreCurso, 415, 30, 2);
-        Maintenance_Curso.AddObject(txt_NombreCurso, 415, 30, 600);//agrega el label y el textfield del nombre del curso
-        Maintenance_Curso.newLine();
+        Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 2);
+        Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 415, 30, 600);//agrega el label y el textfield del nombre del curso
+        Maintenance_Curso_Panel.newLine();
         
-        Maintenance_Curso.AddObject(btnAñadir, 175, 30, 10);
+        Maintenance_Curso_Panel.AddObject(btnAñadir, 175, 30, 10);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
         
-        Maintenance_Curso.AddObject(btnModificar, 175, 30, 10);
+        Maintenance_Curso_Panel.AddObject(btnModificar, 175, 30, 10);
         btnModificar.addActionListener((a) -> {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Curso.AddObject(btnEliminar, 175, 30, 10);
+        Maintenance_Curso_Panel.AddObject(btnEliminar, 175, 30, 10);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
-        Maintenance_Curso.newLine();
+        Maintenance_Curso_Panel.newLine();
         
-        if_.add(Maintenance_Curso);
+        if_.add(Maintenance_Curso_Panel);
     } 
     
     public void btnAñadir_MouseClicked(){
