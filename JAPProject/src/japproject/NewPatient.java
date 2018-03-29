@@ -114,7 +114,7 @@ public class NewPatient {
     //FIN de Controles Swing para Paciente
     
     public NewPatient(iFrame if_) {
-        currentPanel = "RePanel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.      
+        currentPanel = "NewPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.      
         NewPatient_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         NewPatient_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
         Ingresar(if_);
@@ -192,7 +192,7 @@ public class NewPatient {
         lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
         cbo_Parentesco = new JComboBox();//son de seleccion por base de datos
         
-        lbl_ClasificacionPaciente = new iLabel("Clasificación Paciente Paciente".toUpperCase());
+        lbl_ClasificacionPaciente = new iLabel("Clasificación Paciente".toUpperCase());
 //        lbl_ClasificacionPaciente.setText("Clasificación Paciente Paciente".toUpperCase());
         lbl_ClasificacionPaciente.setForeground(Color.GRAY.brighter());
         cbo_ClasificacionPaciente = new JComboBox();//son de seleccion por base de datos

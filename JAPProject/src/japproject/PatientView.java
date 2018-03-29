@@ -9,7 +9,6 @@ import static iComponents.ComponentInterfaz.CENTER;
 import static japproject.JAPProject.sql;
 import iComponents.iFrame;
 import iComponents.iPanel;
-import iComponents.iSQL;
 import iComponents.iScrollPane;
 import iComponents.iTable;
 import java.awt.Color;
@@ -101,35 +100,38 @@ public class PatientView {
     public void PopMenu(iTable RegistrosTable, iFrame if_) {
         JPopupMenu popup = new JPopupMenu();
         JMenuItem ItemEditar = new JMenuItem("Editar paciente");
-
-        ListSelectionModel jModel = RegistrosTable.getSelectionModel();
-        jModel.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                tbl_Data.clear();
-                if (!jModel.isSelectionEmpty()) {
-                    int selectedRow = RegistrosTable.getSelectedRow();
-
-                    for (int j = 0; j < RegistrosTable.getColumnCount(); j++) {
-
-                        tbl_Data.add(RegistrosTable.getColumnName(j) + "-" + RegistrosTable.getValueAt(selectedRow, j).toString());
-                    }
-                    System.out.println("Result: " + tbl_Data.toString());
-                }
-                int selectedRow = jModel.getMinSelectionIndex();
-                JOptionPane.showMessageDialog(null, "Selected Row: " + selectedRow);
-            }
-        });
-        ItemEditar.addActionListener((ae) -> {
-            HP = new HomePanel();
-            HP.RemovePanels();
+      
+        ItemEditar.addActionListener((ae) -> {           
+            ItemEditarActionListener(RegistrosTable);
+            PatientView_panel.dispose();
+            PatientView_panel.setVisible(false);
             EP = new EditPatient(if_);
-
         });
 
         popup.add(ItemEditar);
         RegistrosTable.setComponentPopupMenu(popup);
 
+    }
+        
+    public void ItemEditarActionListener(iTable tblRegistros)
+    {
+         ListSelectionModel jModel = tblRegistros.getSelectionModel();
+        // jModel.addListSelectionListener(new ListSelectionListener() {
+        //    @Override
+        //    public void valueChanged(ListSelectionEvent e) {
+                tbl_Data.clear();
+                if (!jModel.isSelectionEmpty()) {
+                    int selectedRow = tblRegistros.getSelectedRow();
+
+                    for (int j = 0; j < tblRegistros.getColumnCount(); j++) {
+
+                        tbl_Data.add(tblRegistros.getColumnName(j) + "-" + tblRegistros.getValueAt(selectedRow, j).toString());
+                    }
+                    System.out.println("Result: " + tbl_Data.toString());
+                }
+                int selectedRow = jModel.getMinSelectionIndex();
+          //  }
+      //  });
     }
 
     /**

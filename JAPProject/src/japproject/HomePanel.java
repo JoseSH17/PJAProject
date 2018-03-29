@@ -22,8 +22,6 @@ import jiconfont.swing.IconFontSwing;
  */
 public class HomePanel {
 
-
-    
     public static String currentPanel; //Holds current panel running
 
     public Point initialClick;
@@ -134,7 +132,7 @@ public class HomePanel {
         System.out.println("Panel actual : " + currentPanel);
 
         switch (currentPanel) {
-            case "NewPatient_Panel":              //If current panel is PatientView then remove it.                                     
+            case "NewPatient_Panel":              //If current panel is NewPatient then remove it.                                     
                 NP.NewPatient_Panel.dispose();
                 NP.NewPatient_Panel.setVisible(false);
                 break;
