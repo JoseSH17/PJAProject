@@ -12,7 +12,7 @@ import iComponents.iSQL;
 import iComponents.iScrollPane;
 import iComponents.iTable;
 import java.awt.Color;
-
+import static japproject.HomePanel.currentPanel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -35,7 +35,6 @@ public class PatientView {
 
     public iPanel PatientView_panel;
     
-    public Panels p; //Holds current panel running
     
     public static List<String> tbl_Data = new ArrayList();
     
@@ -43,8 +42,7 @@ public class PatientView {
     
 
     public PatientView(iFrame if_) {
-        p = new Panels(); //Instanciating the Panels Class
-        p.setcurrentPanel("PatientView_panel");  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
+        currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         lpb = new LoadingProgressBars();
         
         

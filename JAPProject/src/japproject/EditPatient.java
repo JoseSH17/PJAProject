@@ -25,6 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import static japproject.HomePanel.currentPanel;
 
 /**
  *
@@ -97,9 +98,10 @@ public class EditPatient {
     //FIN de Controles Swing para Paciente
 
     public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
-    public iPanel PatientView_panelLeft;
+    public iPanel PatientView_panelLeft;       
 
     public EditPatient(iFrame if_) {
+        currentPanel = "PatientView_panelLeft";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.  
         PatientView_panelLeft = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
         PatientView_panelLeft.setBackground(Color.BLUE);
         cargarCombobox();

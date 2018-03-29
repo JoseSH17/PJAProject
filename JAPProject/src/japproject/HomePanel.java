@@ -24,12 +24,14 @@ import jiconfont.swing.IconFontSwing;
 public class HomePanel {
 
     public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
-
-    public Panels p; //Holds current panel running
+    
+    public static String currentPanel; //Holds current panel running
 
     public Point initialClick;
 
     public static iFrame if_; //This is the main iFrame container, everything will be shown in here. 
+
+    public LoadingProgressBars lpb;  //Calls methods from Loading Progress Bars class
 
     PatientView PV; //Panel to show Patient Data.
     NewPatient NP; //Panel to add a new Patient.
@@ -37,14 +39,14 @@ public class HomePanel {
     Maintenance MT; //Panel to Add or Edit Helper Tables
 
     public HomePanel() {
-        p = new Panels(); //Instanciating the Panels Class
-
+        lpb = new LoadingProgressBars();
         if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
-        initComponents(); //Do not move InitComponents from this place.    
+        initComponents(); //Do not move InitComponents from this place.          
         if_.finalice();
     }
 
     private void initComponents() {
+        // lpb.ProgressSQL();
         HeaderMenu();
         PV = new PatientView(if_); //PatientView is the first point that shows when program is initiated.
     }
@@ -124,47 +126,30 @@ public class HomePanel {
     }
 
     /**
+     * Gets the currentPanel being displayed and proceeds to dispose it and make
+     * it invisible for the next panel called to be shown correctly.
      *
-     * All panels must be handled here, and all panels except the one being called to be show must be disposed and set to visible false
      */
     public void RemovePanels() {
-        switch (p.getcurrentPanel()) {
-            case "RePanel":
-                System.out.println("Accesando a Patient View");
+        System.out.println("Panel actual : " + currentPanel);
+
+        switch (currentPanel) {
+            case "RePanel":              //If current panel is PatientView then remove it.                                     
                 NP.RePanel.dispose();
                 NP.RePanel.setVisible(false);
+                break;
+            case "PatientView_panel":      //If current panel is PatientView then remove it.           
+                PV.PatientView_panel.dispose();
+                PV.PatientView_panel.setVisible(false);
+                break;
+            case "PatientView_panelLeft":  //If current panel is PatientView_panelLeft then remove it.     
                 EP.PatientView_panelLeft.dispose();
                 EP.PatientView_panelLeft.setVisible(false);
-                MT.Maintenance_Curso.dispose();
-                MT.Maintenance_Curso.setVisible(false);
                 break;
-            case "PatientView_panel":
-                System.out.println("Accesando a New Patient");
-                PV.PatientView_panel.dispose();
-                PV.PatientView_panel.setVisible(false);
-                EP.PatientView_panelLeft.dispose();
-                EP.PatientView_panelLeft.setVisible(false);
-                MT.Maintenance_Curso.dispose();
+
+            case "Maintenance_Curso":    //If current panel is Maintenance_Curso then remove it.    
+                MT.Maintenance_Curso.dispose();     //THIS SHOULD BE UPDATED FOR THE TABBED PANEL WHEN ITS IMPLEMENTATION ITS COMPLETE
                 MT.Maintenance_Curso.setVisible(false);
-                break;
-            case "PatientView_panelLeft":
-                System.out.println("Accesando a Edit Patient");
-                NP.RePanel.dispose();
-                NP.RePanel.setVisible(false);
-                PV.PatientView_panel.dispose();
-                PV.PatientView_panel.setVisible(false);
-                MT.Maintenance_Curso.dispose();
-                MT.Maintenance_Curso.setVisible(false);
-                break;
-                
-            case "Maintenance_Curso":
-                System.out.println("Accesando a Maintenance Cursos");
-                NP.RePanel.dispose();
-                NP.RePanel.setVisible(false);
-                PV.PatientView_panel.dispose();
-                PV.PatientView_panel.setVisible(false);
-                EP.PatientView_panelLeft.dispose();
-                EP.PatientView_panelLeft.setVisible(false);                
                 break;
             default:
                 System.out.println("Panel not handled");

@@ -5,18 +5,18 @@
  */
 package japproject;
 
-import static japproject.JAPProject.pbSQL;
 import static japproject.JAPProject.sql;
-import static japproject.JAPProject.LoadingFrame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author Jose
  */
 public class Threads extends Thread {
+    
+    LoadingProgressBars lpb = new LoadingProgressBars();
 
     String nombre; //Helps to identify the thread to execute
 
@@ -37,16 +37,19 @@ public class Threads extends Thread {
 
         while (infinite) {
             if (this.nombre.equals("Loading")) {
-                pbSQL.setValue(0);
-                pbSQL.setStringPainted(true);
+                lpb.pbSQL.setValue(0);
+                lpb.pbSQL.setStringPainted(true);
                 if (sql.connect() != null) {
-                    pbSQL.setValue(100); //Completes the Progress Bar and finishes the loading process.
-                    infinite = false;                   
-                    LoadingFrame.dispose();
-                    LoadingFrame.setVisible(false);
+                    infinite = false;
+                    System.out.println("Connection is not null");                    
+                    lpb.pbSQL.setValue(100); //Completes the Progress Bar and finishes the loading process.
+                                       
+                  //  lpb.LoadingFrame.dispose();
+                 //  lpb.LoadingFrame.setVisible(false);
                     
                 } else {
-                    pbSQL.setValue(ProgressBarCalc()); //Fills the Progress Bar by 10% each iteration.
+                    System.out.println("Connection is null");
+                    lpb.pbSQL.setValue(ProgressBarCalc()); //Fills the Progress Bar by 10% each iteration.
                 }
                 try {
                     Thread.sleep(300);
