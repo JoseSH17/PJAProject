@@ -33,6 +33,7 @@ public class HomePanel {
 
     PatientView pv; //Panel to show Patient Data.
     NewPatient NP; //Panel to add a new Patient.
+    EditPatient pe;
 
     public HomePanel() {
         if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
@@ -57,7 +58,8 @@ public class HomePanel {
         MenuHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemovePanels();
-                pv = new PatientView(if_); //Calls PatientView class to show its Panel and contents
+//                pv = new PatientView(if_); //Calls PatientView class to show its Panel and contents
+                pe=new EditPatient(if_);
             }
         });
 
