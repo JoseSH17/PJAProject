@@ -6,38 +6,27 @@
 package japproject;
 
 import iComponents.iFrame;
-import iComponents.iLabel;
 import iComponents.iSQL;
-import java.awt.Color;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
-import jiconfont.icons.GoogleMaterialDesignIcons;
-import jiconfont.swing.IconFontSwing;
 
 /**
  *
  * @author Jose
  */
-public class JAPProject {
+public final class JAPProject {
 
+    public static iFrame LoadingFrame;
     public static JProgressBar pbSQL = new JProgressBar();
     public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
-    iFrame LoadingFrame = new iFrame(310, 110, 4, 20, "Loading Bar", EXIT_ON_CLOSE);
 
     public JAPProject() {
         initComponents();
     }
 
     public void initComponents() {
-        iLabel lblIndicador = new iLabel("Accesando a base de datos local, un momento por favor...");        
-        lblIndicador.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.DATA_USAGE, 20, Color.BLACK));        
-        LoadingFrame.AddSingleObject(lblIndicador, 240, 30, EXIT_ON_CLOSE);
-        LoadingFrame.AddSingleObject(pbSQL, 240, 30, EXIT_ON_CLOSE);
-        LoadingFrame.finalice();
-        
-         Thread t = new Thread(new Threads("Loading"));
-         t.start();
+            Thread t = new Thread(new Threads("Loading"));
+            t.start();
     }
 
     /**
@@ -46,7 +35,7 @@ public class JAPProject {
     public static void main(String[] args) {
         // TODO code application logic here
         SwingUtilities.invokeLater(()
-                -> {
+                -> {            
             HomePanel mp = new HomePanel();
         });
     }

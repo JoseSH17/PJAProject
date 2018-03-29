@@ -11,7 +11,6 @@ import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iSQL;
 import iComponents.iTextField;
-import static japproject.HomePanel.currentPanel;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -33,6 +32,9 @@ public class NewPatient {
     
     public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");//hago la conexion a BD
     public iPanel RePanel;//creo el iPanel
+    
+    public Panels p; //Holds current panel running
+    
     
     private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
     private final String USERNAME = "icompone_jose";
@@ -113,7 +115,8 @@ public class NewPatient {
     //FIN de Controles Swing para Paciente
     
     public NewPatient(iFrame if_) {
-        currentPanel = "RePanel";
+        p = new Panels(); //Instanciating the Panels Class
+        p.setcurrentPanel("RePanel");  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.      
         RePanel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         RePanel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
         Ingresar(if_);

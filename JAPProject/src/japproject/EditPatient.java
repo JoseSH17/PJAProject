@@ -5,8 +5,6 @@
  */
 package japproject;
 
-import static iComponents.ComponentInterfaz.LEFT;
-import static iComponents.ComponentInterfaz.RIGHT;
 import static japproject.PatientView.tbl_Data;
 
 import iComponents.iButton;
@@ -24,13 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import static javax.swing.SwingConstants.BOTTOM;
 
 /**
  *
@@ -103,7 +97,7 @@ public class EditPatient {
     //FIN de Controles Swing para Paciente
 
     public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
-    public static iPanel PatientView_panelLeft;
+    public iPanel PatientView_panelLeft;
 
     public EditPatient(iFrame if_) {
         PatientView_panelLeft = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
@@ -112,9 +106,7 @@ public class EditPatient {
         initPaciComponents();
         initSoliComponents();
         AddComponentes(if_);
-        
 
-       
     }
 
     public void tblUpdater(List<String> info, String tbl_Name) {
@@ -538,7 +530,7 @@ public class EditPatient {
          iTable Table = new iTable(cols);
         System.out.println("Cols " + cols);
         System.out.println("Rows " + rows);
-        Table.addrow(rows);
+        //Table.addrow(rows);
         iScrollPane ScrollPane=new iScrollPane(Table, null);
         
         

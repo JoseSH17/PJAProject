@@ -6,7 +6,6 @@
 package japproject;
 
 import static iComponents.ComponentInterfaz.CENTER;
-import static japproject.HomePanel.currentPanel;
 import iComponents.iFrame;
 import iComponents.iPanel;
 import iComponents.iSQL;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
@@ -36,13 +34,22 @@ public class PatientView {
     public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
 
     public iPanel PatientView_panel;
+    
+    public Panels p; //Holds current panel running
+    
     public static List<String> tbl_Data = new ArrayList();
+    
+    public LoadingProgressBars lpb;  //Calls methods from Loading Progress Bars class
+    
 
     public PatientView(iFrame if_) {
-        currentPanel = "PatientView_panel";
-        try {
-            //        try {          
-
+        p = new Panels(); //Instanciating the Panels Class
+        p.setcurrentPanel("PatientView_panel");  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
+        lpb = new LoadingProgressBars();
+        
+        
+        try {                   
+           // lpb.ProgressSQL();
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
 
             PatientView_panel.setBackground(Color.yellow);
@@ -202,5 +209,9 @@ public class PatientView {
 //fin de los parametros de la tabla
 
     }
+    
+    
+    
+    
 
 }

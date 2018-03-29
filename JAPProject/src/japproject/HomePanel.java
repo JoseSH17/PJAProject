@@ -25,17 +25,20 @@ public class HomePanel {
 
     public final iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
 
-    public static String currentPanel; //Holds current panel running
+    public Panels p; //Holds current panel running
 
     public Point initialClick;
 
     public static iFrame if_; //This is the main iFrame container, everything will be shown in here. 
 
-    PatientView pv; //Panel to show Patient Data.
+    PatientView PV; //Panel to show Patient Data.
     NewPatient NP; //Panel to add a new Patient.
-    EditPatient pe;
+    EditPatient EP; //Panel to Edit patients
+    Maintenance MT; //Panel to Add or Edit Helper Tables
 
     public HomePanel() {
+        p = new Panels(); //Instanciating the Panels Class
+
         if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
         initComponents(); //Do not move InitComponents from this place.    
         if_.finalice();
@@ -43,7 +46,7 @@ public class HomePanel {
 
     private void initComponents() {
         HeaderMenu();
-        pv = new PatientView(if_); //PatientView is the first point that shows when program is initiated.
+        PV = new PatientView(if_); //PatientView is the first point that shows when program is initiated.
     }
 
     public void HeaderMenu() {
@@ -58,8 +61,7 @@ public class HomePanel {
         MenuHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemovePanels();
-//                pv = new PatientView(if_); //Calls PatientView class to show its Panel and contents
-                pe=new EditPatient(if_);
+                PV = new PatientView(if_); //Calls PatientView class to show its Panel and contents
             }
         });
 
@@ -81,6 +83,8 @@ public class HomePanel {
 
         JMenuItem Cursos = new JMenuItem("Cursos");
         Cursos.addActionListener((ei) -> {
+            RemovePanels();
+            MT = new Maintenance(if_);
 
         });
         JMenuItem Horarios = new JMenuItem("Horarios");
@@ -119,21 +123,48 @@ public class HomePanel {
         if_.newLine();
     }
 
+    /**
+     *
+     * All panels must be handled here, and all panels except the one being called to be show must be disposed and set to visible false
+     */
     public void RemovePanels() {
-        switch (currentPanel) {
+        switch (p.getcurrentPanel()) {
             case "RePanel":
-                System.out.println("Estoy tratando de entrar a patient view");
+                System.out.println("Accesando a Patient View");
                 NP.RePanel.dispose();
                 NP.RePanel.setVisible(false);
-                //pv.PatientView_panel.dispose();
-                //pv.PatientView_panel.setVisible(false);
+                EP.PatientView_panelLeft.dispose();
+                EP.PatientView_panelLeft.setVisible(false);
+                MT.Maintenance_Curso.dispose();
+                MT.Maintenance_Curso.setVisible(false);
                 break;
             case "PatientView_panel":
-                System.out.println("Estoy tratando de entrar a New Patient");
-                pv.PatientView_panel.dispose();
-                pv.PatientView_panel.setVisible(false);
-               // NP.RePanel.dispose();
-               // NP.RePanel.setVisible(false);
+                System.out.println("Accesando a New Patient");
+                PV.PatientView_panel.dispose();
+                PV.PatientView_panel.setVisible(false);
+                EP.PatientView_panelLeft.dispose();
+                EP.PatientView_panelLeft.setVisible(false);
+                MT.Maintenance_Curso.dispose();
+                MT.Maintenance_Curso.setVisible(false);
+                break;
+            case "PatientView_panelLeft":
+                System.out.println("Accesando a Edit Patient");
+                NP.RePanel.dispose();
+                NP.RePanel.setVisible(false);
+                PV.PatientView_panel.dispose();
+                PV.PatientView_panel.setVisible(false);
+                MT.Maintenance_Curso.dispose();
+                MT.Maintenance_Curso.setVisible(false);
+                break;
+                
+            case "Maintenance_Curso":
+                System.out.println("Accesando a Maintenance Cursos");
+                NP.RePanel.dispose();
+                NP.RePanel.setVisible(false);
+                PV.PatientView_panel.dispose();
+                PV.PatientView_panel.setVisible(false);
+                EP.PatientView_panelLeft.dispose();
+                EP.PatientView_panelLeft.setVisible(false);                
                 break;
             default:
                 System.out.println("Panel not handled");
