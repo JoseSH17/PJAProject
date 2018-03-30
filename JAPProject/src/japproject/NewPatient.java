@@ -460,9 +460,9 @@ public class NewPatient {
 //        NewPatient_Panel.AddObject(chk_boxSolicitanteIgualPaciente, 175, 30, 10);
 //        NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 213, 30, 193);
         NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
-        NewPatient_Panel.newLine();     
+        NewPatient_Panel.newLine();
         NewPatient_Panel.AddObject(btnRegisterAction, 175, 30, 10);
-
+ 
         btnRegisterAction.addActionListener((a) -> {
 
             btn_RegisterAction_MouseClicked();
@@ -558,25 +558,25 @@ public class NewPatient {
 //
 //        });
         
-//        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
+        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
 //            
-//            if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
+            if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
 //                chk_boxSolicitanteDiferentePaciente.setSelected(true);
 //                chk_boxSolicitanteIgualPaciente.setSelected(false);
-//                System.out.println("MUESTRA MENSAJE 2 MARCADO");
+                System.out.println("MUESTRA MENSAJE DE CBO");
 ////                jTabbedPane0.setVisible(true);
 //                lbl_TituloPaciente.setVisible(true);
 //                
-//            }else{
+            }else{
 //                chk_boxSolicitanteDiferentePaciente.setSelected(false);
 //                chk_boxSolicitanteIgualPaciente.setSelected(false);
 ////                jTabbedPane0.setVisible(false);
 //                lbl_TituloPaciente.setVisible(false);
 //                
 //                
-//            }
+            }
 //            
-//        });
+        });
 
         if_.add(NewPatient_Panel);
 
