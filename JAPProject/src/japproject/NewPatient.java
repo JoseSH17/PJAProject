@@ -9,8 +9,6 @@ import iComponents.iButton;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
-import iComponents.iSQL;
-
 import static japproject.JAPProject.sql;
 import iComponents.iTextField;
 import java.awt.Color;
@@ -37,7 +35,7 @@ public class NewPatient {
     
     public iPanel NewPatient_Panel;//creo el iPanel        
     
-    public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
+   // public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
     
     private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
     private final String USERNAME = "icompone_jose";

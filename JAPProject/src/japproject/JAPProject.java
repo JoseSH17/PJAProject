@@ -6,7 +6,7 @@
 package japproject;
 
 import iComponents.iSQL;
-
+import static japproject.LoadingProgressBars.LoadingFrame;
 import javax.swing.SwingUtilities;
 
 /**
@@ -14,28 +14,23 @@ import javax.swing.SwingUtilities;
  * @author Jose
  */
 public final class JAPProject {
+
+    public static LoadingProgressBars lpb = new LoadingProgressBars();
     public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
-    
 
     public JAPProject() {
-        initComponents();
     }
-
-    public void initComponents() {
-            System.out.println("Iniciando Programa...");
-    }
-
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         SwingUtilities.invokeLater(()
                 -> { 
-           // Thread t = new Thread(new Threads("Loading"));
-           // t.start();
-            HomePanel mp = new HomePanel();
+        System.out.println("Iniciando Programa...");
+        lpb.ProgressSQL(); //Calling Progress Bar
+        Thread t = new Thread(new Threads("Loading"));  //Defining Thread which is going to call HomePanel once the SQL connection is established.
+        t.start();       //Initiating Thread.
         });
     }
-
 }
