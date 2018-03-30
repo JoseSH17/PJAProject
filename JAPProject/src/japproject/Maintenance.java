@@ -107,23 +107,28 @@ public class Maintenance {
         });
         Maintenance_Curso_Panel.newLine();
         
-        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Curso", "Nombre Curso"));
-        iPanel ip = new iPanel(215, 90, 500, 400, 4);//aquí se crea un panel
-        //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
+        Tabla();
         
-        ip.setLocation(100, 300);//se le coloca la posicición para que no se sobre ponga a lo demás
-        iTable table = new iTable(cols);//se crea la tabla
-        Mantenimiento_curso(if_);//esto es nada más para ver si la tabla no era más corta
+        if_.add(Maintenance_Curso_Panel);
+    } 
+    
+    public void Tabla(){
+        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Curso", "Nombre Curso"));
+        iPanel ip = new iPanel(215, 90, 500, 400, 4);
+        //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
+        ip.setLocation(100, 300);
+        iTable table = new iTable(cols);
+        ip.setBackground(Color.black);
 
         ResultSet rs = sql.SELECT(""
                 + "SELECT `IdCurso`, `NombreCurso` "
-                + "FROM `JAW_Curso`");//se selecciona las columnas y la tabla que desea mostrar
+                + "FROM `JAW_Curso`");
         if (sql.Exists(rs)) {
             try {
                 while (rs.next()) {
                     Object[] result = {
                         rs.getObject("IdCurso"),
-                        rs.getObject("NombreCurso")//se trae todos los datos que se encuentran en esas columnas
+                        rs.getObject("NombreCurso")
                     };
                     table.addrow(result);
                 }
@@ -131,15 +136,14 @@ public class Maintenance {
                 System.out.println("no object fetch'd");
             }
         }
-        JScrollPane scrollPane = new JScrollPane(table);//aquí es donde se coloca la tabla
+        JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 0, 500, 400);
 
-        ip.add(scrollPane);//el scrollpane se añade al panel el cual se añade al panel de mantenimiento_curso
+        //ip.add(btn_filter);
+        ip.add(scrollPane);
         ip.finalice();
         Maintenance_Curso_Panel.add(ip);
-        
-        if_.add(Maintenance_Curso_Panel);
-    } 
+    }
     
     public void btnAñadir_MouseClicked(){
         try{
@@ -150,7 +154,7 @@ public class Maintenance {
         pps.setString(1 , txt_NombreCurso.getText());
         
         pps.executeUpdate();
-        Mantenimiento_curso(if_);//esto es para que apenas se añada o se modifique algo el cambio se haga en la tabla que esta viendo el cliente, pero hay que arreglarlo
+        Tabla();  //Esto se supone que debe de actualizar la pagina
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -166,7 +170,7 @@ public class Maintenance {
         pps.setString(2 , txt_idCurso.getText());
         
         pps.executeUpdate();
-        Mantenimiento_curso(if_);
+        Tabla();
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -181,7 +185,7 @@ public class Maintenance {
         pps.setString(1 , txt_idCurso.getText());
         
         pps.executeUpdate();
-        Mantenimiento_curso(if_);
+        Tabla();
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
