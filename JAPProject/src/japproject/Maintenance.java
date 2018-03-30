@@ -59,9 +59,9 @@ public class Maintenance {
         lbl_NombreCurso.setForeground(Color.GRAY.brighter());
         txt_NombreCurso = new iTextField("", 3);
         
-        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir curso
+        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar curso
+        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar curso
     }
     private void Mantenimiento_curso(iFrame if_) {
         Componentes_Curso();
@@ -69,26 +69,29 @@ public class Maintenance {
         Maintenance_Curso_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         Maintenance_Curso_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 440);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Curso_Panel.newLine(); 
-
-        Maintenance_Curso_Panel.AddObject(lbl_idCurso, 415, 30, 2);
-        Maintenance_Curso_Panel.AddObject(txt_idCurso, 415, 30, 600);//agrega el label y el textfield del id curso
+ 
+        Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_Curso_Panel.newLine();
         
-        Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 2);
-        Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 415, 30, 600);//agrega el label y el textfield del nombre del curso
+        Maintenance_Curso_Panel.AddObject(lbl_idCurso, 415, 30, 4);
+        Maintenance_Curso_Panel.AddObject(txt_idCurso, 415, 30, 200);//agrega el label y el textfield del id curso
         Maintenance_Curso_Panel.newLine();
         
-        Maintenance_Curso_Panel.AddObject(btnAñadir, 175, 30, 10);
+        Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 4);
+        Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 415, 30, 200);//agrega el label y el textfield del nombre del curso
+        Maintenance_Curso_Panel.newLine();
+        
+        Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 200);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
         
-        Maintenance_Curso_Panel.AddObject(btnModificar, 175, 30, 10);
+        Maintenance_Curso_Panel.AddObject(btnModificar, 130, 30, 340);
         btnModificar.addActionListener((a) -> {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Curso_Panel.AddObject(btnEliminar, 175, 30, 10);
+        Maintenance_Curso_Panel.AddObject(btnEliminar, 130, 30, 480);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
