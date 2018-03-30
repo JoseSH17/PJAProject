@@ -57,7 +57,7 @@ public class Maintenance_Horario {
         currentPanel = "Maintenance_Horario";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Horario_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Horario_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
-        Mantenimiento_curso(if_);
+        Mantenimiento_horario(if_);
     }
     
     private void Componentes_Curso(){
@@ -82,7 +82,7 @@ public class Maintenance_Horario {
         btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar horario
         btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar horario
     }
-    private void Mantenimiento_curso(iFrame if_) {
+    private void Mantenimiento_horario(iFrame if_) {
         Componentes_Curso();
         
         Maintenance_Horario_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
