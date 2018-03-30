@@ -54,7 +54,7 @@ public class Maintenance_Clasif_paciente {
     private iTextField txt_NombreClasifPaciente;//TextField para el nombre del curso
     
     public Maintenance_Clasif_paciente(iFrame if_) {
-        currentPanel = "Maintenance_clasif_Paciente";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
+        currentPanel = "Maintenance_Clasif_Paciente_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Clasif_Paciente_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Clasif_Paciente_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
         Mantenimiento_curso(if_);

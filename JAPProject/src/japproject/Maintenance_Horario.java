@@ -54,7 +54,7 @@ public class Maintenance_Horario {
     private iTextField txt_NombreHorario;//TextField para el nombre del curso
     
     public Maintenance_Horario(iFrame if_) {
-        currentPanel = "Maintenance_Horario";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
+        currentPanel = "Maintenance_Horario_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Horario_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Horario_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
         Mantenimiento_horario(if_);

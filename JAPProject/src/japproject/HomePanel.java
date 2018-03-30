@@ -34,6 +34,10 @@ public class HomePanel {
     NewPatient NP; //Panel to add a new Patient.
     EditPatient EP; //Panel to Edit patients
     Maintenance MT; //Panel to Add or Edit Helper Tables
+    Maintenance_Clasif_paciente MCP; //Panel to Add or Edit Helper Tables
+    Maintenance_Horario MH; //Panel to Add or Edit Helper Tables
+    Maintenance_tPaciente MTP; //Panel to Add or Edit Helper Tables
+    Appointments AP; //Panel to Add appointments.
 
     public HomePanel() {
         lpb = new LoadingProgressBars();
@@ -88,16 +92,18 @@ public class HomePanel {
         });
         JMenuItem Horarios = new JMenuItem("Horarios");
         Horarios.addActionListener((ei) -> {
-        RemovePanels();
-        EP=new EditPatient(if_);
+            RemovePanels();
+            MH = new Maintenance_Horario(if_);
         });
         JMenuItem TPaciente = new JMenuItem("Tipo Paciente");
         TPaciente.addActionListener((o) -> {
-
+            RemovePanels();
+            MTP =  new Maintenance_tPaciente(if_);
         });
         JMenuItem CPaciente = new JMenuItem("Clasificación Paciente");
         CPaciente.addActionListener((ei) -> {
-
+            RemovePanels();
+            MCP =  new Maintenance_Clasif_paciente(if_);
         });
         JMenuItem Parentesco = new JMenuItem("Parentesco");
         Parentesco.addActionListener((ei) -> {
@@ -111,13 +117,21 @@ public class HomePanel {
         menuMantenimiento.add(Parentesco);
 
         JMenu menuPersonalizacion = new JMenu("Personalizar");
+        menuPersonalizacion.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BRUSH, 20, Color.BLACK));
         JMenuItem ColorPallet = new JMenuItem("Colores de Interfaz");
         menuPersonalizacion.add(ColorPallet);
+
+        JButton menuCitas = new JButton("Citas");
+        menuCitas.setOpaque(false);
+        menuCitas.setContentAreaFilled(false);
+        menuCitas.setBorderPainted(false);
+        menuCitas.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ARCHIVE, 20, Color.BLACK));
 
         menuBar.add(MenuHome);
         menuBar.add(menuAgregarPaciente);
         menuBar.add(menuMantenimiento);
         menuBar.add(menuPersonalizacion);
+        menuBar.add(menuCitas);
 
         if_.AddObject(menuBar, if_.getWidth(), 40);
         if_.newLine();
@@ -144,10 +158,25 @@ public class HomePanel {
                 EP.EditPatient_Panel.dispose();
                 EP.EditPatient_Panel.setVisible(false);
                 break;
-
             case "Maintenance_Curso_Panel":    //If current panel is Maintenance_Curso_Panel then remove it.    
                 MT.Maintenance_Curso_Panel.dispose();     //THIS SHOULD BE UPDATED FOR THE TABBED PANEL WHEN ITS IMPLEMENTATION ITS COMPLETE
                 MT.Maintenance_Curso_Panel.setVisible(false);
+                break;
+            case "Maintenance_Clasif_Paciente_Panel": //If current panel is Maintenance_clasif_Paciente then remove it.
+                MCP.Maintenance_Clasif_Paciente_Panel.dispose();
+                MCP.Maintenance_Clasif_Paciente_Panel.setVisible(false);
+                break;
+            case "Maintenance_Horario_Panel": //If current panel is Maintenance_Horario_Panel then remove it.
+                MH.Maintenance_Horario_Panel.dispose();
+                MH.Maintenance_Horario_Panel.setVisible(false);
+                break;
+            case "Maintenance_TipPaciente_Panel":  //If current panel is Maintenance_TipPaciente_Panel then remove it.
+                MTP.Maintenance_TipPaciente_Panel.dispose();
+                MTP.Maintenance_TipPaciente_Panel.setVisible(false);
+                break;
+            case "Appointments_Panel":  //If current panel is Maintenance_Horario_Panel then remove it.
+                AP.Appointments_Panel.dispose(); //If current panel is Appointments_Panel then remove it. 
+                AP.Appointments_Panel.setVisible(false);
                 break;
             default:
                 System.out.println("Panel not handled");
