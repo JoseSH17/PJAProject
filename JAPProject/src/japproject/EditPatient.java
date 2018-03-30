@@ -99,88 +99,88 @@ public class EditPatient {
     public EditPatient(iFrame if_) {
         currentPanel = "EditPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.  
         EditPatient_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);
-        EditPatient_Panel.setBackground(Color.BLUE);
+       EditPatient_Panel.setBackground(Color.decode("#006738"));
 
         AddComponentes();
         if_.add(EditPatient_Panel);
     }
-/*
+
     public void tblUpdater(List<String> info, String tbl_Name) {
-        //Arrays to Handle Data
-        ArrayList<JLabel> dynamicLabels = new ArrayList();
-        ArrayList<iTextField> dynamicTextFields = new ArrayList();
-
-        System.out.println("Gathered Data " + info);
-
-        ArrayList<String> cols = new ArrayList();
-        ArrayList<String> rows = new ArrayList();
-        info.forEach((jKeyPair) -> {
-            cols.add(jKeyPair.split("-")[0]);
-            rows.add(jKeyPair.split("-")[1]);
-        });
-        System.out.println("Cols " + cols);
-        System.out.println("Rows " + rows);
-
-        JLabel lbl_info3 = new JLabel();
-        EditPatient_Panel.AddObject(lbl_info3, 280, 30, iPanel.LEFT);
-        EditPatient_Panel.newLine();
-
-        for (int i = 0; i < cols.size(); i++) {
-            JLabel lbl_Columns = new JLabel(cols.get(i).toString());
-            EditPatient_Panel.AddObject(lbl_Columns, 100, 30);
-            dynamicLabels.add(lbl_Columns);
-        }
-        EditPatient_Panel.newLine();
-        EditPatient_Panel.repaint();
-
-        for (int i = 0; i < rows.size(); i++) {
-            iTextField txt_Rows = new iTextField(rows.get(i).toString(), 2);
-            EditPatient_Panel.AddObject(txt_Rows, 100, 30);
-            dynamicTextFields.add(txt_Rows);
-        }
-        EditPatient_Panel.newLine();
-        EditPatient_Panel.repaint();
-
-        JLabel lbl_ident = new JLabel();
-        EditPatient_Panel.AddObject(lbl_ident, 530, 10);
-        EditPatient_Panel.newLine();
-
-        //Adding Final Control Button
-        JLabel lbl_ident2 = new JLabel();
-        iButton btn_Done = new iButton("", 3, Color.BLACK, Color.WHITE);
-        EditPatient_Panel.AddObject(lbl_ident2, 380, 30);
-        EditPatient_Panel.AddObject(btn_Done, 100, 30);
-        EditPatient_Panel.newLine();
-        EditPatient_Panel.repaint();
-
-        btn_Done.addActionListener((al) -> {
-            String sqlCommand = "";
-            ArrayList<Object> objs = new ArrayList<>();
-            for (int j = 0; j < cols.size(); j++) {
-                if (j != cols.size() - 1) {
-                    sqlCommand += " `" + dynamicLabels.get(j).getText() + "` =?, ";
-                    objs.add(dynamicTextFields.get(j).getText());
-                } else {
-                    sqlCommand += " `" + dynamicLabels.get(j).getText() + "` =? ";
-                    objs.add(dynamicTextFields.get(j).getText());
-                }
-            }
-            System.out.println("Checking Query" + sqlCommand);
-            //Including
-
-            System.out.println("Final Query: " + "UPDATE TABLE `" + tbl_Name + "` SET " + sqlCommand + " WHERE " + dynamicLabels.get(0).getText() + " = " + dynamicTextFields.get(0).getText());
-
-            System.out.println("Objs: " + objs.toString());
-            Boolean exq = sql.exec("UPDATE `" + tbl_Name + "` SET " + sqlCommand + " WHERE `" + dynamicLabels.get(0).getText() + "` = " + rows.get(0), objs);//                                    
-            if (exq) {
-                JOptionPane.showMessageDialog(null, "Table Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Error ocurred while attempting to update the table", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+//        Arrays to Handle Data
+//        ArrayList<JLabel> dynamicLabels = new ArrayList();
+//        ArrayList<iTextField> dynamicTextFields = new ArrayList();
+//
+//        System.out.println("Gathered Data " + info);
+//
+//        ArrayList<String> cols = new ArrayList();
+//        ArrayList<String> rows = new ArrayList();
+//        info.forEach((jKeyPair) -> {
+//            cols.add(jKeyPair.split("-")[0]);
+//            rows.add(jKeyPair.split("-")[1]);
+//        });
+//        System.out.println("Cols " + cols);
+//        System.out.println("Rows " + rows);
+//
+//        JLabel lbl_info3 = new JLabel();
+//        EditPatient_Panel.AddObject(lbl_info3, 280, 30, iPanel.LEFT);
+//        EditPatient_Panel.newLine();
+//
+//        for (int i = 0; i < cols.size(); i++) {
+//            JLabel lbl_Columns = new JLabel(cols.get(i).toString());
+//            EditPatient_Panel.AddObject(lbl_Columns, 100, 30);
+//            dynamicLabels.add(lbl_Columns);
+//        }
+//        EditPatient_Panel.newLine();
+//        EditPatient_Panel.repaint();
+//
+//        for (int i = 0; i < rows.size(); i++) {
+//            iTextField txt_Rows = new iTextField(rows.get(i).toString(), 2);
+//            EditPatient_Panel.AddObject(txt_Rows, 100, 30);
+//            dynamicTextFields.add(txt_Rows);
+//        }
+//        EditPatient_Panel.newLine();
+//        EditPatient_Panel.repaint();
+//
+//        JLabel lbl_ident = new JLabel();
+//        EditPatient_Panel.AddObject(lbl_ident, 530, 10);
+//        EditPatient_Panel.newLine();
+//
+//        Adding Final Control Button
+//        JLabel lbl_ident2 = new JLabel();
+//        iButton btn_Done = new iButton("", 3, Color.BLACK, Color.WHITE);
+//        EditPatient_Panel.AddObject(lbl_ident2, 380, 30);
+//        EditPatient_Panel.AddObject(btn_Done, 100, 30);
+//        EditPatient_Panel.newLine();
+//        EditPatient_Panel.repaint();
+//
+//        btn_Done.addActionListener((al) -> {
+//            String sqlCommand = "";
+//            ArrayList<Object> objs = new ArrayList<>();
+//            for (int j = 0; j < cols.size(); j++) {
+//                if (j != cols.size() - 1) {
+//                    sqlCommand += " `" + dynamicLabels.get(j).getText() + "` =?, ";
+//                    objs.add(dynamicTextFields.get(j).getText());
+//                } else {
+//                    sqlCommand += " `" + dynamicLabels.get(j).getText() + "` =? ";
+//                    objs.add(dynamicTextFields.get(j).getText());
+//                }
+//            }
+//            System.out.println("Checking Query" + sqlCommand);
+//            Including
+//
+//            System.out.println("Final Query: " + "UPDATE TABLE `" + tbl_Name + "` SET " + sqlCommand + " WHERE " + dynamicLabels.get(0).getText() + " = " + dynamicTextFields.get(0).getText());
+//
+//            System.out.println("Objs: " + objs.toString());
+//            Boolean exq = sql.exec("UPDATE `" + tbl_Name + "` SET " + sqlCommand + " WHERE `" + dynamicLabels.get(0).getText() + "` = " + rows.get(0), objs);//                                    
+//            if (exq) {
+//                JOptionPane.showMessageDialog(null, "Table Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Error ocurred while attempting to update the table", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//        });
 
     }
-*/
+
     
     
 //Metodos para cargar los cbo`s de Paciente
@@ -291,8 +291,8 @@ public class EditPatient {
         lbl_LogoPsicologia = new iLabel("");
         lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
         
-        btnEditarAction = new iButton("REGISTRAR", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnEditarAction.setText("REGISTRAR");
+        btnEditarAction = new iButton("Editar", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnEditarAction.setText("Editar");
 
         lbl_TituloSolicitante = new iLabel("SOLICITANTE");
         lbl_TituloSolicitante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -411,7 +411,7 @@ public class EditPatient {
         cbo_CargarTipoPaciente();   
         
         EditPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
-        EditPatient_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 440);
+        EditPatient_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 600);
         EditPatient_Panel.newLine();  
 
         EditPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 2);
@@ -521,8 +521,7 @@ public class EditPatient {
         cbo_TipoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
 
-//        EditPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
-//        EditPatient_Panel.newLine();
+
         EditPatient_Panel.AddObject(btnEditarAction, 175, 30, 10);
         EditPatient_Panel.newLine();
 

@@ -116,9 +116,9 @@ public class PatientView {
     public void ItemEditarActionListener(iTable tblRegistros)
     {
          ListSelectionModel jModel = tblRegistros.getSelectionModel();
-        // jModel.addListSelectionListener(new ListSelectionListener() {
-        //    @Override
-        //    public void valueChanged(ListSelectionEvent e) {
+         jModel.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
                 tbl_Data.clear();
                 if (!jModel.isSelectionEmpty()) {
                     int selectedRow = tblRegistros.getSelectedRow();
@@ -130,8 +130,8 @@ public class PatientView {
                     System.out.println("Result: " + tbl_Data.toString());
                 }
                 int selectedRow = jModel.getMinSelectionIndex();
-          //  }
-      //  });
+            }
+        });
     }
 
     /**
