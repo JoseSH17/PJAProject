@@ -37,6 +37,7 @@ public class HomePanel {
     Maintenance_Clasif_paciente MCP; //Panel to Add or Edit Helper Tables
     Maintenance_Horario MH; //Panel to Add or Edit Helper Tables
     Maintenance_tPaciente MTP; //Panel to Add or Edit Helper Tables
+    Maintenance_Parentesco MP; //Panel to Add or Edit Helper Tables
     Appointments AP; //Panel to Add appointments.
 
     public HomePanel() {
@@ -107,7 +108,8 @@ public class HomePanel {
         });
         JMenuItem Parentesco = new JMenuItem("Parentesco");
         Parentesco.addActionListener((ei) -> {
-
+            RemovePanels();
+            MP = new Maintenance_Parentesco(if_);
         });
 
         menuMantenimiento.add(Cursos);
@@ -173,6 +175,10 @@ public class HomePanel {
             case "Maintenance_TipPaciente_Panel":  //If current panel is Maintenance_TipPaciente_Panel then remove it.
                 MTP.Maintenance_TipPaciente_Panel.dispose();
                 MTP.Maintenance_TipPaciente_Panel.setVisible(false);
+                break;
+            case "Maintenance_Parentesco_Panel":  //If current panel is Maintenance_Parentesco_Panel then remove it.
+                MP.Maintenance_Parentesco_Panel.dispose();
+                MP.Maintenance_Parentesco_Panel.setVisible(false);
                 break;
             case "Appointments_Panel":  //If current panel is Maintenance_Horario_Panel then remove it.
                 AP.Appointments_Panel.dispose(); //If current panel is Appointments_Panel then remove it. 

@@ -13,12 +13,10 @@ import iComponents.iButton;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
-import iComponents.iScrollPane;
 import iComponents.iTable;
 
 import iComponents.iTextField;
 import static japproject.HomePanel.currentPanel;
-import static japproject.HomePanel.if_;
 import static japproject.JAPProject.sql;
 import java.awt.Color;
 import java.sql.Connection;
@@ -28,8 +26,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
