@@ -319,4 +319,16 @@ public class InitComponents implements ComponentInterfaz
     public void addSpace(int height) {
         AddSingleObject(new JLabel(""), 100, height, CENTER);
     }
+    public InitComponents(int w, int h, int margin, int objectMarginTop, boolean haveMarginTop) {
+        this.componentHeight = h;
+        this.componentWidth = w;
+        this.marginBetweenElements = margin;
+        this.isRow = false;
+        this.totalWidth = 0;
+        this.currentRow = 0;
+        this.firstMarginTop = objectMarginTop;
+        this.haveMarginTop = haveMarginTop;
+        this.firstObjectinMarginTop = haveMarginTop;
+        this.MatrixSize = 0;
+    }
 }

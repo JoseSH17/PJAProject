@@ -173,6 +173,14 @@ public class iPanel extends JPanel implements ComponentInterfaz {
      * componente.
      * @param if_ iFrame to add
      */
+    public iPanel(int horizontal, int vertical, int w, int h, int margin) 
+    {   
+        ic = new InitComponents(w, h, margin, 0, false);
+        
+        setBounds(horizontal, vertical, w, h);
+        setLayout(ic.getLayOut());
+    }
+    
     public iPanel(int horizontal, int vertical, float w, float h, int margin, int InitMarginTop, iFrame if_) {
         int height = (int) ((if_.getHeight() * h) / 100);
         int width = (int) ((if_.getWidth() * w) / 100);

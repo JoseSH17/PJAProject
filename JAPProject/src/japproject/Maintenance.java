@@ -4,15 +4,25 @@ import iComponents.iButton;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
+import iComponents.iScrollPane;
+import iComponents.iTable;
 
 import iComponents.iTextField;
+import static japproject.HomePanel.currentPanel;
+import static japproject.HomePanel.if_;
+import static japproject.JAPProject.sql;
 import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import static japproject.HomePanel.currentPanel;
+import javax.swing.JScrollPane;
 
 public class Maintenance {
   
@@ -97,6 +107,37 @@ public class Maintenance {
         });
         Maintenance_Curso_Panel.newLine();
         
+        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Curso", "Nombre Curso"));
+        iPanel ip = new iPanel(215, 90, 500, 400, 4);//aquí se crea un panel
+        //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
+        
+        ip.setLocation(100, 300);//se le coloca la posicición para que no se sobre ponga a lo demás
+        iTable table = new iTable(cols);//se crea la tabla
+        Mantenimiento_curso(if_);//esto es nada más para ver si la tabla no era más corta
+
+        ResultSet rs = sql.SELECT(""
+                + "SELECT `IdCurso`, `NombreCurso` "
+                + "FROM `JAW_Curso`");//se selecciona las columnas y la tabla que desea mostrar
+        if (sql.Exists(rs)) {
+            try {
+                while (rs.next()) {
+                    Object[] result = {
+                        rs.getObject("IdCurso"),
+                        rs.getObject("NombreCurso")//se trae todos los datos que se encuentran en esas columnas
+                    };
+                    table.addrow(result);
+                }
+            } catch (SQLException ex) {
+                System.out.println("no object fetch'd");
+            }
+        }
+        JScrollPane scrollPane = new JScrollPane(table);//aquí es donde se coloca la tabla
+        scrollPane.setBounds(0, 0, 500, 400);
+
+        ip.add(scrollPane);//el scrollpane se añade al panel el cual se añade al panel de mantenimiento_curso
+        ip.finalice();
+        Maintenance_Curso_Panel.add(ip);
+        
         if_.add(Maintenance_Curso_Panel);
     } 
     
@@ -104,12 +145,12 @@ public class Maintenance {
         try{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Curso(IdCurso, NombreCurso) VALUES (?,?)");
+        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Curso(NombreCurso) VALUES (?)");
         
-        pps.setString(1 , txt_idCurso.getText());
-        pps.setString(2 , txt_NombreCurso.getText());
+        pps.setString(1 , txt_NombreCurso.getText());
         
         pps.executeUpdate();
+        Mantenimiento_curso(if_);//esto es para que apenas se añada o se modifique algo el cambio se haga en la tabla que esta viendo el cliente, pero hay que arreglarlo
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -125,6 +166,7 @@ public class Maintenance {
         pps.setString(2 , txt_idCurso.getText());
         
         pps.executeUpdate();
+        Mantenimiento_curso(if_);
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -139,8 +181,10 @@ public class Maintenance {
         pps.setString(1 , txt_idCurso.getText());
         
         pps.executeUpdate();
+        Mantenimiento_curso(if_);
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+
 }
