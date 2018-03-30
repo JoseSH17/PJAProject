@@ -136,7 +136,7 @@ public class Maintenance_Parentesco {
             try {
                 while (rs.next()) {
                     Object[] result = {
-                        rs.getObject("IdCurso"),
+                        rs.getObject("IdParentesco"),
                         rs.getObject("DescripcionParentesco")
                     };
                     table.addrow(result);
