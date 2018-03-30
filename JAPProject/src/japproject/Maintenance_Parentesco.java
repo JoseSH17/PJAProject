@@ -33,9 +33,9 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
-public class Maintenance_Clasif_paciente {
+public class Maintenance_Parentesco {
   
-    public iPanel Maintenance_Clasif_Paciente_Panel;//creo el iPanel
+    public iPanel Maintenance_Parentesco_Panel;//creo el iPanel
     
     private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
     private final String USERNAME = "icompone_jose";
@@ -48,81 +48,81 @@ public class Maintenance_Clasif_paciente {
     private iButton btnEliminar;//Boton para eliminar
     
     private iLabel lbl_Titulo_Mantenimiento;//Lbl para el Titulo de la pagina de mantenimiento en la que se encuentra
-    private iLabel lbl_idClasifPaciente;//Lbl para el id curso
-    private iTextField txt_idTClasifPaciente;//TextField para el id curso
-    private iLabel lbl_NombreClasifPaciente;//Lbl para el nombre del curso
-    private iTextField txt_NombreClasifPaciente;//TextField para el nombre del curso
+    private iLabel lbl_idParentesco;//Lbl para el id curso
+    private iTextField txt_idParentesco;//TextField para el id curso
+    private iLabel lbl_Descripción;//Lbl para el nombre del curso
+    private iTextField txt_Descripcion;//TextField para el nombre del curso
     
-    public Maintenance_Clasif_paciente(iFrame if_) {
-        currentPanel = "Maintenance_clasif_Paciente";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
-        Maintenance_Clasif_Paciente_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        Maintenance_Clasif_Paciente_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
-        Mantenimiento_Clasificación(if_);
+    public Maintenance_Parentesco(iFrame if_) {
+        currentPanel = "Maintenance_Parentesco_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
+        Maintenance_Parentesco_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
+        Maintenance_Parentesco_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
+        Mantenimiento_Parentesco(if_);
     }
     
-    private void Componentes_Clasificación(){
+    private void Componentes_Parentesco(){
         lbl_LogoULatina = new iLabel("");
         lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
         lbl_LogoPsicologia = new iLabel("");
         lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-         
-        lbl_Titulo_Mantenimiento = new iLabel("MANTENIMIENTO CLASIFICACIÓN PACIENTE");
+        
+        lbl_Titulo_Mantenimiento = new iLabel("MANTENIMIENTO PARENTESCO");
         lbl_Titulo_Mantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Titulo_Mantenimiento.setForeground(Color.GRAY.brighter());
         
-        lbl_idClasifPaciente = new iLabel("ID Clasificación Paciente".toUpperCase());
-        lbl_idClasifPaciente.setForeground(Color.GRAY.brighter());
-        txt_idTClasifPaciente = new iTextField("", 3);
+        lbl_idParentesco = new iLabel("ID Parentesco".toUpperCase());
+        lbl_idParentesco.setForeground(Color.GRAY.brighter());
+        txt_idParentesco = new iTextField("", 3);
         
-        lbl_NombreClasifPaciente = new iLabel("Nombre Clasificación Paciente".toUpperCase());
-        lbl_NombreClasifPaciente.setForeground(Color.GRAY.brighter());
-        txt_NombreClasifPaciente = new iTextField("", 3);
+        lbl_Descripción = new iLabel("Descripción".toUpperCase());
+        lbl_Descripción.setForeground(Color.GRAY.brighter());
+        txt_Descripcion = new iTextField("", 3);
         
-        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir clasificación
-        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar clasificación
-        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar clasificación
+        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir curso
+        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar curso
+        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar curso
     }
-    private void Mantenimiento_Clasificación(iFrame if_) {
-        Componentes_Clasificación();
+    private void Mantenimiento_Parentesco(iFrame if_) {
+        Componentes_Parentesco();
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 440);//añade los logos oficiales de la clinica y de la universidad latina
-        Maintenance_Clasif_Paciente_Panel.newLine(); 
+        Maintenance_Parentesco_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+        Maintenance_Parentesco_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 440);//añade los logos oficiales de la clinica y de la universidad latina
+        Maintenance_Parentesco_Panel.newLine(); 
  
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
-        Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Parentesco_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
+        Maintenance_Parentesco_Panel.newLine();
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_idClasifPaciente, 415, 30, 4);
-        Maintenance_Clasif_Paciente_Panel.AddObject(txt_idTClasifPaciente, 415, 30, 200);//agrega el label y el textfield del id clasificación
-        Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Parentesco_Panel.AddObject(lbl_idParentesco, 415, 30, 4);
+        Maintenance_Parentesco_Panel.AddObject(txt_idParentesco, 415, 30, 200);//agrega el label y el textfield del id curso
+        Maintenance_Parentesco_Panel.newLine();
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_NombreClasifPaciente, 415, 30, 4);
-        Maintenance_Clasif_Paciente_Panel.AddObject(txt_NombreClasifPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del clasificación
-        Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 4);
+        Maintenance_Parentesco_Panel.AddObject(txt_Descripcion, 415, 30, 200);//agrega el label y el textfield del nombre del curso
+        Maintenance_Parentesco_Panel.newLine();
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(btnAñadir, 130, 30, 200);
+        Maintenance_Parentesco_Panel.AddObject(btnAñadir, 130, 30, 200);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(btnModificar, 130, 30, 340);
+        Maintenance_Parentesco_Panel.AddObject(btnModificar, 130, 30, 340);
         btnModificar.addActionListener((a) -> {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(btnEliminar, 130, 30, 480);
+        Maintenance_Parentesco_Panel.AddObject(btnEliminar, 130, 30, 480);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
-        Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Parentesco_Panel.newLine();
         
         Tabla();
         
-        if_.add(Maintenance_Clasif_Paciente_Panel);
+        if_.add(Maintenance_Parentesco_Panel);
     } 
     
     public void Tabla(){
-        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Clasificación Paciente", "Nombre Clasificación Paciente"));
+        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Parentesco", "Descripción"));
         iPanel ip = new iPanel(215, 90, 500, 400, 4);
         //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
         ip.setLocation(100, 300);
@@ -130,14 +130,14 @@ public class Maintenance_Clasif_paciente {
         ip.setBackground(Color.black);
 
         ResultSet rs = sql.SELECT(""
-                + "SELECT `IdClasificacionPaciente`, `NombreClasificacion` "
-                + "FROM `JAW_ClasificacionPaciente`");
+                + "SELECT `IdParentesco`, `DescripcionParentesco` "
+                + "FROM `JAW_Parentesco`");
         if (sql.Exists(rs)) {
             try {
                 while (rs.next()) {
                     Object[] result = {
-                        rs.getObject("IdClasificacionPaciente"),
-                        rs.getObject("NombreClasificacion")
+                        rs.getObject("IdCurso"),
+                        rs.getObject("DescripcionParentesco")
                     };
                     table.addrow(result);
                 }
@@ -148,18 +148,19 @@ public class Maintenance_Clasif_paciente {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 0, 500, 400);
 
+        //ip.add(btn_filter);
         ip.add(scrollPane);
-        ip.finalice(); 
-        Maintenance_Clasif_Paciente_Panel.add(ip);
+        ip.finalice();
+        Maintenance_Parentesco_Panel.add(ip);
     }
     
     public void btnAñadir_MouseClicked(){
         try{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_ClasificacionPaciente(NombreClasificacion) VALUES (?)");
+        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Parentesco(DescripcionParentesco) VALUES (?)");
         
-        pps.setString(1 , txt_NombreClasifPaciente.getText());
+        pps.setString(1 , txt_Descripcion.getText());
         
         pps.executeUpdate();
         Tabla();  //Esto se supone que debe de actualizar la pagina
@@ -172,10 +173,10 @@ public class Maintenance_Clasif_paciente {
         try{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("UPDATE JAW_ClasificacionPaciente SET NombreClasificacion=? WHERE IdClasificacionPaciente=?");
+        PreparedStatement pps = con.prepareStatement("UPDATE JAW_Parentesco SET DescripcionParentesco=? WHERE IdParentesco=?");
         
-        pps.setString(1 , txt_NombreClasifPaciente.getText());
-        pps.setString(2 , txt_idTClasifPaciente.getText());
+        pps.setString(1 , txt_Descripcion.getText());
+        pps.setString(2 , txt_idParentesco.getText());
         
         pps.executeUpdate();
         Tabla();
@@ -188,9 +189,9 @@ public class Maintenance_Clasif_paciente {
         try{
         Class.forName("com.mysql.jdbc.Driver");
         Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("DELETE FROM `JAW_ClasificacionPaciente` where `IdClasificacionPaciente` = ?");
+        PreparedStatement pps = con.prepareStatement("DELETE FROM `JAW_Parentesco` where `IdParentesco` = ?");
         
-        pps.setString(1 , txt_idTClasifPaciente.getText());
+        pps.setString(1 , txt_idParentesco.getText());
         
         pps.executeUpdate();
         Tabla();

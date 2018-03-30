@@ -60,7 +60,7 @@ public class Maintenance_tPaciente {
         Mantenimiento_tPaciente(if_);
     }
     
-    private void Componentes_Curso(){
+    private void Componentes_Tipo_Paciente(){
         lbl_LogoULatina = new iLabel("");
         lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
         lbl_LogoPsicologia = new iLabel("");
@@ -83,7 +83,7 @@ public class Maintenance_tPaciente {
         btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar horario
     }
     private void Mantenimiento_tPaciente(iFrame if_) {
-        Componentes_Curso();
+        Componentes_Tipo_Paciente();
         
         Maintenance_TipPaciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         Maintenance_TipPaciente_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 440);//añade los logos oficiales de la clinica y de la universidad latina
