@@ -13,6 +13,8 @@ import iComponents.iScrollPane;
 import iComponents.iTable;
 import java.awt.Color;
 import static japproject.HomePanel.currentPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,9 +24,12 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -63,6 +68,7 @@ public class PatientView {
             RegistrosTable.getTableHeader().setReorderingAllowed(false);
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.getTableHeader().setResizingAllowed(false);
+            RegistrosTable.setRowSelectionAllowed(true);
             RegistrosTable.setSize(500, 500);
 
             PopMenu(RegistrosTable, if_);//metodo que crea e implementa el popmenu 
@@ -98,40 +104,52 @@ public class PatientView {
      * Metodo para crear el popmenu
      */
     public void PopMenu(iTable RegistrosTable, iFrame if_) {
-        JPopupMenu popup = new JPopupMenu();
-        JMenuItem ItemEditar = new JMenuItem("Editar paciente");
-      
-        ItemEditar.addActionListener((ae) -> {           
-            ItemEditarActionListener(RegistrosTable);
-            PatientView_panel.dispose();
-            PatientView_panel.setVisible(false);
-            EP = new EditPatient(if_);
-        });
 
-        popup.add(ItemEditar);
-        RegistrosTable.setComponentPopupMenu(popup);
-
-    }
-        
-    public void ItemEditarActionListener(iTable tblRegistros)
-    {
-         ListSelectionModel jModel = tblRegistros.getSelectionModel();
-         jModel.addListSelectionListener(new ListSelectionListener() {
+        //
+        RegistrosTable.addMouseListener(new MouseAdapter() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                tbl_Data.clear();
-                if (!jModel.isSelectionEmpty()) {
-                    int selectedRow = tblRegistros.getSelectedRow();
-
-                    for (int j = 0; j < tblRegistros.getColumnCount(); j++) {
-
-                        tbl_Data.add(tblRegistros.getColumnName(j) + "-" + tblRegistros.getValueAt(selectedRow, j).toString());
-                    }
-                    System.out.println("Result: " + tbl_Data.toString());
+            public void mouseReleased(MouseEvent e) {
+                int r = RegistrosTable.rowAtPoint(e.getPoint());
+            
+                
+                if (r >= 0 && r < RegistrosTable.getRowCount()) {
+                    RegistrosTable.setRowSelectionInterval(r, r);
+                } else {
+                    RegistrosTable.clearSelection();
                 }
-                int selectedRow = jModel.getMinSelectionIndex();
+
+                int rowindex = RegistrosTable.getSelectedRow();
+                if (rowindex < 0) {
+                    return;
+                }
+                if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
+                    JPopupMenu popup = new JPopupMenu();
+                    JMenuItem ItemEditar = new JMenuItem("Editar paciente");
+                    
+                    ItemEditar.addActionListener((ae) -> {
+                        ItemEditarActionListener(RegistrosTable);
+                        PatientView_panel.dispose();
+                        PatientView_panel.setVisible(false);
+                        EP = new EditPatient(if_);
+                    });
+                    popup.add(ItemEditar);
+                    RegistrosTable.setComponentPopupMenu(popup);
+                    //
+
+                }
             }
         });
+
+    }
+
+    public void ItemEditarActionListener(iTable RegistrosTable) {
+
+       int selectedRow = RegistrosTable.getSelectedRow();
+
+                    for (int j = 0; j < RegistrosTable.getColumnCount(); j++) {
+
+                        tbl_Data.add(RegistrosTable.getColumnName(j) + "-" + RegistrosTable.getValueAt(selectedRow, j).toString());
+                    }
     }
 
     /**

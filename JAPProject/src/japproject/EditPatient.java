@@ -99,8 +99,7 @@ public class EditPatient {
     public EditPatient(iFrame if_) {
         currentPanel = "EditPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.  
         EditPatient_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);
-       EditPatient_Panel.setBackground(Color.decode("#006738"));
-
+        EditPatient_Panel.setBackground(Color.decode("#006738"));
         AddComponentes();
         if_.add(EditPatient_Panel);
     }
@@ -181,8 +180,6 @@ public class EditPatient {
 
     }
 
-    
-    
 //Metodos para cargar los cbo`s de Paciente
     private JComboBox cbo_CargarTipoPaciente() {
 
@@ -256,7 +253,7 @@ public class EditPatient {
     }//Fin del cbo_CargarCurso
 
     public iScrollPane llenarTable(List<String> info) {
-        
+
         System.out.println("Lista recibida por llenarTable: " + info.toString());
 
         ArrayList<String> cols = new ArrayList();
@@ -265,16 +262,21 @@ public class EditPatient {
             cols.add(jKeyPair.split("-")[0]);
             rows.add(jKeyPair.split("-")[1]);
         });
-        iTable Table = new iTable(cols);
-        Table.setSize(500, 50);
+        iTable RegistrosTable = new iTable(cols);
+        RegistrosTable.setSize(800, 100);
+        RegistrosTable.getTableHeader().setReorderingAllowed(false);
+        RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        RegistrosTable.getTableHeader().setResizingAllowed(false);
+        RegistrosTable.setRowSelectionAllowed(true);
+        SetColumsSizes(RegistrosTable);
 
         System.out.println("Cols " + cols);
 
         System.out.println("Rows " + rows);
 
-        Table.addrow(rows.toArray());
+        RegistrosTable.addrow(rows.toArray());
 
-        iScrollPane ScrollPane = new iScrollPane(Table, null);
+        iScrollPane ScrollPane = new iScrollPane(RegistrosTable, null);
 
         return ScrollPane;
     }
@@ -283,14 +285,14 @@ public class EditPatient {
 
     }
 
-    public void initSoliComponents() {    
-        
+    public void initSoliComponents() {
+
         lbl_LogoULatina = new iLabel("");
         lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
-        
+
         lbl_LogoPsicologia = new iLabel("");
         lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-        
+
         btnEditarAction = new iButton("Editar", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
         btnEditarAction.setText("Editar");
 
@@ -408,11 +410,11 @@ public class EditPatient {
         cbo_CargarClasificacionPaciente();
         cbo_CargarCurso();
         cbo_CargarHorario();
-        cbo_CargarTipoPaciente();   
-        
+        cbo_CargarTipoPaciente();
+
         EditPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         EditPatient_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 600);
-        EditPatient_Panel.newLine();  
+        EditPatient_Panel.newLine();
 
         EditPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 2);
         EditPatient_Panel.AddObject(lbl_TituloPaciente, 415, 30, 600);//agrego el titulo para poner verlo con
@@ -521,7 +523,6 @@ public class EditPatient {
         cbo_TipoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
 
-
         EditPatient_Panel.AddObject(btnEditarAction, 175, 30, 10);
         EditPatient_Panel.newLine();
 
@@ -530,10 +531,62 @@ public class EditPatient {
         });
 //
 
-        EditPatient_Panel.AddObject(llenarTable(tbl_Data), 500, 50);
+        EditPatient_Panel.AddObject(llenarTable(tbl_Data), 800, 100);
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.finalice();
+
+    }
+
+    public void SetColumsSizes(iTable RegistrosTable) {
+        //            Codigo para manipular los sizes de las columnas
+        RegistrosTable.getColumnModel().getColumn(0).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(0).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(0).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(1).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(2).setPreferredWidth(140);
+
+        RegistrosTable.getColumnModel().getColumn(3).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(3).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(3).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(5).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(5).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(5).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(6).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(7).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(8).setPreferredWidth(140);
+
+        RegistrosTable.getColumnModel().getColumn(9).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(9).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(9).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(10).setPreferredWidth(140);
+
+        RegistrosTable.getColumnModel().getColumn(11).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(11).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(11).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(12).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(13).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(14).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(15).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(16).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(17).setPreferredWidth(140);
+
+        RegistrosTable.getColumnModel().getColumn(18).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(18).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(18).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(19).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(20).setPreferredWidth(140);
+
+        RegistrosTable.getColumnModel().getColumn(21).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(21).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
+//fin de los parametros de la tabla
 
     }
 
