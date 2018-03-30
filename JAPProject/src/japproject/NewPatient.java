@@ -287,7 +287,7 @@ public class NewPatient {
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
 //        lbl_FechaReporte.setText("Fecha Reporte".toUpperCase());//text_Area
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
-        //iCalendar Fecha = new iCalendar(date);
+        //iCalendar Fecha = new iCalendar(date);//we need to change txt_FechaReporte for this
         txt_FechaReporte = new iTextField("", 3);
 
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
