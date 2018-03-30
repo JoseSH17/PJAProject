@@ -18,19 +18,19 @@ import javax.swing.JProgressBar;
  * @author Jose
  */
 public class LoadingProgressBars {
-    public iFrame LoadingFrame;
+    public static  iFrame LoadingFrame = new iFrame(410, 110, 4, 20, "Loading...", EXIT_ON_CLOSE);
     public iLabel lblIndicador;
-    public  JProgressBar pbSQL = new JProgressBar();
+    public static JProgressBar pbSQL = new JProgressBar(0,100);
     
      
     //Method in charge of the ProgressBar
-    public void ProgressSQL() {
-        LoadingFrame = new iFrame(410, 110, 4, 20, "Loading...", EXIT_ON_CLOSE);
+    public void ProgressSQL() {        
         lblIndicador = new iLabel("Accesando a base de datos local, un momento por favor...");
         lblIndicador.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.DATA_USAGE, 20, Color.BLACK));        
         LoadingFrame.AddSingleObject(lblIndicador, 390, 30, EXIT_ON_CLOSE);
         LoadingFrame.AddSingleObject(pbSQL, 390, 30, EXIT_ON_CLOSE);       
-        LoadingFrame.finalice();                      
+        LoadingFrame.finalice();       
+        System.out.println("Loading Frame invocado");
     }
     
 }
