@@ -57,10 +57,10 @@ public class Maintenance_Clasif_paciente {
         currentPanel = "Maintenance_Clasif_Paciente_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Clasif_Paciente_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Clasif_Paciente_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
-        Mantenimiento_curso(if_);
+        Mantenimiento_Clasificación(if_);
     }
     
-    private void Componentes_Curso(){
+    private void Componentes_Clasificación(){
         lbl_LogoULatina = new iLabel("");
         lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
         lbl_LogoPsicologia = new iLabel("");
@@ -78,12 +78,12 @@ public class Maintenance_Clasif_paciente {
         lbl_NombreClasifPaciente.setForeground(Color.GRAY.brighter());
         txt_NombreClasifPaciente = new iTextField("", 3);
         
-        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir horario
-        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar horario
-        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar horario
+        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir clasificación
+        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar clasificación
+        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar clasificación
     }
-    private void Mantenimiento_curso(iFrame if_) {
-        Componentes_Curso();
+    private void Mantenimiento_Clasificación(iFrame if_) {
+        Componentes_Clasificación();
         
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 440);//añade los logos oficiales de la clinica y de la universidad latina
@@ -93,11 +93,11 @@ public class Maintenance_Clasif_paciente {
         Maintenance_Clasif_Paciente_Panel.newLine();
         
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_idClasifPaciente, 415, 30, 4);
-        Maintenance_Clasif_Paciente_Panel.AddObject(txt_idTClasifPaciente, 415, 30, 200);//agrega el label y el textfield del id horario
+        Maintenance_Clasif_Paciente_Panel.AddObject(txt_idTClasifPaciente, 415, 30, 200);//agrega el label y el textfield del id clasificación
         Maintenance_Clasif_Paciente_Panel.newLine();
         
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_NombreClasifPaciente, 415, 30, 4);
-        Maintenance_Clasif_Paciente_Panel.AddObject(txt_NombreClasifPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del horario
+        Maintenance_Clasif_Paciente_Panel.AddObject(txt_NombreClasifPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del clasificación
         Maintenance_Clasif_Paciente_Panel.newLine();
         
         Maintenance_Clasif_Paciente_Panel.AddObject(btnAñadir, 130, 30, 200);
