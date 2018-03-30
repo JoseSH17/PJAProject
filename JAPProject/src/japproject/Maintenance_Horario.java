@@ -48,10 +48,10 @@ public class Maintenance_Horario {
     private iButton btnEliminar;//Boton para eliminar
     
     private iLabel lbl_Titulo_Mantenimiento;//Lbl para el Titulo de la pagina de mantenimiento en la que se encuentra
-    private iLabel lbl_idCurso;//Lbl para el id curso
-    private iTextField txt_idCurso;//TextField para el id curso
-    private iLabel lbl_NombreCurso;//Lbl para el nombre del curso
-    private iTextField txt_NombreCurso;//TextField para el nombre del curso
+    private iLabel lbl_idHorario;//Lbl para el id curso
+    private iTextField txt_idHorario;//TextField para el id curso
+    private iLabel lbl_NombreHorario;//Lbl para el nombre del curso
+    private iTextField txt_NombreHorario;//TextField para el nombre del curso
     
     public Maintenance_Horario(iFrame if_) {
         currentPanel = "Maintenance_Horario";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
@@ -65,22 +65,22 @@ public class Maintenance_Horario {
         lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
         lbl_LogoPsicologia = new iLabel("");
         lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-        
+         
         lbl_Titulo_Mantenimiento = new iLabel("MANTENIMIENTO HORARIOS");
         lbl_Titulo_Mantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Titulo_Mantenimiento.setForeground(Color.GRAY.brighter());
         
-        lbl_idCurso = new iLabel("ID Horario".toUpperCase());
-        lbl_idCurso.setForeground(Color.GRAY.brighter());
-        txt_idCurso = new iTextField("", 3);
+        lbl_idHorario = new iLabel("ID Horario".toUpperCase());
+        lbl_idHorario.setForeground(Color.GRAY.brighter());
+        txt_idHorario = new iTextField("", 3);
         
-        lbl_NombreCurso = new iLabel("Nombre Horario".toUpperCase());
-        lbl_NombreCurso.setForeground(Color.GRAY.brighter());
-        txt_NombreCurso = new iTextField("", 3);
+        lbl_NombreHorario = new iLabel("Nombre Horario".toUpperCase());
+        lbl_NombreHorario.setForeground(Color.GRAY.brighter());
+        txt_NombreHorario = new iTextField("", 3);
         
-        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir curso
-        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar curso
-        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar curso
+        btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir horario
+        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar horario
+        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar horario
     }
     private void Mantenimiento_curso(iFrame if_) {
         Componentes_Curso();
@@ -92,12 +92,12 @@ public class Maintenance_Horario {
         Maintenance_Horario_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_Horario_Panel.newLine();
         
-        Maintenance_Horario_Panel.AddObject(lbl_idCurso, 415, 30, 4);
-        Maintenance_Horario_Panel.AddObject(txt_idCurso, 415, 30, 200);//agrega el label y el textfield del id curso
+        Maintenance_Horario_Panel.AddObject(lbl_idHorario, 415, 30, 4);
+        Maintenance_Horario_Panel.AddObject(txt_idHorario, 415, 30, 200);//agrega el label y el textfield del id horario
         Maintenance_Horario_Panel.newLine();
         
-        Maintenance_Horario_Panel.AddObject(lbl_NombreCurso, 415, 30, 4);
-        Maintenance_Horario_Panel.AddObject(txt_NombreCurso, 415, 30, 200);//agrega el label y el textfield del nombre del curso
+        Maintenance_Horario_Panel.AddObject(lbl_NombreHorario, 415, 30, 4);
+        Maintenance_Horario_Panel.AddObject(txt_NombreHorario, 415, 30, 200);//agrega el label y el textfield del nombre del horario
         Maintenance_Horario_Panel.newLine();
         
         Maintenance_Horario_Panel.AddObject(btnAñadir, 130, 30, 200);
@@ -148,7 +148,6 @@ public class Maintenance_Horario {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBounds(0, 0, 500, 400);
 
-        //ip.add(btn_filter);
         ip.add(scrollPane);
         ip.finalice();
         Maintenance_Horario_Panel.add(ip);
@@ -160,7 +159,7 @@ public class Maintenance_Horario {
         Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Horario(NombreHorario) VALUES (?)");
         
-        pps.setString(1 , txt_NombreCurso.getText());
+        pps.setString(1 , txt_NombreHorario.getText());
         
         pps.executeUpdate();
         Tabla();  //Esto se supone que debe de actualizar la pagina
@@ -175,8 +174,8 @@ public class Maintenance_Horario {
         Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         PreparedStatement pps = con.prepareStatement("UPDATE JAW_Horario SET NombreHorario=? WHERE IdHorario=?");
         
-        pps.setString(1 , txt_NombreCurso.getText());
-        pps.setString(2 , txt_idCurso.getText());
+        pps.setString(1 , txt_NombreHorario.getText());
+        pps.setString(2 , txt_idHorario.getText());
         
         pps.executeUpdate();
         Tabla();
@@ -191,7 +190,7 @@ public class Maintenance_Horario {
         Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         PreparedStatement pps = con.prepareStatement("DELETE FROM `JAW_Horario` where `IdHorario` = ?");
         
-        pps.setString(1 , txt_idCurso.getText());
+        pps.setString(1 , txt_idHorario.getText());
         
         pps.executeUpdate();
         Tabla();
