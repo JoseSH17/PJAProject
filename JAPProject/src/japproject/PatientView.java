@@ -119,15 +119,17 @@ public class PatientView {
          jModel.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                tbl_Data.clear();
-                if (!jModel.isSelectionEmpty()) {
-                    int selectedRow = tblRegistros.getSelectedRow();
-
-                    for (int j = 0; j < tblRegistros.getColumnCount(); j++) {
-
-                        tbl_Data.add(tblRegistros.getColumnName(j) + "-" + tblRegistros.getValueAt(selectedRow, j).toString());
-                    }
-                    System.out.println("Result: " + tbl_Data.toString());
+                tbl_Data.clear();//limpio el arraylist
+//                if (!jModel.isSelectionEmpty()) {//si no esta vacio haga esto
+                if (tblRegistros.getSelectedRows().length == 0) {//si no esta vacio haga esto
+                                        System.out.println("MENSAJE" );
+//                    int selectedRow = tblRegistros.getSelectedRow();
+//                    for (int j = 0; j < tblRegistros.getColumnCount(); j++) {
+//
+//                        tbl_Data.add(tblRegistros.getColumnName(j) + "-" + tblRegistros.getValueAt(selectedRow, j).toString());
+//                        System.out.println("Result: " + tbl_Data.toString());
+//                    }
+//                    System.out.println("Result: " + tbl_Data.toString());
                 }
                 int selectedRow = jModel.getMinSelectionIndex();
             }

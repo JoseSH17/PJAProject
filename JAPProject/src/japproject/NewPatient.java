@@ -303,7 +303,7 @@ public class NewPatient {
      * @return Muestra los componentes en el NewPatient_Panel
     */
     private void Ingresar(iFrame if_) {
-
+        
         ComponentesSolicitante();//cargo el metodo de los componentes swing de Solicitante
         ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
 
