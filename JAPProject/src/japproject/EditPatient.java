@@ -95,7 +95,7 @@ public class EditPatient {
     //FIN de Controles Swing para Paciente
     //
     //
-    public iPanel EditPatient_Panel;
+    public static iPanel EditPatient_Panel;
 
     public void tblUpdater(List<String> info, String tbl_Name) {
 //        Arrays to Handle Data
