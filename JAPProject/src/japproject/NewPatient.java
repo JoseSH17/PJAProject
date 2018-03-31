@@ -439,7 +439,7 @@ public class NewPatient {
         NewPatient_Panel.newLine();
         NewPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);
         NewPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);
-        NewPatient_Panel.newLine(); 
+        NewPatient_Panel.newLine();
         
         NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
 //        
