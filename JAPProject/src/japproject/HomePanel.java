@@ -94,7 +94,11 @@ public class HomePanel {
         JMenuItem Horarios = new JMenuItem("Horarios");
         Horarios.addActionListener((ei) -> {
             RemovePanels();
+<<<<<<< HEAD
+            EP=new EditPatient(if_);
+=======
             MH = new Maintenance_Horario(if_);
+>>>>>>> 1d6d769591684c2a8793e8c341d7a9dfa6e90dda
         });
         JMenuItem TPaciente = new JMenuItem("Tipo Paciente");
         TPaciente.addActionListener((o) -> {

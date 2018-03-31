@@ -24,6 +24,8 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import static japproject.HomePanel.currentPanel;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 
@@ -37,16 +39,14 @@ public class NewPatient {
     
    // public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
     
-    private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
-    private final String USERNAME = "icompone_jose";
-    private final String PASSWORD = "m70Q(71X7k5v";
-    
     //cbo`s para Paciente
     private JComboBox cbo_TipoPaciente;//son de seleccion por base de datos
     private JComboBox cbo_HorarioPaciente;//son de seleccion por base de datos
     private JComboBox cbo_ClasificacionPaciente;//son de seleccion por base de datos
     private JComboBox cbo_CursoPaciente;//son de seleccion por base de datos
     private JComboBox cbo_Parentesco;//son de seleccion por base de datos
+    private JComboBox cbo_IsNonGrato;//son de seleccion por base de datos//((((lista negra)))))
+    
     //fin cbo`s para Paciente
     
     //Controles swing para NewPatient_Panel
@@ -301,7 +301,7 @@ public class NewPatient {
      * @return Muestra los componentes en el NewPatient_Panel
     */
     private void Ingresar(iFrame if_) {
-
+        
         ComponentesSolicitante();//cargo el metodo de los componentes swing de Solicitante
         ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
 
@@ -318,6 +318,7 @@ public class NewPatient {
         cbo_CargarCurso();
         cbo_CargarHorario();
         cbo_CargarTipoPaciente();
+        cbo_CargarIsNonGrato();//recien agregado
         
         /////////////////componente,/////ancho,largo,posision//
         NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
@@ -462,99 +463,11 @@ public class NewPatient {
         NewPatient_Panel.AddObject(btnRegisterAction, 175, 30, 10);
  
         btnRegisterAction.addActionListener((a) -> {
-
             btn_RegisterAction_MouseClicked();
-            
         });
 //
         NewPatient_Panel.newLine();
 //        //fin de crear tabbedPane y agregarlos al Repanel
-
-
-
-        //Metodo para cuando el chk_boxSolicitanteIgualPaciente este marcado hara la funcion de no no muestra el msj
-//        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
-//            if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
-//                
-////                chk_boxSolicitanteDiferentePaciente.setSelected(false);//para que no
-//                
-//                
-//                System.out.println("MUESTRA MENSAJE MARCADO");
-//                //PARA QUE SE MUESTREN
-//                lbl_TituloPaciente.setVisible(true);
-//                lbl_CedulaSolicitantePaciente.setVisible(true);
-//                txt_CedulaSolicitantePaciente.setVisible(true);
-//                lbl_CedulaPaciente.setVisible(true);
-//                txt_CedulaPaciente.setVisible(true);
-//                lbl_NombrePaciente.setVisible(true);
-//                txt_NombrePaciente.setVisible(true);
-//                lbl_FechaNacimientoPaciente.setVisible(true);
-//                txt_FechaNacimientoPaciente.setVisible(true);
-//                lbl_DireccionPaciente.setVisible(true);
-//                txt_DireccionPaciente.setVisible(true);
-//                lbl_TelefonoPaciente.setVisible(true);
-//                txt_TelefonoPaciente.setVisible(true);
-//                lbl_ProfesionPaciente.setVisible(true);
-//                txt_ProfesionPaciente.setVisible(true);
-//                lbl_ActividadLaboralPaciente.setVisible(true);
-//                txt_ActividadLaboralPaciente.setVisible(true);
-//                lbl_MotivoConsultaPaciente.setVisible(true);
-//                txt_MotivoConsultaPaciente.setVisible(true);
-//                lbl_ParentescoPaciente.setVisible(true);
-//                cbo_Parentesco.setVisible(true);
-//                lbl_ClasificacionPaciente.setVisible(true);
-//                cbo_ClasificacionPaciente.setVisible(true);
-//                lbl_CursoPaciente.setVisible(true);
-//                cbo_CursoPaciente.setVisible(true);
-//                lbl_HorarioPaciente.setVisible(true);
-//                cbo_HorarioPaciente.setVisible(true);
-//                lbl_DetalleHorarioPaciente.setVisible(true);
-//                txt_DetalleHorarioPaciente.setVisible(true);
-//                lbl_TipoPaciente.setVisible(true);
-//                cbo_TipoPaciente.setVisible(true);
-//                
-//            } else {
-//                //esto es debido a que arriba hay que agregar los objetos en la fila corresondiente
-//                //y acomodarlo segun su posicion con los demas objetos
-////                chk_boxSolicitanteDiferentePaciente.setSelected(true);
-////                chk_boxSolicitanteIgualPaciente.setSelected(false);
-//                chk_boxSolicitanteDiferentePaciente.setSelected(false);
-//                
-//                lbl_TituloPaciente.setVisible(false);
-//                lbl_CedulaSolicitantePaciente.setVisible(false);
-//                txt_CedulaSolicitantePaciente.setVisible(false);
-//                lbl_CedulaPaciente.setVisible(false);
-//                txt_CedulaPaciente.setVisible(false);
-//                lbl_NombrePaciente.setVisible(false);
-//                txt_NombrePaciente.setVisible(false);
-//                lbl_FechaNacimientoPaciente.setVisible(false);
-//                txt_FechaNacimientoPaciente.setVisible(false);
-//                lbl_DireccionPaciente.setVisible(false);
-//                txt_DireccionPaciente.setVisible(false);
-//                lbl_TelefonoPaciente.setVisible(false);
-//                txt_TelefonoPaciente.setVisible(false);
-//                lbl_ProfesionPaciente.setVisible(false);
-//                txt_ProfesionPaciente.setVisible(false);
-//                lbl_ActividadLaboralPaciente.setVisible(false);
-//                txt_ActividadLaboralPaciente.setVisible(false);
-//                lbl_MotivoConsultaPaciente.setVisible(false);
-//                txt_MotivoConsultaPaciente.setVisible(false);
-//                lbl_ParentescoPaciente.setVisible(false);
-//                cbo_Parentesco.setVisible(false);
-//                lbl_ClasificacionPaciente.setVisible(false);
-//                cbo_ClasificacionPaciente.setVisible(false);
-//                lbl_CursoPaciente.setVisible(false);
-//                cbo_CursoPaciente.setVisible(false);
-//                lbl_HorarioPaciente.setVisible(false);
-//                cbo_HorarioPaciente.setVisible(false);
-//                lbl_DetalleHorarioPaciente.setVisible(false);
-//                txt_DetalleHorarioPaciente.setVisible(false);
-//                lbl_TipoPaciente.setVisible(false);
-//                cbo_TipoPaciente.setVisible(false);
-//
-//            }
-//
-//        });
         
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
 //            
@@ -582,56 +495,55 @@ public class NewPatient {
     
     
     public void btn_RegisterAction_MouseClicked(){
+
+//        /Getting current date time and applying format/
+//        Date currentDate = new Date();
+//        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         
-        try{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)");
         
-        pps.setString(1 , txt_CedulaSolicitante.getText());
-        pps.setString(2 , txt_NombreSolicitante.getText());
-        pps.setString(3 , txt_DireccionSolicitante.getText());
-        pps.setString(4 , txt_TelefonoSolicitante.getText());
-        pps.setString(5 , txt_ProfesionSolicitante.getText());
-        pps.setString(6 , txt_ActividadLaboralSolicitante.getText());
-        pps.setString(7 , txt_MotivoConsultaSolicitante.getText());
-        pps.setString(8 , txt_FechaReporte.getText());
+        ArrayList<Object> obj1 = new ArrayList();//array para guardar data
+        String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
+//        obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(), currentDateFormatted.format(currentDate)));
+        obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
+                                  txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
+                                  txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
+                                  txt_MotivoConsultaSolicitante.getText(), txt_FechaReporte.getText()));
         
-        pps.executeUpdate();
-        pps.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        Boolean exq1 = sql.exec(query1, obj1);
+        if (exq1) {
+            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+                
+//        pps.setString(1 , txt_CedulaSolicitante.getText());
+//        pps.setString(2 , txt_NombreSolicitante.getText());
+//        pps.setString(3 , txt_DireccionSolicitante.getText());
+//        pps.setString(4 , txt_TelefonoSolicitante.getText());
+//        pps.setString(5 , txt_ProfesionSolicitante.getText());
+//        pps.setString(6 , txt_ActividadLaboralSolicitante.getText());
+//        pps.setString(7 , txt_MotivoConsultaSolicitante.getText());
+//        pps.setString(8 , txt_FechaReporte.getText());
+        
+        
+        ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+        String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        obj2.addAll(Arrays.asList( txt_CedulaSolicitantePaciente.getText(), txt_CedulaPaciente.getText(),
+                                   txt_NombrePaciente.getText(), txt_FechaNacimientoPaciente.getText(), 
+                                   txt_DireccionPaciente.getText(), txt_TelefonoPaciente.getText(),
+                                   txt_ProfesionPaciente.getText(), txt_ActividadLaboralPaciente.getText(),
+                                   txt_MotivoConsultaPaciente.getText(), cbo_Parentesco.getSelectedItem().toString(),
+                                   cbo_ClasificacionPaciente.getSelectedItem().toString(), cbo_HorarioPaciente.getSelectedItem().toString(),
+                                   txt_DetalleHorarioPaciente.getText(), cbo_TipoPaciente.getSelectedItem().toString(),
+                                   cbo_IsNonGrato.getSelectedItem().toString()));
+        Boolean exq2 = sql.exec(query2, obj2);
+        if (exq2) {
+            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         
-        try{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        
-        pps.setString(1 , txt_CedulaSolicitantePaciente.getText());
-        pps.setString(2 , txt_CedulaPaciente.getText());
-        pps.setString(3 , txt_NombrePaciente.getText());
-        pps.setString(4 , txt_FechaNacimientoPaciente.getText());
-        pps.setString(5 , txt_DireccionPaciente.getText());
-        pps.setString(6 , txt_TelefonoPaciente.getText());
-        pps.setString(7 , txt_ProfesionPaciente.getText());
-        pps.setString(8 , txt_ActividadLaboralPaciente.getText());
-        pps.setString(9 , txt_MotivoConsultaPaciente.getText());
-        pps.setString(10 , cbo_Parentesco.getSelectedItem().toString());
-        pps.setString(11 , cbo_ClasificacionPaciente.getSelectedItem().toString());
-        pps.setString(12 , cbo_CursoPaciente.getSelectedItem().toString());
-        pps.setString(13 , cbo_HorarioPaciente.getSelectedItem().toString());
-        pps.setString(14 , txt_DetalleHorarioPaciente.getText());
-        pps.setString(15 , cbo_TipoPaciente.getSelectedItem().toString());
-        pps.setString(16 , null);
-        
-        pps.executeUpdate();
-        pps.close();
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        
-    }
+    }//fin del metodo btn_RegisterAction_MouseClicked()
     
     
     //Metodos para cargar los cbo`s de Paciente
@@ -704,6 +616,12 @@ public class NewPatient {
                 Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
             }
             return cbo_Parentesco;
+        }//Fin del cbo_CargarCurso
+        
+        private JComboBox cbo_CargarIsNonGrato() {
+            String[] fillCbo = {"Si","No"};//para matar gente
+            cbo_IsNonGrato = new JComboBox(fillCbo);//para quemar los cuerpos
+            return cbo_IsNonGrato;//
         }//Fin del cbo_CargarCurso
         //fin de metodos para cargar cbo`s de Paciente
 }
