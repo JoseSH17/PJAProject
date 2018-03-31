@@ -218,6 +218,7 @@ public class NewPatient {
 //        lbl_TipoPaciente.setText("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
         cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
+        cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
         ///////////////Fin de componentes de Paciente
         
     }
@@ -515,17 +516,7 @@ public class NewPatient {
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-                
-//        pps.setString(1 , txt_CedulaSolicitante.getText());
-//        pps.setString(2 , txt_NombreSolicitante.getText());
-//        pps.setString(3 , txt_DireccionSolicitante.getText());
-//        pps.setString(4 , txt_TelefonoSolicitante.getText());
-//        pps.setString(5 , txt_ProfesionSolicitante.getText());
-//        pps.setString(6 , txt_ActividadLaboralSolicitante.getText());
-//        pps.setString(7 , txt_MotivoConsultaSolicitante.getText());
-//        pps.setString(8 , txt_FechaReporte.getText());
-        
-        
+
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
         String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         obj2.addAll(Arrays.asList( txt_CedulaSolicitantePaciente.getText(), txt_CedulaPaciente.getText(),
