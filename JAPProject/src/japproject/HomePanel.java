@@ -15,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
+import static japproject.EditPatient.EditPatient_Panel;
 
 /**
  *
@@ -32,7 +33,6 @@ public class HomePanel {
 
     PatientView PV; //Panel to show Patient Data.
     NewPatient NP; //Panel to add a new Patient.
-    EditPatient EP; //Panel to Edit patients
     Maintenance MT; //Panel to Add or Edit Helper Tables
     Maintenance_Clasif_paciente MCP; //Panel to Add or Edit Helper Tables
     Maintenance_Horario MH; //Panel to Add or Edit Helper Tables
@@ -98,12 +98,12 @@ public class HomePanel {
         JMenuItem TPaciente = new JMenuItem("Tipo Paciente");
         TPaciente.addActionListener((o) -> {
             RemovePanels();
-            MTP =  new Maintenance_tPaciente(if_);
+            MTP = new Maintenance_tPaciente(if_);
         });
         JMenuItem CPaciente = new JMenuItem("Clasificación Paciente");
         CPaciente.addActionListener((ei) -> {
             RemovePanels();
-            MCP =  new Maintenance_Clasif_paciente(if_);
+            MCP = new Maintenance_Clasif_paciente(if_);
         });
         JMenuItem Parentesco = new JMenuItem("Parentesco");
         Parentesco.addActionListener((ei) -> {
@@ -128,17 +128,17 @@ public class HomePanel {
         menuCitas.setBorderPainted(false);
         menuCitas.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ARCHIVE, 20, Color.BLACK));
 
-         menuCitas.addActionListener(new java.awt.event.ActionListener() {
+        menuCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemovePanels();
                 AP = new Appointments(if_); //Calls Appointments class to show its Panel and contents
             }
-        }); 
+        });
         menuBar.add(MenuHome);
         menuBar.add(menuAgregarPaciente);
         menuBar.add(menuMantenimiento);
         menuBar.add(menuPersonalizacion);
-        menuBar.add(menuCitas);               
+        menuBar.add(menuCitas);
 
         if_.AddObject(menuBar, if_.getWidth(), 40);
         if_.newLine();
@@ -146,7 +146,7 @@ public class HomePanel {
 
     /**
      * Gets the currentPanel being displayed and proceeds to dispose it and make
-     * it invisible for the next panel called to be shown correctly.
+     * // * it invisible for the next panel called to be shown correctly.
      *
      */
     public void RemovePanels() {
@@ -161,9 +161,9 @@ public class HomePanel {
                 PV.PatientView_panel.dispose();
                 PV.PatientView_panel.setVisible(false);
                 break;
-            case "EditPatient_Panel":  //If current panel is EditPatient_Panel then remove it.     
-                EP.EditPatient_Panel.dispose();
-                EP.EditPatient_Panel.setVisible(false);
+            case "EditPatient_Panel":  //If current panel is EditPatient_Panel then remove it.                
+                    EditPatient_Panel.dispose();
+                    EditPatient_Panel.setVisible(false);
                 break;
             case "Maintenance_Curso_Panel":    //If current panel is Maintenance_Curso_Panel then remove it.    
                 MT.Maintenance_Curso_Panel.dispose();     //THIS SHOULD BE UPDATED FOR THE TABBED PANEL WHEN ITS IMPLEMENTATION ITS COMPLETE
@@ -193,6 +193,19 @@ public class HomePanel {
                 System.out.println("Panel not handled");
                 break;
         }
+    }
 
+    /**
+     *
+     * @param NestedPanel
+     */
+    public void InvokeNestedPanels(String NestedPanel) {
+        switch (NestedPanel) {            
+            case "EditPatient_Panel":
+              
+                break;
+            default:
+                break;
+        }
     }
 }
