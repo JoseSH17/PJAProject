@@ -89,16 +89,11 @@ public class HomePanel {
         Cursos.addActionListener((ei) -> {
             RemovePanels();
             MT = new Maintenance(if_);
-
         });
         JMenuItem Horarios = new JMenuItem("Horarios");
         Horarios.addActionListener((ei) -> {
             RemovePanels();
-<<<<<<< HEAD
-            EP=new EditPatient(if_);
-=======
             MH = new Maintenance_Horario(if_);
->>>>>>> 1d6d769591684c2a8793e8c341d7a9dfa6e90dda
         });
         JMenuItem TPaciente = new JMenuItem("Tipo Paciente");
         TPaciente.addActionListener((o) -> {
@@ -133,6 +128,12 @@ public class HomePanel {
         menuCitas.setBorderPainted(false);
         menuCitas.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ARCHIVE, 20, Color.BLACK));
 
+         menuCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemovePanels();
+                AP = new Appointments(if_); //Calls Appointments class to show its Panel and contents
+            }
+        }); 
         menuBar.add(MenuHome);
         menuBar.add(menuAgregarPaciente);
         menuBar.add(menuMantenimiento);
