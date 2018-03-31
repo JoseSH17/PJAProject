@@ -8,9 +8,11 @@ package japproject;
 import static iComponents.ComponentInterfaz.CENTER;
 import static japproject.JAPProject.sql;
 import iComponents.iFrame;
+import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iScrollPane;
 import iComponents.iTable;
+import iComponents.iTextField;
 import java.awt.Color;
 import static japproject.HomePanel.currentPanel;
 import java.awt.event.MouseAdapter;
@@ -22,20 +24,19 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 /**
  *
  * @author TUMA
  */
 public class PatientView {
+
+    //
+    iLabel SearchBar_lbl;
+    iTextField SearchBar_txt;
+    //
 
     public iPanel PatientView_panel;
 
@@ -50,15 +51,23 @@ public class PatientView {
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         lpb = new LoadingProgressBars();
 
+        SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
+//        SearchBar_lbl.setForeground(Color.GRAY.brighter());
+        SearchBar_txt = new iTextField("", 3);
+        if_.AddObject(SearchBar_lbl, 200, 30, 10);
+        if_.AddObject(SearchBar_txt, 200, 30,150);//agrego el titulo para poner verlo con
+        SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
+        if_.newLine();
+
         try {
             // lpb.ProgressSQL();
-            PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
+            PatientView_panel = new iPanel(0, 100, 100.0f, 100.0f, 0, 0, if_);
 
-            PatientView_panel.setBackground(Color.yellow);
+          
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
-            for (int i = 1; i < rr.getMetaData().getColumnCount()+1; i++) {
+            for (int i = 1; i < rr.getMetaData().getColumnCount() + 1; i++) {
                 Cols.add(rr.getMetaData().getColumnName(i));
             }
 //          Se crea la tabla y se le da los parametros
@@ -68,7 +77,7 @@ public class PatientView {
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.getTableHeader().setResizingAllowed(false);
             RegistrosTable.setRowSelectionAllowed(true);
-            RegistrosTable.setSize(500, 500);           
+            RegistrosTable.setSize(500, 500);
 
             PopMenu(RegistrosTable, if_);//metodo que crea e implementa el popmenu 
             iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, null);
@@ -109,8 +118,7 @@ public class PatientView {
             @Override
             public void mouseReleased(MouseEvent e) {
                 int r = RegistrosTable.rowAtPoint(e.getPoint());
-            
-                
+
                 if (r >= 0 && r < RegistrosTable.getRowCount()) {
                     RegistrosTable.setRowSelectionInterval(r, r);
                 } else {
@@ -124,7 +132,7 @@ public class PatientView {
                 if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
                     JPopupMenu popup = new JPopupMenu();
                     JMenuItem ItemEditar = new JMenuItem("Editar paciente");
-                    
+
                     ItemEditar.addActionListener((ae) -> {
                         ItemEditarActionListener(RegistrosTable);
                         PatientView_panel.dispose();
@@ -143,12 +151,12 @@ public class PatientView {
 
     public void ItemEditarActionListener(iTable RegistrosTable) {
 
-       int selectedRow = RegistrosTable.getSelectedRow();
+        int selectedRow = RegistrosTable.getSelectedRow();
 
-                    for (int j = 0; j < RegistrosTable.getColumnCount(); j++) {
+        for (int j = 0; j < RegistrosTable.getColumnCount(); j++) {
 
-                        tbl_Data.add(RegistrosTable.getColumnName(j) + "-" + RegistrosTable.getValueAt(selectedRow, j).toString());
-                    }
+            tbl_Data.add(RegistrosTable.getColumnName(j) + "-" + RegistrosTable.getValueAt(selectedRow, j).toString());
+        }
     }
 
     /**
@@ -217,11 +225,10 @@ public class PatientView {
         RegistrosTable.getColumnModel().getColumn(21).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
-        
-        RegistrosTable.getColumnModel().getColumn(23).setPreferredWidth(140);
-         
-//fin de los parametros de la tabla
 
+        RegistrosTable.getColumnModel().getColumn(23).setPreferredWidth(140);
+
+//fin de los parametros de la tabla
     }
 
 }
