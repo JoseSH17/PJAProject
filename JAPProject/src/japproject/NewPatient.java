@@ -405,6 +405,7 @@ public class NewPatient {
         NewPatient_Panel.newLine();
         NewPatient_Panel.AddObject(btnRegisterAction, 175, 30, 10);
         NewPatient_Panel.AddObject(btnNuevoPaciente, 175, 30, 600);
+        btnNuevoPaciente.setVisible(false);
         NewPatient_Panel.newLine();
         
         btnRegisterAction.addActionListener((a) -> {
@@ -423,9 +424,11 @@ public class NewPatient {
             if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
                 System.out.println("MUESTRA MENSAJE DE CBO");
                 jTabbedPane.setVisible(true);
+                btnNuevoPaciente.setVisible(true);
                   
             }else{  
                 jTabbedPane.setVisible(false);
+                btnNuevoPaciente.setVisible(false);
             }
 //            
         });
