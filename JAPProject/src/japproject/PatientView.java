@@ -39,7 +39,7 @@ public class PatientView {
     public iPanel PatientView_panel;
     public static List<String> tbl_Data = new ArrayList();
     EditPatient EP;
-    
+
     public PatientView(iFrame if_) {
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
@@ -173,48 +173,65 @@ public class PatientView {
 
         RegistrosTable.getColumnModel().getColumn(1).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(2).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(3).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(4).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(5).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(6).setPreferredWidth(180);
+        RegistrosTable.getColumnModel().getColumn(7).setPreferredWidth(180);
 
-        RegistrosTable.getColumnModel().getColumn(3).setWidth(0);
-        RegistrosTable.getColumnModel().getColumn(3).setMinWidth(0);
-        RegistrosTable.getColumnModel().getColumn(3).setMaxWidth(0);
+        RegistrosTable.getColumnModel().getColumn(8).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(8).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(8).setMaxWidth(0);
 
-        RegistrosTable.getColumnModel().getColumn(5).setWidth(0);
-        RegistrosTable.getColumnModel().getColumn(5).setMinWidth(0);
-        RegistrosTable.getColumnModel().getColumn(5).setMaxWidth(0);
+        RegistrosTable.getColumnModel().getColumn(9).setPreferredWidth(140);
 
-        RegistrosTable.getColumnModel().getColumn(6).setPreferredWidth(140);
-        RegistrosTable.getColumnModel().getColumn(7).setPreferredWidth(140);
-        RegistrosTable.getColumnModel().getColumn(8).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(10).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(10).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(10).setMaxWidth(0);
 
-        RegistrosTable.getColumnModel().getColumn(9).setWidth(0);
-        RegistrosTable.getColumnModel().getColumn(9).setMinWidth(0);
-        RegistrosTable.getColumnModel().getColumn(9).setMaxWidth(0);
-
-        RegistrosTable.getColumnModel().getColumn(10).setPreferredWidth(140);
-
-        RegistrosTable.getColumnModel().getColumn(11).setWidth(0);
-        RegistrosTable.getColumnModel().getColumn(11).setMinWidth(0);
-        RegistrosTable.getColumnModel().getColumn(11).setMaxWidth(0);
-
+        RegistrosTable.getColumnModel().getColumn(11).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(12).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(13).setPreferredWidth(140);
-        RegistrosTable.getColumnModel().getColumn(14).setPreferredWidth(140);
-        RegistrosTable.getColumnModel().getColumn(15).setPreferredWidth(140);
-        RegistrosTable.getColumnModel().getColumn(16).setPreferredWidth(140);
-        RegistrosTable.getColumnModel().getColumn(17).setPreferredWidth(140);
 
+        RegistrosTable.getColumnModel().getColumn(14).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(14).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(14).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(15).setPreferredWidth(140);
+
+        RegistrosTable.getColumnModel().getColumn(16).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(16).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(16).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(17).setPreferredWidth(140);
+        
         RegistrosTable.getColumnModel().getColumn(18).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(18).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(18).setMaxWidth(0);
-
+        
         RegistrosTable.getColumnModel().getColumn(19).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(20).setPreferredWidth(140);
-
+        
         RegistrosTable.getColumnModel().getColumn(21).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
+        
+        RegistrosTable.getColumnModel().getColumn(22).setPreferredWidth(140);
 
-        RegistrosTable.getColumnModel().getColumn(23).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(23).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(23).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(23).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(24).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(25).setPreferredWidth(140);
+
+        RegistrosTable.getColumnModel().getColumn(26).setWidth(0);
+        RegistrosTable.getColumnModel().getColumn(26).setMinWidth(0);
+        RegistrosTable.getColumnModel().getColumn(26).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(27).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(28).setPreferredWidth(140);
+        RegistrosTable.getColumnModel().getColumn(29).setPreferredWidth(140);
 
 //fin de los parametros de la tabla
     }
