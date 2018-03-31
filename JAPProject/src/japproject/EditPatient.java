@@ -36,6 +36,7 @@ public class EditPatient {
     private JComboBox cbo_ClasificacionPaciente;//son de seleccion por base de datos
     private JComboBox cbo_CursoPaciente;//son de seleccion por base de datos
     private JComboBox cbo_Parentesco;//son de seleccion por base de datos
+    private JComboBox cbo_IsNonGrato;
     //fin cbo`s para Paciente
 
     //Controles swing para NewPatient_Panel
@@ -92,8 +93,9 @@ public class EditPatient {
     private iLabel lbl_DetalleHorarioPaciente;//Lbl para el Detalle Horario del Paciente
     private iTextField txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente
-    //FIN de Controles Swing para Paciente
+    private iLabel lbl_IsNonGrato;//Lbl para el Tipo de Lista Negra  
 
+    //FIN de Controles Swing para Paciente
     //
     //
     public iPanel EditPatient_Panel;
@@ -253,12 +255,19 @@ public class EditPatient {
         }
         return cbo_Parentesco;
     }//Fin del cbo_CargarCurso
+    
+      private JComboBox cbo_CargarIsNonGrato() {
+            String[] fillCbo = {"Si","No"};//para matar gente
+            cbo_IsNonGrato = new JComboBox(fillCbo);//para quemar los cuerpos
+            return cbo_IsNonGrato;//
+        }//Fin del cbo_CargarCurso
+        //fin de metodos para cargar cbo`s de Paciente
 
     public iScrollPane llenarTable(List<String> info) {
 
         System.out.println("Lista recibida por llenarTable: " + info.toString());
         ArrayList<String> cols = new ArrayList();
-        
+
         ArrayList<String> rows = new ArrayList();
         info.forEach((jKeyPair) -> {
             cols.add(jKeyPair.split("-")[0]);
@@ -401,18 +410,24 @@ public class EditPatient {
 
         lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
+
         cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
+        cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
+        lbl_IsNonGrato = new iLabel("Lista Negra".toUpperCase());
+        lbl_IsNonGrato.setForeground(Color.GRAY.brighter());
 
     }
 
     public void AddComponentes() {
         initPaciComponents();
         initSoliComponents();
+        
         cbo_CargarParentesco();
         cbo_CargarClasificacionPaciente();
         cbo_CargarCurso();
         cbo_CargarHorario();
         cbo_CargarTipoPaciente();
+        cbo_CargarIsNonGrato();
 
         EditPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         EditPatient_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 600);
@@ -534,6 +549,10 @@ public class EditPatient {
         lbl_TipoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);
         cbo_TipoPaciente.setVisible(true);//para paciente
+        EditPatient_Panel.newLine();
+
+        EditPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);
+        EditPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);
         EditPatient_Panel.newLine();
 
         EditPatient_Panel.AddObject(btnEditarAction, 175, 30, 10);
