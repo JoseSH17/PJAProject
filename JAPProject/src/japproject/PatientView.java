@@ -107,20 +107,6 @@ public class PatientView {
         //
         RegistrosTable.addMouseListener(new MouseAdapter() {
             @Override
-<<<<<<< HEAD
-            public void valueChanged(ListSelectionEvent e) {
-                tbl_Data.clear();//limpio el arraylist
-//                if (!jModel.isSelectionEmpty()) {//si no esta vacio haga esto
-                if (tblRegistros.getSelectedRows().length == 0) {//si no esta vacio haga esto
-                                        System.out.println("MENSAJE" );
-//                    int selectedRow = tblRegistros.getSelectedRow();
-//                    for (int j = 0; j < tblRegistros.getColumnCount(); j++) {
-//
-//                        tbl_Data.add(tblRegistros.getColumnName(j) + "-" + tblRegistros.getValueAt(selectedRow, j).toString());
-//                        System.out.println("Result: " + tbl_Data.toString());
-//                    }
-//                    System.out.println("Result: " + tbl_Data.toString());
-=======
             public void mouseReleased(MouseEvent e) {
                 int r = RegistrosTable.rowAtPoint(e.getPoint());
             
@@ -149,7 +135,6 @@ public class PatientView {
                     RegistrosTable.setComponentPopupMenu(popup);
                     //
 
->>>>>>> 1d6d769591684c2a8793e8c341d7a9dfa6e90dda
                 }
             }
         });
