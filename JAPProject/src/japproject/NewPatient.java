@@ -6,6 +6,7 @@
 package japproject;
 
 import iComponents.iButton;
+import iComponents.iCalendar;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
@@ -21,8 +22,11 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import static japproject.HomePanel.currentPanel;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 
 
@@ -73,7 +77,7 @@ public class NewPatient {
     private iLabel lbl_MotivoConsultaSolicitante;//Lbl para el Motivo Consulta del Solicitante
     private iTextField txt_MotivoConsultaSolicitante;//TextField para el Motivo Consulta de  Solicitante(cambiar por JTextArea)
     private iLabel lbl_FechaReporte;//Lbl para la FechaReporte del Solicitante
-    private iTextField txt_FechaReporte;//TextField para FechaReporte del Solicitante(cambiar por JDateChooser)
+    private iCalendar FechaReporte;
     private iLabel lbl_NOTA;//Lbl para la NOTA(si preciona el CheckBox) del Solicitante
     
     private JCheckBox chk_boxSolicitanteDiferentePaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
@@ -85,12 +89,10 @@ public class NewPatient {
     private iLabel lbl_TituloPaciente;//Lbl para el Titulo del Paciente
     private iLabel lbl_CedulaPaciente;//Lbl para la Cedula del Solicitante
     private iTextField txt_CedulaPaciente;//TextField para cedula del Solicitante en la parte de paciente(hay que hacerle un setEditable(false))
-//    private iLabel lbl_CedulaSolicitantePaciente;//Lbl para la Cedula del Paciente
-//    private iTextField txt_CedulaSolicitantePaciente;//TextField para cedula del Paciente
     private iLabel lbl_NombrePaciente;//Lbl para el Nombre del Paciente
     private iTextField txt_NombrePaciente;//TextField para el Nombre del Paciente
     private iLabel lbl_FechaNacimientoPaciente;//Lbl para la Fecha de Nacimiento del Paciente
-    private iTextField txt_FechaNacimientoPaciente;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
+    private iCalendar FechaNacimientoPaciente;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
     private iLabel lbl_DireccionPaciente;//Lbl para la Direccion del Paciente
     private iTextField txt_DireccionPaciente;//TextField para la Direccion del Paciente
     private iLabel lbl_TelefonoPaciente;//Lbl para la el Telefono del Paciente
@@ -138,10 +140,6 @@ public class NewPatient {
         lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
         lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
         txt_CedulaPaciente = new iTextField("", 3);
-        
-//        lbl_CedulaSolicitantePaciente = new iLabel("Cédula Solicitante".toUpperCase());
-//        lbl_CedulaSolicitantePaciente.setForeground(Color.GRAY.brighter());
-//        txt_CedulaSolicitantePaciente = new iTextField("", 3);
 
         lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
         lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
@@ -149,7 +147,7 @@ public class NewPatient {
 
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
-        txt_FechaNacimientoPaciente = new iTextField("", 3);
+        FechaNacimientoPaciente = new iCalendar();
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
@@ -220,56 +218,45 @@ public class NewPatient {
         btnRegisterAction.setText("REGISTRAR");
 
         lbl_TituloSolicitante = new iLabel("SOLICITANTE");
-//        lbl_TituloSolicitante.setText("SOLICITANTE");
         lbl_TituloSolicitante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_TituloSolicitante.setForeground(Color.GRAY.brighter());
 
         lbl_CedulaSolicitante = new iLabel("Cédula".toUpperCase());
-//        lbl_CedulaSolicitante.setText("Cédula".toUpperCase());
         lbl_CedulaSolicitante.setForeground(Color.GRAY.brighter());
         txt_CedulaSolicitante = new iTextField("", 3);
-//        txt_CedulaSolicitante.setBackground(Color.BLACK);
         txt_CedulaSolicitante.setForeground(Color.red);
 
         lbl_NombreSolicitante = new iLabel("Nombre".toUpperCase());
-//        lbl_NombreSolicitante.setText("Nombre".toUpperCase());
         lbl_NombreSolicitante.setForeground(Color.GRAY.brighter());
         txt_NombreSolicitante = new iTextField("", 3);
 
         lbl_DireccionSolicitante = new iLabel("Dirección".toUpperCase());
-//        lbl_DireccionSolicitante.setText("Dirección".toUpperCase());
         lbl_DireccionSolicitante.setForeground(Color.GRAY.brighter());
         txt_DireccionSolicitante = new iTextField("", 3);
 
         lbl_TelefonoSolicitante = new iLabel("Teléfono".toUpperCase());
-//        lbl_TelefonoSolicitante.setText("Teléfono".toUpperCase());
         lbl_TelefonoSolicitante.setForeground(Color.GRAY.brighter());
         txt_TelefonoSolicitante = new iTextField("", 3);
 
         lbl_ProfesionSolicitante = new iLabel("Profesión".toUpperCase());
-//        lbl_ProfesionSolicitante.setText("Profesión".toUpperCase());
         lbl_ProfesionSolicitante.setForeground(Color.GRAY.brighter());
         txt_ProfesionSolicitante = new iTextField("", 3);
 
         lbl_ActividadLaboralSolicitante = new iLabel("Actividad Laboral".toUpperCase());
-//        lbl_ActividadLaboralSolicitante.setText("Actividad Laboral".toUpperCase());
         lbl_ActividadLaboralSolicitante.setForeground(Color.GRAY.brighter());
         txt_ActividadLaboralSolicitante = new iTextField("", 3);
 
         lbl_MotivoConsultaSolicitante = new iLabel("Motivo Consulta".toUpperCase());
-//        lbl_MotivoConsultaSolicitante.setText("Motivo Consulta".toUpperCase());//text_Area
         lbl_MotivoConsultaSolicitante.setForeground(Color.GRAY.brighter());
         txt_MotivoConsultaSolicitante = new iTextField("", 3);
         
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
-//        lbl_FechaReporte.setText("Fecha Reporte".toUpperCase());//text_Area
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
-        //iCalendar Fecha = new iCalendar(date);//we need to change txt_FechaReporte for this
-        txt_FechaReporte = new iTextField("", 3);
+//        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        FechaReporte = new iCalendar();
 
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
         lbl_NOTA.setForeground(Color.GRAY.brighter());
-//        lbl_NOTA.setText("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
     
     }
     
@@ -322,7 +309,7 @@ public class NewPatient {
         NewPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 10);//para el paciente
         NewPatient_Panel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 600);
         NewPatient_Panel.AddObject(txt_DireccionSolicitante, 230, 30, 175);
-        NewPatient_Panel.AddObject(txt_FechaNacimientoPaciente, 230, 30, 800);//para paciente
+        NewPatient_Panel.AddObject(FechaNacimientoPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
 
         NewPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 10);
@@ -351,7 +338,7 @@ public class NewPatient {
 
         NewPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
-        NewPatient_Panel.AddObject(txt_FechaReporte, 230, 30, 175);
+        NewPatient_Panel.AddObject(FechaReporte, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         
@@ -415,7 +402,6 @@ public class NewPatient {
         btnNuevoPaciente.addActionListener((a) -> {
             
         });
-//
         
 //        //fin de crear tabbedPane y agregarlos al Repanel
         
@@ -450,7 +436,7 @@ public class NewPatient {
         obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
                                   txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
                                   txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
-                                  txt_MotivoConsultaSolicitante.getText(), txt_FechaReporte.getText()));
+                                  txt_MotivoConsultaSolicitante.getText(), FechaReporte.getText()));
         
         Boolean exq1 = sql.exec(query1, obj1);
         if (exq1) {
@@ -462,7 +448,7 @@ public class NewPatient {
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
         String query2 = "INSERT INTO JAW_Paciente(Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         obj2.addAll(Arrays.asList( txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
-                                   txt_FechaNacimientoPaciente.getText(), txt_DireccionPaciente.getText(),
+                                   FechaNacimientoPaciente.getText(), txt_DireccionPaciente.getText(),
                                    txt_TelefonoPaciente.getText(), txt_ProfesionPaciente.getText(),
                                    txt_ActividadLaboralPaciente.getText(), txt_MotivoConsultaPaciente.getText(),
                                    cbo_Parentesco.getSelectedItem().toString(), cbo_ClasificacionPaciente.getSelectedItem().toString(),
