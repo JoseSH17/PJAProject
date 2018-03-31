@@ -83,7 +83,7 @@ public class HomePanel {
         });
 
         JMenu menuMantenimiento = new JMenu("Mantenimiento");
-        menuMantenimiento.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ADJUST, 20, Color.BLACK));
+        menuMantenimiento.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BUILD, 20, Color.BLACK));
 
         JMenuItem Cursos = new JMenuItem("Cursos");
         Cursos.addActionListener((ei) -> {
@@ -138,7 +138,7 @@ public class HomePanel {
         menuBar.add(menuAgregarPaciente);
         menuBar.add(menuMantenimiento);
         menuBar.add(menuPersonalizacion);
-        menuBar.add(menuCitas);
+        menuBar.add(menuCitas);               
 
         if_.AddObject(menuBar, if_.getWidth(), 40);
         if_.newLine();

@@ -13,7 +13,6 @@ import iComponents.iPanel;
 import iComponents.iScrollPane;
 import iComponents.iTable;
 import iComponents.iTextField;
-import java.awt.Color;
 import static japproject.HomePanel.currentPanel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -37,22 +36,13 @@ public class PatientView {
     iLabel SearchBar_lbl;
     iTextField SearchBar_txt;
     //
-
     public iPanel PatientView_panel;
-
     public static List<String> tbl_Data = new ArrayList();
-
-    public LoadingProgressBars lpb;  //Calls methods from Loading Progress Bars class
-
     EditPatient EP;
-    HomePanel HP;
-
+    
     public PatientView(iFrame if_) {
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
-        lpb = new LoadingProgressBars();
-
         try {
-            // lpb.ProgressSQL();
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
@@ -91,7 +81,6 @@ public class PatientView {
             }
 
             AddComponentes(scrollPane2);
-            if_.add(PatientView_panel);
         } catch (SQLException ex) {
             Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
         }
