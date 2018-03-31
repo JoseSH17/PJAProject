@@ -51,19 +51,9 @@ public class PatientView {
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         lpb = new LoadingProgressBars();
 
-        SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
-//        SearchBar_lbl.setForeground(Color.GRAY.brighter());
-        SearchBar_txt = new iTextField("", 3);
-        if_.AddObject(SearchBar_lbl, 200, 30, 10);
-        if_.AddObject(SearchBar_txt, 200, 30,150);//agrego el titulo para poner verlo con
-        SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
-        if_.newLine();
-
         try {
             // lpb.ProgressSQL();
-            PatientView_panel = new iPanel(0, 100, 100.0f, 100.0f, 0, 0, if_);
-
-          
+            PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
@@ -99,6 +89,7 @@ public class PatientView {
                     System.out.println("no object fetch'd");
                 }
             }
+
             AddComponentes(scrollPane2);
             if_.add(PatientView_panel);
         } catch (SQLException ex) {
@@ -135,6 +126,7 @@ public class PatientView {
 
                     ItemEditar.addActionListener((ae) -> {
                         ItemEditarActionListener(RegistrosTable);
+
                         PatientView_panel.dispose();
                         PatientView_panel.setVisible(false);
                         EP = new EditPatient(if_);
@@ -164,7 +156,14 @@ public class PatientView {
      * Metodo para añadir los componentes
      */
     public void AddComponentes(iScrollPane scrollPane2) {
-        PatientView_panel.AddSingleObject(scrollPane2, 100.0f, 92.4f, CENTER);
+        SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
+        SearchBar_txt = new iTextField("", 3);
+        PatientView_panel.AddObject(SearchBar_lbl, 200, 30, 10);
+        PatientView_panel.AddObject(SearchBar_txt, 200, 30, 150);//agrego el titulo para poner verlo con
+        SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
+        PatientView_panel.newLine();
+
+        PatientView_panel.AddSingleObject(scrollPane2, 100.0f, 89f, CENTER);
         PatientView_panel.newLine();
         PatientView_panel.finalice();
         PatientView_panel.setVisible(true);
