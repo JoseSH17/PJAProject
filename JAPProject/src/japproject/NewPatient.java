@@ -85,8 +85,8 @@ public class NewPatient {
     private iLabel lbl_TituloPaciente;//Lbl para el Titulo del Paciente
     private iLabel lbl_CedulaPaciente;//Lbl para la Cedula del Solicitante
     private iTextField txt_CedulaPaciente;//TextField para cedula del Solicitante en la parte de paciente(hay que hacerle un setEditable(false))
-    private iLabel lbl_CedulaSolicitantePaciente;//Lbl para la Cedula del Paciente
-    private iTextField txt_CedulaSolicitantePaciente;//TextField para cedula del Paciente
+//    private iLabel lbl_CedulaSolicitantePaciente;//Lbl para la Cedula del Paciente
+//    private iTextField txt_CedulaSolicitantePaciente;//TextField para cedula del Paciente
     private iLabel lbl_NombrePaciente;//Lbl para el Nombre del Paciente
     private iTextField txt_NombrePaciente;//TextField para el Nombre del Paciente
     private iLabel lbl_FechaNacimientoPaciente;//Lbl para la Fecha de Nacimiento del Paciente
@@ -139,9 +139,9 @@ public class NewPatient {
         lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
         txt_CedulaPaciente = new iTextField("", 3);
         
-        lbl_CedulaSolicitantePaciente = new iLabel("Cédula Solicitante".toUpperCase());
-        lbl_CedulaSolicitantePaciente.setForeground(Color.GRAY.brighter());
-        txt_CedulaSolicitantePaciente = new iTextField("", 3);
+//        lbl_CedulaSolicitantePaciente = new iLabel("Cédula Solicitante".toUpperCase());
+//        lbl_CedulaSolicitantePaciente.setForeground(Color.GRAY.brighter());
+//        txt_CedulaSolicitantePaciente = new iTextField("", 3);
 
         lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
         lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
@@ -307,15 +307,15 @@ public class NewPatient {
         NewPatient_Panel.newLine();
 
         NewPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
-        NewPatient_Panel.AddObject(lbl_CedulaSolicitantePaciente, 146, 30, 600);//para paciente
+        NewPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
         NewPatient_Panel.AddObject(txt_CedulaSolicitante, 230, 30, 175);
-        NewPatient_Panel.AddObject(txt_CedulaSolicitantePaciente, 230, 30, 800);//para paciente
+        NewPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
 
         NewPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
-        NewPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
+        NewPatient_Panel.AddObject(lbl_NombrePaciente, 230, 30, 600); 
         NewPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 175);
-        NewPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
+        NewPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);
         NewPatient_Panel.newLine();
 
         
@@ -387,7 +387,7 @@ public class NewPatient {
         //Para crear las ventanas de los JtabbedPanes
         jTabbedPane = new JTabbedPane();//creo el panel para hacer el JtabbedPane
         jTabbedPane.add("UNO", new iLabel("En la pestaña uno"));
-//        jTabbedPane.add("DOS", new iLabel("En la pestaña dos"));
+        jTabbedPane.add("DOS", new iLabel("En la pestaña dos"));
 //        jTabbedPane.add("DOS", new iPanel(0, 0, 0, 0, 0, if_));//aun falta en preceso de 
         jTabbedPane.add("TRES", new iLabel("En la pestaña tres"));
         
@@ -457,15 +457,15 @@ public class NewPatient {
         }
 
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-        String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        obj2.addAll(Arrays.asList( txt_CedulaSolicitantePaciente.getText(), txt_CedulaPaciente.getText(),
-                                   txt_NombrePaciente.getText(), txt_FechaNacimientoPaciente.getText(), 
-                                   txt_DireccionPaciente.getText(), txt_TelefonoPaciente.getText(),
-                                   txt_ProfesionPaciente.getText(), txt_ActividadLaboralPaciente.getText(),
-                                   txt_MotivoConsultaPaciente.getText(), cbo_Parentesco.getSelectedItem().toString(),
-                                   cbo_ClasificacionPaciente.getSelectedItem().toString(), cbo_HorarioPaciente.getSelectedItem().toString(),
-                                   txt_DetalleHorarioPaciente.getText(), cbo_TipoPaciente.getSelectedItem().toString(),
-                                   cbo_IsNonGrato.getSelectedItem().toString()));
+        String query2 = "INSERT INTO JAW_Paciente(Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        obj2.addAll(Arrays.asList( txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
+                                   txt_FechaNacimientoPaciente.getText(), txt_DireccionPaciente.getText(),
+                                   txt_TelefonoPaciente.getText(), txt_ProfesionPaciente.getText(),
+                                   txt_ActividadLaboralPaciente.getText(), txt_MotivoConsultaPaciente.getText(),
+                                   cbo_Parentesco.getSelectedItem().toString(), cbo_ClasificacionPaciente.getSelectedItem().toString(),
+                                   cbo_HorarioPaciente.getSelectedItem().toString(), txt_DetalleHorarioPaciente.getText(),
+                                   cbo_TipoPaciente.getSelectedItem().toString(), cbo_IsNonGrato.getSelectedItem().toString()
+                                   ));
         Boolean exq2 = sql.exec(query2, obj2);
         if (exq2) {
             JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
