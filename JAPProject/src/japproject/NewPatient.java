@@ -35,7 +35,7 @@ public class NewPatient {
     public iPanel NewPatient_Panel;//creo el iPanel
     //Controles Swing para Paciente
     private JTabbedPane jTabbedPane;//creo el JtabbedPane para hacer el JtabbedPane
-    
+    private iLabel vacio = new iLabel("");//lo creo para hacer newline()
     
    // public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
     
@@ -53,6 +53,7 @@ public class NewPatient {
     private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
     private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
     private iButton btnRegisterAction;//Boton para el registrar
+    private iButton btnNuevoPaciente;//Boton para el registrar
     //FIN de Controles swing para NewPatient_Panel
     
     //Controles Swing para Solicitante
@@ -114,7 +115,7 @@ public class NewPatient {
     public NewPatient(iFrame if_) {
         currentPanel = "NewPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.      
         NewPatient_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        NewPatient_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel
+        NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
         Ingresar(if_);
     }
     
@@ -127,7 +128,8 @@ public class NewPatient {
   
         ////////////////Componentes para paciente, recordar ponerlos en setVisible(false); ,[y en el metodo setVisible(true) si es verdad, }else{setVisible(true);]
         btnRegisterActionPaciente = new iButton("REGISTRAR PACIENTE", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnRegisterActionPaciente.setText("REGISTRAR PACIENTE");
+//        btnRegisterActionPaciente.setText("REGISTRAR PACIENTE");
+        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
 
         lbl_TituloPaciente = new iLabel("PACIENTE");
         lbl_TituloPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -296,27 +298,12 @@ public class NewPatient {
         /////////////////componente,/////ancho,largo,posision//
         NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         NewPatient_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 600);
-        NewPatient_Panel.newLine(); 
+        NewPatient_Panel.newLine();  
         
-        
-        //Para crear las ventanas de los JtabbedPanes
-        jTabbedPane = new JTabbedPane();//creo el panel para hacer el JtabbedPane
-        jTabbedPane.add("UNO", new iLabel("En la pestaña uno"));
-        jTabbedPane.add("DOS", new iLabel("En la pestaña dos"));
-        jTabbedPane.add("TRES", new iLabel("En la pestaña tres"));
-        
-        jTabbedPane.setBackgroundAt(0, Color.YELLOW);
-        jTabbedPane.setBackgroundAt(1, Color.RED);
-        jTabbedPane.setBackgroundAt(2, Color.GREEN);
-        
-        iLabel vacio = new iLabel("");//lo creo para hacer newline()
-        NewPatient_Panel.AddObject(vacio, 0,30,2);
-        NewPatient_Panel.newLine();
+        NewPatient_Panel.AddObject(vacio, 0,30,2);//esto fue agregado para hacer salto de linea en el mismo codigo
+        NewPatient_Panel.newLine();//aqui paso de linea al momento de hacer u know
         NewPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 2);
-//        NewPatient_Panel.AddObject(lbl_TituloPaciente, 415, 30, 600);//agrego el titulo para poner verlo con
-        NewPatient_Panel.AddObject(jTabbedPane, 415, 590, 600);//agrego el titulo para poner verlo con
-//        NewPatient_Panel.AddObject(vacio, 0,30,600);
-//        NewPatient_Panel.newLine();
+        NewPatient_Panel.AddObject(lbl_TituloPaciente, 415, 30, 600);//agrego el titulo para poner verlo con
         NewPatient_Panel.newLine();
 
         NewPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
@@ -389,9 +376,7 @@ public class NewPatient {
         NewPatient_Panel.newLine();
         
         NewPatient_Panel.AddObject(lbl_TipoPaciente, 230, 30, 600);
-//        lbl_TipoPaciente.setVisible(true);//para paciente
         NewPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);
-//        cbo_TipoPaciente.setVisible(true);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);
         NewPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);
@@ -399,44 +384,48 @@ public class NewPatient {
         
         NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
         
+        //Para crear las ventanas de los JtabbedPanes
+        jTabbedPane = new JTabbedPane();//creo el panel para hacer el JtabbedPane
+        jTabbedPane.add("UNO", new iLabel("En la pestaña uno"));
+//        jTabbedPane.add("DOS", new iLabel("En la pestaña dos"));
+//        jTabbedPane.add("DOS", new iPanel(0, 0, 0, 0, 0, if_));//aun falta en preceso de 
+        jTabbedPane.add("TRES", new iLabel("En la pestaña tres"));
         
-
-        
-//        
-//                                        //largo, ancho, posicion  
-//        NewPatient_Panel.AddObject(vacio, 590,30,2);
-//        NewPatient_Panel.newLine();
-//        NewPatient_Panel.AddObject(jTabbedPane, 500, 590, 600);//para paciente
-//        //Fin de crear los TabbedPane
-//        
+        jTabbedPane.setBackgroundAt(0, Color.YELLOW);
+        jTabbedPane.setBackgroundAt(1, Color.RED);
+        jTabbedPane.setBackgroundAt(2, Color.GREEN);
+                                       //largo, ancho   , posicion  
+        NewPatient_Panel.AddObject(jTabbedPane, 445, 570, 600);//para paciente
+        jTabbedPane.setVisible(false); 
+    
+                                        
+        //Fin de crear los TabbedPane
         NewPatient_Panel.newLine();
         NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
         NewPatient_Panel.newLine();
         NewPatient_Panel.AddObject(btnRegisterAction, 175, 30, 10);
- 
+        NewPatient_Panel.AddObject(btnNuevoPaciente, 175, 30, 600);
+        NewPatient_Panel.newLine();
+        
         btnRegisterAction.addActionListener((a) -> {
             btn_RegisterAction_MouseClicked();
         });
+        
+        btnNuevoPaciente.addActionListener((a) -> {
+            
+        });
 //
-        NewPatient_Panel.newLine();
+        
 //        //fin de crear tabbedPane y agregarlos al Repanel
         
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
 //            
             if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
-//                chk_boxSolicitanteDiferentePaciente.setSelected(true);
-//                chk_boxSolicitanteIgualPaciente.setSelected(false);
                 System.out.println("MUESTRA MENSAJE DE CBO");
-////                jTabbedPane0.setVisible(true);
-//                lbl_TituloPaciente.setVisible(true);
-//                
-            }else{
-//                chk_boxSolicitanteDiferentePaciente.setSelected(false);
-//                chk_boxSolicitanteIgualPaciente.setSelected(false);
-////                jTabbedPane0.setVisible(false);
-//                lbl_TituloPaciente.setVisible(false);
-//                
-//                
+                jTabbedPane.setVisible(true);
+                  
+            }else{  
+                jTabbedPane.setVisible(false);
             }
 //            
         });
