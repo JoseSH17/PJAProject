@@ -113,6 +113,7 @@ public class NewPatient {
     private iLabel lbl_DetalleHorarioPaciente;//Lbl para el Detalle Horario del Paciente
     private iTextField txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente 
+    private iLabel lbl_IsNonGrato;//Lbl para el Tipo de Lista Negra  
     //FIN de Controles Swing para Paciente
         
     
@@ -218,6 +219,8 @@ public class NewPatient {
 //        lbl_TipoPaciente.setText("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
         cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
+        lbl_IsNonGrato = new iLabel("Lista Negra".toUpperCase());
+        lbl_IsNonGrato.setForeground(Color.GRAY.brighter()); 
         cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
         ///////////////Fin de componentes de Paciente
         
@@ -415,7 +418,7 @@ public class NewPatient {
 //        lbl_CursoPaciente.setVisible(true);//para paciente
         NewPatient_Panel.AddObject(cbo_CursoPaciente, 230, 30, 800);
 //        cbo_CursoPaciente.setVisible(true);//para paciente
-        NewPatient_Panel.newLine();
+        NewPatient_Panel.newLine(); 
         
         NewPatient_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 600);
 //        lbl_HorarioPaciente.setVisible(true);//para paciente
@@ -434,6 +437,9 @@ public class NewPatient {
         NewPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);
 //        cbo_TipoPaciente.setVisible(true);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);
+        NewPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);
+        NewPatient_Panel.newLine(); 
         
         NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
 //        
@@ -504,7 +510,6 @@ public class NewPatient {
         
         ArrayList<Object> obj1 = new ArrayList();//array para guardar data
         String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
-//        obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(), currentDateFormatted.format(currentDate)));
         obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
                                   txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
                                   txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
