@@ -94,6 +94,8 @@ public class EditPatient {
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente
     //FIN de Controles Swing para Paciente
 
+    //
+    //
     public iPanel EditPatient_Panel;
 
     public EditPatient(iFrame if_) {
@@ -255,15 +257,15 @@ public class EditPatient {
     public iScrollPane llenarTable(List<String> info) {
 
         System.out.println("Lista recibida por llenarTable: " + info.toString());
-
         ArrayList<String> cols = new ArrayList();
+        
         ArrayList<String> rows = new ArrayList();
         info.forEach((jKeyPair) -> {
             cols.add(jKeyPair.split("-")[0]);
             rows.add(jKeyPair.split("-")[1]);
         });
         iTable RegistrosTable = new iTable(cols);
-        RegistrosTable.setSize(800, 100);
+        RegistrosTable.setSize(800, 90);
         RegistrosTable.getTableHeader().setReorderingAllowed(false);
         RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         RegistrosTable.getTableHeader().setResizingAllowed(false);
@@ -416,6 +418,17 @@ public class EditPatient {
         EditPatient_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 600);
         EditPatient_Panel.newLine();
 
+        iLabel espacioLabel2 = new iLabel("");
+        EditPatient_Panel.AddObject(espacioLabel2, 415, 30, 2);
+        EditPatient_Panel.newLine();
+
+        EditPatient_Panel.AddObject(llenarTable(tbl_Data), 1100, 90);
+        EditPatient_Panel.newLine();
+
+        iLabel espacioLabel = new iLabel("");
+        EditPatient_Panel.AddObject(espacioLabel, 415, 30, 2);
+        EditPatient_Panel.newLine();
+
         EditPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 2);
         EditPatient_Panel.AddObject(lbl_TituloPaciente, 415, 30, 600);//agrego el titulo para poner verlo con
         lbl_TituloPaciente.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
@@ -531,9 +544,6 @@ public class EditPatient {
         });
 //
 
-        EditPatient_Panel.AddObject(llenarTable(tbl_Data), 800, 100);
-        EditPatient_Panel.newLine();
-
         EditPatient_Panel.finalice();
 
     }
@@ -586,6 +596,8 @@ public class EditPatient {
         RegistrosTable.getColumnModel().getColumn(21).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
+
+        RegistrosTable.getColumnModel().getColumn(23).setPreferredWidth(140);
 //fin de los parametros de la tabla
 
     }

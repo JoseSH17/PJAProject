@@ -56,11 +56,10 @@ public class PatientView {
 
             PatientView_panel.setBackground(Color.yellow);
 
-            ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista
-
+            ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
-            for (int i = 1; i < rr.getMetaData().getColumnCount(); i++) {
-                Cols.add(rr.getMetaData().getColumnLabel(i));
+            for (int i = 1; i < rr.getMetaData().getColumnCount()+1; i++) {
+                Cols.add(rr.getMetaData().getColumnName(i));
             }
 //          Se crea la tabla y se le da los parametros
 
@@ -69,7 +68,7 @@ public class PatientView {
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.getTableHeader().setResizingAllowed(false);
             RegistrosTable.setRowSelectionAllowed(true);
-            RegistrosTable.setSize(500, 500);
+            RegistrosTable.setSize(500, 500);           
 
             PopMenu(RegistrosTable, if_);//metodo que crea e implementa el popmenu 
             iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, null);
@@ -218,6 +217,9 @@ public class PatientView {
         RegistrosTable.getColumnModel().getColumn(21).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
+        
+        RegistrosTable.getColumnModel().getColumn(23).setPreferredWidth(140);
+         
 //fin de los parametros de la tabla
 
     }
