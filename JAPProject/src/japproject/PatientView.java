@@ -14,6 +14,7 @@ import iComponents.iScrollPane;
 import iComponents.iTable;
 import iComponents.iTextField;
 import static japproject.HomePanel.currentPanel;
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -52,6 +53,7 @@ public class PatientView {
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
+//            PatientView_panel.setBackground(Color.decode("#006738"));
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
@@ -64,10 +66,11 @@ public class PatientView {
             RegistrosTable.getTableHeader().setReorderingAllowed(false);
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.setRowSelectionAllowed(true);
+            RegistrosTable.setBackground(Color.decode("#006738"));
             RegistrosTable.setSize(500, 500);
 
             PopMenu(RegistrosTable, if_);//metodo que crea e implementa el popmenu 
-            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, null);
+            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable,Color.decode("#006738"));
             scrollPane2.setViewportView(RegistrosTable);
             SetColumsSizes(RegistrosTable);
 
