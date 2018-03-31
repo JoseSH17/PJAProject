@@ -30,7 +30,6 @@ public class LoadingProgressBars {
         LoadingFrame.AddSingleObject(lblIndicador, 390, 30, EXIT_ON_CLOSE);
         LoadingFrame.AddSingleObject(pbSQL, 390, 30, EXIT_ON_CLOSE);       
         LoadingFrame.finalice();       
-        System.out.println("Loading Frame invocado");
     }
     
 }

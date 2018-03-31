@@ -38,10 +38,8 @@ public class Threads extends Thread {
                 pbSQL.setStringPainted(true);
                 if (sql.connect() != null) {
                     infinite = false;                 
-                    System.out.println("Connection is not null");
                     pbSQL.setValue(100); //Completes the Progress Bar and finishes the loading process.                                       
                 } else {
-                    System.out.println("Connection is null");
                     pbSQL.setValue(ProgressBarCalc()); //Fills the Progress Bar by 10% each iteration.
                 }                
                 try {
@@ -58,7 +56,6 @@ public class Threads extends Thread {
                 HomePanel HP = new HomePanel();
                 }
             }
-            //System.exit(0);
         }
     }
 
