@@ -68,9 +68,8 @@ public class EditPatient {
     private iLabel lbl_TituloPaciente;//Lbl para el Titulo del Paciente
     private iLabel lbl_CedulaPaciente;//Lbl para la Cedula del Solicitante
     private iTextField txt_CedulaPaciente;//TextField para cedula del Solicitante en la parte de paciente(hay que hacerle un setEditable(false))
-    private iLabel lbl_CedulaSolicitantePaciente;//Lbl para la Cedula del Paciente
-    private iTextField txt_CedulaSolicitantePaciente;//TextField para cedula del Paciente
-    private iLabel lbl_NombrePaciente;//Lbl para el Nombre del Paciente
+    private iLabel lbl_NombrePaciente;//Lbl para la Cedula del Paciente
+    private iTextField txt_NombrePaciente;//TextField para cedula del Paciente
     private iLabel lbl_FechaNacimientoPaciente;//Lbl para la Fecha de Nacimiento del Paciente
     private iTextField txt_FechaNacimientoPaciente;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
     private iLabel lbl_DireccionPaciente;//Lbl para la Direccion del Paciente
@@ -95,6 +94,82 @@ public class EditPatient {
     //
     //
     public iPanel EditPatient_Panel;
+
+    public void tblUpdater(List<String> info, String tbl_Name) {
+//        Arrays to Handle Data
+//        ArrayList<JLabel> dynamicLabels = new ArrayList();
+//        ArrayList<iTextField> dynamicTextFields = new ArrayList();
+//
+//        System.out.println("Gathered Data " + info);
+//
+//        ArrayList<String> cols = new ArrayList();
+//        ArrayList<String> rows = new ArrayList();
+//        info.forEach((jKeyPair) -> {
+//            cols.add(jKeyPair.split("-")[0]);
+//            rows.add(jKeyPair.split("-")[1]);
+//        });
+//        System.out.println("Cols " + cols);
+//        System.out.println("Rows " + rows);
+//
+//        JLabel lbl_info3 = new JLabel();
+//        EditPatient_Panel.AddObject(lbl_info3, 280, 30, iPanel.LEFT);
+//        EditPatient_Panel.newLine();
+//
+//        for (int i = 0; i < cols.size(); i++) {
+//            JLabel lbl_Columns = new JLabel(cols.get(i).toString());
+//            EditPatient_Panel.AddObject(lbl_Columns, 100, 30);
+//            dynamicLabels.add(lbl_Columns);
+//        }
+//        EditPatient_Panel.newLine();
+//        EditPatient_Panel.repaint();
+//
+//        for (int i = 0; i < rows.size(); i++) {
+//            iTextField txt_Rows = new iTextField(rows.get(i).toString(), 2);
+//            EditPatient_Panel.AddObject(txt_Rows, 100, 30);
+//            dynamicTextFields.add(txt_Rows);
+//        }
+//        EditPatient_Panel.newLine();
+//        EditPatient_Panel.repaint();
+//
+//        JLabel lbl_ident = new JLabel();
+//        EditPatient_Panel.AddObject(lbl_ident, 530, 10);
+//        EditPatient_Panel.newLine();
+//
+//        Adding Final Control Button
+//        JLabel lbl_ident2 = new JLabel();
+//        iButton btn_Done = new iButton("", 3, Color.BLACK, Color.WHITE);
+//        EditPatient_Panel.AddObject(lbl_ident2, 380, 30);
+//        EditPatient_Panel.AddObject(btn_Done, 100, 30);
+//        EditPatient_Panel.newLine();
+//        EditPatient_Panel.repaint();
+//
+//        btn_Done.addActionListener((al) -> {
+//            String sqlCommand = "";
+//            ArrayList<Object> objs = new ArrayList<>();
+//            for (int j = 0; j < cols.size(); j++) {
+//                if (j != cols.size() - 1) {
+//                    sqlCommand += " `" + dynamicLabels.get(j).getText() + "` =?, ";
+//                    objs.add(dynamicTextFields.get(j).getText());
+//                } else {
+//                    sqlCommand += " `" + dynamicLabels.get(j).getText() + "` =? ";
+//                    objs.add(dynamicTextFields.get(j).getText());
+//                }
+//            }
+//            System.out.println("Checking Query" + sqlCommand);
+//            Including
+//
+//            System.out.println("Final Query: " + "UPDATE TABLE `" + tbl_Name + "` SET " + sqlCommand + " WHERE " + dynamicLabels.get(0).getText() + " = " + dynamicTextFields.get(0).getText());
+//
+//            System.out.println("Objs: " + objs.toString());
+//            Boolean exq = sql.exec("UPDATE `" + tbl_Name + "` SET " + sqlCommand + " WHERE `" + dynamicLabels.get(0).getText() + "` = " + rows.get(0), objs);//                                    
+//            if (exq) {
+//                JOptionPane.showMessageDialog(null, "Table Updated", "Information", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Error ocurred while attempting to update the table", "Error", JOptionPane.ERROR_MESSAGE);
+//            }
+//        });
+
+    }
 
     public EditPatient(iFrame if_) {
         currentPanel = "EditPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.  
@@ -179,7 +254,7 @@ public class EditPatient {
 
         System.out.println("Lista recibida por llenarTable: " + info.toString());
         ArrayList<String> cols = new ArrayList();
-        
+
         ArrayList<String> rows = new ArrayList();
         info.forEach((jKeyPair) -> {
             cols.add(jKeyPair.split("-")[0]);
@@ -200,25 +275,32 @@ public class EditPatient {
         RegistrosTable.addrow(rows.toArray());
 
         iScrollPane ScrollPane = new iScrollPane(RegistrosTable, null);
-         //setear valores textfiles solicitante
+        //setear valores textfiles solicitante
         txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());     
+        txt_NombreSolicitante.setText(RegistrosTable.getValueAt(0, 2).toString());
+        txt_DireccionSolicitante.setText(RegistrosTable.getValueAt(0, 3).toString());
+        txt_TelefonoSolicitante.setText(RegistrosTable.getValueAt(0, 4).toString());
+        txt_ProfesionSolicitante.setText(RegistrosTable.getValueAt(0, 5).toString());
+        txt_ActividadLaboralSolicitante.setText(RegistrosTable.getValueAt(0, 6).toString());
+        txt_MotivoConsultaSolicitante.setText(RegistrosTable.getValueAt(0, 7).toString());
+        txt_FechaReporte.setText(RegistrosTable.getValueAt(0, 28).toString());
         //
         //setear valores textfiles paciente
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());   
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());   
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());   
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());   
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());   
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());   
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());   
-          txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());           
+        txt_CedulaPaciente.setText(RegistrosTable.getValueAt(0, 11).toString());
+        txt_NombrePaciente.setText(RegistrosTable.getValueAt(0, 12).toString());
+
+        txt_FechaNacimientoPaciente.setText(RegistrosTable.getValueAt(0, 1).toString());
+        txt_DireccionPaciente.setText(RegistrosTable.getValueAt(0, 1).toString());
+        txt_TelefonoPaciente.setText(RegistrosTable.getValueAt(0, 1).toString());
+        txt_ProfesionPaciente.setText(RegistrosTable.getValueAt(0, 1).toString());
+        txt_ActividadLaboralPaciente.setText(RegistrosTable.getValueAt(0, 1).toString());
+        txt_MotivoConsultaPaciente.setText(RegistrosTable.getValueAt(0, 1).toString());
+        //set cbo
+        cbo_TipoPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 8).toString()));
+        cbo_HorarioPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 8).toString()));
+        cbo_ClasificacionPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 8).toString()));
+        cbo_CursoPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 8).toString()));
+        cbo_Parentesco.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 8).toString()));
         //
 
         return ScrollPane;
@@ -246,7 +328,6 @@ public class EditPatient {
         lbl_CedulaSolicitante = new iLabel("Cédula".toUpperCase());
         lbl_CedulaSolicitante.setForeground(Color.GRAY.brighter());
         txt_CedulaSolicitante = new iTextField("", 3);
-
 
         lbl_NombreSolicitante = new iLabel("Nombre".toUpperCase());
         lbl_NombreSolicitante.setForeground(Color.GRAY.brighter());
@@ -288,12 +369,9 @@ public class EditPatient {
         lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
         txt_CedulaPaciente = new iTextField("", 3);
 
-        lbl_CedulaSolicitantePaciente = new iLabel("Cédula Solicitante".toUpperCase());
-        lbl_CedulaSolicitantePaciente.setForeground(Color.GRAY.brighter());
-        txt_CedulaSolicitantePaciente = new iTextField("", 3);
-
         lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
         lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
+        txt_NombrePaciente = new iTextField("", 3);
 
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
@@ -375,19 +453,19 @@ public class EditPatient {
         EditPatient_Panel.newLine();
 
         EditPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
-        EditPatient_Panel.AddObject(lbl_CedulaSolicitantePaciente, 146, 30, 600);//para paciente
-        lbl_CedulaSolicitantePaciente.setVisible(true);//para paciente
+        EditPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
+        lbl_NombrePaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_CedulaSolicitante, 230, 30, 175);
-        EditPatient_Panel.AddObject(txt_CedulaSolicitantePaciente, 230, 30, 800);//para paciente
-        txt_CedulaSolicitantePaciente.setVisible(true);//para paciente
-        txt_CedulaSolicitantePaciente.setEnabled(true);
+        EditPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
+        txt_NombrePaciente.setVisible(true);//para paciente
+        txt_NombrePaciente.setEnabled(true);
         EditPatient_Panel.newLine();
 
         EditPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
-        EditPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
+        EditPatient_Panel.AddObject(lbl_NombrePaciente, 146, 30, 600);//para paciente
         lbl_CedulaPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 175);
-        EditPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
+        EditPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);//para paciente
         txt_CedulaPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
 
