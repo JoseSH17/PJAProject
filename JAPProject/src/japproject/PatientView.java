@@ -25,6 +25,11 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -33,14 +38,17 @@ import javax.swing.JTable;
 public class PatientView {
 
     //
+    iTable RegistrosTable;
     iLabel SearchBar_lbl;
     iTextField SearchBar_txt;
+
     //
     public iPanel PatientView_panel;
     public static List<String> tbl_Data = new ArrayList();
     EditPatient EP;
 
     public PatientView(iFrame if_) {
+
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
@@ -51,11 +59,10 @@ public class PatientView {
                 Cols.add(rr.getMetaData().getColumnName(i));
             }
 //          Se crea la tabla y se le da los parametros
-
-            iTable RegistrosTable = new iTable(Cols);
+            SearchBar_txt = new iTextField("", 3);
+            RegistrosTable = new iTable(Cols, SearchBar_txt);
             RegistrosTable.getTableHeader().setReorderingAllowed(false);
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-            RegistrosTable.getTableHeader().setResizingAllowed(false);
             RegistrosTable.setRowSelectionAllowed(true);
             RegistrosTable.setSize(500, 500);
 
@@ -146,7 +153,7 @@ public class PatientView {
      */
     public void AddComponentes(iScrollPane scrollPane2) {
         SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
-        SearchBar_txt = new iTextField("", 3);
+
         PatientView_panel.AddObject(SearchBar_lbl, 200, 30, 10);
         PatientView_panel.AddObject(SearchBar_txt, 200, 30, 150);//agrego el titulo para poner verlo con
         SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
@@ -178,7 +185,9 @@ public class PatientView {
         RegistrosTable.getColumnModel().getColumn(5).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(6).setPreferredWidth(180);
         RegistrosTable.getColumnModel().getColumn(7).setPreferredWidth(180);
-
+      
+        
+       
         RegistrosTable.getColumnModel().getColumn(8).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(8).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(8).setMaxWidth(0);
@@ -204,18 +213,18 @@ public class PatientView {
         RegistrosTable.getColumnModel().getColumn(16).setMaxWidth(0);
 
         RegistrosTable.getColumnModel().getColumn(17).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(18).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(18).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(18).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(19).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(20).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(21).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(22).setPreferredWidth(140);
 
         RegistrosTable.getColumnModel().getColumn(23).setWidth(0);
