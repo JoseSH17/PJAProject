@@ -122,88 +122,6 @@ public class NewPatient {
     }
     
     /**
-     * Método que crea los componentes en el NewPatient_Panel de Paciente
-     *
-     * @return Muestra los componentes en el NewPatient_Panel del Paciente
-     */
-    private void ComponentesPaciente(){
-  
-        ////////////////Componentes para paciente, recordar ponerlos en setVisible(false); ,[y en el metodo setVisible(true) si es verdad, }else{setVisible(true);]
-        btnRegisterActionPaciente = new iButton("REGISTRAR PACIENTE", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-//        btnRegisterActionPaciente.setText("REGISTRAR PACIENTE");
-        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-
-        lbl_TituloPaciente = new iLabel("PACIENTE");
-        lbl_TituloPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_TituloPaciente.setForeground(Color.GRAY.brighter());
-
-        lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
-        lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
-        txt_CedulaPaciente = new iTextField("", 3);
-
-        lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
-        lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
-        txt_NombrePaciente = new iTextField("", 3);
-
-        lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
-        lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
-        FechaNacimientoPaciente = new iCalendar();
-        Date date =  new Date(); //Getting current date from local host
-        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd"); //Formatting current date for initial search and table refresh            
-        FechaNacimientoPaciente.setText(currentDateFormatted.format(FechaNacimientoPaciente.getDate()));
-
-        lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
-        lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
-        txt_DireccionPaciente = new iTextField("", 3);
-
-        lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
-        lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
-        txt_TelefonoPaciente = new iTextField("", 3);
-
-        lbl_ProfesionPaciente = new iLabel("Profesión Paciente".toUpperCase());
-        lbl_ProfesionPaciente.setForeground(Color.GRAY.brighter());
-        txt_ProfesionPaciente = new iTextField("", 3);
-
-        lbl_ActividadLaboralPaciente = new iLabel("Actividad Laboral Paciente".toUpperCase());
-        lbl_ActividadLaboralPaciente.setForeground(Color.GRAY.brighter());
-        txt_ActividadLaboralPaciente = new iTextField("", 3);
-
-        lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
-        lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaPaciente = new iTextField("", 3);
-
-        lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
-        lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
-        cbo_Parentesco = new JComboBox();//son de seleccion por base de datos
-        
-        lbl_ClasificacionPaciente = new iLabel("Clasificación Paciente".toUpperCase());
-        lbl_ClasificacionPaciente.setForeground(Color.GRAY.brighter());
-        cbo_ClasificacionPaciente = new JComboBox();//son de seleccion por base de datos
-
-        lbl_CursoPaciente = new iLabel("Curso".toUpperCase());
-        lbl_CursoPaciente.setForeground(Color.GRAY.brighter());
-        cbo_CursoPaciente = new JComboBox();//son de seleccion por base de datos
-
-        lbl_HorarioPaciente = new iLabel("Horario Paciente".toUpperCase());
-        lbl_HorarioPaciente.setForeground(Color.GRAY.brighter());
-        cbo_HorarioPaciente = new JComboBox();//son de seleccion por base de datos
-
-        lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
-        lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
-        txt_DetalleHorarioPaciente = new iTextField("", 3);
-
-        lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
-        lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
-        cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
-        lbl_IsNonGrato = new iLabel("Lista Negra".toUpperCase());
-        lbl_IsNonGrato.setForeground(Color.GRAY.brighter()); 
-        cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
-        ///////////////Fin de componentes de Paciente
-        
-    }
-    
-    
-    /**
      * Método que crea los componentes en el NewPatient_Panel de Solicitante
      *
      * @return Muestra los componentes en el NewPatient_Panel del Solicitante
@@ -256,14 +174,106 @@ public class NewPatient {
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
         FechaReporte = new iCalendar();
-        Date date =  new Date(); //Getting current date from local host
-        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd"); //Formatting current date for initial search and table refresh            
-        FechaReporte.setText(currentDateFormatted.format(FechaReporte.getDate()));
+//        FechaReporte.setText(fechaActualFechaReporte());
         
-
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
         lbl_NOTA.setForeground(Color.GRAY.brighter());
     
+    }
+    
+    
+    /**
+     * Método que crea los componentes en el NewPatient_Panel de Paciente
+     *
+     * @return Muestra los componentes en el NewPatient_Panel del Paciente
+     */
+    private void ComponentesPaciente(){
+  
+        ////////////////Componentes para paciente, recordar ponerlos en setVisible(false); ,[y en el metodo setVisible(true) si es verdad, }else{setVisible(true);]
+        btnRegisterActionPaciente = new iButton("REGISTRAR PACIENTE", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+//        btnRegisterActionPaciente.setText("REGISTRAR PACIENTE");
+        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+
+        lbl_TituloPaciente = new iLabel("PACIENTE");
+        lbl_TituloPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TituloPaciente.setForeground(Color.GRAY.brighter());
+
+        lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
+        lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
+        txt_CedulaPaciente = new iTextField("", 3);
+
+        lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
+        lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
+        txt_NombrePaciente = new iTextField("", 3);
+
+        lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
+        lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
+        FechaNacimientoPaciente = new iCalendar();
+//        FechaNacimientoPaciente.setText(fechaActualFechaNacimiento());//
+
+        lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
+        lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
+        txt_DireccionPaciente = new iTextField("", 3);
+
+        lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
+        lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
+        txt_TelefonoPaciente = new iTextField("", 3);
+
+        lbl_ProfesionPaciente = new iLabel("Profesión Paciente".toUpperCase());
+        lbl_ProfesionPaciente.setForeground(Color.GRAY.brighter());
+        txt_ProfesionPaciente = new iTextField("", 3);
+
+        lbl_ActividadLaboralPaciente = new iLabel("Actividad Laboral Paciente".toUpperCase());
+        lbl_ActividadLaboralPaciente.setForeground(Color.GRAY.brighter());
+        txt_ActividadLaboralPaciente = new iTextField("", 3);
+
+        lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
+        lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
+        txt_MotivoConsultaPaciente = new iTextField("", 3);
+
+        lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
+        lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
+        cbo_Parentesco = new JComboBox();//son de seleccion por base de datos
+        
+        lbl_ClasificacionPaciente = new iLabel("Clasificación Paciente".toUpperCase());
+        lbl_ClasificacionPaciente.setForeground(Color.GRAY.brighter());
+        cbo_ClasificacionPaciente = new JComboBox();//son de seleccion por base de datos
+
+        lbl_CursoPaciente = new iLabel("Curso".toUpperCase());
+        lbl_CursoPaciente.setForeground(Color.GRAY.brighter());
+        cbo_CursoPaciente = new JComboBox();//son de seleccion por base de datos
+
+        lbl_HorarioPaciente = new iLabel("Horario Paciente".toUpperCase());
+        lbl_HorarioPaciente.setForeground(Color.GRAY.brighter());
+        cbo_HorarioPaciente = new JComboBox();//son de seleccion por base de datos
+
+        lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
+        lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
+        txt_DetalleHorarioPaciente = new iTextField("", 3);
+
+        lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
+        lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
+        cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
+        lbl_IsNonGrato = new iLabel("Lista Negra".toUpperCase());
+        lbl_IsNonGrato.setForeground(Color.GRAY.brighter()); 
+        cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
+        ///////////////Fin de componentes de Paciente
+        
+    }
+    
+    
+    public String fechaActualFechaReporte(){
+//        DateFormat formatoFechaFechaReporte = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        DateFormat formatoFechaFechaReporte = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println(formatoFechaFechaReporte.format(FechaReporte.getDate()));
+        FechaReporte.setText(formatoFechaFechaReporte.format(FechaReporte.getDate()));//this
+        return formatoFechaFechaReporte.format(FechaReporte.getDate());
+    }
+    
+    public String fechaActualFechaNacimiento(){
+        DateFormat formatoFechaFechaNacimiento = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println(formatoFechaFechaNacimiento.format(FechaNacimientoPaciente.getDate()));
+        return formatoFechaFechaNacimiento.format(FechaNacimientoPaciente.getDate());
     }
     
     
@@ -430,38 +440,34 @@ public class NewPatient {
     
     public void btn_RegisterAction_MouseClicked(){
 
-//        /Getting current date time and applying format/
-//        Date currentDate = new Date();
-//        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        
-        
+
         ArrayList<Object> obj1 = new ArrayList();//array para guardar data
         String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
-        obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
-                                  txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
-                                  txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
-                                  txt_MotivoConsultaSolicitante.getText(), FechaReporte.getText()));
+        obj1.addAll(Arrays.asList( txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
+                                   txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
+                                   txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
+                                   txt_MotivoConsultaSolicitante.getText(), fechaActualFechaReporte() ));
         
         Boolean exq1 = sql.exec(query1, obj1);
         if (exq1) {
-            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "SOLICITANTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-        String query2 = "INSERT INTO JAW_Paciente(Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        obj2.addAll(Arrays.asList( txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
+        String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        obj2.addAll(Arrays.asList( 0, txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
                                    FechaNacimientoPaciente.getText(), txt_DireccionPaciente.getText(),
                                    txt_TelefonoPaciente.getText(), txt_ProfesionPaciente.getText(),
                                    txt_ActividadLaboralPaciente.getText(), txt_MotivoConsultaPaciente.getText(),
                                    cbo_Parentesco.getSelectedItem().toString(), cbo_ClasificacionPaciente.getSelectedItem().toString(),
-                                   cbo_HorarioPaciente.getSelectedItem().toString(), txt_DetalleHorarioPaciente.getText(),
-                                   cbo_TipoPaciente.getSelectedItem().toString(), cbo_IsNonGrato.getSelectedItem().toString()
-                                   ));
+                                   cbo_CursoPaciente.getSelectedItem().toString(), cbo_HorarioPaciente.getSelectedItem().toString(),
+                                   txt_DetalleHorarioPaciente.getText(), cbo_TipoPaciente.getSelectedItem().toString(),
+                                   cbo_IsNonGrato.getSelectedItem().toString() ));
         Boolean exq2 = sql.exec(query2, obj2);
         if (exq2) {
-            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "PACIENTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
