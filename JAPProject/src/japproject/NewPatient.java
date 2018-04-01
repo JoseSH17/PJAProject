@@ -174,7 +174,7 @@ public class NewPatient {
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
         FechaReporte = new iCalendar();
-//        FechaReporte.setText(fechaActualFechaReporte());
+//        FechaReporte.setText(fechaActualFechaReporte());//no es es necesario hacerlo aqui
         
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
         lbl_NOTA.setForeground(Color.GRAY.brighter());
@@ -191,7 +191,6 @@ public class NewPatient {
   
         ////////////////Componentes para paciente, recordar ponerlos en setVisible(false); ,[y en el metodo setVisible(true) si es verdad, }else{setVisible(true);]
         btnRegisterActionPaciente = new iButton("REGISTRAR PACIENTE", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-//        btnRegisterActionPaciente.setText("REGISTRAR PACIENTE");
         btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
 
         lbl_TituloPaciente = new iLabel("PACIENTE");
@@ -209,7 +208,7 @@ public class NewPatient {
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
         FechaNacimientoPaciente = new iCalendar();
-//        FechaNacimientoPaciente.setText(fechaActualFechaNacimiento());//
+//        FechaNacimientoPaciente.setText(fechaActualFechaNacimiento());//No es necesario hacerlo
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
@@ -263,17 +262,17 @@ public class NewPatient {
     
     
     public String fechaActualFechaReporte(){
-//        DateFormat formatoFechaFechaReporte = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        DateFormat formatoFechaFechaReporte = new SimpleDateFormat("yyyy/MM/dd");
-        System.out.println(formatoFechaFechaReporte.format(FechaReporte.getDate()));
-        FechaReporte.setText(formatoFechaFechaReporte.format(FechaReporte.getDate()));//this
+        DateFormat formatoFechaFechaReporte = new SimpleDateFormat("yyyy/MM/dd");//le doy formato a la fecha
+        System.out.println(formatoFechaFechaReporte.format(FechaReporte.getDate()));//para ver la fecha si esta bien
+        FechaReporte.setText(FechaReporte.getDate());////le seteo la fecha con el formato especificado
         return formatoFechaFechaReporte.format(FechaReporte.getDate());
     }
     
     public String fechaActualFechaNacimiento(){
-        DateFormat formatoFechaFechaNacimiento = new SimpleDateFormat("yyyy/MM/dd");
-        System.out.println(formatoFechaFechaNacimiento.format(FechaNacimientoPaciente.getDate()));
-        return formatoFechaFechaNacimiento.format(FechaNacimientoPaciente.getDate());
+        DateFormat formatoFechaFechaNacimiento = new SimpleDateFormat("yyyy/MM/dd");//le doy formato a la fecha
+        System.out.println(formatoFechaFechaNacimiento.format(FechaNacimientoPaciente.getDate()));//para ver la fecha si esta bien
+        FechaNacimientoPaciente.setText(FechaNacimientoPaciente.getText());//le seteo la fecha con el formato especificado
+        return formatoFechaFechaNacimiento.format(FechaNacimientoPaciente.getDate()); 
     }
     
     
