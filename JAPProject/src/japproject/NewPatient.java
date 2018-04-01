@@ -457,7 +457,7 @@ public class NewPatient {
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
         String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         obj2.addAll(Arrays.asList( 0, txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
-                                   FechaNacimientoPaciente.getText(), txt_DireccionPaciente.getText(),
+                                   fechaActualFechaNacimiento(), txt_DireccionPaciente.getText(),
                                    txt_TelefonoPaciente.getText(), txt_ProfesionPaciente.getText(),
                                    txt_ActividadLaboralPaciente.getText(), txt_MotivoConsultaPaciente.getText(),
                                    cbo_Parentesco.getSelectedItem().toString(), cbo_ClasificacionPaciente.getSelectedItem().toString(),
