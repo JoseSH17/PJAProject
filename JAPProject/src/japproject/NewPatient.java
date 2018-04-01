@@ -148,6 +148,9 @@ public class NewPatient {
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
         FechaNacimientoPaciente = new iCalendar();
+        Date date =  new Date(); //Getting current date from local host
+        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd"); //Formatting current date for initial search and table refresh            
+        FechaNacimientoPaciente.setText(currentDateFormatted.format(FechaNacimientoPaciente.getDate()));
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
@@ -252,8 +255,11 @@ public class NewPatient {
         
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
-//        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         FechaReporte = new iCalendar();
+        Date date =  new Date(); //Getting current date from local host
+        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd"); //Formatting current date for initial search and table refresh            
+        FechaReporte.setText(currentDateFormatted.format(FechaReporte.getDate()));
+        
 
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
         lbl_NOTA.setForeground(Color.GRAY.brighter());
@@ -373,7 +379,7 @@ public class NewPatient {
         
         //Para crear las ventanas de los JtabbedPanes
         jTabbedPane = new JTabbedPane();//creo el panel para hacer el JtabbedPane
-        jTabbedPane.add("UNO", new iLabel("En la pestaña uno"));
+        jTabbedPane.add("UNO", new iLabel("En la pestaña uno"));//falta cambiar por el panel estatico
         jTabbedPane.add("DOS", new iLabel("En la pestaña dos"));
 //        jTabbedPane.add("DOS", new iPanel(0, 0, 0, 0, 0, if_));//aun falta en preceso de 
         jTabbedPane.add("TRES", new iLabel("En la pestaña tres"));
@@ -399,14 +405,12 @@ public class NewPatient {
             btn_RegisterAction_MouseClicked();
         });
         
-        btnNuevoPaciente.addActionListener((a) -> {
+        btnNuevoPaciente.addActionListener((a) -> {//falta programar
             
         });
         
-//        //fin de crear tabbedPane y agregarlos al Repanel
-        
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
-//            
+            
             if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
                 System.out.println("MUESTRA MENSAJE DE CBO");
                 jTabbedPane.setVisible(true);
@@ -416,7 +420,7 @@ public class NewPatient {
                 jTabbedPane.setVisible(false);
                 btnNuevoPaciente.setVisible(false);
             }
-//            
+            
         });
 
         if_.add(NewPatient_Panel);
@@ -461,7 +465,6 @@ public class NewPatient {
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-        
     }//fin del metodo btn_RegisterAction_MouseClicked()
     
     
