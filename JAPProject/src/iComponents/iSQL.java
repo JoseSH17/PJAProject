@@ -171,7 +171,7 @@ public final class iSQL {
             //JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
-    }
+    }           
 
     /**
      * Sentencia ùnica para SELECT, retorna un ResultSet, que podrà ser
@@ -211,6 +211,49 @@ public final class iSQL {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         return null;
+    }
+    
+    
+    /**
+     * Sentencia ùnica para SELECT, retorna un ResultSet, que podrà ser
+     * utilizado para crear tablas o manipular informaciòn.
+     *
+     * @param preparedQuery
+     * @param objs
+     * @return
+     */
+    public int SelectReturnValue(String preparedQuery, ArrayList<Object> objs) {
+        PreparedStatement ps;
+        int ReturnedValue;
+        try {
+            if (connection != null)
+            {
+                ps = this.connection.prepareStatement(preparedQuery);
+
+                Iterator it = objs.iterator();
+                int poc = 1;
+                while (it.hasNext()) {
+                    Object element = it.next();
+                    if (this.isNumeric(element)) {
+                        ps.setInt(poc, Integer.parseInt(element.toString()));
+                    } else {
+                        ps.setString(poc, element.toString());
+                    }
+                    poc++;
+                }
+
+                ResultSet rs = ps.executeQuery();
+                ReturnedValue = (int) rs.getObject(1);
+                return ReturnedValue;
+            }
+            else 
+            {
+                return 0;
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        return 0;
     }
 
     public ResultSet SELECT(String preparedQuery) {

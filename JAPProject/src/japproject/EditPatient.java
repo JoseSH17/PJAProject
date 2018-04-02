@@ -102,6 +102,8 @@ public class EditPatient {
     //FIN de Controles Swing para Paciente
     //
     //
+    public int IdPaciente;
+    public int IdSolicitante;
     public static iPanel EditPatient_Panel;
 
     public EditPatient(iFrame if_) {
@@ -215,6 +217,7 @@ public class EditPatient {
 
         iScrollPane ScrollPane = new iScrollPane(RegistrosTable, null);
         //setear valores textfiles solicitante
+        IdSolicitante = Integer.parseInt(RegistrosTable.getValueAt(0, 10).toString()) - 1;
         txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
         txt_NombreSolicitante.setText(RegistrosTable.getValueAt(0, 2).toString());
         txt_DireccionSolicitante.setText(RegistrosTable.getValueAt(0, 3).toString());
@@ -225,6 +228,8 @@ public class EditPatient {
         txt_FechaReporte.setText(RegistrosTable.getValueAt(0, 28).toString());
         //
         //setear valores textfiles paciente
+        IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString()) - 1;
+
         txt_CedulaPaciente.setText(RegistrosTable.getValueAt(0, 11).toString());
         txt_NombrePaciente.setText(RegistrosTable.getValueAt(0, 12).toString());
 
@@ -248,17 +253,28 @@ public class EditPatient {
     }
 
     private void btnEditarAction_MouseClicked() {
+        Date date = new Date();
+        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        currentDateFormatted.format(date);
+        
         ArrayList<Object> obj1 = new ArrayList();//array para guardar data
-        String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
-        obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
-                txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
-                txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
-                txt_MotivoConsultaSolicitante.getText(), txt_FechaReporte.getText()));
+        obj1.addAll(Arrays.asList(
+                txt_CedulaSolicitante.getText(),
+                txt_NombreSolicitante.getText(),
+                txt_DireccionSolicitante.getText(),
+                txt_TelefonoSolicitante.getText(),
+                txt_ProfesionSolicitante.getText(),
+                txt_ActividadLaboralSolicitante.getText(),
+                txt_MotivoConsultaSolicitante.getText(),
+                txt_FechaReporte.getText(),
+                IdSolicitante
+        ));
+
+        String query1 = "UPDATE JAW_Solicitante SET `Cedula`=?, `Nombre`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `FechaReporte`=? WHERE IdSolicitante=?";
 
         Boolean exq1 = sql.exec(query1, obj1);
 
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-        String query2 = "INSERT INTO JAW_Paciente(Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         obj2.addAll(Arrays.asList(
                 txt_CedulaPaciente.getText(),
                 txt_NombrePaciente.getText(),
@@ -268,19 +284,22 @@ public class EditPatient {
                 txt_ProfesionPaciente.getText(),
                 txt_ActividadLaboralPaciente.getText(),
                 txt_MotivoConsultaPaciente.getText(),
-                cbo_Parentesco.getSelectedItem().toString(),
-                cbo_ClasificacionPaciente.getSelectedItem().toString(),
-                cbo_CursoPaciente.getSelectedItem().toString(),
-                cbo_HorarioPaciente.getSelectedItem().toString(),
+                cbo_Parentesco.getSelectedIndex() + 1,
+                cbo_ClasificacionPaciente.getSelectedIndex() + 1,
+                cbo_CursoPaciente.getSelectedIndex() + 1,
+                cbo_HorarioPaciente.getSelectedIndex() + 1,
                 txt_DetalleHorarioPaciente.getText(),
-                cbo_TipoPaciente.getSelectedItem().toString(),
-                cbo_IsNonGrato.getSelectedItem().toString()
+                cbo_TipoPaciente.getSelectedIndex() + 1,
+                cbo_IsNonGrato.getSelectedIndex() + 1,
+                IdPaciente
         ));
+        String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
+
         Boolean exq2 = sql.exec(query2, obj2);
-        if (exq2&&exq1) {
-            JOptionPane.showMessageDialog(null, "REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        if (exq2 && exq1) {
+            JOptionPane.showMessageDialog(null, "EDITADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERROR AL EDITAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
