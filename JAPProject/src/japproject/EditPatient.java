@@ -253,8 +253,11 @@ public class EditPatient {
     }
 
     private void btnEditarAction_MouseClicked() {
+        Date date = new Date();
+        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        currentDateFormatted.format(date);
+        
         ArrayList<Object> obj1 = new ArrayList();//array para guardar data
-        String query1 = "UPDATE JAW_Solicitante `Cedula`=?, `Nombre`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `FechaReporte`=? WHERE IdSolicitante=?";
         obj1.addAll(Arrays.asList(
                 txt_CedulaSolicitante.getText(),
                 txt_NombreSolicitante.getText(),
@@ -265,13 +268,13 @@ public class EditPatient {
                 txt_MotivoConsultaSolicitante.getText(),
                 txt_FechaReporte.getText(),
                 IdSolicitante
-                ));
-                
+        ));
+
+        String query1 = "UPDATE JAW_Solicitante SET `Cedula`=?, `Nombre`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `FechaReporte`=? WHERE IdSolicitante=?";
 
         Boolean exq1 = sql.exec(query1, obj1);
 
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-        String query2 = "UPDATE  JAW_Paciente `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
         obj2.addAll(Arrays.asList(
                 txt_CedulaPaciente.getText(),
                 txt_NombrePaciente.getText(),
@@ -289,8 +292,9 @@ public class EditPatient {
                 cbo_TipoPaciente.getSelectedIndex() + 1,
                 cbo_IsNonGrato.getSelectedIndex() + 1,
                 IdPaciente
-                
         ));
+        String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
+
         Boolean exq2 = sql.exec(query2, obj2);
         if (exq2 && exq1) {
             JOptionPane.showMessageDialog(null, "EDITADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
