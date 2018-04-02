@@ -315,7 +315,7 @@ public class EditPatient {
                 cbo_IsNonGrato.getSelectedIndex() + 1,
                 IdPaciente
         ));
-        String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
+        String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
         System.out.println("Valores de obj2 antes del UPDATE" + obj2);
         
         Boolean exq2 = sql.exec(query2, obj2);
