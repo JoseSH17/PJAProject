@@ -38,12 +38,13 @@ import javax.swing.JTable;
  */
 public class Appointments {
 
-    public iPanel Appointments_Panel;
-    public iLabel lblCalendar;
-    public iTextField txtHiddenSearch;
-    public iCalendar calendar;
-    public JButton btnViewAll;
-    public iTable tblCitas;
+    public iPanel Appointments_Panel; //Panel to view, edit and add appointments.
+    public iLabel lblCalendar; //lbl to indicate the user to select a date.
+    public iCalendar calendar; //Calendar to filter main appointments view.
+    public iTextField txtHiddenSearch; //Filter for the iTable that shows appointments, is hidden from the user.
+    public JButton btnViewAll; //Removes filter from txtHidenSearch.
+    public JButton btnScheduleAppointment; //Allows the user to schedule a new appointment.
+    public iTable tblAppointments; //Table to display all appointments, can be filtered as user requests.
 
     public List<String> tbl_Data = new ArrayList();
 
@@ -51,18 +52,15 @@ public class Appointments {
         try {                        
             currentPanel = "Appointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
             Appointments_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//Defining iPanel dimensions
-            Appointments_Panel.setBackground(Color.decode("#006738"));//le doy color al panel               
-
+            Appointments_Panel.setBackground(Color.decode("#006738"));//le doy color al panel  
+             
             lblCalendar = new iLabel("Por favor seleccione una fecha: "); //Lbl Guide
             lblCalendar.setForeground(Color.WHITE); //Calendar
             calendar = new iCalendar();
             
             txtHiddenSearch = new iTextField("",0); //Hidden txt that searches in table and updates result for used depending on selected date, this is not shown to the user.           
             
-            CalendarUpdateTable(calendar); //Calling method to update table dynamically
-                       
-            
-            CheckFirstExecution(txtHiddenSearch);
+            CalendarUpdateTable(calendar); //Calling method to update table dynamically                                   
             
             btnViewAll = new JButton("Ver todas las citas");
             btnViewAll.setToolTipText("Elimina el filtro y muestra todas las citas");
@@ -71,7 +69,7 @@ public class Appointments {
             
             Appointments_Panel.AddObject(lblCalendar, 190, 30, 3);
             Appointments_Panel.AddObject(calendar, 70, 30, 193);
-            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303);
+            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303);            
             Appointments_Panel.newLine();
             
              btnViewAll.addActionListener((ae) -> {
@@ -87,18 +85,18 @@ public class Appointments {
                 Cols.add(rs.getMetaData().getColumnName(i));
             }
 //          Se crea la tabla y se le da los parametros
-            System.out.println("Valor de txthiddensearch:" + txtHiddenSearch.getText());
-            tblCitas = new iTable(Cols, txtHiddenSearch);
-            tblCitas.getTableHeader().setReorderingAllowed(false);
-            tblCitas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-            tblCitas.getTableHeader().setResizingAllowed(false);
-            tblCitas.setRowSelectionAllowed(true);
-            tblCitas.setSize(1100, 300);
+            tblAppointments = new iTable(Cols, txtHiddenSearch);
+            tblAppointments.getTableHeader().setReorderingAllowed(false);
+            tblAppointments.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+            tblAppointments.getTableHeader().setResizingAllowed(false);
+            tblAppointments.setRowSelectionAllowed(true);
+            tblAppointments.setBackground(Color.decode("#006738"));
+            tblAppointments.setSize(1100, 200);
 
-            PopMenu(tblCitas, if_);//metodo que crea e implementa el popmenu 
-            iScrollPane scrollCitas = new iScrollPane(tblCitas, null);
-            scrollCitas.setViewportView(tblCitas);
-            SetColumsSizes(tblCitas);
+            PopMenu(tblAppointments, if_);//metodo que crea e implementa el popmenu 
+            iScrollPane scrollCitas = new iScrollPane(tblAppointments, Color.decode("#006738"));
+            scrollCitas.setViewportView(tblAppointments);
+            SetColumsSizes(tblAppointments);
 
             if (sql.Exists(rs)) {//verifica que el query sea valido
                 try {
@@ -109,16 +107,20 @@ public class Appointments {
                             row[i - 1] = rs.getObject(i);
                         }
 
-                        tblCitas.addrow(row);
+                        tblAppointments.addrow(row);
                     }
                 } catch (SQLException ex) {
                     System.out.println("no object fetch'd");
                 }
             }
             Appointments_Panel.addSpace(20);
-            Appointments_Panel.AddObject(scrollCitas, 1100, 300);
+            Appointments_Panel.AddObject(scrollCitas, 1100, 200);            
+            
             Appointments_Panel.newLine();
             Appointments_Panel.finalice();
+            
+            CheckFirstExecution(txtHiddenSearch);
+                                
         } catch (SQLException ex) {
             Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
         }
