@@ -304,7 +304,7 @@ public class NewPatient {
         
         /////////////////componente,/////ancho,largo,posision//
         NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
-        NewPatient_Panel.AddObject(lbl_LogoPsicologia, 415, 120, 600);
+        NewPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
         NewPatient_Panel.newLine();  
         
         NewPatient_Panel.AddObject(vacio, 0,30,2);//esto fue agregado para hacer salto de linea en el mismo codigo
@@ -416,6 +416,13 @@ public class NewPatient {
         NewPatient_Panel.newLine();
         
         setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
+        
         
         btnRegisterAction.addActionListener((a) -> {
             btn_RegisterAction_MouseClicked();
@@ -425,18 +432,32 @@ public class NewPatient {
             
         });
         
+        
+        
+        if (chk_boxSolicitanteDiferentePaciente.isSelected() == false) {
+                jTabbedPane.setVisible(false);
+                btnNuevoPaciente.setVisible(false);
+                cbo_Parentesco.setSelectedItem("Nulo");
+                cbo_Parentesco.setEnabled(false);
+                  
+        }else{
+                cbo_Parentesco.setEnabled(true);
+        }
+        
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
             
-            if (chk_boxSolicitanteDiferentePaciente.isSelected()) {
+            if (chk_boxSolicitanteDiferentePaciente.isSelected() == true) {
                 System.out.println("MUESTRA MENSAJE DE CBO");
                 jTabbedPane.setVisible(true);
                 btnNuevoPaciente.setVisible(true);
+                cbo_Parentesco.setEnabled(true);
                   
-            }else{  
+            }else if(chk_boxSolicitanteDiferentePaciente.isSelected() == false) {  
                 jTabbedPane.setVisible(false);
                 btnNuevoPaciente.setVisible(false);
+                cbo_Parentesco.setSelectedItem("Nulo");
+                cbo_Parentesco.setEnabled(false);
             }
-            
         });
 
         if_.add(NewPatient_Panel);
@@ -457,9 +478,6 @@ public class NewPatient {
             System.out.println("El Solicitante es el paciente".toUpperCase());
             
             
-            
-            
-            
             ArrayList<Object> obj1 = new ArrayList();//array para guardar data
             String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
             obj1.addAll(Arrays.asList(  txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
@@ -474,22 +492,6 @@ public class NewPatient {
                 JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
             }//fin de if exq1
 
-//            txt_CedulaPaciente.setText(txt_CedulaSolicitante.getText());
-//            txt_CedulaPaciente.setEnabled(false);
-//            txt_NombrePaciente.setText(txt_NombreSolicitante.getText());
-//            txt_NombrePaciente.setEnabled(false);
-//            txt_DireccionPaciente.setText(txt_DireccionSolicitante.getText());
-//            txt_DireccionPaciente.setEnabled(false);
-//            txt_TelefonoPaciente.setText(txt_TelefonoSolicitante.getText());
-//            txt_TelefonoPaciente.setEnabled(false);
-//            txt_ProfesionPaciente.setText(txt_ProfesionSolicitante.getText());
-//            txt_ProfesionPaciente.setEnabled(false);
-//            txt_ActividadLaboralPaciente.setText(txt_ActividadLaboralSolicitante.getText());
-//            txt_ActividadLaboralPaciente.setEnabled(false);
-//            txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
-//            txt_MotivoConsultaPaciente.setEnabled(false);
-            
-            
             ArrayList<Object> obj2 = new ArrayList();//array para guardar data
             String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             obj2.addAll(Arrays.asList(  0, txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
@@ -518,17 +520,13 @@ public class NewPatient {
         
         
     }//fin del metodo btn_RegisterAction_MouseClicked()
+
     
-    
-    //iTextField NombrePaciente
-    //iTextField DireccionPaciente
-    //iTextField TelefonoPaciente
-    //iTextField ProfesionPaciente
-    //iTextField ActividadLaboral 
-    //iTextField MotivoConsultaPaciente
-    
-    
-    
+    /**
+     * Método hace que toma el txt y lo hace dinamicamente
+     *
+     * @return hace que el texto escrito en el txt lo pase al otro txt
+    */
     private void setJTexFieldChanged(iTextField txt)
     {
         DocumentListener documentListener = new DocumentListener() {
@@ -568,31 +566,35 @@ public class NewPatient {
         }
     }
     
+    
+    /**
+     * Método le paso por parametro los txt y los hago dinamicos
+     *
+     * @return seteo los txt y los pasa al otro txt y hace que el txt no se pueda editar 
+    */
     private void txtEjemploJTextFieldChanged()
     {
         //Copiar el contenido del jtextfield al jlabel
         txt_CedulaPaciente.setText(txt_CedulaSolicitante.getText());
         txt_CedulaPaciente.setEnabled(false);
+        txt_NombrePaciente.setText(txt_NombreSolicitante.getText());
+        txt_NombrePaciente.setEnabled(false);
+        txt_DireccionPaciente.setText(txt_DireccionSolicitante.getText());
+        txt_DireccionPaciente.setEnabled(false);
+        txt_TelefonoPaciente.setText(txt_TelefonoSolicitante.getText());
+        txt_TelefonoPaciente.setEnabled(false);
+        txt_ProfesionPaciente.setText(txt_ProfesionSolicitante.getText());
+        txt_ProfesionPaciente.setEnabled(false);
+        txt_ActividadLaboralPaciente.setText(txt_ActividadLaboralSolicitante.getText());
+        txt_ActividadLaboralPaciente.setEnabled(false);
+        txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
+        txt_MotivoConsultaPaciente.setEnabled(false);
         
     }
     
-//    private void txtEjemploJTextFieldChangedNombrePaciente()
-//    {
-//        txt_NombrePaciente.setText(txt_NombreSolicitante.getText());
-//        txt_NombrePaciente.setEnabled(false);
-//    }
     
     
-//            txt_DireccionPaciente.setText(txt_DireccionSolicitante.getText());
-//            txt_DireccionPaciente.setEnabled(false);
-//            txt_TelefonoPaciente.setText(txt_TelefonoSolicitante.getText());
-//            txt_TelefonoPaciente.setEnabled(false);
-//            txt_ProfesionPaciente.setText(txt_ProfesionSolicitante.getText());
-//            txt_ProfesionPaciente.setEnabled(false);
-//            txt_ActividadLaboralPaciente.setText(txt_ActividadLaboralSolicitante.getText());
-//            txt_ActividadLaboralPaciente.setEnabled(false);
-//            txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
-//            txt_MotivoConsultaPaciente.setEnabled(false);
+
     
     
     
