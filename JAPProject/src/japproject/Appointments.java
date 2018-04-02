@@ -51,7 +51,7 @@ public class Appointments {
         try {                        
             currentPanel = "Appointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
             Appointments_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//Defining iPanel dimensions
-            Appointments_Panel.setBackground(new java.awt.Color(00, 52, 25));//le doy color al panel               
+            Appointments_Panel.setBackground(Color.decode("#006738"));//le doy color al panel               
 
             lblCalendar = new iLabel("Por favor seleccione una fecha: "); //Lbl Guide
             lblCalendar.setForeground(Color.WHITE); //Calendar
