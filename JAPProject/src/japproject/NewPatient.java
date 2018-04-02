@@ -22,11 +22,15 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import static japproject.HomePanel.currentPanel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 
 
@@ -119,6 +123,7 @@ public class NewPatient {
         NewPatient_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
         Ingresar(if_);
+        
     }
     
     /**
@@ -410,6 +415,8 @@ public class NewPatient {
         btnNuevoPaciente.setVisible(false);
         NewPatient_Panel.newLine();
         
+        setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
+        
         btnRegisterAction.addActionListener((a) -> {
             btn_RegisterAction_MouseClicked();
         });
@@ -437,40 +444,169 @@ public class NewPatient {
     }//Fin del metodo ibtnIngresarPacienteaddActionListener
     
     
+    
+    /**
+     * Método hace inserts de los datos escritos en newPatient
+     *
+     * @return Ingresa los datos en las tablas
+    */
     public void btn_RegisterAction_MouseClicked(){
 
-
-        ArrayList<Object> obj1 = new ArrayList();//array para guardar data
-        String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
-        obj1.addAll(Arrays.asList( txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
-                                   txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
-                                   txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
-                                   txt_MotivoConsultaSolicitante.getText(), fechaActualFechaReporte() ));
+        if(chk_boxSolicitanteDiferentePaciente.isSelected() == false){
         
-        Boolean exq1 = sql.exec(query1, obj1);
-        if (exq1) {
-            JOptionPane.showMessageDialog(null, "SOLICITANTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+            System.out.println("El Solicitante es el paciente".toUpperCase());
+            
+            
+            
+            
+            
+            ArrayList<Object> obj1 = new ArrayList();//array para guardar data
+            String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
+            obj1.addAll(Arrays.asList(  txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
+                                        txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
+                                        txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
+                                        txt_MotivoConsultaSolicitante.getText(), fechaActualFechaReporte() ));
+        
+            Boolean exq1 = sql.exec(query1, obj1);
+            if (exq1) {
+                JOptionPane.showMessageDialog(null, "SOLICITANTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }//fin de if exq1
 
-        ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-        String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        obj2.addAll(Arrays.asList( 0, txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
-                                   fechaActualFechaNacimiento(), txt_DireccionPaciente.getText(),
-                                   txt_TelefonoPaciente.getText(), txt_ProfesionPaciente.getText(),
-                                   txt_ActividadLaboralPaciente.getText(), txt_MotivoConsultaPaciente.getText(),
-                                   cbo_Parentesco.getSelectedItem().toString(), cbo_ClasificacionPaciente.getSelectedItem().toString(),
-                                   cbo_CursoPaciente.getSelectedItem().toString(), cbo_HorarioPaciente.getSelectedItem().toString(),
-                                   txt_DetalleHorarioPaciente.getText(), cbo_TipoPaciente.getSelectedItem().toString(),
-                                   cbo_IsNonGrato.getSelectedItem().toString() ));
-        Boolean exq2 = sql.exec(query2, obj2);
-        if (exq2) {
-            JOptionPane.showMessageDialog(null, "PACIENTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+//            txt_CedulaPaciente.setText(txt_CedulaSolicitante.getText());
+//            txt_CedulaPaciente.setEnabled(false);
+//            txt_NombrePaciente.setText(txt_NombreSolicitante.getText());
+//            txt_NombrePaciente.setEnabled(false);
+//            txt_DireccionPaciente.setText(txt_DireccionSolicitante.getText());
+//            txt_DireccionPaciente.setEnabled(false);
+//            txt_TelefonoPaciente.setText(txt_TelefonoSolicitante.getText());
+//            txt_TelefonoPaciente.setEnabled(false);
+//            txt_ProfesionPaciente.setText(txt_ProfesionSolicitante.getText());
+//            txt_ProfesionPaciente.setEnabled(false);
+//            txt_ActividadLaboralPaciente.setText(txt_ActividadLaboralSolicitante.getText());
+//            txt_ActividadLaboralPaciente.setEnabled(false);
+//            txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
+//            txt_MotivoConsultaPaciente.setEnabled(false);
+            
+            
+            ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+            String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            obj2.addAll(Arrays.asList(  0, txt_CedulaPaciente.getText(), txt_NombrePaciente.getText(),
+                                        fechaActualFechaNacimiento(), txt_DireccionPaciente.getText(),
+                                        txt_TelefonoPaciente.getText(), txt_ProfesionPaciente.getText(),
+                                        txt_ActividadLaboralPaciente.getText(), txt_MotivoConsultaPaciente.getText(),
+                                        cbo_Parentesco.getSelectedItem().toString(), cbo_ClasificacionPaciente.getSelectedItem().toString(),
+                                        cbo_CursoPaciente.getSelectedItem().toString(), cbo_HorarioPaciente.getSelectedItem().toString(),
+                                        txt_DetalleHorarioPaciente.getText(), cbo_TipoPaciente.getSelectedItem().toString(),
+                                        cbo_IsNonGrato.getSelectedItem().toString() ));
+            Boolean exq2 = sql.exec(query2, obj2);
+            if (exq2) {
+                JOptionPane.showMessageDialog(null, "PACIENTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }//fin de if exq2
+            
+        }else{
+            
+            System.out.println("El Solicitante no es el paciente, esta en proceso");
+            
+            
+            
+        
+        }//fin del metodo si solicitante es el paciente
+        
+        
     }//fin del metodo btn_RegisterAction_MouseClicked()
+    
+    
+    //iTextField NombrePaciente
+    //iTextField DireccionPaciente
+    //iTextField TelefonoPaciente
+    //iTextField ProfesionPaciente
+    //iTextField ActividadLaboral 
+    //iTextField MotivoConsultaPaciente
+    
+    
+    
+    private void setJTexFieldChanged(iTextField txt)
+    {
+        DocumentListener documentListener = new DocumentListener() {
+ 
+        @Override
+        public void changedUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+ 
+        @Override
+        public void insertUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+ 
+        @Override
+        public void removeUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+        };
+        txt.getDocument().addDocumentListener(documentListener);
+    }
+ 
+    private void printIt(DocumentEvent documentEvent) {
+        DocumentEvent.EventType type = documentEvent.getType();
+ 
+        if (type.equals(DocumentEvent.EventType.CHANGE))
+        {
+            
+        }
+        else if (type.equals(DocumentEvent.EventType.INSERT))
+        {
+           txtEjemploJTextFieldChanged();
+        }
+        else if (type.equals(DocumentEvent.EventType.REMOVE))
+        {
+            txtEjemploJTextFieldChanged();
+        }
+    }
+    
+    private void txtEjemploJTextFieldChanged()
+    {
+        //Copiar el contenido del jtextfield al jlabel
+        txt_CedulaPaciente.setText(txt_CedulaSolicitante.getText());
+        txt_CedulaPaciente.setEnabled(false);
+        
+    }
+    
+//    private void txtEjemploJTextFieldChangedNombrePaciente()
+//    {
+//        txt_NombrePaciente.setText(txt_NombreSolicitante.getText());
+//        txt_NombrePaciente.setEnabled(false);
+//    }
+    
+    
+//            txt_DireccionPaciente.setText(txt_DireccionSolicitante.getText());
+//            txt_DireccionPaciente.setEnabled(false);
+//            txt_TelefonoPaciente.setText(txt_TelefonoSolicitante.getText());
+//            txt_TelefonoPaciente.setEnabled(false);
+//            txt_ProfesionPaciente.setText(txt_ProfesionSolicitante.getText());
+//            txt_ProfesionPaciente.setEnabled(false);
+//            txt_ActividadLaboralPaciente.setText(txt_ActividadLaboralSolicitante.getText());
+//            txt_ActividadLaboralPaciente.setEnabled(false);
+//            txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
+//            txt_MotivoConsultaPaciente.setEnabled(false);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     //Metodos para cargar los cbo`s de Paciente
