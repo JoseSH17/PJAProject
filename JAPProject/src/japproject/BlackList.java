@@ -43,7 +43,6 @@ public class BlackList {
 
     //
     public BlackList(iFrame if_) {
-        BlackList_Panel = new iPanel(0, 0, 100f, 100f, 0, 0, if_);
         currentPanel = "BlackList_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             BlackList_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
