@@ -65,7 +65,7 @@ public class PatientView {
             RegistrosTable.setSize(500, 500);
 
             PopMenu(RegistrosTable, if_);//metodo que crea e implementa el popmenu 
-            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable,Color.decode("#006738"));
+            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, Color.decode("#006738"));
             scrollPane2.setViewportView(RegistrosTable);
             SetColumsSizes(RegistrosTable);
 
@@ -117,13 +117,17 @@ public class PatientView {
                 if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
                     JPopupMenu popup = new JPopupMenu();
                     JMenuItem ItemEditar = new JMenuItem("Editar paciente");
-
+                    
                     ItemEditar.addActionListener((ae) -> {
-                        ItemEditarActionListener(RegistrosTable);
+                        tbl_Data.clear();
+                       
 
                         PatientView_panel.dispose();
                         PatientView_panel.setVisible(false);
+                        ItemEditarActionListener(RegistrosTable);
                         EP = new EditPatient(if_);
+                         
+
                     });
                     popup.add(ItemEditar);
                     RegistrosTable.setComponentPopupMenu(popup);
@@ -135,10 +139,10 @@ public class PatientView {
 
     }
 
-    public void ItemEditarActionListener(iTable RegistrosTable) {
+    public static void ItemEditarActionListener(iTable RegistrosTable) {
 
         int selectedRow = RegistrosTable.getSelectedRow();
-
+         
         for (int j = 0; j < RegistrosTable.getColumnCount(); j++) {
 
             tbl_Data.add(RegistrosTable.getColumnName(j) + "-" + RegistrosTable.getValueAt(selectedRow, j).toString());
@@ -183,9 +187,7 @@ public class PatientView {
         RegistrosTable.getColumnModel().getColumn(5).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(6).setPreferredWidth(180);
         RegistrosTable.getColumnModel().getColumn(7).setPreferredWidth(180);
-      
-        
-       
+
         RegistrosTable.getColumnModel().getColumn(8).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(8).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(8).setMaxWidth(0);
