@@ -513,9 +513,6 @@ public class NewPatient {
             
             System.out.println("El Solicitante no es el paciente, esta en proceso");
             
-            
-            
-        
         }//fin del metodo si solicitante es el paciente
         
         
@@ -527,8 +524,7 @@ public class NewPatient {
      *
      * @return hace que el texto escrito en el txt lo pase al otro txt
     */
-    private void setJTexFieldChanged(iTextField txt)
-    {
+    private void setJTexFieldChanged(iTextField txt){
         DocumentListener documentListener = new DocumentListener() {
  
         @Override
@@ -572,8 +568,7 @@ public class NewPatient {
      *
      * @return seteo los txt y los pasa al otro txt y hace que el txt no se pueda editar 
     */
-    private void txtEjemploJTextFieldChanged()
-    {
+    private void txtEjemploJTextFieldChanged() {
         //Copiar el contenido del jtextfield al jlabel
         txt_CedulaPaciente.setText(txt_CedulaSolicitante.getText());
         txt_CedulaPaciente.setEnabled(false);
@@ -589,27 +584,7 @@ public class NewPatient {
         txt_ActividadLaboralPaciente.setEnabled(false);
         txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
         txt_MotivoConsultaPaciente.setEnabled(false);
-        
     }
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     //Metodos para cargar los cbo`s de Paciente
         private JComboBox cbo_CargarTipoPaciente() {
