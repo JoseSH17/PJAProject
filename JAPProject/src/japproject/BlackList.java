@@ -116,15 +116,16 @@ public class BlackList {
                     JMenuItem ItemEditar = new JMenuItem("Eliminar de ListaNegra");
 
                     ItemEditar.addActionListener((ae) -> {
-                       int IdSolicitante = Integer.parseInt(RegistrosTable.getValueAt(0, 10).toString()) - 1;
+                       int IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString());
                         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-                        obj2.addAll(Arrays.asList(IdSolicitante));
+                        obj2.addAll(Arrays.asList("No",IdPaciente));
                         
-                        String query2 = "UPDATE  JAW_VistaListaNegra SET `ListaNegra`=No WHERE `IdPaciente`=?";
+                        String query2 = "UPDATE JAW_Paciente SET `IsNonGrato` = ? WHERE `IdPaciente`=?";
 
                         Boolean exq2 = sql.exec(query2, obj2);
                         if (exq2) {
                             JOptionPane.showMessageDialog(null, "ELIMINADO DE LA LISTA NEGRA EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                            SearchBar_txt.setText("");
                         } else {
                             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR DE LA LISTA NEGRA", "ERROR", JOptionPane.ERROR_MESSAGE);
                         }

@@ -110,12 +110,13 @@ public class EditPatient {
     public int IdPaciente;
     public int IdSolicitante;
     public static iPanel EditPatient_Panel;
+    public EditPatient EP; //Instaciamiento para llamada recíproca.
 
     public EditPatient(iFrame if_) {
         currentPanel = "EditPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.  
         EditPatient_Panel = new iPanel(0, 70, 100f, 100.0f, 0, 0, if_);
         EditPatient_Panel.setBackground(Color.decode("#006738"));
-        AddComponentes();
+        AddComponentes(if_);
     }
 
 //Metodos para cargar los cbo`s de Paciente
@@ -272,7 +273,7 @@ public class EditPatient {
         return ScrollPane;
     }
 
-    private void btnEditarAction_MouseClicked() {
+    private void btnEditarAction_MouseClicked(iFrame if_) {
         DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd");
         
         //System.out.println("Fecha tomada de TXT formateada: " + currentDateFormatted.format(txt_FechaReporte.getText()).toString());
@@ -312,7 +313,7 @@ public class EditPatient {
                 cbo_HorarioPaciente.getSelectedIndex() + 1,
                 txt_DetalleHorarioPaciente.getText(),
                 cbo_TipoPaciente.getSelectedIndex() + 1,
-                cbo_IsNonGrato.getSelectedIndex() + 1,
+                cbo_IsNonGrato.getSelectedItem(),
                 IdPaciente
         ));
         String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
@@ -321,6 +322,10 @@ public class EditPatient {
         Boolean exq2 = sql.exec(query2, obj2);
         if (exq2 && exq1) {
             JOptionPane.showMessageDialog(null, "EDITADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            EditPatient_Panel.dispose();
+            EditPatient_Panel.setVisible(false);
+            EP = new EditPatient(if_);
+            
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL EDITAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -447,7 +452,7 @@ public class EditPatient {
 
     }
 
-    public void AddComponentes() {
+    public void AddComponentes(iFrame if_) {
         initPaciComponents();
         initSoliComponents();
         cbo_CargarParentesco();
@@ -586,7 +591,7 @@ public class EditPatient {
         EditPatient_Panel.newLine();
 
         btnEditarAction.addActionListener((a) -> {
-            btnEditarAction_MouseClicked();
+            btnEditarAction_MouseClicked(if_);
         });
 //
 
