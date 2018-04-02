@@ -26,9 +26,14 @@ import javax.swing.JComboBox;
 import static japproject.HomePanel.currentPanel;
 import static japproject.JAPProject.sql;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**
@@ -191,7 +196,7 @@ public class EditPatient {
         return cbo_IsNonGrato;
     }
 
-    public iScrollPane llenarTable(List<String> info) {
+    public iScrollPane llenarTable(List<String> info){
 
         System.out.println("Lista recibida por llenarTable: " + info.toString());
         ArrayList<String> cols = new ArrayList();
@@ -217,7 +222,7 @@ public class EditPatient {
 
         iScrollPane ScrollPane = new iScrollPane(RegistrosTable, null);
         //setear valores textfiles solicitante
-        IdSolicitante = Integer.parseInt(RegistrosTable.getValueAt(0, 10).toString()) - 1;
+        IdSolicitante = Integer.parseInt(RegistrosTable.getValueAt(0, 10).toString());
         txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
         txt_NombreSolicitante.setText(RegistrosTable.getValueAt(0, 2).toString());
         txt_DireccionSolicitante.setText(RegistrosTable.getValueAt(0, 3).toString());
@@ -225,15 +230,30 @@ public class EditPatient {
         txt_ProfesionSolicitante.setText(RegistrosTable.getValueAt(0, 5).toString());
         txt_ActividadLaboralSolicitante.setText(RegistrosTable.getValueAt(0, 6).toString());
         txt_MotivoConsultaSolicitante.setText(RegistrosTable.getValueAt(0, 7).toString());
-        txt_FechaReporte.setText(RegistrosTable.getValueAt(0, 28).toString());
-        //
+        
+        String TemporalReportDate = RegistrosTable.getValueAt(0, 28).toString().replace("/", "-");
+         try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(TemporalReportDate);
+            txt_FechaReporte.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(EditPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //setear valores textfiles paciente
-        IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString()) - 1;
+        IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString());
 
         txt_CedulaPaciente.setText(RegistrosTable.getValueAt(0, 11).toString());
         txt_NombrePaciente.setText(RegistrosTable.getValueAt(0, 12).toString());
 
-        txt_FechaNacimientoPaciente.setText(RegistrosTable.getValueAt(0, 13).toString());
+        String TemporalPatientBirthDate = RegistrosTable.getValueAt(0, 13).toString().replace("/", "-");             
+  
+        try {
+            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(TemporalPatientBirthDate);       
+            txt_FechaNacimientoPaciente.setDate(date);
+        } catch (ParseException ex) {
+            Logger.getLogger(EditPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
         txt_DireccionPaciente.setText(RegistrosTable.getValueAt(0, 18).toString());
         txt_TelefonoPaciente.setText(RegistrosTable.getValueAt(0, 19).toString());
         txt_ProfesionPaciente.setText(RegistrosTable.getValueAt(0, 20).toString());
@@ -253,9 +273,9 @@ public class EditPatient {
     }
 
     private void btnEditarAction_MouseClicked() {
-        Date date = new Date();
-        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        currentDateFormatted.format(date);
+        DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd");
+        
+        //System.out.println("Fecha tomada de TXT formateada: " + currentDateFormatted.format(txt_FechaReporte.getText()).toString());
         
         ArrayList<Object> obj1 = new ArrayList();//array para guardar data
         obj1.addAll(Arrays.asList(
@@ -266,11 +286,13 @@ public class EditPatient {
                 txt_ProfesionSolicitante.getText(),
                 txt_ActividadLaboralSolicitante.getText(),
                 txt_MotivoConsultaSolicitante.getText(),
-                txt_FechaReporte.getText(),
+                currentDateFormatted.format(txt_FechaReporte.getDate()),
                 IdSolicitante
         ));
+        
+        System.out.println("Valores de obj1 antes del UPDATE" + obj1);
 
-        String query1 = "UPDATE JAW_Solicitante SET `Cedula`=?, `Nombre`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `FechaReporte`=? WHERE IdSolicitante=?";
+        String query1 = "UPDATE JAW_Solicitante SET `Cedula`=?, `Nombre`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `FechaReporte`=? WHERE `IdSolicitante`=?";
 
         Boolean exq1 = sql.exec(query1, obj1);
 
@@ -278,7 +300,7 @@ public class EditPatient {
         obj2.addAll(Arrays.asList(
                 txt_CedulaPaciente.getText(),
                 txt_NombrePaciente.getText(),
-                txt_FechaNacimientoPaciente.getText(),
+                currentDateFormatted.format(txt_FechaNacimientoPaciente.getDate()),
                 txt_DireccionPaciente.getText(),
                 txt_TelefonoPaciente.getText(),
                 txt_ProfesionPaciente.getText(),
@@ -294,7 +316,8 @@ public class EditPatient {
                 IdPaciente
         ));
         String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
-
+        System.out.println("Valores de obj2 antes del UPDATE" + obj2);
+        
         Boolean exq2 = sql.exec(query2, obj2);
         if (exq2 && exq1) {
             JOptionPane.showMessageDialog(null, "EDITADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);

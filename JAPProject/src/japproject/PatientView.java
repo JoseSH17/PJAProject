@@ -26,11 +26,6 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
-import javax.swing.RowFilter;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 /**
  *

@@ -38,8 +38,10 @@ public class HomePanel {
     Maintenance_Horario MH; //Panel to Add or Edit Helper Tables
     Maintenance_tPaciente MTP; //Panel to Add or Edit Helper Tables
     Maintenance_Parentesco MP; //Panel to Add or Edit Helper Tables
-    Appointments AP; //Panel to Add appointments.
-
+    Appointments AP; //Panel to View and Edit appointments.
+    AddAppointment AAP; //Panel to Add appointments
+    BlackList BL; //Panel to View Patients in BlackList
+    
     public HomePanel() {
         lpb = new LoadingProgressBars();
         if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
@@ -122,23 +124,46 @@ public class HomePanel {
         JMenuItem ColorPallet = new JMenuItem("Colores de Interfaz");
         menuPersonalizacion.add(ColorPallet);
 
-        JButton menuCitas = new JButton("Citas");
-        menuCitas.setOpaque(false);
-        menuCitas.setContentAreaFilled(false);
-        menuCitas.setBorderPainted(false);
+        JMenu menuCitas = new JMenu("Citas");       
         menuCitas.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ARCHIVE, 20, Color.BLACK));
-
-        menuCitas.addActionListener(new java.awt.event.ActionListener() {
+        JMenuItem viewAppointments = new JMenuItem("Ver Citas");
+                viewAppointments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemovePanels();
                 AP = new Appointments(if_); //Calls Appointments class to show its Panel and contents
             }
         });
+        
+        JMenuItem addAppointments = new JMenuItem("Agregar Cita");
+
+        addAppointments.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemovePanels();
+                AAP = new AddAppointment(if_); //Calls Appointments class to show its Panel and contents
+            }
+        });
+        menuCitas.add(viewAppointments);
+        menuCitas.add(addAppointments);
+                
+        JButton menuBlackSheep = new JButton("Lista Negra");
+        menuBlackSheep.setOpaque(false);
+        menuBlackSheep.setContentAreaFilled(false);
+        menuBlackSheep.setBorderPainted(false);
+        menuBlackSheep.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BLOCK, 20, Color.BLACK));
+        
+        menuBlackSheep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemovePanels();
+                BL =  new BlackList(if_);
+            }
+        });
+        
         menuBar.add(MenuHome);
         menuBar.add(menuAgregarPaciente);
         menuBar.add(menuMantenimiento);
         menuBar.add(menuPersonalizacion);
         menuBar.add(menuCitas);
+        menuBar.add(menuBlackSheep);
 
         if_.AddObject(menuBar, if_.getWidth(), 40);
         if_.newLine();
@@ -185,9 +210,17 @@ public class HomePanel {
                 MP.Maintenance_Parentesco_Panel.dispose();
                 MP.Maintenance_Parentesco_Panel.setVisible(false);
                 break;
-            case "Appointments_Panel":  //If current panel is Maintenance_Horario_Panel then remove it.
+            case "Appointments_Panel":  //If current panel is Appointments_Panel then remove it.
                 AP.Appointments_Panel.dispose(); //If current panel is Appointments_Panel then remove it. 
                 AP.Appointments_Panel.setVisible(false);
+                break;
+            case "AddAppointments_Panel":  //If current panel is AddAppointments_Panel then remove it.
+                AAP.AddAppointments_Panel.dispose(); //If current panel is AddAppointments_Panel then remove it. 
+                AAP.AddAppointments_Panel.setVisible(false);
+                break; 
+            case "BlackList_Panel": //If current panel is BlackList_Panel then remove it.
+                BL.BlackList_Panel.dispose(); //If current panel is BlackList_Panel then remove it.
+                BL.BlackList_Panel.setVisible(false);
                 break;
             default:
                 System.out.println("Panel not handled");

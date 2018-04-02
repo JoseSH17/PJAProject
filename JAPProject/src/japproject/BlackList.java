@@ -21,7 +21,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
@@ -45,11 +44,10 @@ public class BlackList {
     //
     public BlackList(iFrame if_) {
         BlackList_Panel = new iPanel(0, 0, 100f, 100f, 0, 0, if_);
-
-        currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
+        currentPanel = "BlackList_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             BlackList_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
-//            BlackList_Panel.setBackground(Color.decode("#006738"));
+            BlackList_Panel.setBackground(Color.decode("#006738"));
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaListaNegra");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
