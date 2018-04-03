@@ -88,11 +88,11 @@ public class Maintenance_Parentesco {
         Maintenance_Parentesco_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_Parentesco_Panel.newLine();
         
-        Maintenance_Parentesco_Panel.AddObject(lbl_idParentesco, 415, 30, 4);
+        Maintenance_Parentesco_Panel.AddObject(lbl_idParentesco, 415, 30, 30);
         Maintenance_Parentesco_Panel.AddObject(txt_idParentesco, 415, 30, 200);//agrega el label y el textfield del id curso
         Maintenance_Parentesco_Panel.newLine();
         
-        Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 4);
+        Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 30);
         Maintenance_Parentesco_Panel.AddObject(txt_Descripcion, 415, 30, 200);//agrega el label y el textfield del nombre del curso
         Maintenance_Parentesco_Panel.newLine();
         
@@ -101,12 +101,12 @@ public class Maintenance_Parentesco {
             btnAñadir_MouseClicked();
         });
         
-        Maintenance_Parentesco_Panel.AddObject(btnModificar, 130, 30, 340);
+        Maintenance_Parentesco_Panel.AddObject(btnModificar, 130, 30, 345);
         btnModificar.addActionListener((a) -> {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Parentesco_Panel.AddObject(btnEliminar, 130, 30, 480);
+        Maintenance_Parentesco_Panel.AddObject(btnEliminar, 130, 30, 485);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
