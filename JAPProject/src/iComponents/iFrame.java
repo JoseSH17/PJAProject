@@ -92,7 +92,7 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
     public iFrame(int w, int h, int margin, int InitMarginTop, String Title, int CloseOperation) {
         initFrame(w, h, margin, InitMarginTop, Title, CloseOperation);
     }
-    
+
     /**
      * @param w JFrame (Main) Width
      * @param h JFrame (Main) Height
@@ -106,7 +106,7 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         int iwidth = (int) ((env.getMaximumWindowBounds().width * w) / 100);
         int iheight = (int) ((env.getMaximumWindowBounds().height * h) / 100);
-        
+
         initFrame(iwidth, iheight, margin, InitMarginTop, Title, CloseOperation);
     }
 
@@ -268,16 +268,15 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
     private void responsiveMaker() {
         shwdw.setVisible(false);
         setVisible(false);
-        if (!isMaximized) 
-        {
+        if (!isMaximized) {
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
             setMaximizedBounds(env.getMaximumWindowBounds());
-            
+
             setTmpWidth(getWidth());
             setTmpHeight(getHeight());
             setWidth((int) env.getMaximumWindowBounds().width);
             setHeight((int) env.getMaximumWindowBounds().height);
-            
+
             setExtendedState(MAXIMIZED_BOTH);
             isMaximized = true;
         } else {
@@ -288,134 +287,118 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
             setExtendedState(NORMAL);
             isMaximized = false;
         }
-        
+
         shwdw.setVisible(true);
         setVisible(true);
 
         List<Component> compList = getAllComponents(getRootPane());
 
         compList.forEach((comp) -> {
-            if (comp instanceof iPanel) 
-            {    
+            if (comp instanceof iPanel) {
                 iPanel ip = (iPanel) comp;
                 ip.setComponentWidth(getWidth());
                 ip.setComponentHeight(getHeight());
-                
-                if (ip.isResponsiveWidth() || ip.isResponsiveHeight())
-                {
-                    if (ip.isResponsiveWidth())
-                        ip.setBounds(ip.getHorizontal(),ip.getVertical(), getWidth(), ip.getHeight());
 
-                    if (ip.isResponsiveHeight())
-                     ip.setBounds(ip.getHorizontal(),ip.getVertical(),ip.getWidth(),getHeight());
-                } 
-                else if (ip.isResponsiveExtendedWidth() || ip.isResponsiveExtendedHeight()) 
-                {
-                    if (ip.isResponsiveExtendedWidth())
-                        ip.setResponsiveWidth(ip.getResponsiveExtendedPercentWidth(),ip.getResponsiveExtendedPixelWidth());
+                if (ip.isResponsiveWidth() || ip.isResponsiveHeight()) {
+                    if (ip.isResponsiveWidth()) {
+                        ip.setBounds(ip.getHorizontal(), ip.getVertical(), getWidth(), ip.getHeight());
+                    }
 
-                    if (ip.isResponsiveExtendedHeight())
+                    if (ip.isResponsiveHeight()) {
+                        ip.setBounds(ip.getHorizontal(), ip.getVertical(), ip.getWidth(), getHeight());
+                    }
+                } else if (ip.isResponsiveExtendedWidth() || ip.isResponsiveExtendedHeight()) {
+                    if (ip.isResponsiveExtendedWidth()) {
+                        ip.setResponsiveWidth(ip.getResponsiveExtendedPercentWidth(), ip.getResponsiveExtendedPixelWidth());
+                    }
+
+                    if (ip.isResponsiveExtendedHeight()) {
                         ip.setResponsiveHeight(ip.getResponsiveExtendedPercentHeight(), ip.getResponsiveExtendedPixelHeight());
+                    }
                 }
-                
-                if (ip.isResponsiveAlwaysOnBottom() && !(ip.isResponsiveExtendedWidth() || ip.isResponsiveExtendedHeight())) 
-                {
+
+                if (ip.isResponsiveAlwaysOnBottom() && !(ip.isResponsiveExtendedWidth() || ip.isResponsiveExtendedHeight())) {
                     ip.setBounds(ip.getHorizontal(), getHeight() - ip.getHeight(), getWidth(), ip.getHeight());
                 }
-                
-            } 
-            else if (comp.getParent() instanceof iPanel) 
-            {
+
+            } else if (comp.getParent() instanceof iPanel) {
+                            System.out.println(comp);
+
                 iPanel iptmp = (iPanel) comp.getParent();
 
-                if (comp instanceof iScrollPane) 
-                {
+                if (comp instanceof iScrollPane) {
                     iScrollPane ips = (iScrollPane) comp;
                     ips.setBounds(ips.getX(), ips.getY(), iptmp.calcWidth(ips.getresponsivePercentWidth(), 0), ips.getHeight());
-                }
-                else if (comp instanceof iTextField) 
-                {
+                    ips.setBounds(ips.getX(), ips.getY(), ips.getWidth(), iptmp.calcHeigth(ips.getResponsivePercentHeight(), ips.getResponsiveExtendedPixelHeight()));
+                   
+                } else if (comp instanceof iTextField) {
                     iTextField itf = (iTextField) comp;
-                    switch (itf.getPositon()) 
-                    {
+                    switch (itf.getPositon()) {
                         case RIGHT:
                             itf.setBounds((iptmp.getWidth() - itf.getWidth()), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
-                            
+
                         case CENTER:
-                            itf.setBounds((iptmp.getWidth()/2) - (itf.getWidth() /2),itf.getY(),itf.getWidth(),itf.getHeight());                                
+                            itf.setBounds((iptmp.getWidth() / 2) - (itf.getWidth() / 2), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
                     }
-                }
-                else if (comp instanceof iPasswordField) 
-                {
+                } else if (comp instanceof iPasswordField) {
                     iPasswordField itf = (iPasswordField) comp;
-                    switch (itf.getPositon()) 
-                    {
+                    switch (itf.getPositon()) {
                         case RIGHT:
-                            itf.setBounds((iptmp.getWidth() - itf.getWidth()),itf.getY(),itf.getWidth(),itf.getHeight());                            
+                            itf.setBounds((iptmp.getWidth() - itf.getWidth()), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
-                            
+
                         case CENTER:
-                            itf.setBounds((iptmp.getWidth()/2) - (itf.getWidth() /2),itf.getY(),itf.getWidth(),itf.getHeight());                                                            
+                            itf.setBounds((iptmp.getWidth() / 2) - (itf.getWidth() / 2), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
                     }
-                }
-                else if (comp instanceof iButton) 
-                {
+                } else if (comp instanceof iButton) {
                     iButton itf = (iButton) comp;
-                    switch (itf.getPositon()) 
-                    {
+                    switch (itf.getPositon()) {
                         case RIGHT:
-                            itf.setBounds((iptmp.getWidth() - itf.getWidth()),itf.getY(),itf.getWidth(),itf.getHeight());                            
+                            itf.setBounds((iptmp.getWidth() - itf.getWidth()), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
-                            
+
                         case CENTER:
-                            itf.setBounds((iptmp.getWidth()/2) - (itf.getWidth() /2),itf.getY(),itf.getWidth(),itf.getHeight());                                                            
+                            itf.setBounds((iptmp.getWidth() / 2) - (itf.getWidth() / 2), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
                     }
-                }
-                else if (comp instanceof iCalendar) 
-                {
+                } else if (comp instanceof iCalendar) {
                     iCalendar itf = (iCalendar) comp;
-                    switch (itf.getPositon()) 
-                    {
+                    switch (itf.getPositon()) {
                         case RIGHT:
-                            itf.setBounds((iptmp.getWidth() - itf.getWidth()),itf.getY(),itf.getWidth(),itf.getHeight());                            
+                            itf.setBounds((iptmp.getWidth() - itf.getWidth()), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
-                            
+
                         case CENTER:
-                            itf.setBounds((iptmp.getWidth()/2) - (itf.getWidth() /2),itf.getY(),itf.getWidth(),itf.getHeight());                                                            
+                            itf.setBounds((iptmp.getWidth() / 2) - (itf.getWidth() / 2), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
                     }
-                }
-                else if (comp instanceof iLabel) 
-                {
+                } else if (comp instanceof iLabel) {
                     iLabel itf = (iLabel) comp;
-                    switch (itf.getPositon()) 
-                    {
+                    switch (itf.getPositon()) {
                         case RIGHT:
-                            itf.setBounds((iptmp.getWidth() - itf.getWidth()),itf.getY(),itf.getWidth(),itf.getHeight());                            
+                            itf.setBounds((iptmp.getWidth() - itf.getWidth()), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
-                            
+
                         case CENTER:
-                            itf.setBounds((iptmp.getWidth()/2) - (itf.getWidth() /2),itf.getY(),itf.getWidth(),itf.getHeight());                                                            
+                            itf.setBounds((iptmp.getWidth() / 2) - (itf.getWidth() / 2), itf.getY(), itf.getWidth(), itf.getHeight());
                             break;
                         case LEFT:
                             itf.setBounds(itf.getX(), itf.getY(), iptmp.getWidth(), itf.getHeight());
                             break;
                     }
-                }
-                else if (comp instanceof JLabel) 
-                {
+                } else if (comp instanceof JLabel) {
                     JLabel jlbl = (JLabel) comp;
-                    if (jlbl.getHorizontalAlignment() == SwingConstants.RIGHT)
+                    if (jlbl.getHorizontalAlignment() == SwingConstants.RIGHT) {
                         jlbl.setBounds(
                                 jlbl.getX(),
                                 jlbl.getY(),
                                 jlbl.getParent().getWidth(),
                                 jlbl.getHeight()
                         );
+                    }
                 }
             }
         });
@@ -590,7 +573,7 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
 
         shwdw.setEnabled(false);
         // 1 verde puede mostrarse
-        
+
         WindowAdapter adapter = new WindowAdapter() {
             @Override
             public void windowGainedFocus(WindowEvent we) {

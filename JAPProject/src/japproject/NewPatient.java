@@ -473,17 +473,17 @@ public class NewPatient {
             
             
             ArrayList<Object> obj1 = new ArrayList();//array para guardar data
-            String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
-//            String query1 = "SELECT InsertNewRequester(?,?,?,?,?,?,?,?)";
+//            String query1 = "INSERT INTO JAW_Solicitante(Cedula, Nombre, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, FechaReporte) VALUES (?,?,?,?,?,?,?,?)";
+            String query1 = "SELECT InsertNewRequester(?,?,?,?,?,?,?,?)";
             obj1.addAll(Arrays.asList(  txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
                                         txt_DireccionSolicitante.getText(), txt_TelefonoSolicitante.getText(),
                                         txt_ProfesionSolicitante.getText(), txt_ActividadLaboralSolicitante.getText(),
                                         txt_MotivoConsultaSolicitante.getText(), fechaActualFechaReporte() ));
         
-            Boolean exq1 = sql.exec(query1, obj1); 
-//            int exq1 = sql.SelectReturnValue(query1, obj1);
-//            System.out.println(exq1);
-            if (exq1) {
+//            Boolean exq1 = sql.exec(query1, obj1); 
+             int exq1 = sql.SelectReturnValue(query1, obj1);
+            System.out.println("Valor desde NewPatient " + exq1);
+            if (exq1 != 0) {
                 JOptionPane.showMessageDialog(null, "SOLICITANTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 
             }else{
@@ -494,8 +494,9 @@ public class NewPatient {
             
             //ahora si el solicitante se ingreso hago el insert de paciente
                 ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-                String query2 = "INSERT INTO JAW_Paciente(Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                obj2.addAll(Arrays.asList(  txt_CedulaPaciente.getText(),
+                String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                obj2.addAll(Arrays.asList(  exq1,
+                                            txt_CedulaPaciente.getText(),
                                             txt_NombrePaciente.getText(), fechaActualFechaNacimiento(), 
                                             txt_DireccionPaciente.getText(), txt_TelefonoPaciente.getText(),
                                             txt_ProfesionPaciente.getText(), txt_ActividadLaboralPaciente.getText(),

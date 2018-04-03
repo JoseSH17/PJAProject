@@ -106,7 +106,7 @@ public class EditPatient {
     public int IdPaciente;
     public int IdSolicitante;
     public static iPanel EditPatient_Panel;
-    public PatientView EP; //Instaciamiento para llamada recíproca.
+    public PatientView PV; //Instaciamiento para llamada recíproca.
     iTextField SearchBar_txt;// para actualizar la tabla
 
     public EditPatient(iFrame if_) {
@@ -321,10 +321,9 @@ public class EditPatient {
             SearchBar_txt.setText("");
             JOptionPane.showMessageDialog(null, "EDITADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             EditPatient_Panel.dispose();
-            EditPatient_Panel.setVisible(false);
-            
+            EditPatient_Panel.setVisible(false); 
             SearchBar_txt.setText("");
-            EP = new PatientView(if_);
+            PV = new PatientView(if_);
             SearchBar_txt.setText("");
             
         } else {

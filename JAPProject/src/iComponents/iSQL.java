@@ -246,8 +246,12 @@ public final class iSQL {
                 }
 
                 ResultSet rs = ps.executeQuery();
+                if (rs.next())
+               {
                 ReturnedValue = (int) rs.getObject(1);
+                System.out.println("Valor Retornado por metodo " + ReturnedValue);
                 return ReturnedValue;
+                } else {System.out.println("No retorna nada la funcion");}  
             }
             else 
             {

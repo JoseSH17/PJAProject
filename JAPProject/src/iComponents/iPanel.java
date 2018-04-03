@@ -280,6 +280,8 @@ public class iPanel extends JPanel implements ComponentInterfaz {
         {
             ((iScrollPane) component).setResponsiveWidth(true);
             ((iScrollPane) component).setresponsivePercentWidth(width);
+            ((iScrollPane) component).setResponsivHeight(true);
+            ((iScrollPane) component).setResponsivePercentHeight(height);
         }
         setResponsiveByiComponent(component, Position);
 
@@ -303,6 +305,8 @@ public class iPanel extends JPanel implements ComponentInterfaz {
         {
             ((iScrollPane) component).setResponsiveWidth(true);
             ((iScrollPane) component).setresponsivePercentWidth(width);
+            ((iScrollPane) component).setResponsivHeight(true);
+            ((iScrollPane) component).setResponsivePercentHeight(height);
         }
         setResponsiveByiComponent(component, Position);
         return add(ic.AddSingleObject(component, (int) ((this.getWidth() * width) / 100), (int) ((this.getHeight() * height) / 100), Position));

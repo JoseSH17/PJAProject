@@ -161,7 +161,11 @@ public class PatientView {
         SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         PatientView_panel.newLine();
 
+        
+        
         PatientView_panel.AddSingleObject(scrollPane2, 100.0f, 89f, CENTER);
+        //scrollPane2.setResponsiveHeight(100.0f, 100);
+        scrollPane2.setResponsiveExtendedPixelHeight(208);
         PatientView_panel.newLine();
         PatientView_panel.finalice();
         PatientView_panel.setVisible(true);
