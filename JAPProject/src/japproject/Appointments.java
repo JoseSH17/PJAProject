@@ -45,6 +45,8 @@ public class Appointments {
     public JButton btnViewAll; //Removes filter from txtHidenSearch.
     public JButton btnScheduleAppointment; //Allows the user to schedule a new appointment.
     public iTable tblAppointments; //Table to display all appointments, can be filtered as user requests.
+    private iLabel lbl_LogoULatina;//Ulatina logo lbl display
+    private iLabel lbl_LogoPsicologia;//Ulatina Psychology Dept logo lbl display
 
     public List<String> tbl_Data = new ArrayList();
 
@@ -53,7 +55,17 @@ public class Appointments {
             currentPanel = "Appointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
             Appointments_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//Defining iPanel dimensions
             Appointments_Panel.setBackground(Color.decode("#006738"));//le doy color al panel  
-             
+            
+            lbl_LogoULatina = new iLabel("");
+            lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
+
+            lbl_LogoPsicologia = new iLabel("");
+            lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
+
+            Appointments_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+            Appointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
+            Appointments_Panel.newLine();
+            
             lblCalendar = new iLabel("Por favor seleccione una fecha: "); //Lbl Guide
             lblCalendar.setForeground(Color.WHITE); //Calendar
             calendar = new iCalendar();

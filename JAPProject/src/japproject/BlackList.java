@@ -40,6 +40,8 @@ public class BlackList {
     iTable RegistrosTable;
     iLabel SearchBar_lbl;
     iTextField SearchBar_txt;
+    private iLabel lbl_LogoULatina;//Ulatina logo lbl display
+    private iLabel lbl_LogoPsicologia;//Ulatina Psychology Dept logo lbl display
 
     //
     public BlackList(iFrame if_) {
@@ -48,6 +50,16 @@ public class BlackList {
             BlackList_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
             BlackList_Panel.setBackground(Color.decode("#006738"));
 
+            lbl_LogoULatina = new iLabel("");
+            lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
+
+            lbl_LogoPsicologia = new iLabel("");
+            lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
+
+            BlackList_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+            BlackList_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
+            BlackList_Panel.newLine();            
+            
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaListaNegra");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
             for (int i = 1; i < rr.getMetaData().getColumnCount() + 1; i++) {
@@ -146,14 +158,16 @@ public class BlackList {
      * Metodo para añadir los componentes
      */
     public void AddComponentes(iScrollPane scrollPane2) {
-        SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
-
+        SearchBar_lbl = new iLabel("Filtrar");
+        SearchBar_lbl.setForeground(Color.WHITE); //Search txt to filter table results in real time.
+                
         BlackList_Panel.AddObject(SearchBar_lbl, 200, 30, 10);
         BlackList_Panel.AddObject(SearchBar_txt, 200, 30, 150);//agrego el titulo para poner verlo con
         SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         BlackList_Panel.newLine();
 
-        BlackList_Panel.AddSingleObject(scrollPane2, 99.5f, 89f, CENTER);
+        BlackList_Panel.addSpace(20);
+        BlackList_Panel.AddSingleObject(scrollPane2, 95.5f, 70f, CENTER);
         BlackList_Panel.newLine();
         BlackList_Panel.finalice();
         BlackList_Panel.setVisible(true);
