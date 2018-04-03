@@ -118,9 +118,9 @@ public class EditPatient {
 
 //Metodos para cargar los cbo`s de Paciente
     private JComboBox cbo_CargarTipoPaciente() {
-        
+
         ResultSet rs = sql.SELECT("SELECT `NombreTipoPaciente` FROM JAW_TipoPaciente");
-        
+
         try {
             while (rs.next()) {
                 cbo_TipoPaciente.addItem(rs.getObject("NombreTipoPaciente"));
@@ -132,9 +132,9 @@ public class EditPatient {
     }//Fin del cbo_CargarTipoPaciente
 
     private JComboBox cbo_CargarHorario() {
-        
+
         ResultSet rs = sql.SELECT("SELECT `NombreHorario` FROM JAW_Horario");
-        
+
         try {
             while (rs.next()) {
                 cbo_HorarioPaciente.addItem(rs.getObject("NombreHorario"));
@@ -146,9 +146,9 @@ public class EditPatient {
     }//Fin del cbo_CargarHorario
 
     private JComboBox cbo_CargarClasificacionPaciente() {
-        
+
         ResultSet rs = sql.SELECT("SELECT `NombreClasificacion` FROM JAW_ClasificacionPaciente");
-        
+
         try {
             while (rs.next()) {
                 cbo_ClasificacionPaciente.addItem(rs.getObject("NombreClasificacion"));
@@ -157,13 +157,13 @@ public class EditPatient {
             Logger.getLogger(EditPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cbo_ClasificacionPaciente;
-        
+
     }//Fin del cbo_CargarClasificacionPaciente
 
     private JComboBox cbo_CargarCurso() {
-        
+
         ResultSet rs = sql.SELECT("SELECT `NombreCurso` FROM JAW_Curso");
-        
+
         try {
             while (rs.next()) {
                 cbo_CursoPaciente.addItem(rs.getObject("NombreCurso"));
@@ -175,9 +175,9 @@ public class EditPatient {
     }//Fin del cbo_CargarCurso
 
     private JComboBox cbo_CargarParentesco() {
-        
+
         ResultSet rs = sql.SELECT("SELECT `DescripcionParentesco` FROM JAW_Parentesco");
-        
+
         try {
             while (rs.next()) {
                 cbo_Parentesco.addItem(rs.getObject("DescripcionParentesco"));
@@ -193,12 +193,12 @@ public class EditPatient {
         cbo_IsNonGrato = new JComboBox(fillCbo);//para quemar los cuerpos
         return cbo_IsNonGrato;
     }
-    
+
     public iScrollPane llenarTable(List<String> info) {
-        
+
         System.out.println("Lista recibida por llenarTable: " + info.toString());
         ArrayList<String> cols = new ArrayList();
-        
+
         ArrayList<String> rows = new ArrayList();
         info.forEach((jKeyPair) -> {
             cols.add(jKeyPair.split("-")[0]);
@@ -212,11 +212,11 @@ public class EditPatient {
         RegistrosTable.getTableHeader().setResizingAllowed(false);
         RegistrosTable.setRowSelectionAllowed(true);
         SetColumsSizes(RegistrosTable);
-        
+
         System.out.println("Cols " + cols);
-        
+
         System.out.println("Rows " + rows);
-        
+
         RegistrosTable.addrow(rows.toArray());
         SearchBar_txt.setText("");
         iScrollPane ScrollPane = new iScrollPane(RegistrosTable, null);
@@ -229,7 +229,7 @@ public class EditPatient {
         txt_ProfesionSolicitante.setText(RegistrosTable.getValueAt(0, 5).toString());
         txt_ActividadLaboralSolicitante.setText(RegistrosTable.getValueAt(0, 6).toString());
         txt_MotivoConsultaSolicitante.setText(RegistrosTable.getValueAt(0, 7).toString());
-        
+
         String TemporalReportDate = RegistrosTable.getValueAt(0, 28).toString().replace("/", "-");
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(TemporalReportDate);
@@ -240,19 +240,19 @@ public class EditPatient {
 
         //setear valores textfiles paciente
         IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString());
-        
+
         txt_CedulaPaciente.setText(RegistrosTable.getValueAt(0, 11).toString());
         txt_NombrePaciente.setText(RegistrosTable.getValueAt(0, 12).toString());
-        
+
         String TemporalPatientBirthDate = RegistrosTable.getValueAt(0, 13).toString().replace("/", "-");
-        
+
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(TemporalPatientBirthDate);
             txt_FechaNacimientoPaciente.setDate(date);
         } catch (ParseException ex) {
             Logger.getLogger(EditPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         txt_DireccionPaciente.setText(RegistrosTable.getValueAt(0, 18).toString());
         txt_TelefonoPaciente.setText(RegistrosTable.getValueAt(0, 19).toString());
         txt_ProfesionPaciente.setText(RegistrosTable.getValueAt(0, 20).toString());
@@ -270,7 +270,7 @@ public class EditPatient {
         //
         return ScrollPane;
     }
-    
+
     private void btnEditarAction_MouseClicked(iFrame if_) {
         DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -287,13 +287,13 @@ public class EditPatient {
                 currentDateFormatted.format(txt_FechaReporte.getDate()),
                 IdSolicitante
         ));
-        
+
         System.out.println("Valores de obj1 antes del UPDATE" + obj1);
-        
+
         String query1 = "UPDATE JAW_Solicitante SET `Cedula`=?, `Nombre`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `FechaReporte`=? WHERE `IdSolicitante`=?";
-        
+
         Boolean exq1 = sql.exec(query1, obj1);
-        
+
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
         obj2.addAll(Arrays.asList(
                 txt_CedulaPaciente.getText(),
@@ -315,114 +315,111 @@ public class EditPatient {
         ));
         String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
         System.out.println("Valores de obj2 antes del UPDATE" + obj2);
-        
+
         Boolean exq2 = sql.exec(query2, obj2);
         if (exq2 && exq1) {
             SearchBar_txt.setText("");
             JOptionPane.showMessageDialog(null, "EDITADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             EditPatient_Panel.dispose();
-            EditPatient_Panel.setVisible(false); 
-            SearchBar_txt.setText("");
+            EditPatient_Panel.setVisible(false);
             PV = new PatientView(if_);
-            SearchBar_txt.setText("");
-            
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL EDITAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void initSoliComponents() {
-        
+
         lbl_LogoULatina = new iLabel("");
         lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
-        
+
         lbl_LogoPsicologia = new iLabel("");
         lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-        
+
         btnEditarAction = new iButton("Editar", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
         btnEditarAction.setText("Editar");
-        
+
         lbl_TituloSolicitante = new iLabel("SOLICITANTE");
         lbl_TituloSolicitante.setForeground(Color.GRAY.brighter());
-        
+
         lbl_CedulaSolicitante = new iLabel("Cédula".toUpperCase());
         lbl_CedulaSolicitante.setForeground(Color.GRAY.brighter());
         txt_CedulaSolicitante = new iTextField("", 3);
-        
+
         lbl_NombreSolicitante = new iLabel("Nombre".toUpperCase());
         lbl_NombreSolicitante.setForeground(Color.GRAY.brighter());
         txt_NombreSolicitante = new iTextField("", 3);
-        
+
         lbl_DireccionSolicitante = new iLabel("Dirección".toUpperCase());
         lbl_DireccionSolicitante.setForeground(Color.GRAY.brighter());
         txt_DireccionSolicitante = new iTextField("", 3);
-        
+
         lbl_TelefonoSolicitante = new iLabel("Teléfono".toUpperCase());
         lbl_TelefonoSolicitante.setForeground(Color.GRAY.brighter());
         txt_TelefonoSolicitante = new iTextField("", 3);
-        
+
         lbl_ProfesionSolicitante = new iLabel("Profesión".toUpperCase());
         lbl_ProfesionSolicitante.setForeground(Color.GRAY.brighter());
         txt_ProfesionSolicitante = new iTextField("", 3);
-        
+
         lbl_ActividadLaboralSolicitante = new iLabel("Actividad Laboral".toUpperCase());
         lbl_ActividadLaboralSolicitante.setForeground(Color.GRAY.brighter());
         txt_ActividadLaboralSolicitante = new iTextField("", 3);
-        
+
         lbl_MotivoConsultaSolicitante = new iLabel("Motivo Consulta".toUpperCase());
         lbl_MotivoConsultaSolicitante.setForeground(Color.GRAY.brighter());
         txt_MotivoConsultaSolicitante = new iTextField("", 3);
-        
+
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
         txt_FechaReporte = new iCalendar();
         Date date = new Date(); //Getting current date from local host
         DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd"); //Formatting current date for initial search and table refresh            
         txt_FechaReporte.setText(currentDateFormatted.format(txt_FechaReporte.getDate()));
-        
+
     }
-    
+
     public void initPaciComponents() {
-        
+
         lbl_TituloPaciente = new iLabel("PACIENTE");
-        
+
         lbl_TituloPaciente.setForeground(Color.GRAY.brighter());
-        
+
         lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
         lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
         txt_CedulaPaciente = new iTextField("", 3);
-        
+
         lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
         lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
         txt_NombrePaciente = new iTextField("", 3);
-        
+
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
         txt_FechaNacimientoPaciente = new iCalendar();
         Date date = new Date(); //Getting current date from local host
         DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd"); //Formatting current date for initial search and table refresh            
         txt_FechaNacimientoPaciente.setText(currentDateFormatted.format(txt_FechaNacimientoPaciente.getDate()));
-        
+
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
         txt_DireccionPaciente = new iTextField("", 3);
-        
+
         lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
         lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
         txt_TelefonoPaciente = new iTextField("", 3);
-        
+
         lbl_ProfesionPaciente = new iLabel("Profesión Paciente".toUpperCase());
         lbl_ProfesionPaciente.setForeground(Color.GRAY.brighter());
         txt_ProfesionPaciente = new iTextField("", 3);
-        
+
         lbl_ActividadLaboralPaciente = new iLabel("Actividad Laboral Paciente".toUpperCase());
         lbl_ActividadLaboralPaciente.setForeground(Color.GRAY.brighter());
         txt_ActividadLaboralPaciente = new iTextField("", 3);
-        
+
         lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
         lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
         txt_MotivoConsultaPaciente = new iTextField("", 3);
-        
+
         lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
         lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
         cbo_Parentesco = new JComboBox();//son de seleccion por base de datos
@@ -442,7 +439,7 @@ public class EditPatient {
         lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
         lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
         txt_DetalleHorarioPaciente = new iTextField("", 3);
-        
+
         lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
         cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
@@ -451,7 +448,7 @@ public class EditPatient {
         cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
 
     }
-    
+
     public void AddComponentes(iFrame if_) {
         initPaciComponents();
         initSoliComponents();
@@ -461,27 +458,27 @@ public class EditPatient {
         cbo_CargarHorario();
         cbo_CargarTipoPaciente();
         cbo_CargarIsNonGrato();
-        
+
         EditPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         EditPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
         EditPatient_Panel.newLine();
-        
+
         iLabel espacioLabel2 = new iLabel("");
         EditPatient_Panel.AddObject(espacioLabel2, 415, 30, 2);
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddSingleObject(llenarTable(tbl_Data), 95f, 90, 0);
         EditPatient_Panel.newLine();
-        
+
         iLabel espacioLabel = new iLabel("");
         EditPatient_Panel.AddObject(espacioLabel, 415, 30, 2);
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 180);
         EditPatient_Panel.AddObject(lbl_TituloPaciente, 415, 30, 630);//agrego el titulo para poner verlo con
         lbl_TituloPaciente.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
         EditPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
         lbl_NombrePaciente.setVisible(true);//para paciente
@@ -490,7 +487,7 @@ public class EditPatient {
         txt_NombrePaciente.setVisible(true);//para paciente
         txt_NombrePaciente.setEnabled(true);
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
         EditPatient_Panel.AddObject(lbl_NombrePaciente, 146, 30, 600);//para paciente
         lbl_CedulaPaciente.setVisible(true);//para paciente
@@ -498,7 +495,7 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);//para paciente
         txt_CedulaPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 10);//para el paciente
         EditPatient_Panel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 600);
         lbl_FechaNacimientoPaciente.setVisible(true);//para paciente
@@ -506,7 +503,7 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_FechaNacimientoPaciente, 230, 30, 800);//para paciente
         txt_FechaNacimientoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 10);
         EditPatient_Panel.AddObject(lbl_DireccionPaciente, 230, 30, 600);//para paciente
         lbl_DireccionPaciente.setVisible(true);//para paciente
@@ -514,7 +511,7 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_DireccionPaciente, 230, 30, 800);//para paciente
         txt_DireccionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_ProfesionSolicitante, 146, 30, 10);
         EditPatient_Panel.AddObject(lbl_TelefonoPaciente, 230, 30, 600);//para paciente
         lbl_TelefonoPaciente.setVisible(true);//para paciente
@@ -522,7 +519,7 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_TelefonoPaciente, 230, 30, 800);//para paciente
         txt_TelefonoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 10);
         EditPatient_Panel.AddObject(lbl_ProfesionPaciente, 230, 30, 600);//para paciente
         lbl_ProfesionPaciente.setVisible(true);//para paciente
@@ -530,7 +527,7 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_ProfesionPaciente, 230, 30, 800);//para paciente
         txt_ProfesionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 10);
         EditPatient_Panel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 600);//para paciente
         lbl_ActividadLaboralPaciente.setVisible(true);//para paciente
@@ -538,7 +535,7 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 800);//para paciente
         txt_ActividadLaboralPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 10);
         EditPatient_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
         lbl_MotivoConsultaPaciente.setVisible(true);//para paciente
@@ -546,65 +543,65 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
         txt_MotivoConsultaPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_ParentescoPaciente, 230, 30, 600);
         lbl_ParentescoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_Parentesco, 230, 30, 800);
         cbo_Parentesco.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_ClasificacionPaciente, 230, 30, 600);
         lbl_ClasificacionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_ClasificacionPaciente, 230, 30, 800);
         cbo_ClasificacionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_CursoPaciente, 230, 30, 600);
         lbl_CursoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_CursoPaciente, 230, 30, 800);
         cbo_CursoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 600);
         lbl_HorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_HorarioPaciente, 230, 30, 800);
         cbo_HorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 600);
         lbl_DetalleHorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 800);
         txt_DetalleHorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_TipoPaciente, 230, 30, 600);
         lbl_TipoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);
         cbo_TipoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);
         EditPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);
         EditPatient_Panel.newLine();
-        
+
         EditPatient_Panel.AddObject(btnEditarAction, 175, 30, 10);
         EditPatient_Panel.newLine();
-        
+
         btnEditarAction.addActionListener((a) -> {
             btnEditarAction_MouseClicked(if_);
         });
 //
 
         EditPatient_Panel.finalice();
-        
+
     }
-    
+
     public void SetColumsSizes(iTable RegistrosTable) {
         //            Codigo para manipular los sizes de las columnas
         RegistrosTable.getColumnModel().getColumn(0).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(0).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(0).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(1).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(2).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(3).setPreferredWidth(140);
@@ -612,62 +609,62 @@ public class EditPatient {
         RegistrosTable.getColumnModel().getColumn(5).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(6).setPreferredWidth(180);
         RegistrosTable.getColumnModel().getColumn(7).setPreferredWidth(180);
-        
+
         RegistrosTable.getColumnModel().getColumn(8).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(8).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(8).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(9).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(10).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(10).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(10).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(11).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(12).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(13).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(14).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(14).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(14).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(15).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(16).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(16).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(16).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(17).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(18).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(18).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(18).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(19).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(20).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(21).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(21).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(22).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(23).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(23).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(23).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(24).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(25).setPreferredWidth(140);
-        
+
         RegistrosTable.getColumnModel().getColumn(26).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(26).setMinWidth(0);
         RegistrosTable.getColumnModel().getColumn(26).setMaxWidth(0);
-        
+
         RegistrosTable.getColumnModel().getColumn(27).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(28).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(29).setPreferredWidth(140);
 //fin de los parametros de la tabla
 
     }
-    
+
 }
