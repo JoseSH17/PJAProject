@@ -92,11 +92,11 @@ public class Maintenance_tPaciente {
         Maintenance_TipPaciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_TipPaciente_Panel.newLine();
         
-        Maintenance_TipPaciente_Panel.AddObject(lbl_idTipoPaciente, 415, 30, 4);
+        Maintenance_TipPaciente_Panel.AddObject(lbl_idTipoPaciente, 415, 30, 30);
         Maintenance_TipPaciente_Panel.AddObject(txt_idTipPaciente, 415, 30, 200);//agrega el label y el textfield del id horario
         Maintenance_TipPaciente_Panel.newLine();
         
-        Maintenance_TipPaciente_Panel.AddObject(lbl_NombreTipoPaciente, 415, 30, 4);
+        Maintenance_TipPaciente_Panel.AddObject(lbl_NombreTipoPaciente, 415, 30, 30);
         Maintenance_TipPaciente_Panel.AddObject(txt_NombreTipoPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del horario
         Maintenance_TipPaciente_Panel.newLine();
         
@@ -105,12 +105,12 @@ public class Maintenance_tPaciente {
             btnAñadir_MouseClicked();
         });
         
-        Maintenance_TipPaciente_Panel.AddObject(btnModificar, 130, 30, 340);
+        Maintenance_TipPaciente_Panel.AddObject(btnModificar, 130, 30, 345);
         btnModificar.addActionListener((a) -> {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_TipPaciente_Panel.AddObject(btnEliminar, 130, 30, 480);
+        Maintenance_TipPaciente_Panel.AddObject(btnEliminar, 130, 30, 485);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
