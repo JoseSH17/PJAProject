@@ -123,7 +123,6 @@ public class NewPatient {
         NewPatient_Panel = new iPanel(0, 70, if_.getWidth(), 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
         Ingresar(if_);
-        
     }
     
     /**
@@ -179,7 +178,6 @@ public class NewPatient {
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
         FechaReporte = new iCalendar();
-//        FechaReporte.setText(fechaActualFechaReporte());//no es es necesario hacerlo aqui
         
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
         lbl_NOTA.setForeground(Color.GRAY.brighter());
@@ -213,7 +211,6 @@ public class NewPatient {
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
         FechaNacimientoPaciente = new iCalendar();
-//        FechaNacimientoPaciente.setText(fechaActualFechaNacimiento());//No es necesario hacerlo
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
@@ -428,7 +425,11 @@ public class NewPatient {
             btn_RegisterAction_MouseClicked();
         });
         
-        btnNuevoPaciente.addActionListener((a) -> {//falta programar
+        btnNuevoPaciente.addActionListener((a) -> {//este metodo es para registrar los pacientes cuando el paciente es distinto al solicitante
+            
+        });
+        
+        btnRegisterActionPaciente.addActionListener((aa) -> {
             
         });
         
@@ -437,6 +438,7 @@ public class NewPatient {
         if (chk_boxSolicitanteDiferentePaciente.isSelected() == false) {
                 jTabbedPane.setVisible(false);
                 btnNuevoPaciente.setVisible(false);
+                
         }else{
                 
         }
@@ -481,39 +483,36 @@ public class NewPatient {
                                         txt_MotivoConsultaSolicitante.getText(), fechaActualFechaReporte() ));
         
 //            Boolean exq1 = sql.exec(query1, obj1); 
-             int exq1 = sql.SelectReturnValue(query1, obj1);
+            int exq1 = sql.SelectReturnValue(query1, obj1);
             System.out.println("Valor desde NewPatient " + exq1);
             if (exq1 != 0) {
                 JOptionPane.showMessageDialog(null, "SOLICITANTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-                
             }else{
-                
                 System.out.println("El Solicitante no es el paciente, esta en proceso".toUpperCase());
             }//fin del metodo si solicitante es el paciente 
             
-            
             //ahora si el solicitante se ingreso hago el insert de paciente
-                ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-                String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-                obj2.addAll(Arrays.asList(  exq1,
-                                            txt_CedulaPaciente.getText(),
-                                            txt_NombrePaciente.getText(), fechaActualFechaNacimiento(), 
-                                            txt_DireccionPaciente.getText(), txt_TelefonoPaciente.getText(),
-                                            txt_ProfesionPaciente.getText(), txt_ActividadLaboralPaciente.getText(),
-                                            txt_MotivoConsultaPaciente.getText(), cbo_Parentesco.getSelectedIndex(), 
-                                            cbo_ClasificacionPaciente.getSelectedIndex(), cbo_CursoPaciente.getSelectedIndex(),
-                                            cbo_HorarioPaciente.getSelectedIndex(), txt_DetalleHorarioPaciente.getText(),
-                                            cbo_TipoPaciente.getSelectedIndex(), cbo_IsNonGrato.getSelectedItem().toString() ));
-                Boolean exq2 = sql.exec(query2, obj2);
-                if (exq2) {
-                    JOptionPane.showMessageDialog(null, "PACIENTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
-                }//fin de if exq2
-            
+            ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+            String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            obj2.addAll(Arrays.asList(  exq1,
+                                        txt_CedulaPaciente.getText(),
+                                        txt_NombrePaciente.getText(), fechaActualFechaNacimiento(), 
+                                        txt_DireccionPaciente.getText(), txt_TelefonoPaciente.getText(),
+                                        txt_ProfesionPaciente.getText(), txt_ActividadLaboralPaciente.getText(),
+                                        txt_MotivoConsultaPaciente.getText(), cbo_Parentesco.getSelectedIndex()+1, 
+                                        cbo_ClasificacionPaciente.getSelectedIndex()+1, cbo_CursoPaciente.getSelectedIndex()+1,
+                                        cbo_HorarioPaciente.getSelectedIndex()+1, txt_DetalleHorarioPaciente.getText(),
+                                        cbo_TipoPaciente.getSelectedIndex()+1, cbo_IsNonGrato.getSelectedItem().toString() ));
+            Boolean exq2 = sql.exec(query2, obj2);
+            if (exq2) {
+                JOptionPane.showMessageDialog(null, "PACIENTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }//fin de if exq2
             
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS DEL ", "ERROR", JOptionPane.ERROR_MESSAGE);
+            
+//            JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS DEL ", "ERROR", JOptionPane.ERROR_MESSAGE);
         }//fin de if exq1
 
         
@@ -589,81 +588,81 @@ public class NewPatient {
     }
     
     //Metodos para cargar los cbo`s de Paciente
-        private JComboBox cbo_CargarTipoPaciente() {
+    private JComboBox cbo_CargarTipoPaciente() {
 
-            ResultSet rs = sql.SELECT("SELECT `NombreTipoPaciente` FROM JAW_TipoPaciente");
+        ResultSet rs = sql.SELECT("SELECT `NombreTipoPaciente` FROM JAW_TipoPaciente");
 
-            try {
-                while (rs.next()) {
-                    cbo_TipoPaciente.addItem(rs.getObject("NombreTipoPaciente"));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            while (rs.next()) {
+                cbo_TipoPaciente.addItem(rs.getObject("NombreTipoPaciente"));
             }
-            return cbo_TipoPaciente;
-        }//Fin del cbo_CargarTipoPaciente
+        } catch (SQLException ex) {
+            Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cbo_TipoPaciente;
+    }//Fin del cbo_CargarTipoPaciente
 
-        private JComboBox cbo_CargarHorario() {
+    private JComboBox cbo_CargarHorario() {
 
-            ResultSet rs = sql.SELECT("SELECT `NombreHorario` FROM JAW_Horario");
+        ResultSet rs = sql.SELECT("SELECT `NombreHorario` FROM JAW_Horario");
 
-            try {
-                while (rs.next()) {
-                    cbo_HorarioPaciente.addItem(rs.getObject("NombreHorario"));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            while (rs.next()) {
+                cbo_HorarioPaciente.addItem(rs.getObject("NombreHorario"));
             }
-            return cbo_HorarioPaciente;
-        }//Fin del cbo_CargarHorario
+        } catch (SQLException ex) {
+            Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cbo_HorarioPaciente;
+    }//Fin del cbo_CargarHorario
 
-        private JComboBox cbo_CargarClasificacionPaciente() {
+    private JComboBox cbo_CargarClasificacionPaciente() {
 
-            ResultSet rs = sql.SELECT("SELECT `NombreClasificacion` FROM JAW_ClasificacionPaciente");
+        ResultSet rs = sql.SELECT("SELECT `NombreClasificacion` FROM JAW_ClasificacionPaciente");
 
-            try {
-                while (rs.next()) {
-                    cbo_ClasificacionPaciente.addItem(rs.getObject("NombreClasificacion"));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            while (rs.next()) {
+                cbo_ClasificacionPaciente.addItem(rs.getObject("NombreClasificacion"));
             }
-            return cbo_ClasificacionPaciente;
+        } catch (SQLException ex) {
+            Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cbo_ClasificacionPaciente;
 
-        }//Fin del cbo_CargarClasificacionPaciente
+    }//Fin del cbo_CargarClasificacionPaciente
 
-        private JComboBox cbo_CargarCurso() {
+    private JComboBox cbo_CargarCurso() {
 
-            ResultSet rs = sql.SELECT("SELECT `NombreCurso` FROM JAW_Curso");
+        ResultSet rs = sql.SELECT("SELECT `NombreCurso` FROM JAW_Curso");
 
-            try {
-                while (rs.next()) {
-                    cbo_CursoPaciente.addItem(rs.getObject("NombreCurso"));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            while (rs.next()) {
+                cbo_CursoPaciente.addItem(rs.getObject("NombreCurso"));
             }
-            return cbo_CursoPaciente;
-        }//Fin del cbo_CargarCurso
+        } catch (SQLException ex) {
+            Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cbo_CursoPaciente;
+    }//Fin del cbo_CargarCurso
 
-        private JComboBox cbo_CargarParentesco() {
+    private JComboBox cbo_CargarParentesco() {
 
-            ResultSet rs = sql.SELECT("SELECT `DescripcionParentesco` FROM JAW_Parentesco");
+        ResultSet rs = sql.SELECT("SELECT `DescripcionParentesco` FROM JAW_Parentesco");
 
-            try {
-                while (rs.next()) {
-                    cbo_Parentesco.addItem(rs.getObject("DescripcionParentesco"));
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        try {
+            while (rs.next()) {
+                cbo_Parentesco.addItem(rs.getObject("DescripcionParentesco"));
             }
-            return cbo_Parentesco;
-        }//Fin del cbo_CargarCurso
+        } catch (SQLException ex) {
+            Logger.getLogger(NewPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cbo_Parentesco;
+    }//Fin del cbo_CargarCurso
         
-        private JComboBox cbo_CargarIsNonGrato() {
-            String[] fillCbo = {"Si","No"};//para matar gente
-            cbo_IsNonGrato = new JComboBox(fillCbo);//para quemar los cuerpos
-            return cbo_IsNonGrato;//
-        }//Fin del cbo_CargarCurso
-        //fin de metodos para cargar cbo`s de Paciente
-}
+    private JComboBox cbo_CargarIsNonGrato() {
+        String[] fillCbo = {"Si","No"};//para matar gente
+        cbo_IsNonGrato = new JComboBox(fillCbo);//para quemar los cuerpos
+        return cbo_IsNonGrato;//
+    }//Fin del cbo_CargarCurso
+    //fin de metodos para cargar cbo`s de Paciente
+}//Fin de la clase new patient
