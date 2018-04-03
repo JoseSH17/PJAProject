@@ -110,7 +110,7 @@ public class Maintenance_tPaciente {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_TipPaciente_Panel.AddObject(btnEliminar, 130, 30, 485);
+        Maintenance_TipPaciente_Panel.AddObject(btnEliminar, 130, 30, 486);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
