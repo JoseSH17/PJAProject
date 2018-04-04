@@ -38,11 +38,12 @@ import javax.swing.event.DocumentListener;
 public class NewPatient {
     
     public iPanel NewPatient_Panel;//creo el iPanel
-    //Controles Swing para Paciente
-    private JTabbedPane jTabbedPane;//creo el JtabbedPane para hacer el JtabbedPane
-    private iLabel vacio = new iLabel("");//lo creo para hacer newline()
     
-   // public static iSQL sql = new iSQL("icomponents.net", "icompone_jose", "icompone_jose", "m70Q(71X7k5v");
+    
+    public iPanel JTabbedPane_Panel;//creo el iPanel para mi JTabbedPane
+    private JTabbedPane jTabbedPane;//creo el JtabbedPane
+    
+    private iLabel vacio = new iLabel("");//lo creo para hacer newline()
     
     //cbo`s para Paciente
     private JComboBox cbo_TipoPaciente;//son de seleccion por base de datos
@@ -119,6 +120,12 @@ public class NewPatient {
         currentPanel = "NewPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.
         NewPatient_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
+        
+                                     //x  ,   y, width(largo), height(alto), Elements Margin, if_
+        JTabbedPane_Panel = new iPanel(600, 200, 38.0f, 70.0f, 0, 0, if_);//le doy propiedades al iPanel
+        JTabbedPane_Panel.setBackground(Color.decode("#0732"));//le doy color al panel
+//        JTabbedPane_Panel.setVisible(false);
+        
         Ingresar(if_);
     }
     
@@ -256,6 +263,85 @@ public class NewPatient {
         ///////////////Fin de componentes de Paciente
         
     }
+    
+    /**
+     * Método que crea los componentes en el TabbedPane
+     *
+     * @return Muestra los componentes en el TabbedPane
+     */
+    private void ComponentesTabbedPane(){
+  
+        ////////////////Componentes para paciente, recordar ponerlos en setVisible(false); ,[y en el metodo setVisible(true) si es verdad, }else{setVisible(true);]
+        
+        lbl_TituloPaciente = new iLabel("PACIENTE");
+        lbl_TituloPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbl_TituloPaciente.setForeground(Color.GRAY.brighter());
+
+        lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
+        lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
+        txt_CedulaPaciente = new iTextField("", 15);
+
+        lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
+        lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
+        txt_NombrePaciente = new iTextField("", 15);
+
+        lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
+        lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
+        FechaNacimientoPaciente = new iCalendar();
+
+        lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
+        lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
+        txt_DireccionPaciente = new iTextField("", 15);
+
+        lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
+        lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
+        txt_TelefonoPaciente = new iTextField("", 15);
+
+        lbl_ProfesionPaciente = new iLabel("Profesión Paciente".toUpperCase());
+        lbl_ProfesionPaciente.setForeground(Color.GRAY.brighter());
+        txt_ProfesionPaciente = new iTextField("", 15);
+
+        lbl_ActividadLaboralPaciente = new iLabel("Actividad Laboral Paciente".toUpperCase());
+        lbl_ActividadLaboralPaciente.setForeground(Color.GRAY.brighter());
+        txt_ActividadLaboralPaciente = new iTextField("", 15);
+
+        lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
+        lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
+        txt_MotivoConsultaPaciente = new iTextField("", 15);
+
+        lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
+        lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
+        cbo_Parentesco = new JComboBox();//son de seleccion por base de datos
+        
+        lbl_ClasificacionPaciente = new iLabel("Clasificación Paciente".toUpperCase());
+        lbl_ClasificacionPaciente.setForeground(Color.GRAY.brighter());
+        cbo_ClasificacionPaciente = new JComboBox();//son de seleccion por base de datos
+
+        lbl_CursoPaciente = new iLabel("Curso".toUpperCase());
+        lbl_CursoPaciente.setForeground(Color.GRAY.brighter());
+        cbo_CursoPaciente = new JComboBox();//son de seleccion por base de datos
+
+        lbl_HorarioPaciente = new iLabel("Horario Paciente".toUpperCase());
+        lbl_HorarioPaciente.setForeground(Color.GRAY.brighter());
+        cbo_HorarioPaciente = new JComboBox();//son de seleccion por base de datos
+
+        lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
+        lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
+        txt_DetalleHorarioPaciente = new iTextField("", 15);
+
+        lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
+        lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
+        cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
+        lbl_IsNonGrato = new iLabel("Lista Negra".toUpperCase());
+        lbl_IsNonGrato.setForeground(Color.GRAY.brighter()); 
+        cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
+        
+        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnRegisterPaciente = new iButton("REGISTRAR PACIENTES", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        ///////////////Fin de componentes de Paciente
+        
+    }//fin de metodo
+    
     
     
     public String fechaActualFechaReporte(){
@@ -416,24 +502,32 @@ public class NewPatient {
         setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
         setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
         
+        if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
+            jTabbedPane.setVisible(false);
+        }else{
+            jTabbedPane.setVisible(true);
+        }
         
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
             
             if (chk_boxSolicitanteDiferentePaciente.isSelected() == true) {
-                System.out.println("MUESTRA MENSAJE DE CBO");
+                System.out.println("MUESTRA MENSAJE DE CHECKBOX ACTIVO");
 //                JOptionPane.showMessageDialog(null, "AHORA SELECCIONO EL CHECKBOX, PACIENTE ES DISTINTO AL SOLICITANTE", "ERROR", JOptionPane.ERROR_MESSAGE);
-                jTabbedPane.setVisible(true);
+//                jTabbedPane.setVisible(true);
                 btnNuevoPaciente.setVisible(true);
                 cbo_Parentesco.setEnabled(true);
                 cbo_IsNonGrato.setEnabled(true);
+                jTabbedPane.setVisible(true);
                  
             }else {  
-                jTabbedPane.setVisible(false);
+                System.out.println("MUESTRA MENSAJE DE CHECKBOC DESACTIVADO");
+//                jTabbedPane.setVisible(false);
                 btnNuevoPaciente.setVisible(false);
                 cbo_Parentesco.setSelectedItem("Nulo");
                 cbo_Parentesco.setEnabled(false);
                 cbo_IsNonGrato.setSelectedItem("No");
                 cbo_IsNonGrato.setEnabled(false); 
+                jTabbedPane.setVisible(false);
             }
         });
         
