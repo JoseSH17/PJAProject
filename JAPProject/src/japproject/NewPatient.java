@@ -22,13 +22,10 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import static japproject.HomePanel.currentPanel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -143,37 +140,37 @@ public class NewPatient {
         btnRegisterAction.setText("REGISTRAR");
 
         lbl_TituloSolicitante = new iLabel("SOLICITANTE");
-        lbl_TituloSolicitante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+//        lbl_TituloSolicitante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_TituloSolicitante.setForeground(Color.GRAY.brighter());
 
         lbl_CedulaSolicitante = new iLabel("Cédula".toUpperCase());
         lbl_CedulaSolicitante.setForeground(Color.GRAY.brighter());
-        txt_CedulaSolicitante = new iTextField("", 3);
+        txt_CedulaSolicitante = new iTextField("", 15);
         txt_CedulaSolicitante.setForeground(Color.red);
 
         lbl_NombreSolicitante = new iLabel("Nombre".toUpperCase());
         lbl_NombreSolicitante.setForeground(Color.GRAY.brighter());
-        txt_NombreSolicitante = new iTextField("", 3);
+        txt_NombreSolicitante = new iTextField("", 15);
 
         lbl_DireccionSolicitante = new iLabel("Dirección".toUpperCase());
         lbl_DireccionSolicitante.setForeground(Color.GRAY.brighter());
-        txt_DireccionSolicitante = new iTextField("", 3);
+        txt_DireccionSolicitante = new iTextField("", 15);
 
         lbl_TelefonoSolicitante = new iLabel("Teléfono".toUpperCase());
         lbl_TelefonoSolicitante.setForeground(Color.GRAY.brighter());
-        txt_TelefonoSolicitante = new iTextField("", 3);
+        txt_TelefonoSolicitante = new iTextField("", 15);
 
         lbl_ProfesionSolicitante = new iLabel("Profesión".toUpperCase());
         lbl_ProfesionSolicitante.setForeground(Color.GRAY.brighter());
-        txt_ProfesionSolicitante = new iTextField("", 3);
+        txt_ProfesionSolicitante = new iTextField("", 15);
 
         lbl_ActividadLaboralSolicitante = new iLabel("Actividad Laboral".toUpperCase());
         lbl_ActividadLaboralSolicitante.setForeground(Color.GRAY.brighter());
-        txt_ActividadLaboralSolicitante = new iTextField("", 3);
+        txt_ActividadLaboralSolicitante = new iTextField("", 15);
 
         lbl_MotivoConsultaSolicitante = new iLabel("Motivo Consulta".toUpperCase());
         lbl_MotivoConsultaSolicitante.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaSolicitante = new iTextField("", 3);
+        txt_MotivoConsultaSolicitante = new iTextField("", 15);
         
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
@@ -202,11 +199,11 @@ public class NewPatient {
 
         lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
         lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
-        txt_CedulaPaciente = new iTextField("", 3);
+        txt_CedulaPaciente = new iTextField("", 15);
 
         lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
         lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
-        txt_NombrePaciente = new iTextField("", 3);
+        txt_NombrePaciente = new iTextField("", 15);
 
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
@@ -214,23 +211,23 @@ public class NewPatient {
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
-        txt_DireccionPaciente = new iTextField("", 3);
+        txt_DireccionPaciente = new iTextField("", 15);
 
         lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
         lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
-        txt_TelefonoPaciente = new iTextField("", 3);
+        txt_TelefonoPaciente = new iTextField("", 15);
 
         lbl_ProfesionPaciente = new iLabel("Profesión Paciente".toUpperCase());
         lbl_ProfesionPaciente.setForeground(Color.GRAY.brighter());
-        txt_ProfesionPaciente = new iTextField("", 3);
+        txt_ProfesionPaciente = new iTextField("", 15);
 
         lbl_ActividadLaboralPaciente = new iLabel("Actividad Laboral Paciente".toUpperCase());
         lbl_ActividadLaboralPaciente.setForeground(Color.GRAY.brighter());
-        txt_ActividadLaboralPaciente = new iTextField("", 3);
+        txt_ActividadLaboralPaciente = new iTextField("", 15);
 
         lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
         lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaPaciente = new iTextField("", 3);
+        txt_MotivoConsultaPaciente = new iTextField("", 15);
 
         lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
         lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
@@ -250,7 +247,7 @@ public class NewPatient {
 
         lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
         lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
-        txt_DetalleHorarioPaciente = new iTextField("", 3);
+        txt_DetalleHorarioPaciente = new iTextField("", 15);
 
         lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
@@ -306,9 +303,10 @@ public class NewPatient {
         
         NewPatient_Panel.AddObject(vacio, 0,30,2);//esto fue agregado para hacer salto de linea en el mismo codigo
         NewPatient_Panel.newLine();//aqui paso de linea al momento de hacer u know
-        NewPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 2);
-        NewPatient_Panel.AddObject(lbl_TituloPaciente, 415, 30, 600);//agrego el titulo para poner verlo con
+        NewPatient_Panel.AddObject(lbl_TituloSolicitante, 75, 30, 175);
+        NewPatient_Panel.AddObject(lbl_TituloPaciente, 56, 30, 800);//agrego el titulo para poner verlo con
         NewPatient_Panel.newLine();
+        
 
         NewPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
