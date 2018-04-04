@@ -440,10 +440,13 @@ public class NewPatient {
                 btnNuevoPaciente.setVisible(false);
                 cbo_Parentesco.setSelectedItem("Nulo");
                 cbo_Parentesco.setEnabled(false);
+                cbo_IsNonGrato.setSelectedItem("No");
+                cbo_IsNonGrato.setEnabled(false);
                 
         }else{
 //                cbo_Parentesco.setSelectedItem("Nulo");
                 cbo_Parentesco.setEnabled(true);
+                cbo_IsNonGrato.setEnabled(true);
         }
         
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
@@ -453,12 +456,15 @@ public class NewPatient {
                 jTabbedPane.setVisible(true);
                 btnNuevoPaciente.setVisible(true);
                 cbo_Parentesco.setEnabled(true);
+                cbo_IsNonGrato.setEnabled(true);
                 
             }else if(chk_boxSolicitanteDiferentePaciente.isSelected() == false) {  
                 jTabbedPane.setVisible(false);
                 btnNuevoPaciente.setVisible(false);
                 cbo_Parentesco.setSelectedItem("Nulo");
                 cbo_Parentesco.setEnabled(false);
+                cbo_IsNonGrato.setSelectedItem("No");
+                cbo_IsNonGrato.setEnabled(false); 
             }
         });
 
