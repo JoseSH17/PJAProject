@@ -438,9 +438,12 @@ public class NewPatient {
         if (chk_boxSolicitanteDiferentePaciente.isSelected() == false) {
                 jTabbedPane.setVisible(false);
                 btnNuevoPaciente.setVisible(false);
+                cbo_Parentesco.setSelectedItem("Nulo");
+                cbo_Parentesco.setEnabled(false);
                 
         }else{
-                
+//                cbo_Parentesco.setSelectedItem("Nulo");
+                cbo_Parentesco.setEnabled(true);
         }
         
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
@@ -449,10 +452,13 @@ public class NewPatient {
                 System.out.println("MUESTRA MENSAJE DE CBO");
                 jTabbedPane.setVisible(true);
                 btnNuevoPaciente.setVisible(true);
+                cbo_Parentesco.setEnabled(true);
                 
             }else if(chk_boxSolicitanteDiferentePaciente.isSelected() == false) {  
                 jTabbedPane.setVisible(false);
                 btnNuevoPaciente.setVisible(false);
+                cbo_Parentesco.setSelectedItem("Nulo");
+                cbo_Parentesco.setEnabled(false);
             }
         });
 
@@ -494,8 +500,7 @@ public class NewPatient {
             //ahora si el solicitante se ingreso hago el insert de paciente
             ArrayList<Object> obj2 = new ArrayList();//array para guardar data
             String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            obj2.addAll(Arrays.asList(  exq1,
-                                        txt_CedulaPaciente.getText(),
+            obj2.addAll(Arrays.asList(  exq1, txt_CedulaPaciente.getText(),
                                         txt_NombrePaciente.getText(), fechaActualFechaNacimiento(), 
                                         txt_DireccionPaciente.getText(), txt_TelefonoPaciente.getText(),
                                         txt_ProfesionPaciente.getText(), txt_ActividadLaboralPaciente.getText(),
