@@ -344,31 +344,31 @@ public class EditPatient {
 
         lbl_CedulaSolicitante = new iLabel("Cédula".toUpperCase());
         lbl_CedulaSolicitante.setForeground(Color.GRAY.brighter());
-        txt_CedulaSolicitante = new iTextField("", 3);
+        txt_CedulaSolicitante = new iTextField("", 15);
 
         lbl_NombreSolicitante = new iLabel("Nombre".toUpperCase());
         lbl_NombreSolicitante.setForeground(Color.GRAY.brighter());
-        txt_NombreSolicitante = new iTextField("", 3);
+        txt_NombreSolicitante = new iTextField("", 15);
 
         lbl_DireccionSolicitante = new iLabel("Dirección".toUpperCase());
         lbl_DireccionSolicitante.setForeground(Color.GRAY.brighter());
-        txt_DireccionSolicitante = new iTextField("", 3);
+        txt_DireccionSolicitante = new iTextField("", 15);
 
         lbl_TelefonoSolicitante = new iLabel("Teléfono".toUpperCase());
         lbl_TelefonoSolicitante.setForeground(Color.GRAY.brighter());
-        txt_TelefonoSolicitante = new iTextField("", 3);
+        txt_TelefonoSolicitante = new iTextField("", 15);
 
         lbl_ProfesionSolicitante = new iLabel("Profesión".toUpperCase());
         lbl_ProfesionSolicitante.setForeground(Color.GRAY.brighter());
-        txt_ProfesionSolicitante = new iTextField("", 3);
+        txt_ProfesionSolicitante = new iTextField("", 15);
 
         lbl_ActividadLaboralSolicitante = new iLabel("Actividad Laboral".toUpperCase());
         lbl_ActividadLaboralSolicitante.setForeground(Color.GRAY.brighter());
-        txt_ActividadLaboralSolicitante = new iTextField("", 3);
+        txt_ActividadLaboralSolicitante = new iTextField("", 15);
 
         lbl_MotivoConsultaSolicitante = new iLabel("Motivo Consulta".toUpperCase());
         lbl_MotivoConsultaSolicitante.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaSolicitante = new iTextField("", 3);
+        txt_MotivoConsultaSolicitante = new iTextField("", 15);
 
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
@@ -387,11 +387,11 @@ public class EditPatient {
 
         lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
         lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
-        txt_CedulaPaciente = new iTextField("", 3);
+        txt_CedulaPaciente = new iTextField("", 15);
 
         lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
         lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
-        txt_NombrePaciente = new iTextField("", 3);
+        txt_NombrePaciente = new iTextField("", 15);
 
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
         lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
@@ -402,23 +402,23 @@ public class EditPatient {
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
-        txt_DireccionPaciente = new iTextField("", 3);
+        txt_DireccionPaciente = new iTextField("", 15);
 
         lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
         lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
-        txt_TelefonoPaciente = new iTextField("", 3);
+        txt_TelefonoPaciente = new iTextField("", 15);
 
         lbl_ProfesionPaciente = new iLabel("Profesión Paciente".toUpperCase());
         lbl_ProfesionPaciente.setForeground(Color.GRAY.brighter());
-        txt_ProfesionPaciente = new iTextField("", 3);
+        txt_ProfesionPaciente = new iTextField("", 15);
 
         lbl_ActividadLaboralPaciente = new iLabel("Actividad Laboral Paciente".toUpperCase());
         lbl_ActividadLaboralPaciente.setForeground(Color.GRAY.brighter());
-        txt_ActividadLaboralPaciente = new iTextField("", 3);
+        txt_ActividadLaboralPaciente = new iTextField("", 15);
 
         lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
         lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaPaciente = new iTextField("", 3);
+        txt_MotivoConsultaPaciente = new iTextField("", 15);
 
         lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
         lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
@@ -438,7 +438,7 @@ public class EditPatient {
 
         lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
         lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
-        txt_DetalleHorarioPaciente = new iTextField("", 3);
+        txt_DetalleHorarioPaciente = new iTextField("", 15);
 
         lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
@@ -459,133 +459,160 @@ public class EditPatient {
         cbo_CargarTipoPaciente();
         cbo_CargarIsNonGrato();
 
-        EditPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+        EditPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 50);
         EditPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
         EditPatient_Panel.newLine();
 
         iLabel espacioLabel2 = new iLabel("");
-        EditPatient_Panel.AddObject(espacioLabel2, 415, 30, 2);
+        EditPatient_Panel.AddObject(espacioLabel2, 415, 15, 2);
         EditPatient_Panel.newLine();
 
         EditPatient_Panel.AddSingleObject(llenarTable(tbl_Data), 95f, 90, 0);
         EditPatient_Panel.newLine();
 
         iLabel espacioLabel = new iLabel("");
-        EditPatient_Panel.AddObject(espacioLabel, 415, 30, 2);
+        EditPatient_Panel.AddObject(espacioLabel, 415, 15, 2);
         EditPatient_Panel.newLine();
 
-        EditPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 180);
+        EditPatient_Panel.AddObject(lbl_TituloSolicitante, 415, 30, 195);
         EditPatient_Panel.AddObject(lbl_TituloPaciente, 415, 30, 630);//agrego el titulo para poner verlo con
         lbl_TituloPaciente.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         EditPatient_Panel.newLine();
 
-        EditPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
+        EditPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
         lbl_NombrePaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_CedulaSolicitante, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_CedulaSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
         txt_NombrePaciente.setVisible(true);//para paciente
         txt_NombrePaciente.setEnabled(true);
+        
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_NombrePaciente, 146, 30, 600);//para paciente
         lbl_CedulaPaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);//para paciente
         txt_CedulaPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 10);//para el paciente
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 50);//para el paciente
         EditPatient_Panel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 600);
         lbl_FechaNacimientoPaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_DireccionSolicitante, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_DireccionSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_FechaNacimientoPaciente, 230, 30, 800);//para paciente
         txt_FechaNacimientoPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 10);
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_DireccionPaciente, 230, 30, 600);//para paciente
         lbl_DireccionPaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_TelefonoSolicitante, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_TelefonoSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_DireccionPaciente, 230, 30, 800);//para paciente
         txt_DireccionPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(lbl_ProfesionSolicitante, 146, 30, 10);
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(lbl_ProfesionSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_TelefonoPaciente, 230, 30, 600);//para paciente
         lbl_TelefonoPaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_ProfesionSolicitante, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_ProfesionSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_TelefonoPaciente, 230, 30, 800);//para paciente
         txt_TelefonoPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 10);
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_ProfesionPaciente, 230, 30, 600);//para paciente
         lbl_ProfesionPaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_ActividadLaboralSolicitante, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_ActividadLaboralSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_ProfesionPaciente, 230, 30, 800);//para paciente
         txt_ProfesionPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 10);
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 600);//para paciente
         lbl_ActividadLaboralPaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_MotivoConsultaSolicitante, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_MotivoConsultaSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 800);//para paciente
         txt_ActividadLaboralPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 10);
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
         lbl_MotivoConsultaPaciente.setVisible(true);//para paciente
-        EditPatient_Panel.AddObject(txt_FechaReporte, 230, 30, 175);
+        EditPatient_Panel.AddObject(txt_FechaReporte, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
         txt_MotivoConsultaPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
+        EditPatient_Panel.addSpace(5);
+        
         EditPatient_Panel.AddObject(lbl_ParentescoPaciente, 230, 30, 600);
         lbl_ParentescoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_Parentesco, 230, 30, 800);
         cbo_Parentesco.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
+        EditPatient_Panel.addSpace(5);
+        
         EditPatient_Panel.AddObject(lbl_ClasificacionPaciente, 230, 30, 600);
         lbl_ClasificacionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_ClasificacionPaciente, 230, 30, 800);
         cbo_ClasificacionPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
+        EditPatient_Panel.addSpace(5);
+        
         EditPatient_Panel.AddObject(lbl_CursoPaciente, 230, 30, 600);
         lbl_CursoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_CursoPaciente, 230, 30, 800);
         cbo_CursoPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
+        EditPatient_Panel.addSpace(5);
+        
         EditPatient_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 600);
         lbl_HorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_HorarioPaciente, 230, 30, 800);
         cbo_HorarioPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
+        EditPatient_Panel.addSpace(5);
+        
         EditPatient_Panel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 600);
         lbl_DetalleHorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 800);
         txt_DetalleHorarioPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
+        EditPatient_Panel.addSpace(5);
+        
         EditPatient_Panel.AddObject(lbl_TipoPaciente, 230, 30, 600);
         lbl_TipoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);
         cbo_TipoPaciente.setVisible(true);//para paciente
+        
         EditPatient_Panel.newLine();
-
+        EditPatient_Panel.addSpace(5);
+        
+        EditPatient_Panel.AddObject(btnEditarAction, 175, 30, 50);
         EditPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);
         EditPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);
         EditPatient_Panel.newLine();
-
-        EditPatient_Panel.AddObject(btnEditarAction, 175, 30, 10);
-        EditPatient_Panel.newLine();
+        EditPatient_Panel.addSpace(5);
 
         btnEditarAction.addActionListener((a) -> {
             btnEditarAction_MouseClicked(if_);
