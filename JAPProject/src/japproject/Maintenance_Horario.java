@@ -110,7 +110,7 @@ public class Maintenance_Horario {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Horario_Panel.AddObject(btnEliminar, 130, 30, 485);
+        Maintenance_Horario_Panel.AddObject(btnEliminar, 130, 30, 486);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });

@@ -74,7 +74,7 @@ public class Maintenance_Clasif_paciente {
         lbl_idClasifPaciente.setForeground(Color.GRAY.brighter());
         txt_idTClasifPaciente = new iTextField("", 3);
         
-        lbl_NombreClasifPaciente = new iLabel("Nombre Clasificación Paciente".toUpperCase());
+        lbl_NombreClasifPaciente = new iLabel("Nombre Clasificación".toUpperCase());
         lbl_NombreClasifPaciente.setForeground(Color.GRAY.brighter());
         txt_NombreClasifPaciente = new iTextField("", 3);
         
@@ -85,11 +85,11 @@ public class Maintenance_Clasif_paciente {
     private void Mantenimiento_Clasificación(iFrame if_) {
         Componentes_Clasificación();
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 5);
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Clasif_Paciente_Panel.newLine(); 
  
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
+        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 10);//agrego el titulo
         Maintenance_Clasif_Paciente_Panel.newLine();
         
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_idClasifPaciente, 415, 30, 30);
@@ -110,7 +110,7 @@ public class Maintenance_Clasif_paciente {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(btnEliminar, 130, 30, 485);
+        Maintenance_Clasif_Paciente_Panel.AddObject(btnEliminar, 130, 30, 486);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });

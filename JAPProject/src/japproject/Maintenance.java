@@ -96,7 +96,7 @@ public class Maintenance {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Curso_Panel.AddObject(btnEliminar, 130, 30, 485);
+        Maintenance_Curso_Panel.AddObject(btnEliminar, 130, 30, 486);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });

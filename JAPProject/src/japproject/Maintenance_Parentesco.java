@@ -106,7 +106,7 @@ public class Maintenance_Parentesco {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Parentesco_Panel.AddObject(btnEliminar, 130, 30, 485);
+        Maintenance_Parentesco_Panel.AddObject(btnEliminar, 130, 30, 486);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
