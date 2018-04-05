@@ -225,6 +225,7 @@ public class NewPatient {
         lbl_NOTA.setForeground(Color.GRAY.brighter());
     
         btnRegister = new iButton("REGISTRAR", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        
     }
     
     
@@ -297,7 +298,7 @@ public class NewPatient {
         lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
         cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
-        lbl_IsNonGrato = new iLabel("Lista Negra".toUpperCase());
+        lbl_IsNonGrato = new iLabel("Lista Replicado".toUpperCase());
         lbl_IsNonGrato.setForeground(Color.GRAY.brighter()); 
         cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
         
@@ -377,7 +378,7 @@ public class NewPatient {
         lbl_TipoPacienteT = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPacienteT.setForeground(Color.GRAY.brighter());
         cbo_TipoPacienteT = new JComboBox();//son de seleccion por base de datos
-        lbl_IsNonGratoT = new iLabel("Lista Negra".toUpperCase());
+        lbl_IsNonGratoT = new iLabel("Lista Replicado".toUpperCase());
         lbl_IsNonGratoT.setForeground(Color.GRAY.brighter()); 
         cbo_IsNonGratoT = new JComboBox();//son los de seleccion por paciente en lista negra
         
@@ -824,14 +825,13 @@ public class NewPatient {
         TabbedPane_Panel.newLine();
         TabbedPane_Panel.AddObject(vacio, 175, 30, 170);
         TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.AddObject(vacio, 175, 30, 170);
-//        TabbedPane_Panel.newLine();
         TabbedPane_Panel.AddObject(btnNuevoPacienteT, 175, 30, 10);
         TabbedPane_Panel.newLine();
         
         
 //        //Para crear las ventanas de los JtabbedPanes
 //        jTabbedPane = new JTabbedPane();//creo el panel para hacer el JtabbedPane
+//        jTabbedPane.add(TabbedPane_Panel,"Ventana");
 //        jTabbedPane.setVisible(false);
 
         
