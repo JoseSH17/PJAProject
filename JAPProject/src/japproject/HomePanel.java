@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
 import static japproject.EditPatient.EditPatient_Panel;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  *
@@ -41,7 +42,7 @@ public class HomePanel {
     Appointments AP; //Panel to View and Edit appointments.
     AddAppointment AAP; //Panel to Add appointments
     BlackList BL; //Panel to View Patients in BlackList
-    
+    public static Color ColorPanels=new ColorUIResource(Color.WHITE);
     public HomePanel() {
         lpb = new LoadingProgressBars();
         if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
