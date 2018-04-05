@@ -29,6 +29,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
+import javax.swing.JTextArea;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -81,7 +83,7 @@ public class NewPatient {
     private iLabel lbl_NombreSolicitante;//Lbl para el nombre del Solicitante
     private iTextField txt_NombreSolicitante;//TextField para el nombre del solicitante
     private iLabel lbl_DireccionSolicitante;//Lbl para la direccion del Solicitante
-    private iTextField txt_DireccionSolicitante;//TextField para la direccion del solicitante(cambiar por JTextArea)
+    private JTextArea txt_DireccionSolicitante;//TextField para la direccion del solicitante(cambiar por JTextArea)
     private iLabel lbl_TelefonoSolicitante;//Lbl para el telefono del Solicitante
     private iTextField txt_TelefonoSolicitante;//TextField para el telefono del solicitante
     private iLabel lbl_ProfesionSolicitante;//Lbl para la profesion del Solicitante
@@ -108,7 +110,7 @@ public class NewPatient {
     private iLabel lbl_FechaNacimientoPaciente;//Lbl para la Fecha de Nacimiento del Paciente
     private iCalendar FechaNacimientoPaciente;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
     private iLabel lbl_DireccionPaciente;//Lbl para la Direccion del Paciente
-    private iTextField txt_DireccionPaciente;//TextField para la Direccion del Paciente
+    private JTextArea txt_DireccionPaciente;//TextField para la Direccion del Paciente
     private iLabel lbl_TelefonoPaciente;//Lbl para la el Telefono del Paciente
     private iTextField txt_TelefonoPaciente;//TextField para el Telefono del Paciente
     private iLabel lbl_ProfesionPaciente;//Lbl para la Profesion del Paciente
@@ -116,13 +118,13 @@ public class NewPatient {
     private iLabel lbl_ActividadLaboralPaciente;//Lbl para la Actividad Laboral del Paciente
     private iTextField txt_ActividadLaboralPaciente;//TextField para la Actividad Laboral del Paciente
     private iLabel lbl_MotivoConsultaPaciente;//Lbl para la El Motivo Consulta del Paciente
-    private iTextField txt_MotivoConsultaPaciente;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
+    private JTextArea txt_MotivoConsultaPaciente;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
     private iLabel lbl_ParentescoPaciente;//Lbl para el Parentesco del Paciente
     private iLabel lbl_ClasificacionPaciente;//Lbl para la Clasificacion del Paciente
     private iLabel lbl_CursoPaciente;//Lbl para la el Curso del Paciente
     private iLabel lbl_HorarioPaciente;//Lbl para la el Horario del Paciente
     private iLabel lbl_DetalleHorarioPaciente;//Lbl para el Detalle Horario del Paciente
-    private iTextField txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
+    private JTextArea txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente 
     private iLabel lbl_IsNonGrato;//Lbl para el Tipo de Lista Negra  
     //FIN de Controles Swing para Paciente
@@ -137,7 +139,7 @@ public class NewPatient {
     private iLabel lbl_FechaNacimientoPacienteT;//Lbl para la Fecha de Nacimiento del Paciente
     private iCalendar FechaNacimientoPacienteT;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
     private iLabel lbl_DireccionPacienteT;//Lbl para la Direccion del Paciente
-    private iTextField txt_DireccionPacienteT;//TextField para la Direccion del Paciente
+    private JTextArea txt_DireccionPacienteT;//TextField para la Direccion del Paciente
     private iLabel lbl_TelefonoPacienteT;//Lbl para la el Telefono del Paciente
     private iTextField txt_TelefonoPacienteT;//TextField para el Telefono del Paciente
     private iLabel lbl_ProfesionPacienteT;//Lbl para la Profesion del Paciente
@@ -145,13 +147,13 @@ public class NewPatient {
     private iLabel lbl_ActividadLaboralPacienteT;//Lbl para la Actividad Laboral del Paciente
     private iTextField txt_ActividadLaboralPacienteT;//TextField para la Actividad Laboral del Paciente
     private iLabel lbl_MotivoConsultaPacienteT;//Lbl para la El Motivo Consulta del Paciente
-    private iTextField txt_MotivoConsultaPacienteT;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
+    private JTextArea txt_MotivoConsultaPacienteT;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
     private iLabel lbl_ParentescoPacienteT;//Lbl para el Parentesco del Paciente
     private iLabel lbl_ClasificacionPacienteT;//Lbl para la Clasificacion del Paciente
     private iLabel lbl_CursoPacienteT;//Lbl para la el Curso del Paciente
     private iLabel lbl_HorarioPacienteT;//Lbl para la el Horario del Paciente
     private iLabel lbl_DetalleHorarioPacienteT;//Lbl para el Detalle Horario del Paciente
-    private iTextField txt_DetalleHorarioPacienteT;//TextField para el Detalle Horario del Paciente
+    private JTextArea txt_DetalleHorarioPacienteT;//TextField para el Detalle Horario del Paciente
     private iLabel lbl_TipoPacienteT;//Lbl para el Tipo de Paciente 
     private iLabel lbl_IsNonGratoT;//Lbl para el Tipo de Lista Negra  
     //FIN de Controles Swing para Paciente
@@ -162,7 +164,7 @@ public class NewPatient {
         NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
         
                                      //x  ,   y, width(largo), height(alto), Elements Margin, if_
-        TabbedPane_Panel = new iPanel(600, 200, 38.0f, 70.0f, 0, 0, if_);//le doy propiedades al iPanel
+        TabbedPane_Panel = new iPanel(600, 200, 38.0f, 75.0f, 0, 0, if_);//le doy propiedades al iPanel
         TabbedPane_Panel.setBackground(Color.decode("#0732"));//le doy color al panel
         TabbedPane_Panel.setVisible(false);
         Ingresar(if_);
@@ -197,7 +199,7 @@ public class NewPatient {
 
         lbl_DireccionSolicitante = new iLabel("Dirección".toUpperCase());
         lbl_DireccionSolicitante.setForeground(Color.GRAY.brighter());
-        txt_DireccionSolicitante = new iTextField("", 15);
+        txt_DireccionSolicitante = new JTextArea();
 
         lbl_TelefonoSolicitante = new iLabel("Teléfono".toUpperCase());
         lbl_TelefonoSolicitante.setForeground(Color.GRAY.brighter());
@@ -253,7 +255,8 @@ public class NewPatient {
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
-        txt_DireccionPaciente = new iTextField("", 15);
+        txt_DireccionPaciente = new JTextArea();
+        
 
         lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
         lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
@@ -269,7 +272,7 @@ public class NewPatient {
 
         lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
         lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaPaciente = new iTextField("", 15);
+        txt_MotivoConsultaPaciente = new JTextArea();
 
         lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
         lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
@@ -289,7 +292,7 @@ public class NewPatient {
 
         lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
         lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
-        txt_DetalleHorarioPaciente = new iTextField("", 15);
+        txt_DetalleHorarioPaciente = new JTextArea();
 
         lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
@@ -333,7 +336,7 @@ public class NewPatient {
 
         lbl_DireccionPacienteT = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPacienteT.setForeground(Color.GRAY.brighter());
-        txt_DireccionPacienteT = new iTextField("", 15);
+        txt_DireccionPacienteT = new JTextArea();
 
         lbl_TelefonoPacienteT = new iLabel("Teléfono Paciente".toUpperCase());
         lbl_TelefonoPacienteT.setForeground(Color.GRAY.brighter());
@@ -349,7 +352,7 @@ public class NewPatient {
 
         lbl_MotivoConsultaPacienteT = new iLabel("Motivo Consulta Paciente".toUpperCase());
         lbl_MotivoConsultaPacienteT.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaPacienteT = new iTextField("", 15);
+        txt_MotivoConsultaPacienteT = new JTextArea();
 
         lbl_ParentescoPacienteT = new iLabel("Parentesco Paciente".toUpperCase());
         lbl_ParentescoPacienteT.setForeground(Color.GRAY.brighter());
@@ -369,7 +372,7 @@ public class NewPatient {
 
         lbl_DetalleHorarioPacienteT = new iLabel("Detalle Horario Paciente".toUpperCase());
         lbl_DetalleHorarioPacienteT.setForeground(Color.GRAY.brighter());
-        txt_DetalleHorarioPacienteT = new iTextField("", 15);
+        txt_DetalleHorarioPacienteT = new JTextArea();
 
         lbl_TipoPacienteT = new iLabel("Tipo Paciente Paciente".toUpperCase());
         lbl_TipoPacienteT.setForeground(Color.GRAY.brighter());
@@ -606,7 +609,7 @@ public class NewPatient {
         
         ComponentesSolicitante();//cargo el metodo de los componentes swing de Solicitante
         ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
-        ComponentesPacienteT();
+        ComponentesPacienteT();//cargo los componentes del Panel Paciente
         
         chk_boxSolicitanteDiferentePaciente = new JCheckBox();
         chk_boxSolicitanteDiferentePaciente.setText("PACIENTE != Solicitante".toUpperCase());
@@ -624,11 +627,13 @@ public class NewPatient {
         NewPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
         NewPatient_Panel.newLine();  
         
-        NewPatient_Panel.AddObject(vacio, 0,30,2);//esto fue agregado para hacer salto de linea en el mismo codigo
+//        NewPatient_Panel.AddObject(vacio, 0,30,2);//esto fue agregado para hacer salto de linea en el mismo codigo
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.newLine();//aqui paso de linea al momento de hacer u know
         NewPatient_Panel.AddObject(lbl_TituloSolicitante, 75, 30, 175);
         NewPatient_Panel.AddObject(lbl_TituloPaciente, 56, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         
 
         NewPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
@@ -636,12 +641,14 @@ public class NewPatient {
         NewPatient_Panel.AddObject(txt_CedulaSolicitante, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
 
         NewPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_NombrePaciente, 230, 30, 600);//para paciente 
         NewPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
 
         
         NewPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 10);
@@ -649,65 +656,80 @@ public class NewPatient {
         NewPatient_Panel.AddObject(txt_DireccionSolicitante, 230, 30, 175);
         NewPatient_Panel.AddObject(FechaNacimientoPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
 
         NewPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_DireccionPaciente, 230, 30, 600);//para paciente
         NewPatient_Panel.AddObject(txt_TelefonoSolicitante, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_DireccionPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5); 
 
         NewPatient_Panel.AddObject(lbl_ProfesionSolicitante, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_TelefonoPaciente, 230, 30, 600);//para paciente
         NewPatient_Panel.AddObject(txt_ProfesionSolicitante, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_TelefonoPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
 
         NewPatient_Panel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_ProfesionPaciente, 230, 30, 600);//para paciente
         NewPatient_Panel.AddObject(txt_ActividadLaboralSolicitante, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_ProfesionPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
 
         NewPatient_Panel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 600);//para paciente
         NewPatient_Panel.AddObject(txt_MotivoConsultaSolicitante, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
 
         NewPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 10);
         NewPatient_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
         NewPatient_Panel.AddObject(FechaReporte, 230, 30, 175);
         NewPatient_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_ParentescoPaciente, 230, 30, 600);//
         NewPatient_Panel.AddObject(cbo_Parentesco, 230, 30, 800);//
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_ClasificacionPaciente, 230, 30, 600);//
         NewPatient_Panel.AddObject(cbo_ClasificacionPaciente, 230, 30, 800);//
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_CursoPaciente, 230, 30, 600);//
         NewPatient_Panel.AddObject(cbo_CursoPaciente, 230, 30, 800);//
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 600);//
         NewPatient_Panel.AddObject(cbo_HorarioPaciente, 230, 30, 800);//
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 600);//
         NewPatient_Panel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 800);//
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_TipoPaciente, 230, 30, 600);//
         NewPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);//
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
+        
         NewPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);//
         NewPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);//
         NewPatient_Panel.newLine();
+//        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
+//        NewPatient_Panel.addSpace(5);
         
         //Fin de crear los TabbedPane
         NewPatient_Panel.newLine();
@@ -737,64 +759,73 @@ public class NewPatient {
         
         TabbedPane_Panel.AddObject(lbl_TituloPacienteT, 56, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_CedulaPacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(txt_CedulaPacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_NombrePacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(txt_NombrePacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_FechaNacimientoPacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(FechaNacimientoPacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_DireccionPacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(txt_DireccionPacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_TelefonoPacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(txt_TelefonoPacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_ProfesionPacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(txt_ProfesionPacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_ActividadLaboralPacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(txt_ActividadLaboralPacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_MotivoConsultaPacienteT, 146, 30, 10);//para paciente
         TabbedPane_Panel.AddObject(txt_MotivoConsultaPacienteT, 230, 30, 170);//para paciente
         TabbedPane_Panel.newLine();
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_ParentescoPacienteT, 146, 30, 10);//
         TabbedPane_Panel.AddObject(cbo_ParentescoT, 230, 30, 170);//
         TabbedPane_Panel.newLine();
-        
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_ClasificacionPacienteT, 146, 30, 10);//
         TabbedPane_Panel.AddObject(cbo_ClasificacionPacienteT, 230, 30, 170);//
         TabbedPane_Panel.newLine();
-
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_CursoPacienteT, 146, 30, 10);//
         TabbedPane_Panel.AddObject(cbo_CursoPacienteT, 230, 30, 170);//
         TabbedPane_Panel.newLine();
-
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_HorarioPacienteT, 146, 30, 10);//
         TabbedPane_Panel.AddObject(cbo_HorarioPacienteT, 230, 30, 170);//
         TabbedPane_Panel.newLine();
-
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_DetalleHorarioPacienteT, 146, 30, 10);//
         TabbedPane_Panel.AddObject(txt_DetalleHorarioPacienteT, 230, 30, 170);//
         TabbedPane_Panel.newLine();
-
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_TipoPacienteT, 146, 30, 10);//
         TabbedPane_Panel.AddObject(cbo_TipoPacienteT, 230, 30, 170);//
         TabbedPane_Panel.newLine();
-        
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(lbl_IsNonGratoT, 146, 30, 10);//
         TabbedPane_Panel.AddObject(cbo_IsNonGratoT, 230, 30, 170);//
         TabbedPane_Panel.newLine();
-
+        TabbedPane_Panel.addSpace(5);
         TabbedPane_Panel.AddObject(btnRegisterPacienteT, 175, 30, 170);
         TabbedPane_Panel.newLine();
         TabbedPane_Panel.AddObject(vacio, 175, 30, 170);
         TabbedPane_Panel.newLine();
-        TabbedPane_Panel.AddObject(vacio, 175, 30, 170);
-        TabbedPane_Panel.newLine();
+//        TabbedPane_Panel.AddObject(vacio, 175, 30, 170);
+//        TabbedPane_Panel.newLine();
         TabbedPane_Panel.AddObject(btnNuevoPacienteT, 175, 30, 10);
         TabbedPane_Panel.newLine();
         
@@ -926,6 +957,27 @@ public class NewPatient {
      * @return hace que el texto escrito en el txt lo pase al otro txt
     */
     private void setJTexFieldChanged(iTextField txt){
+        DocumentListener documentListener = new DocumentListener() {
+ 
+        @Override
+        public void changedUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+ 
+        @Override
+        public void insertUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+ 
+        @Override
+        public void removeUpdate(DocumentEvent documentEvent) {
+            printIt(documentEvent);
+        }
+        };
+        txt.getDocument().addDocumentListener(documentListener);
+    }
+    
+    private void setJTexFieldChanged(JTextArea txt){
         DocumentListener documentListener = new DocumentListener() {
  
         @Override
