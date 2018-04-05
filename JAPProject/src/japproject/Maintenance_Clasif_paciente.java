@@ -72,11 +72,11 @@ public class Maintenance_Clasif_paciente {
         
         lbl_idClasifPaciente = new iLabel("ID Clasificación Paciente".toUpperCase());
         lbl_idClasifPaciente.setForeground(Color.GRAY.brighter());
-        txt_idTClasifPaciente = new iTextField("", 3);
+        txt_idTClasifPaciente = new iTextField("", 15);
         
         lbl_NombreClasifPaciente = new iLabel("Nombre Clasificación".toUpperCase());
         lbl_NombreClasifPaciente.setForeground(Color.GRAY.brighter());
-        txt_NombreClasifPaciente = new iTextField("", 3);
+        txt_NombreClasifPaciente = new iTextField("", 15);
         
         btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir clasificación
         btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar clasificación
@@ -87,18 +87,22 @@ public class Maintenance_Clasif_paciente {
         
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 5);
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
-        Maintenance_Clasif_Paciente_Panel.newLine(); 
+        Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Clasif_Paciente_Panel.addSpace(5);
  
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 10);//agrego el titulo
         Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Clasif_Paciente_Panel.addSpace(5);
         
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_idClasifPaciente, 415, 30, 30);
         Maintenance_Clasif_Paciente_Panel.AddObject(txt_idTClasifPaciente, 415, 30, 200);//agrega el label y el textfield del id clasificación
         Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Clasif_Paciente_Panel.addSpace(5);
         
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_NombreClasifPaciente, 415, 30, 30);
         Maintenance_Clasif_Paciente_Panel.AddObject(txt_NombreClasifPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del clasificación
         Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Clasif_Paciente_Panel.addSpace(5);
         
         Maintenance_Clasif_Paciente_Panel.AddObject(btnAñadir, 130, 30, 200);
         btnAñadir.addActionListener((a) -> {

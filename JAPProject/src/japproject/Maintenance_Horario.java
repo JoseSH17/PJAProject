@@ -72,11 +72,11 @@ public class Maintenance_Horario {
         
         lbl_idHorario = new iLabel("ID Horario".toUpperCase());
         lbl_idHorario.setForeground(Color.GRAY.brighter());
-        txt_idHorario = new iTextField("", 3);
+        txt_idHorario = new iTextField("", 15);
         
         lbl_NombreHorario = new iLabel("Nombre Horario".toUpperCase());
         lbl_NombreHorario.setForeground(Color.GRAY.brighter());
-        txt_NombreHorario = new iTextField("", 3);
+        txt_NombreHorario = new iTextField("", 15);
         
         btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir horario
         btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar horario
@@ -88,17 +88,21 @@ public class Maintenance_Horario {
         Maintenance_Horario_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         Maintenance_Horario_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Horario_Panel.newLine(); 
+        Maintenance_Horario_Panel.addSpace(5);
  
         Maintenance_Horario_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_Horario_Panel.newLine();
+        Maintenance_Horario_Panel.addSpace(5);
         
         Maintenance_Horario_Panel.AddObject(lbl_idHorario, 415, 30, 30);
         Maintenance_Horario_Panel.AddObject(txt_idHorario, 415, 30, 200);//agrega el label y el textfield del id horario
         Maintenance_Horario_Panel.newLine();
+        Maintenance_Horario_Panel.addSpace(5);
         
         Maintenance_Horario_Panel.AddObject(lbl_NombreHorario, 415, 30, 30);
         Maintenance_Horario_Panel.AddObject(txt_NombreHorario, 415, 30, 200);//agrega el label y el textfield del nombre del horario
         Maintenance_Horario_Panel.newLine();
+        Maintenance_Horario_Panel.addSpace(5);
         
         Maintenance_Horario_Panel.AddObject(btnAñadir, 130, 30, 200);
         btnAñadir.addActionListener((a) -> {

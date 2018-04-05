@@ -72,11 +72,11 @@ public class Maintenance_tPaciente {
         
         lbl_idTipoPaciente = new iLabel("ID Tipo Paciente".toUpperCase());
         lbl_idTipoPaciente.setForeground(Color.GRAY.brighter());
-        txt_idTipPaciente = new iTextField("", 3);
+        txt_idTipPaciente = new iTextField("", 15);
         
         lbl_NombreTipoPaciente = new iLabel("Nombre Tipo Paciente".toUpperCase());
         lbl_NombreTipoPaciente.setForeground(Color.GRAY.brighter());
-        txt_NombreTipoPaciente = new iTextField("", 3);
+        txt_NombreTipoPaciente = new iTextField("", 15);
         
         btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir horario
         btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar horario
@@ -87,18 +87,22 @@ public class Maintenance_tPaciente {
         
         Maintenance_TipPaciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         Maintenance_TipPaciente_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
-        Maintenance_TipPaciente_Panel.newLine(); 
+        Maintenance_TipPaciente_Panel.newLine();
+        Maintenance_TipPaciente_Panel.addSpace(5);
  
         Maintenance_TipPaciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_TipPaciente_Panel.newLine();
+        Maintenance_TipPaciente_Panel.addSpace(5);
         
         Maintenance_TipPaciente_Panel.AddObject(lbl_idTipoPaciente, 415, 30, 30);
         Maintenance_TipPaciente_Panel.AddObject(txt_idTipPaciente, 415, 30, 200);//agrega el label y el textfield del id horario
         Maintenance_TipPaciente_Panel.newLine();
+        Maintenance_TipPaciente_Panel.addSpace(5);
         
         Maintenance_TipPaciente_Panel.AddObject(lbl_NombreTipoPaciente, 415, 30, 30);
         Maintenance_TipPaciente_Panel.AddObject(txt_NombreTipoPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del horario
         Maintenance_TipPaciente_Panel.newLine();
+        Maintenance_TipPaciente_Panel.addSpace(5);
         
         Maintenance_TipPaciente_Panel.AddObject(btnAñadir, 130, 30, 200);
         btnAñadir.addActionListener((a) -> {

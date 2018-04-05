@@ -58,11 +58,11 @@ public class Maintenance {
         
         lbl_idCurso = new iLabel("ID Curso".toUpperCase());
         lbl_idCurso.setForeground(Color.GRAY.brighter());
-        txt_idCurso = new iTextField("", 3);
+        txt_idCurso = new iTextField("", 15);
         
         lbl_NombreCurso = new iLabel("Nombre Curso".toUpperCase());
         lbl_NombreCurso.setForeground(Color.GRAY.brighter());
-        txt_NombreCurso = new iTextField("", 3);
+        txt_NombreCurso = new iTextField("", 15);
         
         btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir curso
         btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar curso
@@ -74,17 +74,21 @@ public class Maintenance {
         Maintenance_Curso_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
         Maintenance_Curso_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Curso_Panel.newLine(); 
- 
+        Maintenance_Curso_Panel.addSpace(5);
+        
         Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_Curso_Panel.newLine();
+        Maintenance_Curso_Panel.addSpace(5);
         
         Maintenance_Curso_Panel.AddObject(lbl_idCurso, 415, 30, 30);
         Maintenance_Curso_Panel.AddObject(txt_idCurso, 415, 30, 200);//agrega el label y el textfield del id curso
         Maintenance_Curso_Panel.newLine();
+        Maintenance_Curso_Panel.addSpace(5);
         
         Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 30);
         Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 415, 30, 200);//agrega el label y el textfield del nombre del curso
         Maintenance_Curso_Panel.newLine();
+        Maintenance_Curso_Panel.addSpace(5);
         
         Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 200);
         btnAñadir.addActionListener((a) -> {
