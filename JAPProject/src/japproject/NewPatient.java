@@ -224,7 +224,7 @@ public class NewPatient {
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
         lbl_NOTA.setForeground(Color.GRAY.brighter());
     
-        btnRegister = new iButton("REGISTRAR", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnRegister = new iButton("REGISTRAR", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
     }
     
     
@@ -301,8 +301,8 @@ public class NewPatient {
         lbl_IsNonGrato.setForeground(Color.GRAY.brighter()); 
         cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
         
-        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnRegisterPaciente = new iButton("REGISTRAR PACIENTE", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnRegisterPaciente = new iButton("REGISTRAR PACIENTE", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
         ///////////////Fin de componentes de Paciente
         
     }//fin de metodo componentes paciente
@@ -381,8 +381,8 @@ public class NewPatient {
         lbl_IsNonGratoT.setForeground(Color.GRAY.brighter()); 
         cbo_IsNonGratoT = new JComboBox();//son los de seleccion por paciente en lista negra
         
-        btnNuevoPacienteT = new iButton("NUEVO PACIENTE(+)", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnRegisterPacienteT = new iButton("REGISTRAR PACIENTE", 2, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnNuevoPacienteT = new iButton("NUEVO PACIENTE(+)", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
+        btnRegisterPacienteT = new iButton("REGISTRAR PACIENTE", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
         ///////////////Fin de componentes de Paciente
         
     }//fin de metodo componentes paciente
