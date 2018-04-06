@@ -125,7 +125,7 @@ public class Maintenance_Parentesco {
         ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Parentesco", "Descripción"));
         iPanel ip = new iPanel(215, 90, 500, 400, 4);
         //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
-        ip.setLocation(100, 300);
+        ip.setLocation(115, 300);
         iTable table = new iTable(cols);
         ip.setBackground(Color.black);
 
