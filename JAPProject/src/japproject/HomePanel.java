@@ -63,7 +63,7 @@ public class HomePanel {
         MenuHome.setOpaque(false);
         MenuHome.setContentAreaFilled(false);
         MenuHome.setBorderPainted(false);
-        MenuHome.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.HOME, 20, Color.BLACK)); //Adding an icon that looks like a tiny home for the menu.
+        MenuHome.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.HOME, 20, Color.cyan.darker())); //Adding an icon that looks like a tiny home for the menu.
 
         MenuHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +76,7 @@ public class HomePanel {
         menuAgregarPaciente.setOpaque(false);
         menuAgregarPaciente.setContentAreaFilled(false);
         menuAgregarPaciente.setBorderPainted(false);
-        menuAgregarPaciente.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PERSON, 20, Color.BLACK));
+        menuAgregarPaciente.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PERSON, 20, Color.cyan.darker()));
 
         menuAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +86,7 @@ public class HomePanel {
         });
 
         JMenu menuMantenimiento = new JMenu("Mantenimiento");
-        menuMantenimiento.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BUILD, 20, Color.BLACK));
+        menuMantenimiento.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BUILD, 20, Color.cyan.darker()));
 
         JMenuItem Cursos = new JMenuItem("Cursos");
         Cursos.addActionListener((ei) -> {
@@ -121,12 +121,12 @@ public class HomePanel {
         menuMantenimiento.add(Parentesco);
 
         JMenu menuPersonalizacion = new JMenu("Personalizar");
-        menuPersonalizacion.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BRUSH, 20, Color.BLACK));
+        menuPersonalizacion.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BRUSH, 20, Color.cyan.darker()));
         JMenuItem ColorPallet = new JMenuItem("Colores de Interfaz");
         menuPersonalizacion.add(ColorPallet);
 
         JMenu menuCitas = new JMenu("Citas");       
-        menuCitas.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ARCHIVE, 20, Color.BLACK));
+        menuCitas.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.ARCHIVE, 20, Color.cyan.darker()));
         JMenuItem viewAppointments = new JMenuItem("Ver Citas");
                 viewAppointments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,7 +150,7 @@ public class HomePanel {
         menuBlackSheep.setOpaque(false);
         menuBlackSheep.setContentAreaFilled(false);
         menuBlackSheep.setBorderPainted(false);
-        menuBlackSheep.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BLOCK, 20, Color.BLACK));
+        menuBlackSheep.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BLOCK, 20, Color.cyan.darker()));
         
         menuBlackSheep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

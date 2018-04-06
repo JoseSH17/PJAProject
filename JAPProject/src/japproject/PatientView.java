@@ -26,15 +26,20 @@ import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
+import static japproject.HomePanel.ColorPanels;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.EventListener;
+import javax.swing.border.Border;
 
 /**
  *
  * @author TUMA
  */
-public class PatientView {
+public class PatientView implements ActionListener {
 
     //
-    iTable RegistrosTable;
+    public iTable RegistrosTable;
     iLabel SearchBar_lbl;
     iTextField SearchBar_txt;
 
@@ -42,13 +47,18 @@ public class PatientView {
     public iPanel PatientView_panel;
     public static List<String> tbl_Data = new ArrayList();
     EditPatient EP;
+    //popmenu
+    JPopupMenu popup;
+    JMenuItem ItemEditar;
+    public boolean banderita;
+    //
 
     public PatientView(iFrame if_) {
 
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
-//            PatientView_panel.setBackground(Color.decode("#006738"));
+            PatientView_panel.setBackground(Color.DARK_GRAY);
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
@@ -61,13 +71,21 @@ public class PatientView {
             RegistrosTable.getTableHeader().setReorderingAllowed(false);
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.setRowSelectionAllowed(true);
-            RegistrosTable.setBackground(Color.decode("#006738"));
             RegistrosTable.setSize(500, 500);
+            RegistrosTable.setBackground(Color.DARK_GRAY);
 
-            PopMenu(RegistrosTable, if_);//metodo que crea e implementa el popmenu 
-            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, Color.decode("#006738"));
+            popup = new JPopupMenu();
+            ItemEditar = new JMenuItem("Editar paciente");
+            ItemEditar.addActionListener(this);
+
+            popup.add(ItemEditar);
+
+            RegistrosTable.setComponentPopupMenu(popup);
+            RegistrosTable.addMouseListener(new TableMouseListener(RegistrosTable));
+
+            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, Color.DARK_GRAY);
             scrollPane2.setViewportView(RegistrosTable);
-            SetColumsSizes(RegistrosTable);
+            SetColumsSizes();
 
             if (sql.Exists(rr)) {//verifica que el query sea valido
                 try {
@@ -96,53 +114,19 @@ public class PatientView {
      *
      * Metodo para crear el popmenu
      */
-    public void PopMenu(iTable RegistrosTable, iFrame if_) {
-
-        //
-        RegistrosTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                int r = RegistrosTable.rowAtPoint(e.getPoint());
-
-                if (r >= 0 && r < RegistrosTable.getRowCount()) {
-                    RegistrosTable.setRowSelectionInterval(r, r);
-                } else {
-                    RegistrosTable.clearSelection();
-                }
-
-                int rowindex = RegistrosTable.getSelectedRow();
-                if (rowindex < 0) {
-                    return;
-                }
-                if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
-                    JPopupMenu popup = new JPopupMenu();
-                    JMenuItem ItemEditar = new JMenuItem("Editar paciente");
-                    
-                    ItemEditar.addActionListener((ae) -> {
-                        tbl_Data.clear();
-                       
-
-                        PatientView_panel.dispose();
-                        PatientView_panel.setVisible(false);
-                        ItemEditarActionListener(RegistrosTable);
-                        EP = new EditPatient(if_);
-                         
-
-                    });
-                    popup.add(ItemEditar);
-                    RegistrosTable.setComponentPopupMenu(popup);
-                    //
-
-                }
-            }
-        });
-
+    public void LlamarEditPatient(iFrame if_) {
+        tbl_Data.clear();
+        PatientView_panel.dispose();
+        PatientView_panel.setVisible(false);
+        ItemEditarActionListener();
+        EP = new EditPatient(if_);
+        System.out.println("hola");
     }
 
-    public static void ItemEditarActionListener(iTable RegistrosTable) {
+    public void ItemEditarActionListener() {
 
         int selectedRow = RegistrosTable.getSelectedRow();
-         
+
         for (int j = 0; j < RegistrosTable.getColumnCount(); j++) {
 
             tbl_Data.add(RegistrosTable.getColumnName(j) + "-" + RegistrosTable.getValueAt(selectedRow, j).toString());
@@ -152,6 +136,8 @@ public class PatientView {
     /**
      *
      * Metodo para añadir los componentes
+     *
+     * @param scrollPane2
      */
     public void AddComponentes(iScrollPane scrollPane2) {
         SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
@@ -161,8 +147,6 @@ public class PatientView {
         SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         PatientView_panel.newLine();
 
-        
-        
         PatientView_panel.AddSingleObject(scrollPane2, 100.0f, 89f, CENTER);
         //scrollPane2.setResponsiveHeight(100.0f, 100);
         scrollPane2.setResponsiveExtendedPixelHeight(208);
@@ -176,9 +160,9 @@ public class PatientView {
      *
      * Metodo Para setear los sizes de las columnas
      *
-     * @return Para setear los sizes de las columnas
+     * @param RegistrosTable
      */
-    public void SetColumsSizes(iTable RegistrosTable) {
+    public void SetColumsSizes() {
         //            Codigo para manipular los sizes de las columnas
         RegistrosTable.getColumnModel().getColumn(0).setWidth(0);
         RegistrosTable.getColumnModel().getColumn(0).setMinWidth(0);
@@ -249,4 +233,15 @@ public class PatientView {
 //fin de los parametros de la tabla
     }
 
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        JMenuItem menu = (JMenuItem) event.getSource();
+        
+        if (menu == ItemEditar) {
+            LlamarEditPatient(HomePanel.if_);
+
+        }
+
+    }
+    
 }
