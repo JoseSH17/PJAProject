@@ -146,7 +146,7 @@ public class HomePanel {
         menuCitas.add(viewAppointments);
         menuCitas.add(addAppointments);
                 
-        JButton menuBlackSheep = new JButton("Lista Negra");
+        JButton menuBlackSheep = new JButton("Lista Relegados");
         menuBlackSheep.setOpaque(false);
         menuBlackSheep.setContentAreaFilled(false);
         menuBlackSheep.setBorderPainted(false);
@@ -225,20 +225,6 @@ public class HomePanel {
                 break;
             default:
                 System.out.println("Panel not handled");
-                break;
-        }
-    }
-
-    /**
-     *
-     * @param NestedPanel
-     */
-    public void InvokeNestedPanels(String NestedPanel) {
-        switch (NestedPanel) {            
-            case "EditPatient_Panel":
-              
-                break;
-            default:
                 break;
         }
     }

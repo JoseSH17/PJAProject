@@ -6,7 +6,6 @@
 package japproject;
 
 import iComponents.iSQL;
-import static japproject.LoadingProgressBars.LoadingFrame;
 import javax.swing.SwingUtilities;
 
 /**

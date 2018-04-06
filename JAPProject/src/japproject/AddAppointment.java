@@ -23,6 +23,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class AddAppointment {
@@ -53,7 +54,7 @@ public class AddAppointment {
 
             lblSearch = new iLabel("Buscar en Tabla");
             lblSearch.setForeground(Color.WHITE); //SearchBar for tblPatientsForAppointments
-            txtSearch = new iTextField("", 0);
+            txtSearch = new iTextField("", 15);            
             AddAppointments_Panel.addSpace(20);
             AddAppointments_Panel.AddObject(lblSearch, 130, 30, 13);
             AddAppointments_Panel.AddObject(txtSearch, 250, 30, 153);

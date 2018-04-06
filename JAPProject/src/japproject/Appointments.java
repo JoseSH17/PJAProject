@@ -15,6 +15,8 @@ import iComponents.iTextField;
 import static japproject.HomePanel.currentPanel;
 import static japproject.JAPProject.sql;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
@@ -30,13 +32,14 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
+import java.util.EventListener;
+import javax.swing.border.Border;
 
 /**
  *
  * @author Jose
  */
-public class Appointments {
+public class Appointments implements ActionListener {
 
     public iPanel Appointments_Panel; //Panel to view, edit and add appointments.
     public iLabel lblCalendar; //lbl to indicate the user to select a date.
@@ -45,17 +48,21 @@ public class Appointments {
     public JButton btnViewAll; //Removes filter from txtHidenSearch.
     public JButton btnScheduleAppointment; //Allows the user to schedule a new appointment.
     public iTable tblAppointments; //Table to display all appointments, can be filtered as user requests.
+    public JPopupMenu popup;
+    public JMenuItem ItemEditar;
+    public JMenuItem ItemEliminar;
+
     private iLabel lbl_LogoULatina;//Ulatina logo lbl display
     private iLabel lbl_LogoPsicologia;//Ulatina Psychology Dept logo lbl display
 
     public List<String> tbl_Data = new ArrayList();
 
     public Appointments(iFrame if_) {
-        try {                        
+        try {
             currentPanel = "Appointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
             Appointments_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//Defining iPanel dimensions
             Appointments_Panel.setBackground(Color.decode("#006738"));//le doy color al panel  
-            
+
             lbl_LogoULatina = new iLabel("");
             lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
 
@@ -65,30 +72,29 @@ public class Appointments {
             Appointments_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
             Appointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
             Appointments_Panel.newLine();
-            
+
             lblCalendar = new iLabel("Por favor seleccione una fecha: "); //Lbl Guide
             lblCalendar.setForeground(Color.WHITE); //Calendar
             calendar = new iCalendar();
-            
-            txtHiddenSearch = new iTextField("",0); //Hidden txt that searches in table and updates result for used depending on selected date, this is not shown to the user.           
-            
+
+            txtHiddenSearch = new iTextField("", 0); //Hidden txt that searches in table and updates result for used depending on selected date, this is not shown to the user.           
+
             CalendarUpdateTable(calendar); //Calling method to update table dynamically                                   
-            
+
             btnViewAll = new JButton("Ver todas las citas");
             btnViewAll.setToolTipText("Elimina el filtro y muestra todas las citas");
-            
+
             Appointments_Panel.addSpace(20); //Leaving space from top
-            
+
             Appointments_Panel.AddObject(lblCalendar, 190, 30, 3);
             Appointments_Panel.AddObject(calendar, 70, 30, 193);
-            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303);            
+            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303);
             Appointments_Panel.newLine();
-            
-             btnViewAll.addActionListener((ae) -> {
-                 txtHiddenSearch.setText(""); //Deletes filter defined on txtHiddenSearch and show all data
-                 
-             });
-            
+
+            btnViewAll.addActionListener((ae) -> {
+                txtHiddenSearch.setText(""); //Deletes filter defined on txtHiddenSearch and show all data
+
+            });
 
             ResultSet rs = sql.SELECT("SELECT * FROM JAW_VistaCitas order by `Fecha Cita` desc");
 
@@ -105,10 +111,22 @@ public class Appointments {
             tblAppointments.setBackground(Color.decode("#006738"));
             tblAppointments.setSize(1100, 200);
 
-            PopMenu(tblAppointments, if_);//metodo que crea e implementa el popmenu 
+            popup = new JPopupMenu();
+            ItemEditar = new JMenuItem("Editar Cita");
+            ItemEditar.addActionListener(this);
+            ItemEliminar = new JMenuItem("Eliminar Cita");
+            ItemEliminar.addActionListener(this);
+
+            popup.add(ItemEditar);
+            popup.add(ItemEliminar);
+
+            tblAppointments.setComponentPopupMenu(popup);
+            tblAppointments.addMouseListener(new TableMouseListener(tblAppointments));
+
+            //PopMenu(tblAppointments, if_);//metodo que crea e implementa el popmenu 
             iScrollPane scrollCitas = new iScrollPane(tblAppointments, Color.decode("#006738"));
             scrollCitas.setViewportView(tblAppointments);
-            SetColumsSizes(tblAppointments);
+            SetColumsSizes();
 
             if (sql.Exists(rs)) {//verifica que el query sea valido
                 try {
@@ -126,125 +144,93 @@ public class Appointments {
                 }
             }
             Appointments_Panel.addSpace(20);
-            Appointments_Panel.AddObject(scrollCitas, 1100, 200);            
-            
+            Appointments_Panel.AddObject(scrollCitas, 1100, 200);
+
             Appointments_Panel.newLine();
             Appointments_Panel.finalice();
-            
+
             CheckFirstExecution(txtHiddenSearch);
-                                
+
         } catch (SQLException ex) {
             Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void CheckFirstExecution(iTextField check)
-    {   
-        if(check.getText().isEmpty())
-        {
-            Date date =  new Date(); //Getting current date from local host
+    public void CheckFirstExecution(iTextField check) {
+        if (check.getText().isEmpty()) {
+            Date date = new Date(); //Getting current date from local host
             DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd"); //Formatting current date for initial search and table refresh            
             txtHiddenSearch.setText(currentDateFormatted.format(calendar.getDate()));
         }
     }
-    
+
     public void CalendarUpdateTable(iCalendar calendar) {
         calendar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                calendarActionListener(calendar.getDate());                
+                calendarActionListener(calendar.getDate());
             }
         });
     }
 
     public void calendarActionListener(Date date) {
         DateFormat currentDateFormatted = new SimpleDateFormat("yyyy/MM/dd");
-        txtHiddenSearch.setText(currentDateFormatted.format(date));        
+        txtHiddenSearch.setText(currentDateFormatted.format(date));
         System.out.println("Fecha Actual: " + currentDateFormatted.format(date));
     }
 
-    public void PopMenu(iTable tblCitas, iFrame if_) {
+    public void ItemEditarActionListener() {
 
-        //
-        tblCitas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                int r = tblCitas.rowAtPoint(e.getPoint());
+        int selectedRow = tblAppointments.getSelectedRow();
 
-                if (r >= 0 && r < tblCitas.getRowCount()) {
-                    tblCitas.setRowSelectionInterval(r, r);
-                } else {
-                    tblCitas.clearSelection();
-                }
-
-                int rowindex = tblCitas.getSelectedRow();
-                if (rowindex < 0) {
-                    return;
-                }
-                if (e.isPopupTrigger() && e.getComponent() instanceof JTable) {
-                    JPopupMenu popup = new JPopupMenu();
-                    JMenuItem ItemEditar = new JMenuItem("Editar Cita");
-                    JMenuItem ItemEliminar = new JMenuItem("Eliminar Cita");
-
-                    ItemEditar.addActionListener((ae) -> {
-                        ItemEditarActionListener(tblCitas);
-                    });
-
-                    ItemEliminar.addActionListener((ae) -> {
-                        ItemEliminarActionListener(tblCitas);
-                    });
-
-                    popup.add(ItemEditar);
-                    popup.add(ItemEliminar);
-                    tblCitas.setComponentPopupMenu(popup);
-                    //
-
-                }
-            }
-        });
-
-    }
-
-    public void ItemEditarActionListener(iTable tblCitas) {
-
-        int selectedRow = tblCitas.getSelectedRow();
-
-        for (int j = 0; j < tblCitas.getColumnCount(); j++) {
-            tbl_Data.add(tblCitas.getColumnName(j) + "-" + tblCitas.getValueAt(selectedRow, j).toString());
+        for (int j = 0; j < tblAppointments.getColumnCount(); j++) {
+            tbl_Data.add(tblAppointments.getColumnName(j) + "-" + tblAppointments.getValueAt(selectedRow, j).toString());
             System.out.println("tblData: " + tbl_Data.toString());
         }
     }
 
-    public void ItemEliminarActionListener(iTable tblCitas) {
-        int selectedRow = tblCitas.getSelectedRow();
-        System.out.println("ID CITA: " + tblCitas.getValueAt(selectedRow, 0).toString());
+    public void ItemEliminarActionListener() {
+        int selectedRow = tblAppointments.getSelectedRow();
+        System.out.println("ID CITA: " + tblAppointments.getValueAt(selectedRow, 0).toString());
         ArrayList<Object> objs = new ArrayList();
-        objs.addAll(Arrays.asList(tblCitas.getValueAt(selectedRow, 0).toString()));
+        objs.addAll(Arrays.asList(tblAppointments.getValueAt(selectedRow, 0).toString()));
         sql.exec("UPDATE JAW_Citas SET `Deleted` = 1 WHERE IdCita = ?", objs);
     }
 
-    public void SetColumsSizes(iTable tblCitas) {
+    public void SetColumsSizes() {
         //Code to manage columns sizes
-        tblCitas.getColumnModel().getColumn(0).setWidth(0);
-        tblCitas.getColumnModel().getColumn(0).setMinWidth(0);
-        tblCitas.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblAppointments.getColumnModel().getColumn(0).setWidth(0);
+        tblAppointments.getColumnModel().getColumn(0).setMinWidth(0);
+        tblAppointments.getColumnModel().getColumn(0).setMaxWidth(0);
 
-        tblCitas.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tblAppointments.getColumnModel().getColumn(1).setPreferredWidth(140);
 
-        tblCitas.getColumnModel().getColumn(2).setWidth(0);
-        tblCitas.getColumnModel().getColumn(2).setMinWidth(0);
-        tblCitas.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblAppointments.getColumnModel().getColumn(2).setWidth(0);
+        tblAppointments.getColumnModel().getColumn(2).setMinWidth(0);
+        tblAppointments.getColumnModel().getColumn(2).setMaxWidth(0);
 
-        tblCitas.getColumnModel().getColumn(3).setPreferredWidth(140);
+        tblAppointments.getColumnModel().getColumn(3).setPreferredWidth(140);
 
-        tblCitas.getColumnModel().getColumn(4).setPreferredWidth(200);
+        tblAppointments.getColumnModel().getColumn(4).setPreferredWidth(200);
 
-        tblCitas.getColumnModel().getColumn(5).setPreferredWidth(400);
+        tblAppointments.getColumnModel().getColumn(5).setPreferredWidth(400);
 
-        tblCitas.getColumnModel().getColumn(6).setPreferredWidth(100);
+        tblAppointments.getColumnModel().getColumn(6).setPreferredWidth(100);
 
-        tblCitas.getColumnModel().getColumn(7).setPreferredWidth(150);
+        tblAppointments.getColumnModel().getColumn(7).setPreferredWidth(150);
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        JMenuItem menu = (JMenuItem) event.getSource();
+        if (menu == ItemEditar) {
+            ItemEditarActionListener();
+        } else if (menu == ItemEliminar) {
+            System.out.println("Entro correctamente en ItemEliminar WUJUU!!");
+            ItemEliminarActionListener();
+        } else {
+            System.out.println("Menu Not Handled");
+        }
+    }
 }

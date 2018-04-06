@@ -15,8 +15,6 @@ import iComponents.iTable;
 import iComponents.iTextField;
 import static japproject.HomePanel.currentPanel;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,12 +23,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
-import static japproject.HomePanel.ColorPanels;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.EventListener;
-import javax.swing.border.Border;
 
 /**
  *
@@ -50,7 +44,6 @@ public class PatientView implements ActionListener {
     //popmenu
     JPopupMenu popup;
     JMenuItem ItemEditar;
-    public boolean banderita;
     //
 
     public PatientView(iFrame if_) {
