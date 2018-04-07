@@ -23,13 +23,16 @@ import javax.swing.plaf.ColorUIResource;
  * @author Jose
  */
 public class HomePanel {
-
+    //Static Variables
     public static String currentPanel; //Holds current panel running
-
-    public Point initialClick;
-
+    public static Color ColorPanels =new ColorUIResource(Color.decode("#006738"));
+    public static Color ColorFonts =  new ColorUIResource(Color.WHITE);
+    public static Color ColorElementsFonts =  new ColorUIResource(Color.BLACK);
+    public static Color ColorNonEditElementsFonts =  new ColorUIResource(Color.BLUE);
     public static iFrame if_; //This is the main iFrame container, everything will be shown in here. 
 
+    public Point initialClick;
+    
     public LoadingProgressBars lpb;  //Calls methods from Loading Progress Bars class
 
     PatientView PV; //Panel to show Patient Data.
@@ -42,7 +45,7 @@ public class HomePanel {
     Appointments AP; //Panel to View and Edit appointments.
     AddAppointment AAP; //Panel to Add appointments
     BlackList BL; //Panel to View Patients in BlackList
-    public static Color ColorPanels=new ColorUIResource(Color.decode("#006738"));
+    
     public HomePanel() {
         lpb = new LoadingProgressBars();
         if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
