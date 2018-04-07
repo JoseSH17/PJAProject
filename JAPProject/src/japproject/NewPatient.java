@@ -22,16 +22,10 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import static japproject.HomePanel.currentPanel;
-import java.awt.BorderLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -45,11 +39,6 @@ import javax.swing.event.DocumentListener;
 public class NewPatient {
     
     public iPanel NewPatient_Panel;//creo el iPanel para mi Solicitante
-    public iPanel NewPatient2_Panel;//creo el iPanel para mi Paciente
-    
-    public iPanel TabbedPane_Panel;//creo el iPanel para mi JTabbedPane
-    private JTabbedPane Tabs;//creo el JtabbedPane
-    
     
     private iLabel vacio = new iLabel("");//lo creo para hacer newline()
     
@@ -62,22 +51,9 @@ public class NewPatient {
     private JComboBox cbo_IsNonGrato;//son de seleccion por base de datos//((((lista negra)))))
     //fin cbo`s para Paciente
     
-    //cbo`s para Paciente
-    private JComboBox cbo_TipoPacienteT;//son de seleccion por base de datos
-    private JComboBox cbo_HorarioPacienteT;//son de seleccion por base de datos
-    private JComboBox cbo_ClasificacionPacienteT;//son de seleccion por base de datos
-    private JComboBox cbo_CursoPacienteT;//son de seleccion por base de datos
-    private JComboBox cbo_ParentescoT;//son de seleccion por base de datos
-    private JComboBox cbo_IsNonGratoT;//son de seleccion por base de datos//((((lista negra)))))
-    //fin cbo`s para Paciente
-    
     //Controles swing para NewPatient_Panel
     private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
     private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
-    private iLabel lbl_LogoPsicologiaT;//Lbl para el logo de Psicologia
-    private iButton btnRegister;//Boton para el registrar
-    private iButton btnNuevoPaciente;//Boton para el registrar
-    private iButton btnNuevoPacienteT;//Boton para el registrar
     //FIN de Controles swing para NewPatient_Panel
     
     //Controles Swing para Solicitante
@@ -99,8 +75,8 @@ public class NewPatient {
     private iLabel lbl_FechaReporte;//Lbl para la FechaReporte del Solicitante
     private iCalendar FechaReporte;
     private iLabel lbl_NOTA;//Lbl para la NOTA(si preciona el CheckBox) del Solicitante
-    
     private JCheckBox chk_boxSolicitanteDiferentePaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
+    private iButton btnRegister;//Boton para el registrar
     //FIN de Controles Swing para Solicitante
     
     
@@ -131,52 +107,14 @@ public class NewPatient {
     private JTextArea txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente 
     private iLabel lbl_IsNonGrato;//Lbl para el Tipo de Lista Negra  
-    //FIN de Controles Swing para Paciente
-    
-    //Controles swing para paciente = Solicitante
-    private iButton btnRegisterPacienteT;//Boton para registrar el paciente
-    private iLabel lbl_TituloPacienteT;//Lbl para el Titulo del Paciente
-    private iLabel lbl_CedulaPacienteT;//Lbl para la Cedula del Solicitante
-    private iTextField txt_CedulaPacienteT;//TextField para cedula del Solicitante en la parte de paciente(hay que hacerle un setEditable(false))
-    private iLabel lbl_NombrePacienteT;//Lbl para el Nombre del Paciente
-    private iTextField txt_NombrePacienteT;//TextField para el Nombre del Paciente
-    private iLabel lbl_FechaNacimientoPacienteT;//Lbl para la Fecha de Nacimiento del Paciente
-    private iCalendar FechaNacimientoPacienteT;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
-    private iLabel lbl_DireccionPacienteT;//Lbl para la Direccion del Paciente
-    private JTextArea txt_DireccionPacienteT;//TextField para la Direccion del Paciente
-    private iLabel lbl_TelefonoPacienteT;//Lbl para la el Telefono del Paciente
-    private iTextField txt_TelefonoPacienteT;//TextField para el Telefono del Paciente
-    private iLabel lbl_ProfesionPacienteT;//Lbl para la Profesion del Paciente
-    private iTextField txt_ProfesionPacienteT;//TextField para la Profesion del Paciente
-    private iLabel lbl_ActividadLaboralPacienteT;//Lbl para la Actividad Laboral del Paciente
-    private iTextField txt_ActividadLaboralPacienteT;//TextField para la Actividad Laboral del Paciente
-    private iLabel lbl_MotivoConsultaPacienteT;//Lbl para la El Motivo Consulta del Paciente
-    private JTextArea txt_MotivoConsultaPacienteT;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
-    private iLabel lbl_ParentescoPacienteT;//Lbl para el Parentesco del Paciente
-    private iLabel lbl_ClasificacionPacienteT;//Lbl para la Clasificacion del Paciente
-    private iLabel lbl_CursoPacienteT;//Lbl para la el Curso del Paciente
-    private iLabel lbl_HorarioPacienteT;//Lbl para la el Horario del Paciente
-    private iLabel lbl_DetalleHorarioPacienteT;//Lbl para el Detalle Horario del Paciente
-    private JTextArea txt_DetalleHorarioPacienteT;//TextField para el Detalle Horario del Paciente
-    private iLabel lbl_TipoPacienteT;//Lbl para el Tipo de Paciente 
-    private iLabel lbl_IsNonGratoT;//Lbl para el Tipo de Lista Negra  
+    private iButton btnNuevoPaciente;//Boton para el registrar
     //FIN de Controles Swing para Paciente
     
     public NewPatient(iFrame if_) {
         currentPanel = "NewPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.
-//        NewPatient_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        NewPatient_Panel = new iPanel(0, 0, 50.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
+                                  //x  , y, width(largo), height(alto), Elements Margin, if_
+        NewPatient_Panel = new iPanel(0, 0, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
-        
-                                     //x  ,   y, width(largo), height(alto), Elements Margin, if_
-//        TabbedPane_Panel = new iPanel(600, 200, 38.0f, 75.0f, 0, 0, if_);//le doy propiedades al iPanel
-//        NewPatient2_Panel = new iPanel(600, 0, 50.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-//        NewPatient2_Panel.setBackground(Color.decode("#0732"));//le doy color al panel
-
-        TabbedPane_Panel = new iPanel(600, 0, 50.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        TabbedPane_Panel.setBackground(Color.decode("#0000"));//le doy color al panel
-//        TabbedPane_Panel.setVisible(false);
-        
         Ingresar(if_);
         
     }
@@ -272,7 +210,6 @@ public class NewPatient {
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
         txt_DireccionPaciente = new JTextArea();
         
-
         lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
         lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
         txt_TelefonoPaciente = new iTextField("", 15);
@@ -322,89 +259,6 @@ public class NewPatient {
         
     }//fin de metodo componentes paciente
     
-    
-    
-    /**
-     * Método que crea los componentes en el NewPatient_Panel de Paciente
-     *
-     * @return Muestra los componentes en el NewPatient_Panel del Paciente
-     */
-    private void ComponentesPacienteT(){
-  
-        ////////////////Componentes para paciente, recordar ponerlos en setVisible(false); ,[y en el metodo setVisible(true) si es verdad, }else{setVisible(true);]
-        
-        lbl_LogoPsicologiaT = new iLabel("");
-        lbl_LogoPsicologiaT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-        
-        lbl_TituloPacienteT = new iLabel("PACIENTE");
-        lbl_TituloPacienteT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_TituloPacienteT.setForeground(Color.GRAY.brighter());
-
-        lbl_CedulaPacienteT = new iLabel("Cédula Paciente".toUpperCase());
-        lbl_CedulaPacienteT.setForeground(Color.GRAY.brighter());
-        txt_CedulaPacienteT = new iTextField("", 15);
-
-        lbl_NombrePacienteT = new iLabel("Nombre Paciente".toUpperCase());
-        lbl_NombrePacienteT.setForeground(Color.GRAY.brighter());
-        txt_NombrePacienteT = new iTextField("", 15);
-
-        lbl_FechaNacimientoPacienteT = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
-        lbl_FechaNacimientoPacienteT.setForeground(Color.GRAY.brighter());
-        FechaNacimientoPacienteT = new iCalendar();
-
-        lbl_DireccionPacienteT = new iLabel("Dirección Paciente".toUpperCase());
-        lbl_DireccionPacienteT.setForeground(Color.GRAY.brighter());
-        txt_DireccionPacienteT = new JTextArea();
-
-        lbl_TelefonoPacienteT = new iLabel("Teléfono Paciente".toUpperCase());
-        lbl_TelefonoPacienteT.setForeground(Color.GRAY.brighter());
-        txt_TelefonoPacienteT = new iTextField("", 15);
-
-        lbl_ProfesionPacienteT = new iLabel("Profesión Paciente".toUpperCase());
-        lbl_ProfesionPacienteT.setForeground(Color.GRAY.brighter());
-        txt_ProfesionPacienteT = new iTextField("", 15);
-
-        lbl_ActividadLaboralPacienteT = new iLabel("Actividad Laboral Paciente".toUpperCase());
-        lbl_ActividadLaboralPacienteT.setForeground(Color.GRAY.brighter());
-        txt_ActividadLaboralPacienteT = new iTextField("", 15);
-
-        lbl_MotivoConsultaPacienteT = new iLabel("Motivo Consulta Paciente".toUpperCase());
-        lbl_MotivoConsultaPacienteT.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaPacienteT = new JTextArea();
-
-        lbl_ParentescoPacienteT = new iLabel("Parentesco Paciente".toUpperCase());
-        lbl_ParentescoPacienteT.setForeground(Color.GRAY.brighter());
-        cbo_ParentescoT = new JComboBox();//son de seleccion por base de datos
-        
-        lbl_ClasificacionPacienteT = new iLabel("Clasificación Paciente".toUpperCase());
-        lbl_ClasificacionPacienteT.setForeground(Color.GRAY.brighter());
-        cbo_ClasificacionPacienteT = new JComboBox();//son de seleccion por base de datos
-
-        lbl_CursoPacienteT = new iLabel("Curso".toUpperCase());
-        lbl_CursoPacienteT.setForeground(Color.GRAY.brighter());
-        cbo_CursoPacienteT = new JComboBox();//son de seleccion por base de datos
-
-        lbl_HorarioPacienteT = new iLabel("Horario Paciente".toUpperCase());
-        lbl_HorarioPacienteT.setForeground(Color.GRAY.brighter());
-        cbo_HorarioPacienteT = new JComboBox();//son de seleccion por base de datos
-
-        lbl_DetalleHorarioPacienteT = new iLabel("Detalle Horario Paciente".toUpperCase());
-        lbl_DetalleHorarioPacienteT.setForeground(Color.GRAY.brighter());
-        txt_DetalleHorarioPacienteT = new JTextArea();
-
-        lbl_TipoPacienteT = new iLabel("Tipo Paciente Paciente".toUpperCase());
-        lbl_TipoPacienteT.setForeground(Color.GRAY.brighter());
-        cbo_TipoPacienteT = new JComboBox();//son de seleccion por base de datos
-        lbl_IsNonGratoT = new iLabel("Lista Relegados".toUpperCase());
-        lbl_IsNonGratoT.setForeground(Color.GRAY.brighter()); 
-        cbo_IsNonGratoT = new JComboBox();//son los de seleccion por paciente en lista negra
-        
-        btnNuevoPacienteT = new iButton("NUEVO PACIENTE(+)", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnRegisterPacienteT = new iButton("REGISTRAR PACIENTE", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        ///////////////Fin de componentes de Paciente
-        
-    }//fin de metodo componentes paciente
-    
     public String fechaActualFechaReporte(){
         DateFormat formatoFechaFechaReporte = new SimpleDateFormat("yyyy/MM/dd");//le doy formato a la fecha
         System.out.println(formatoFechaFechaReporte.format(FechaReporte.getDate()));//para ver la fecha si esta bien
@@ -420,204 +274,6 @@ public class NewPatient {
     }
     
     
-//    /**
-//     * Método que crea los componentes en el NewPatient_Panel 
-//     *
-//     * @return Muestra los componentes en el NewPatient_Panel
-//    */
-//    private void Ingresar(iFrame if_) {
-//        
-//        ComponentesSolicitante();//cargo el metodo de los componentes swing de Solicitante
-//        ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
-//        
-//        
-//        chk_boxSolicitanteDiferentePaciente = new JCheckBox();
-//        chk_boxSolicitanteDiferentePaciente.setText("PACIENTE != Solicitante".toUpperCase());
-//        chk_boxSolicitanteDiferentePaciente.setBackground(Color.GRAY);
-//        
-//        cbo_CargarParentesco();
-//        cbo_CargarClasificacionPaciente();
-//        cbo_CargarCurso();
-//        cbo_CargarHorario();
-//        cbo_CargarTipoPaciente();
-//        cbo_CargarIsNonGrato();//recien agregado
-//        
-//        /////////////////componente,/////ancho,largo,posision//
-//        NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
-//        NewPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
-//        NewPatient_Panel.newLine();  
-//        
-//        NewPatient_Panel.AddObject(vacio, 0,30,2);//esto fue agregado para hacer salto de linea en el mismo codigo
-//        NewPatient_Panel.newLine();//aqui paso de linea al momento de hacer u know
-//        NewPatient_Panel.AddObject(lbl_TituloSolicitante, 75, 30, 175);
-//        NewPatient_Panel.AddObject(lbl_TituloPaciente, 56, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//        
-//
-//        NewPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
-//        NewPatient_Panel.AddObject(txt_CedulaSolicitante, 230, 30, 175);
-//        NewPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//
-//        NewPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_NombrePaciente, 230, 30, 600);//para paciente 
-//        NewPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 175);
-//        NewPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//
-//        
-//        NewPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 600);//para paciente
-//        NewPatient_Panel.AddObject(txt_DireccionSolicitante, 230, 30, 175);
-//        NewPatient_Panel.AddObject(FechaNacimientoPaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//
-//        NewPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_DireccionPaciente, 230, 30, 600);//para paciente
-//        NewPatient_Panel.AddObject(txt_TelefonoSolicitante, 230, 30, 175);
-//        NewPatient_Panel.AddObject(txt_DireccionPaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//
-//        NewPatient_Panel.AddObject(lbl_ProfesionSolicitante, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_TelefonoPaciente, 230, 30, 600);//para paciente
-//        NewPatient_Panel.AddObject(txt_ProfesionSolicitante, 230, 30, 175);
-//        NewPatient_Panel.AddObject(txt_TelefonoPaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//
-//        NewPatient_Panel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_ProfesionPaciente, 230, 30, 600);//para paciente
-//        NewPatient_Panel.AddObject(txt_ActividadLaboralSolicitante, 230, 30, 175);
-//        NewPatient_Panel.AddObject(txt_ProfesionPaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//
-//        NewPatient_Panel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 600);//para paciente
-//        NewPatient_Panel.AddObject(txt_MotivoConsultaSolicitante, 230, 30, 175);
-//        NewPatient_Panel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//
-//        NewPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 10);
-//        NewPatient_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
-//        NewPatient_Panel.AddObject(FechaReporte, 230, 30, 175);
-//        NewPatient_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
-//        NewPatient_Panel.newLine();
-//        
-//        NewPatient_Panel.AddObject(lbl_ParentescoPaciente, 230, 30, 600);//
-//        NewPatient_Panel.AddObject(cbo_Parentesco, 230, 30, 800);//
-//        NewPatient_Panel.newLine();
-//        
-//        NewPatient_Panel.AddObject(lbl_ClasificacionPaciente, 230, 30, 600);//
-//        NewPatient_Panel.AddObject(cbo_ClasificacionPaciente, 230, 30, 800);//
-//        NewPatient_Panel.newLine();
-//        
-//        NewPatient_Panel.AddObject(lbl_CursoPaciente, 230, 30, 600);//
-//        NewPatient_Panel.AddObject(cbo_CursoPaciente, 230, 30, 800);//
-//        NewPatient_Panel.newLine();
-//        
-//        NewPatient_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 600);//
-//        NewPatient_Panel.AddObject(cbo_HorarioPaciente, 230, 30, 800);//
-//        NewPatient_Panel.newLine();
-//        
-//        NewPatient_Panel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 600);//
-//        NewPatient_Panel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 800);//
-//        NewPatient_Panel.newLine();
-//        
-//        NewPatient_Panel.AddObject(lbl_TipoPaciente, 230, 30, 600);//
-//        NewPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);//
-//        NewPatient_Panel.newLine();
-//        NewPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);//
-//        NewPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);//
-//        NewPatient_Panel.newLine();
-//        
-//        NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
-//        
-//        //Para crear las ventanas de los JtabbedPanes
-//        Tabs = new JTabbedPane();//creo el panel para hacer el JtabbedPane
-//        Tabs.add("UNO", new iLabel("En la pestaña uno"));//falta cambiar por el panel estatico
-//        Tabs.add("DOS", new iLabel("En la pestaña dos"));
-////        Tabs.add("DOS", new iPanel(0, 0, 0, 0, 0, if_));//aun falta en preceso de 
-//        Tabs.add("TRES", new iLabel("En la pestaña tres"));
-//        
-//        Tabs.setBackgroundAt(0, Color.YELLOW);
-//        Tabs.setBackgroundAt(1, Color.RED);
-//        Tabs.setBackgroundAt(2, Color.GREEN);
-//                                       //largo, ancho   , posicion  
-//        NewPatient_Panel.AddObject(Tabs, 445, 570, 600);//para paciente
-//        Tabs.setVisible(false); 
-//    
-//                                        
-//        //Fin de crear los TabbedPane
-//        NewPatient_Panel.newLine();
-//        NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
-//        NewPatient_Panel.newLine();
-//        NewPatient_Panel.AddObject(btnRegister, 175, 30, 10);
-//        NewPatient_Panel.AddObject(btnNuevoPaciente, 175, 30, 600);
-//        btnNuevoPaciente.setVisible(false);
-//        NewPatient_Panel.newLine();
-//        
-//        setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
-//        
-//        if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
-//            Tabs.setVisible(false);
-//        }else{
-//            Tabs.setVisible(true);
-//        }
-//        
-//        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
-//            
-//            if (chk_boxSolicitanteDiferentePaciente.isSelected() == true) {
-//                System.out.println("MUESTRA MENSAJE DE CHECKBOX ACTIVO");
-////                JOptionPane.showMessageDialog(null, "AHORA SELECCIONO EL CHECKBOX, PACIENTE ES DISTINTO AL SOLICITANTE", "ERROR", JOptionPane.ERROR_MESSAGE);
-//                Tabs.setVisible(true);
-//                btnNuevoPaciente.setVisible(true);
-//                cbo_Parentesco.setEnabled(true);
-//                cbo_IsNonGrato.setEnabled(true);
-////                Tabs.setVisible(true);
-//                 
-//            }else {  
-//                System.out.println("MUESTRA MENSAJE DE CHECKBOC DESACTIVADO");
-//                Tabs.setVisible(false);
-//                btnNuevoPaciente.setVisible(false);
-//                cbo_Parentesco.setSelectedItem("Nulo");
-//                cbo_Parentesco.setEnabled(false);
-//                cbo_IsNonGrato.setSelectedItem("No");
-//                cbo_IsNonGrato.setEnabled(false); 
-////                Tabs.setVisible(false);
-//            }
-//        });
-//        
-//        btnRegister.addActionListener((a) -> {
-//            btn_Register_MouseClicked();
-//        });
-//        
-//        btnNuevoPaciente.addActionListener((a) -> {//este metodo es para registrar los pacientes cuando el paciente es distinto al solicitante
-//            
-//        });
-//        
-//        btnRegisterPaciente.addActionListener((aa) -> {
-//            
-//        });
-//        
-//        if_.add(NewPatient_Panel);//me aniade el panel al frame
-//
-//    }//Fin del metodo ibtnIngresarPacienteaddActionListener
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     /**
      * Método que crea los componentes en el NewPatient_Panel 
      *
@@ -626,427 +282,190 @@ public class NewPatient {
     private void Ingresar(iFrame if_) {
         
         ComponentesSolicitante();//cargo el metodo de los componentes swing de Solicitante
-//        ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
-        ComponentesPacienteT();//cargo los componentes del Panel Paciente
+        ComponentesPaciente();//cargo el metodo de los componentes swing de Paciente
         
-//        cbo_CargarParentesco();
-//        cbo_CargarClasificacionPaciente();
-//        cbo_CargarCurso();
-//        cbo_CargarHorario();
-//        cbo_CargarTipoPaciente();
-//        cbo_CargarIsNonGrato();//recien agregado
+        cbo_CargarParentesco();
+        cbo_CargarClasificacionPaciente();
+        cbo_CargarCurso();
+        cbo_CargarHorario();
+        cbo_CargarTipoPaciente();
+        cbo_CargarIsNonGrato();//recien agregado
         
         /////////////////componente,/////ancho,largo,posision//
-        //componentes para NewPatient_Panel
         NewPatient_Panel.addSpace(70);
         NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
-        NewPatient_Panel.newLine();  
+        NewPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
+        NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_TituloSolicitante, 75, 30, 175);
+        NewPatient_Panel.AddObject(lbl_TituloPaciente, 56, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_CedulaSolicitante, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 600);//para paciente
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(txt_CedulaSolicitante, 230, 30, 175);
+        NewPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
-        
+
         NewPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_NombrePaciente, 230, 30, 600);//para paciente 
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 175);
+        NewPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
-        
+
         NewPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 600);//para paciente
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(txt_DireccionSolicitante, 230, 30, 175);
+        NewPatient_Panel.AddObject(FechaNacimientoPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
-        
+
         NewPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_DireccionPaciente, 230, 30, 600);//para paciente
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(txt_TelefonoSolicitante, 230, 30, 175);
+        NewPatient_Panel.AddObject(txt_DireccionPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
-        
+
         NewPatient_Panel.AddObject(lbl_ProfesionSolicitante, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_TelefonoPaciente, 230, 30, 600);//para paciente
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(txt_ProfesionSolicitante, 230, 30, 175);
+        NewPatient_Panel.AddObject(txt_TelefonoPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
-        
+
         NewPatient_Panel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_ProfesionPaciente, 230, 30, 600);//para paciente
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(txt_ActividadLaboralSolicitante, 230, 30, 175);
+        NewPatient_Panel.AddObject(txt_ProfesionPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
-        
+
         NewPatient_Panel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 600);//para paciente
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(txt_MotivoConsultaSolicitante, 230, 30, 175);
+        NewPatient_Panel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 800);//para paciente
+        NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
+
+        NewPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 10);
+        NewPatient_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
+        NewPatient_Panel.addSpace(5);
+        NewPatient_Panel.AddObject(FechaReporte, 230, 30, 175);
+        NewPatient_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
         
-        NewPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 10);
-        NewPatient_Panel.AddObject(FechaReporte, 230, 30, 175);
+        NewPatient_Panel.AddObject(lbl_ParentescoPaciente, 230, 30, 600);//
+        NewPatient_Panel.AddObject(cbo_Parentesco, 230, 30, 800);//
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
+        
+        NewPatient_Panel.AddObject(lbl_ClasificacionPaciente, 230, 30, 600);//
+        NewPatient_Panel.AddObject(cbo_ClasificacionPaciente, 230, 30, 800);//
+        NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
+        
+        NewPatient_Panel.AddObject(lbl_CursoPaciente, 230, 30, 600);//
+        NewPatient_Panel.AddObject(cbo_CursoPaciente, 230, 30, 800);//
+        NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
+        
+        NewPatient_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 600);//
+        NewPatient_Panel.AddObject(cbo_HorarioPaciente, 230, 30, 800);//
+        NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
+        
+        NewPatient_Panel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 600);//
+        NewPatient_Panel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 800);//
+        NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
+        
+        NewPatient_Panel.AddObject(lbl_TipoPaciente, 230, 30, 600);//
+        NewPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);//
+        NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
+        
+        NewPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);//
+        NewPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);//
+        NewPatient_Panel.newLine();
+//        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
         NewPatient_Panel.newLine();
-        
+
+
         NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
         NewPatient_Panel.newLine();
+        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(btnRegister, 175, 30, 10);
+        NewPatient_Panel.AddObject(btnNuevoPaciente, 175, 30, 600);
+        btnNuevoPaciente.setVisible(false);
         NewPatient_Panel.newLine();
-        
-//        TabbedPane_Panel.addSpace(100);
-//        TabbedPane_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
-//        TabbedPane_Panel.newLine();
-        
-        
-        
-        
-        
-//        //componentes para NewPatient2_Panel
-//        NewPatient2_Panel.addSpace(70);
-//        NewPatient2_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 10);
-//        NewPatient2_Panel.newLine();  
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_TituloPaciente, 56, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_CedulaPaciente, 146, 30, 10);//para paciente
-//        NewPatient2_Panel.AddObject(txt_CedulaPaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//
-//        NewPatient2_Panel.AddObject(lbl_NombrePaciente, 230, 30, 10);//para paciente 
-//        NewPatient2_Panel.AddObject(txt_NombrePaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//
-//        NewPatient2_Panel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 10);//para paciente
-//        NewPatient2_Panel.AddObject(FechaNacimientoPaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//
-//        NewPatient2_Panel.AddObject(lbl_DireccionPaciente, 230, 30, 10);//para paciente
-//        NewPatient2_Panel.AddObject(txt_DireccionPaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5); 
-//
-//        NewPatient2_Panel.AddObject(lbl_TelefonoPaciente, 230, 30, 10);//para paciente
-//        NewPatient2_Panel.AddObject(txt_TelefonoPaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//
-//        NewPatient2_Panel.AddObject(lbl_ProfesionPaciente, 230, 30, 10);//para paciente
-//        NewPatient2_Panel.AddObject(txt_ProfesionPaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//
-//        NewPatient2_Panel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 10);//para paciente
-//        NewPatient2_Panel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 10);//para paciente
-//        NewPatient2_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 250);//para paciente
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        
-//        NewPatient2_Panel.AddObject(lbl_ParentescoPaciente, 230, 30, 10);//
-//        NewPatient2_Panel.AddObject(cbo_Parentesco, 230, 30, 250);//
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_ClasificacionPaciente, 230, 30, 10);//
-//        NewPatient2_Panel.AddObject(cbo_ClasificacionPaciente, 230, 30, 250);//
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_CursoPaciente, 230, 30, 10);//
-//        NewPatient2_Panel.AddObject(cbo_CursoPaciente, 230, 30, 250);//
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 10);//
-//        NewPatient2_Panel.AddObject(cbo_HorarioPaciente, 230, 30, 250);//
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 10);//
-//        NewPatient2_Panel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 250);//
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_TipoPaciente, 230, 30, 10);//
-//        NewPatient2_Panel.AddObject(cbo_TipoPaciente, 230, 30, 250);//
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(5);
-//        
-//        NewPatient2_Panel.AddObject(lbl_IsNonGrato, 230, 30, 10);//
-//        NewPatient2_Panel.AddObject(cbo_IsNonGrato, 230, 30, 250);//
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.addSpace(50);
-//        
-//        NewPatient2_Panel.AddObject(btnRegisterPaciente, 175, 30, 250);
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.AddObject(vacio, 175, 30, 170);
-//        NewPatient2_Panel.newLine();
-//        NewPatient2_Panel.AddObject(btnNuevoPaciente, 175, 30, 10);
-//        NewPatient2_Panel.newLine();
-        
-//        btnNuevoPaciente.setVisible(false);
-
-//        
-//        setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
-//        setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
-        
 
 
-//        TabbedPane_Panel.addSpace(70);
-//        TabbedPane_Panel.AddObject(lbl_LogoPsicologiaT, 482, 120, 10);
-//        TabbedPane_Panel.newLine();  
-//        
+        setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
+        setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
         
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        TabbedPane_Panel.AddObject(lbl_TituloPacienteT, 56, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_CedulaPacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(txt_CedulaPacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_NombrePacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(txt_NombrePacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_FechaNacimientoPacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(FechaNacimientoPacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_DireccionPacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(txt_DireccionPacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_TelefonoPacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(txt_TelefonoPacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_ProfesionPacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(txt_ProfesionPacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_ActividadLaboralPacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(txt_ActividadLaboralPacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_MotivoConsultaPacienteT, 146, 30, 10);//para paciente
-//        TabbedPane_Panel.AddObject(txt_MotivoConsultaPacienteT, 230, 30, 170);//para paciente
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_ParentescoPacienteT, 146, 30, 10);//
-//        TabbedPane_Panel.AddObject(cbo_ParentescoT, 230, 30, 170);//
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_ClasificacionPacienteT, 146, 30, 10);//
-//        TabbedPane_Panel.AddObject(cbo_ClasificacionPacienteT, 230, 30, 170);//
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_CursoPacienteT, 146, 30, 10);//
-//        TabbedPane_Panel.AddObject(cbo_CursoPacienteT, 230, 30, 170);//
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_HorarioPacienteT, 146, 30, 10);//
-//        TabbedPane_Panel.AddObject(cbo_HorarioPacienteT, 230, 30, 170);//
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        TabbedPane_Panel.AddObject(lbl_DetalleHorarioPacienteT, 146, 30, 10);//
-//        TabbedPane_Panel.AddObject(txt_DetalleHorarioPacienteT, 230, 30, 170);//
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_TipoPacienteT, 146, 30, 10);//
-//        TabbedPane_Panel.AddObject(cbo_TipoPacienteT, 230, 30, 170);//
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(lbl_IsNonGratoT, 146, 30, 10);//
-//        TabbedPane_Panel.AddObject(cbo_IsNonGratoT, 230, 30, 170);//
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.addSpace(5);
-//        
-//        TabbedPane_Panel.AddObject(btnRegisterPacienteT, 175, 30, 170);
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.AddObject(vacio, 175, 30, 170);
-//        TabbedPane_Panel.newLine();
-//        TabbedPane_Panel.AddObject(btnNuevoPacienteT, 175, 30, 10);
-//        TabbedPane_Panel.newLine();
+        if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
 
+        }else{
+            
+        }
         
-        
-        //Para crear las ventanas de los JtabbedPanes
-        
-
-//        JTable table1 = new JTable (12, 5);
-        JTable table2 = new JTable (12, 5);
-//        JButton button1 = new JButton ("Button");
-        JButton button2 = new JButton ("Button");
-//        
-//        JTable table3 = new JTable (12, 5);
-//        JButton button3 = new JButton ("Button");
-//        
-//        
-//        TabbedPane_Panel.setLayout(new BorderLayout ());
-//        TabbedPane_Panel.add (table1, BorderLayout.SOUTH);
-//        TabbedPane_Panel.add (button1, BorderLayout.NORTH);
-        JPanel panel = new JPanel ();//panel
-        JPanel panel1 = new JPanel ();//panel
-        JPanel panel2 = new JPanel ();//panel
-        JPanel panel3 = new JPanel ();//panel
-        JPanel panel4 = new JPanel ();//panel
-        panel1.add(table2, BorderLayout.SOUTH);
-        panel2.add(button2, BorderLayout.NORTH);
-        Tabs = new JTabbedPane();//creo el panel para hacer el JtabbedPane
-        Tabs.addTab ("Tab1", panel);
-        Tabs.addTab ("Tab2", panel1);
-        Tabs.addTab ("Tab3", panel2);
-        Tabs.addTab ("Tab4", panel3);
-        Tabs.addTab ("Tab5", panel4);
-//        Tabs.addTab ("Tab2", TabbedPane_Panel);
-//        Tabs.addTab ("Tab3", TabbedPane_Panel);
-        
-//        Tabs.add(TabbedPane_Panel, "Tab2");
-//        Tabs.addTab("Tab2",NewPatient2_Panel);
-//        Tabs.setVisible(false);
-
-        
-        
-//        JPanel panel = new JPanel ();//panel
-//        panel.setLayout (new BorderLayout ());
-//        panel.add (table3, BorderLayout.SOUTH);
-//        panel.add (button3, BorderLayout.SOUTH);
-//        
-//        JPanel panel2 = new JPanel ();//panel
-//        panel2.setLayout (new BorderLayout ());
-//        panel2.add (table3, BorderLayout.CENTER);
-//        panel2.add (button3, BorderLayout.SOUTH);
-//        
-//        
-//        JTabbedPane tabbedPane = new JTabbedPane ();
-//        tabbedPane.addTab ("Tab1", panel);
-//        tabbedPane.addTab ("Tab2", panel2);
-//        
-//        JFrame frame = new JFrame ();
-        if_.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-        if_.getContentPane ().setLayout (new BorderLayout ());
-        if_.getContentPane ().add (Tabs, BorderLayout.CENTER);
-        if_.pack ();
-        if_.setVisible (true);
-//        
-//
-//        if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
-////            Tabs.setVisible(false);
-//            TabbedPane_Panel.setVisible(false);//el panel
-//        }else{
-////            Tabs.setVisible(true);
-//            TabbedPane_Panel.setVisible(true);//el panel
-//        }
-        
-        
-        
-        
-
-
-        
-//        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
-//            
-//            if (chk_boxSolicitanteDiferentePaciente.isSelected() == true) {
-//                System.out.println("MUESTRA MENSAJE DE CHECKBOX ACTIVO");
-////                JOptionPane.showMessageDialog(null, "AHORA SELECCIONO EL CHECKBOX, PACIENTE ES DISTINTO AL SOLICITANTE", "ERROR", JOptionPane.ERROR_MESSAGE);
-////                Tabs.setVisible(true);
-//                
-////                btnNuevoPaciente.setVisible(true);
-////                cbo_Parentesco.setEnabled(true);
-////                cbo_IsNonGrato.setEnabled(true);
-//                TabbedPane_Panel.setVisible(true);//el panel
-////                btnNuevoPacienteT.setVisible(true);
-//                
-//            }else {  
-//                System.out.println("MUESTRA MENSAJE DE CHECKBOC DESACTIVADO");
-////                Tabs.setVisible(false);
-//                
-////                btnNuevoPaciente.setVisible(false);
-////                cbo_Parentesco.setSelectedItem("Nulo");
-////                cbo_Parentesco.setEnabled(false);
-////                cbo_IsNonGrato.setSelectedItem("No");
-////                cbo_IsNonGrato.setEnabled(false);
-//                TabbedPane_Panel.setVisible(false);//el panel
-////                btnNuevoPacienteT.setVisible(false);
-//            }
-//        });
+        chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {
+            
+            if (chk_boxSolicitanteDiferentePaciente.isSelected() == true) {
+                System.out.println("MUESTRA MENSAJE DE CHECKBOX ACTIVO");
+//                JOptionPane.showMessageDialog(null, "AHORA SELECCIONO EL CHECKBOX, PACIENTE ES DISTINTO AL SOLICITANTE", "ERROR", JOptionPane.ERROR_MESSAGE);
+                btnNuevoPaciente.setVisible(true);
+                cbo_Parentesco.setEnabled(true);
+                cbo_IsNonGrato.setEnabled(true);
+                
+                
+            }else {  
+                System.out.println("MUESTRA MENSAJE DE CHECKBOC DESACTIVADO");
+                
+                btnNuevoPaciente.setVisible(false);
+                cbo_Parentesco.setSelectedItem("Nulo");
+                cbo_Parentesco.setEnabled(false);
+                cbo_IsNonGrato.setSelectedItem("No");
+                cbo_IsNonGrato.setEnabled(false);
+                
+            }
+        });
         
 //        btnRegister.addActionListener((a) -> {
 //            btn_Register_MouseClicked();
 //        });
         
-//        btnNuevoPaciente.addActionListener((a) -> {//este metodo es para registrar los pacientes cuando el paciente es distinto al solicitante
-//            
-//        });
-//        
-//        btnRegisterPaciente.addActionListener((aa) -> {
-//            
-//        });
+        btnNuevoPaciente.addActionListener((a) -> {//este metodo es para registrar los pacientes cuando el paciente es distinto al solicitante
+            
+        });
         
-//        if_.add(NewPatient_Panel);//me aniade el panel al frame
-//        if_.add(TabbedPane_Panel);
+        btnRegisterPaciente.addActionListener((aa) -> {//boton de registrar paciente, no se ha implementado
+            
+        });
         
-    JSplitPane split = new JSplitPane();
-    
-    split.setLeftComponent(NewPatient_Panel);
-    split.setRightComponent(TabbedPane_Panel);
-    
-    if_.add(NewPatient_Panel);
-//    if_.add(panel);
-//    if_.add(panel1);
-//    if_.add(panel2);
-//    if_.add(panel3);
-//    if_.add(panel4);
-    if_.add(Tabs);
-    
-    
-        
-        
+        if_.add(NewPatient_Panel);//me aniade el panel al frame
 
     }//Fin del metodo ibtnIngresarPacienteaddActionListener
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
     
     /**
      * Método hace inserts de los datos escritos en newPatient
@@ -1100,8 +519,6 @@ public class NewPatient {
             
         }//fin de if exq1
 
-        
-        
     }//fin del metodo btn_Register_MouseClicked()
 
     
