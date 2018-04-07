@@ -23,7 +23,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 public class AddAppointment {
@@ -38,7 +37,7 @@ public class AddAppointment {
 
     public AddAppointment(iFrame if_) {
         try {
-            currentPanel = "Appointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
+            currentPanel = "AddAppointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
             AddAppointments_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//Defining iPanel dimensions
             AddAppointments_Panel.setBackground(Color.decode("#006738"));//le doy color al panel  
 

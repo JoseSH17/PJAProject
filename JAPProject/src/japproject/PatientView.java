@@ -134,6 +134,7 @@ public class PatientView implements ActionListener {
      */
     public void AddComponentes(iScrollPane scrollPane2) {
         SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
+        SearchBar_lbl.setForeground(Color.WHITE);
 
         PatientView_panel.AddObject(SearchBar_lbl, 200, 30, 10);
         PatientView_panel.AddObject(SearchBar_txt, 200, 30, 150);//agrego el titulo para poner verlo con

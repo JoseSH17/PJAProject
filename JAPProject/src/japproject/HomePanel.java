@@ -42,16 +42,16 @@ public class HomePanel {
     Appointments AP; //Panel to View and Edit appointments.
     AddAppointment AAP; //Panel to Add appointments
     BlackList BL; //Panel to View Patients in BlackList
-    public static Color ColorPanels=new ColorUIResource(Color.WHITE);
+    public static Color ColorPanels=new ColorUIResource(Color.decode("#006738"));
     public HomePanel() {
         lpb = new LoadingProgressBars();
         if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
+        if_.setBackground(ColorPanels);
         initComponents(); //Do not move InitComponents from this place.          
         if_.finalice();
     }
 
     private void initComponents() {
-        // lpb.ProgressSQL();
         HeaderMenu();
         PV = new PatientView(if_); //PatientView is the first point that shows when program is initiated.
     }
