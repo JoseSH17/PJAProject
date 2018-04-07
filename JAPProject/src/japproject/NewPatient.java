@@ -293,8 +293,8 @@ public class NewPatient {
         
         /////////////////componente,/////ancho,largo,posision//
         NewPatient_Panel.addSpace(70);
-        NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
-        NewPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
+        NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 83, 10);
+        NewPatient_Panel.AddObject(lbl_LogoPsicologia, 482, 120, 600);
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
         
@@ -400,15 +400,16 @@ public class NewPatient {
         NewPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);//
         NewPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);//
         NewPatient_Panel.newLine();
-//        NewPatient_Panel.addSpace(5);
+        NewPatient_Panel.addSpace(5);
         
         NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
         NewPatient_Panel.newLine();
+//        NewPatient_Panel.addSpace(15);
 
 
         NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
         NewPatient_Panel.newLine();
-        NewPatient_Panel.addSpace(5);
+//        NewPatient_Panel.addSpace(5);
         NewPatient_Panel.AddObject(btnRegister, 175, 30, 10);
         NewPatient_Panel.AddObject(btnNuevoPaciente, 175, 30, 600);
         btnNuevoPaciente.setVisible(false);
