@@ -189,5 +189,9 @@ public class Maintenance {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+    
+    public void RemoveTable(){
+        
+    }
 
 }
