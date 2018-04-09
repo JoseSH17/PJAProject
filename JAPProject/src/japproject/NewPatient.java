@@ -73,7 +73,7 @@ public class NewPatient {
     private iLabel lbl_FechaReporte;//Lbl para la FechaReporte del Solicitante
     private iCalendar FechaReporte;
     private iLabel lbl_NOTA;//Lbl para la NOTA(si preciona el CheckBox) del Solicitante
-    private JCheckBox chk_boxSolicitanteDiferentePaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
+    public JCheckBox chk_boxSolicitanteDiferentePaciente;//Checkbox para ver si el Solicitante ("""NO""") es el Mismo Paciente
     private iButton btnRegister;//Boton para el registrar
     //FIN de Controles Swing para Solicitante
 
@@ -568,7 +568,7 @@ public class NewPatient {
      */
     public void btn_Register_MouseClicked() {//MouseClicked de Boton Registrar 
 
-        if (chk_boxSolicitanteDiferentePaciente.isSelected() == false) {
+        if (!chk_boxSolicitanteDiferentePaciente.isSelected()) {//esto quiere decir que si el checkbox esta desactivado !chkbox.isSelected()
             //si el checkbox esta en false
             System.out.println("El Solicitante es el paciente".toUpperCase());
 
@@ -608,18 +608,19 @@ public class NewPatient {
             }//fin de if exq2
 
         } else {
-
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //si el checkbox esta en true
-            System.out.println("El Solicitante es Distinto al Paciente".toUpperCase());
+            System.out.println("El Solicitante != al Paciente".toUpperCase());
 
-            if (insertCounter > 0) {
+            if (insertCounter > 0) {//si el contador es > 0
 
-                if (resp == 0) {
-                    //aqui pones lo que quieras hacer si la respuesta es SI 
-                    System.out.println("resp = 0");
+                if (resp == 0) {//si la respuesta es SI del JOptionPane(Desea agregar otro paciente?)
+                    
+                    System.out.println("resp = 0");//si la respuesta fue SI haga esto
+                    
                     //metodo de campos de solicitante .setEnabled(false);
                     if (idSolicitante != 0) {
-                        System.out.println("idSolicitante = "+ idSolicitante);
+                        System.out.println("idSolicitante = " + idSolicitante);
                         //el solicitante es el mismo ahora hago el el insert de paciente
                         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
                         String query2 = "INSERT INTO JAW_Paciente(IdSolicitante, Cedula, Nombre, FechaNacimiento, Direccion, Telefono, Profesion, ActividadLaboral, MotivoConsulta, IdParentesco, IdClasificacionPaciente, IdCurso, IdHorario, DetalleHorario, IdTipoPaciente, IsNonGrato) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -632,21 +633,22 @@ public class NewPatient {
                                 cbo_HorarioPaciente.getSelectedIndex() + 1, txt_DetalleHorarioPaciente.getText(),
                                 cbo_TipoPaciente.getSelectedIndex() + 1, cbo_IsNonGrato.getSelectedItem().toString()));
                         Boolean exq2 = sql.exec(query2, obj2);
+
                         if (exq2) {
                             JOptionPane.showMessageDialog(null, "PACIENTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(null, "ERROR AL INSERTAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
                         }//fin de if exq2
+
                     } else {
                         System.out.println("El Solicitante no es el paciente, esta en proceso".toUpperCase());
-
                     }//fin del metodo si solicitante es el paciente 
                 } else {
-                    //y aqui va lo contrario si esque la respuesta seria NO
+                    //si la respuesta seria NO
                     LimpiarTodosCampos();// //recargo el panel.repaint y limpio las tablas
-                }//fin del if
+                }//fin del if insertCounter
 
-            }
+            }//fin del if del contador
 
             ArrayList<Object> obj1 = new ArrayList();//array para guardar data
             String query1 = "SELECT InsertNewRequester(?,?,?,?,?,?,?,?)";
@@ -658,6 +660,7 @@ public class NewPatient {
             int exq1 = sql.SelectReturnValue(query1, obj1);
             idSolicitante = exq1;
             System.out.println("Valor desde NewPatient " + exq1);
+
             if (exq1 != 0) {
                 JOptionPane.showMessageDialog(null, "SOLICITANTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -676,6 +679,7 @@ public class NewPatient {
                     cbo_HorarioPaciente.getSelectedIndex() + 1, txt_DetalleHorarioPaciente.getText(),
                     cbo_TipoPaciente.getSelectedIndex() + 1, cbo_IsNonGrato.getSelectedItem().toString()));
             Boolean exq2 = sql.exec(query2, obj2);
+
             if (exq2) {
                 JOptionPane.showMessageDialog(null, "PACIENTE REGISTRADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 insertCounter++;
@@ -737,17 +741,14 @@ public class NewPatient {
 
     private void printIt(DocumentEvent documentEvent) {
         DocumentEvent.EventType type = documentEvent.getType();
-        
-            
-            if (type.equals(DocumentEvent.EventType.CHANGE)) {
 
-            } else if (type.equals(DocumentEvent.EventType.INSERT) && chk_boxSolicitanteDiferentePaciente.isSelected()==false) {
-                System.out.println("entrando");
-                txtEjemploJTextFieldChanged();
-            } else if (type.equals(DocumentEvent.EventType.REMOVE) && chk_boxSolicitanteDiferentePaciente.isSelected()==false) {
-                System.out.println("entrando");
-                txtEjemploJTextFieldChanged();
-            }
+        if (type.equals(DocumentEvent.EventType.CHANGE)) {
+
+        } else if (type.equals(DocumentEvent.EventType.INSERT)) {
+            txtEjemploJTextFieldChanged();
+        } else if (type.equals(DocumentEvent.EventType.REMOVE)) {
+            txtEjemploJTextFieldChanged();
+        }
     }
 
     /**
