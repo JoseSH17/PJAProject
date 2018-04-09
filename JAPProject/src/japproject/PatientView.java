@@ -25,6 +25,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -58,6 +59,8 @@ public class PatientView implements ActionListener {
             for (int i = 1; i < rr.getMetaData().getColumnCount() + 1; i++) {
                 Cols.add(rr.getMetaData().getColumnName(i));
             }
+            Cols.add("Telefonos");
+
 //          Se crea la tabla y se le da los parametros
             SearchBar_txt = new iTextField("", 3);
             RegistrosTable = new iTable(Cols, SearchBar_txt);
@@ -66,7 +69,7 @@ public class PatientView implements ActionListener {
             RegistrosTable.setRowSelectionAllowed(true);
             RegistrosTable.setSize(500, 500);
             RegistrosTable.setBackground(Color.DARK_GRAY);
-
+         
             popup = new JPopupMenu();
             ItemEditar = new JMenuItem("Editar paciente");
             ItemEditar.addActionListener(this);
@@ -84,9 +87,9 @@ public class PatientView implements ActionListener {
                 try {
 
                     while (rr.next()) {//llena los rows de la tabla
-                        Object[] row = new Object[rr.getMetaData().getColumnCount()];
-                        for (int i = 1; i <= rr.getMetaData().getColumnCount(); i++) {
-                            row[i - 1] = rr.getObject(i);
+                        Object[] row = new Object[rr.getMetaData().getColumnCount()+1];
+                        for (int i = 1; i <= rr.getMetaData().getColumnCount()+1; i++) {
+                            row[i - 1] = rr.getObject(i)+"hola";
                         }
 
                         RegistrosTable.addrow(row);
@@ -95,6 +98,12 @@ public class PatientView implements ActionListener {
                     System.out.println("no object fetch'd");
                 }
             }
+//               Agregar columna de botones
+            TableColumn agregarColumn;
+            agregarColumn = RegistrosTable.getColumnModel().getColumn(30);
+            agregarColumn.setCellEditor(new myeditor(RegistrosTable));
+            agregarColumn.setCellRenderer(new myrenderer(true));
+            //
 
             AddComponentes(scrollPane2);
         } catch (SQLException ex) {
@@ -230,12 +239,12 @@ public class PatientView implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         JMenuItem menu = (JMenuItem) event.getSource();
-        
+
         if (menu == ItemEditar) {
             LlamarEditPatient(HomePanel.if_);
 
         }
 
     }
-    
+
 }
