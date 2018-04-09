@@ -37,8 +37,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import static japproject.HomePanel.ColorPanels;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Locale;
+import javax.swing.JSpinner;
 import javax.swing.JTextArea;
+import javax.swing.SpinnerDateModel;
 
 /**
  *
@@ -47,7 +50,7 @@ import javax.swing.JTextArea;
 public class Appointments implements ActionListener {
 
     public iPanel Appointments_Panel; //Panel to view, edit and add appointments.
-    public iPanel EditAppointments_Panel; //Panel that appears only when edit an appointment is chosen.
+    public iPanel AddEditAppointments_Panel; //Panel that appears only when edit an appointment is chosen.
     public iLabel lblCalendar; //lbl to indicate the user to select a date.
     public iCalendar calendar; //Calendar to filter main appointments view.
     public iTextField txtHiddenSearch; //Filter for the iTable that shows appointments, is hidden from the user.
@@ -68,12 +71,12 @@ public class Appointments implements ActionListener {
         try {
             currentPanel = "Appointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions. 
             this.EAP = new EditAppointmentData();
-            
+
             Appointments_Panel = new iPanel(0, 70, 100.0f, 50.0f, 0, 0, if_);//Defining iPanel dimensions
             Appointments_Panel.setBackground(ColorPanels);//le doy color al panel  
-            
-            EditAppointments_Panel = new iPanel(0,520,100.0f,50.0f,0,0,if_);
-            EditAppointments_Panel.setBackground(Color.BLACK);//le doy color al panel  
+
+            AddEditAppointments_Panel = new iPanel(0, 520, 100.0f, 50.0f, 0, 0, if_);
+            AddEditAppointments_Panel.setBackground(Color.BLACK);//le doy color al panel  
 
             lbl_LogoULatina = new iLabel("");
             lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
@@ -161,9 +164,9 @@ public class Appointments implements ActionListener {
 
             Appointments_Panel.newLine();
             Appointments_Panel.finalice();
-                                                
-            EditAppointments_Panel.finalice();
- 
+
+            AddEditAppointments_Panel.finalice();
+
             CheckFirstExecution(txtHiddenSearch);
 
         } catch (SQLException ex) {
@@ -171,120 +174,105 @@ public class Appointments implements ActionListener {
         }
     }
 
-    public void CreateEditComponents()
-    {
-        EditAppointments_Panel.addSpace(15);
-        
+    public void CreateEditComponents() {
+        AddEditAppointments_Panel.addSpace(15);
+
         //lbl for Psychologist name
         iLabel lbl_NombrePsicologo = new iLabel("Nombre Psicologo");
         lbl_NombrePsicologo.setForeground(ColorFonts);
-        
+
         //lbl for Patients UniqueID
         iLabel lbl_CedulaPaciente = new iLabel("Cédula Paciente");
         lbl_CedulaPaciente.setForeground(ColorFonts);
-        
+
         //lbl for Patients Address
         iLabel lbl_Direccion = new iLabel("Dirección");
         lbl_Direccion.setForeground(ColorFonts);
-        
+
         //lbl for Patients Phone Numbers
         iLabel lbl_Telefono = new iLabel("Teléfono");
         lbl_Telefono.setForeground(ColorFonts);
-        
-        //lbl for Appointment Date
-        iLabel lbl_FechaCita = new iLabel("Fecha Cita");  
-        lbl_FechaCita.setForeground(ColorFonts);
-        
-        //lbl for Appointment Time
-        iLabel lbl_HoraCita = new iLabel("Hora Cita");  
-        lbl_HoraCita.setForeground(ColorFonts);
-    
 
-        
-        EditAppointments_Panel.AddObject(lbl_NombrePsicologo, 120, 30, 20);
-        EditAppointments_Panel.AddObject(lbl_CedulaPaciente, 120, 30, 140);
-        EditAppointments_Panel.AddObject(lbl_Direccion, 120, 30, 260);
-        EditAppointments_Panel.AddObject(lbl_Telefono, 120, 30, 380);
-        EditAppointments_Panel.AddObject(lbl_FechaCita, 120, 30, 500);
-        EditAppointments_Panel.AddObject(lbl_HoraCita, 120, 30, 620);
-        
-        EditAppointments_Panel.newLine();    
-        EditAppointments_Panel.addSpace(5);
-        
-        iTextField txt_NombrePsicologo = new iTextField("", 15);    
+        //lbl for Appointment Date
+        iLabel lbl_FechaCita = new iLabel("Fecha Cita");
+        lbl_FechaCita.setForeground(ColorFonts);
+
+        //lbl for Appointment Time
+        iLabel lbl_HoraCita = new iLabel("Hora Cita");
+        lbl_HoraCita.setForeground(ColorFonts);
+
+        AddEditAppointments_Panel.AddObject(lbl_NombrePsicologo, 190, 30, 20);
+        AddEditAppointments_Panel.AddObject(lbl_CedulaPaciente, 190, 30, 230);
+        AddEditAppointments_Panel.AddObject(lbl_Direccion, 190, 30, 440);
+        AddEditAppointments_Panel.AddObject(lbl_Telefono, 190, 30, 650);
+        AddEditAppointments_Panel.AddObject(lbl_FechaCita, 100, 30, 860);
+        AddEditAppointments_Panel.AddObject(lbl_HoraCita, 190, 30, 1000);
+
+        AddEditAppointments_Panel.newLine();
+        AddEditAppointments_Panel.addSpace(15);
+
+        iTextField txt_NombrePsicologo = new iTextField("", 15);
         txt_NombrePsicologo.setForeground(ColorElementsFonts);
         txt_NombrePsicologo.setText(EAP.getNombrePsicologo());
-        
-        EditAppointments_Panel.AddObject(txt_NombrePsicologo, 190, 30, 150);
-        EditAppointments_Panel.newLine();      
-        
-        EditAppointments_Panel.addSpace(5);
-        
-        
+
         iTextField txt_CedulaPaciente = new iTextField("", 15);
         txt_CedulaPaciente.setForeground(ColorElementsFonts);
         txt_CedulaPaciente.setDisabledTextColor(ColorNonEditElementsFonts);
         txt_CedulaPaciente.setEnabled(false);
         txt_CedulaPaciente.setText(EAP.getCedulaPaciente());
-       
-        EditAppointments_Panel.AddObject(txt_CedulaPaciente, 190, 30, 150);
-        EditAppointments_Panel.newLine();
-        
-        EditAppointments_Panel.addSpace(35);
-        
-        
+
         JTextArea txt_Direccion = new JTextArea();
         txt_Direccion.setWrapStyleWord(true);
         txt_Direccion.setLineWrap(true);
+        txt_Direccion.setAutoscrolls(true);
         txt_Direccion.setDisabledTextColor(ColorNonEditElementsFonts);
         txt_Direccion.setEnabled(false);
         txt_Direccion.setForeground(ColorElementsFonts);
-        txt_Direccion.setText(EAP.getDireccionPaciente());        
-        EditAppointments_Panel.AddObject(txt_Direccion, 190, 60, 150);
-        EditAppointments_Panel.newLine();
-        
-        EditAppointments_Panel.addSpace(5);
-        
-        
+        txt_Direccion.setText(EAP.getDireccionPaciente());
+
         iTextField txt_Telefono = new iTextField("", 15);
         txt_Telefono.setForeground(ColorElementsFonts);
         txt_Telefono.setDisabledTextColor(ColorNonEditElementsFonts);
-        txt_Telefono.setEnabled(false);  
+        txt_Telefono.setEnabled(false);
         txt_Telefono.setText(EAP.getTelefonoPaciente());
-        
-        EditAppointments_Panel.AddObject(txt_Telefono, 190, 30, 150);
-        EditAppointments_Panel.newLine();
-        
-        EditAppointments_Panel.addSpace(5);
-        
-        
+
         iCalendar editCalendar = new iCalendar();
         editCalendar.setForeground(ColorElementsFonts);
-        
-        
+                
         try {
             String TemporaryDate = EAP.getFechaCita().substring(0, 10);
-            System.out.println("TemporaryDate: " + TemporaryDate);
-            Date date;              
+            Date date;
             date = new SimpleDateFormat("yyyy-MM-dd").parse(TemporaryDate);
-            System.out.println("Date: " + date);
             editCalendar.setDate(date);
         } catch (ParseException ex) {
             Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        JSpinner spinnerEditar = new JSpinner();
+        try {
+            String TemporaryDate = EAP.getHoraCita();
+            Date date;
+            date = new SimpleDateFormat("h:mm a").parse(TemporaryDate);
+            SpinnerDateModel sm
+                    = new SpinnerDateModel(date, null, null, Calendar.HOUR_OF_DAY);
+            spinnerEditar.setModel(sm);
+            JSpinner.DateEditor de = new JSpinner.DateEditor(spinnerEditar, "h:mm a");
+            spinnerEditar.setEditor(de);
+        } catch (ParseException ex) {
+            Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        EditAppointments_Panel.AddObject(editCalendar, 190, 30, 150);
-        EditAppointments_Panel.newLine();
-        
-        EditAppointments_Panel.addSpace(5);
-        
-      
-        EditAppointments_Panel.newLine();
-        
-        EditAppointments_Panel.repaint();
-            
+        AddEditAppointments_Panel.AddObject(txt_NombrePsicologo, 190, 30, 20);
+        AddEditAppointments_Panel.AddObject(txt_CedulaPaciente, 190, 30, 230);
+        AddEditAppointments_Panel.AddObject(txt_Direccion, 190, 40, 440);
+        AddEditAppointments_Panel.AddObject(txt_Telefono, 190, 30, 650);
+        AddEditAppointments_Panel.AddObject(editCalendar, 100, 30, 860);
+        AddEditAppointments_Panel.AddObject(spinnerEditar, 100, 30, 1000);
+        AddEditAppointments_Panel.newLine();
+
+        AddEditAppointments_Panel.repaint();
     }
-    
+
     public void CheckFirstExecution(iTextField check) {
         if (check.getText().isEmpty()) {
             Date date = new Date(); //Getting current date from local host
@@ -313,14 +301,12 @@ public class Appointments implements ActionListener {
         int selectedRow = tblAppointments.getSelectedRow();
 
         for (int j = 0; j < tblAppointments.getColumnCount(); j++) {
-            tbl_Data.add(tblAppointments.getColumnName(j) + "-" + tblAppointments.getValueAt(selectedRow, j).toString());                                 
+            tbl_Data.add(tblAppointments.getColumnName(j) + "-" + tblAppointments.getValueAt(selectedRow, j).toString());
         }
-        System.out.println("tblData: " + tbl_Data.toString());
-        ArrayList <Object> Values = new ArrayList<>();
-        tbl_Data.forEach((cnsmr) ->{
+        ArrayList<Object> Values = new ArrayList<>();
+        tbl_Data.forEach((cnsmr) -> {
             Values.add(cnsmr.split("-")[1]);  //Adding only values to Values arrayList            
         });
-        System.out.println("Contenido de Values: " + Values);
         //Assigning Values to Encapsulated variables.
         EAP.setIdCita((String) Values.get(0));
         EAP.setNombrePsicologo((String) Values.get(1));
@@ -330,7 +316,8 @@ public class Appointments implements ActionListener {
         EAP.setDireccionPaciente((String) Values.get(5));
         EAP.setTelefonoPaciente((String) Values.get(6));
         EAP.setFechaCita((String) Values.get(7));
-        
+        EAP.setHoraCita((String) Values.get(7));
+
         CreateEditComponents();     //Calls method in charge of creating elements in EditPanel
     }
 
