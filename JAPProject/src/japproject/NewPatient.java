@@ -104,7 +104,6 @@ public class NewPatient {
     private JTextArea txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente 
     private iLabel lbl_IsNonGrato;//Lbl para el Tipo de Lista Negra  
-    private iButton btnNuevoPaciente;//Boton para el registrar
     private int idSolicitante;//return idSolicitante
     private int insertCounter;//return contador
     public int resp;//return contador
@@ -261,7 +260,6 @@ public class NewPatient {
         lbl_IsNonGrato.setForeground(Color.GRAY.brighter());
         cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
 
-        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
         btnRegisterPaciente = new iButton("REGISTRAR PACIENTE", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
         ///////////////Fin de componentes de Paciente
 
@@ -415,43 +413,33 @@ public class NewPatient {
         NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
         NewPatient_Panel.newLine();
         NewPatient_Panel.AddObject(btnRegister, 175, 30, 10);
-        NewPatient_Panel.AddObject(btnNuevoPaciente, 175, 30, 600);
-        btnNuevoPaciente.setVisible(false);
         NewPatient_Panel.newLine();
 
-//        if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
-//            //si esta desactivado el chkbox
-//            setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
-//            
-//            cbo_Parentesco.setSelectedItem("Nulo");
-//            cbo_Parentesco.setEnabled(false);
-//            cbo_IsNonGrato.setSelectedItem("No");
-//            cbo_IsNonGrato.setEnabled(false);
-//            
-//        }else{
-//                //si esta activo el chkbox
-//            LimpiarCamposPaciente();//limpia mis compos y lo haces setEnable(true)
-//            btnNuevoPaciente.setVisible(true);
-//            cbo_Parentesco.setEnabled(true);
-//            cbo_IsNonGrato.setEnabled(true);
-//        }//fin del if
+        if(!chk_boxSolicitanteDiferentePaciente.isSelected()){
+            //si esta desactivado el chkbox
+            setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
+            
+            cbo_Parentesco.setSelectedItem("Nulo");
+            cbo_Parentesco.setEnabled(false);
+            cbo_IsNonGrato.setSelectedItem("No");
+            cbo_IsNonGrato.setEnabled(false);
+            
+        }else{
+                //si esta activo el chkbox
+            LimpiarCamposPaciente();//limpia mis compos y lo haces setEnable(true)
+            cbo_Parentesco.setEnabled(true);
+            cbo_IsNonGrato.setEnabled(true);
+        }//fin del if
 
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {//action listener del chk_box
 
-            if (chk_boxSolicitanteDiferentePaciente.isSelected() == true) {
-                System.out.println("MUESTRA MENSAJE DE CHECKBOX ACTIVO");
-                LimpiarCamposPaciente();//limpia mis compos y lo haces setEnable(true)
-                btnNuevoPaciente.setVisible(true);
-                cbo_Parentesco.setEnabled(true);
-                cbo_IsNonGrato.setEnabled(true);
-
-            } else {
+            if (!chk_boxSolicitanteDiferentePaciente.isSelected()) {
                 System.out.println("MUESTRA MENSAJE DE CHECKBOC DESACTIVADO");
 
                 setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
@@ -462,21 +450,22 @@ public class NewPatient {
                 setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
                 setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
 
-                btnNuevoPaciente.setVisible(false);
                 cbo_Parentesco.setSelectedItem("Nulo");
                 cbo_Parentesco.setEnabled(false);
                 cbo_IsNonGrato.setSelectedItem("No");
                 cbo_IsNonGrato.setEnabled(false);
+
+            } else {
+                System.out.println("MUESTRA MENSAJE DE CHECKBOX ACTIVO");
+                LimpiarCamposPaciente();//limpia mis compos y lo haces setEnable(true)
+                cbo_Parentesco.setEnabled(true);
+                cbo_IsNonGrato.setEnabled(true);
 
             }//fin del if
         });
 
         btnRegister.addActionListener((a) -> {
             btn_Register_MouseClicked();
-        });
-
-        btnNuevoPaciente.addActionListener((a) -> {//limpia los campos de paciente para ingresar uno nuevo
-            LimpiarCamposPaciente();
         });
 
         btnRegisterPaciente.addActionListener((aa) -> {//boton de registrar paciente, no se ha implementado
@@ -650,6 +639,8 @@ public class NewPatient {
 
             }//fin del if del contador
 
+            
+            //aqui empieza la primara vez
             ArrayList<Object> obj1 = new ArrayList();//array para guardar data
             String query1 = "SELECT InsertNewRequester(?,?,?,?,?,?,?,?)";
             obj1.addAll(Arrays.asList(txt_CedulaSolicitante.getText(), txt_NombreSolicitante.getText(),
