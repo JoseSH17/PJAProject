@@ -177,6 +177,7 @@ public class NewPatient {
         chk_boxSolicitanteDiferentePaciente = new JCheckBox();
         chk_boxSolicitanteDiferentePaciente.setText("PACIENTE != Solicitante".toUpperCase());
         chk_boxSolicitanteDiferentePaciente.setBackground(Color.GRAY);
+        chk_boxSolicitanteDiferentePaciente.setSelected(false); //Is initialized on false for JTextField to copy values from solicitante to paciente
 
         btnRegister = new iButton("REGISTRAR", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
     }
@@ -419,28 +420,22 @@ public class NewPatient {
         btnNuevoPaciente.setVisible(false);
         NewPatient_Panel.newLine();
 
-//        if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
-//            //si esta desactivado el chkbox
-//            setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
-//            setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
-//            
-//            cbo_Parentesco.setSelectedItem("Nulo");
-//            cbo_Parentesco.setEnabled(false);
-//            cbo_IsNonGrato.setSelectedItem("No");
-//            cbo_IsNonGrato.setEnabled(false);
-//            
-//        }else{
-//                //si esta activo el chkbox
-//            LimpiarCamposPaciente();//limpia mis compos y lo haces setEnable(true)
-//            btnNuevoPaciente.setVisible(true);
-//            cbo_Parentesco.setEnabled(true);
-//            cbo_IsNonGrato.setEnabled(true);
-//        }//fin del if
+        if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
+            //si esta desactivado el chkbox
+            setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
+            setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
+            
+            cbo_Parentesco.setSelectedItem("Nulo");
+            cbo_Parentesco.setEnabled(false);
+            cbo_IsNonGrato.setSelectedItem("No");
+            cbo_IsNonGrato.setEnabled(false);            
+        }
+
 
         chk_boxSolicitanteDiferentePaciente.addActionListener((e) -> {//action listener del chk_box
 
@@ -454,13 +449,13 @@ public class NewPatient {
             } else {
                 System.out.println("MUESTRA MENSAJE DE CHECKBOC DESACTIVADO");
 
-                setJTexFieldChanged(txt_CedulaSolicitante);//este metedo es para escribir dinamicamente
-                setJTexFieldChanged(txt_NombreSolicitante);//este metedo es para escribir dinamicamente
-                setJTexFieldChanged(txt_DireccionSolicitante);//este metedo es para escribir dinamicamente
-                setJTexFieldChanged(txt_TelefonoSolicitante);//este metedo es para escribir dinamicamente
-                setJTexFieldChanged(txt_ProfesionSolicitante);//este metedo es para escribir dinamicamente
-                setJTexFieldChanged(txt_ActividadLaboralSolicitante);//este metedo es para escribir dinamicamente
-                setJTexFieldChanged(txt_MotivoConsultaSolicitante);//este metedo es para escribir dinamicamente
+                txt_CedulaPaciente.setText(txt_CedulaSolicitante.getText());     
+                txt_NombrePaciente.setText(txt_NombreSolicitante.getText());
+                txt_DireccionPaciente.setText(txt_DireccionSolicitante.getText());
+                txt_TelefonoPaciente.setText(txt_TelefonoSolicitante.getText());
+                txt_ProfesionPaciente.setText(txt_ProfesionSolicitante.getText());
+                txt_ActividadLaboralPaciente.setText(txt_ActividadLaboralSolicitante.getText());
+                txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
 
                 btnNuevoPaciente.setVisible(false);
                 cbo_Parentesco.setSelectedItem("Nulo");
@@ -502,11 +497,8 @@ public class NewPatient {
         txt_ActividadLaboralSolicitante.setText("");
         txt_MotivoConsultaSolicitante.setText("");
 //        try {
-//            String TemporaryDate = FechaReporte.getDate().toString();
-//            System.out.println("TemporaryDate: " + TemporaryDate);
 //            Date date;              
-//            date = new SimpleDateFormat("yyyy-MM-dd").parse(TemporaryDate);
-//            System.out.println("Date: " + date);
+//            date = new SimpleDateFormat("yyyy-MM-dd");
 //            FechaReporte.setDate(date);
 //        } catch (ParseException ex) {
 //            Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
