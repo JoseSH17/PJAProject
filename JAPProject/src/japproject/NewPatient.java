@@ -116,6 +116,7 @@ public class NewPatient {
         NewPatient_Panel = new iPanel(0, 0, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
         Ingresar(if_);
+        if_.setIconImage(new ImageIcon(getClass().getResource("/content/iconoUlatina.PNG")).getImage());
     }
 
     /**
