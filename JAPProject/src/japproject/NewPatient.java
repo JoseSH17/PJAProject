@@ -78,7 +78,6 @@ public class NewPatient {
     //FIN de Controles Swing para Solicitante
 
     //Controles swing para paciente != Solicitante
-    private iButton btnRegisterPaciente;//Boton para registrar el paciente
     private iLabel lbl_TituloPaciente;//Lbl para el Titulo del Paciente
     private iLabel lbl_CedulaPaciente;//Lbl para la Cedula del Solicitante
     private iTextField txt_CedulaPaciente;//TextField para cedula del Solicitante en la parte de paciente(hay que hacerle un setEditable(false))
@@ -104,7 +103,6 @@ public class NewPatient {
     private JTextArea txt_DetalleHorarioPaciente;//TextField para el Detalle Horario del Paciente
     private iLabel lbl_TipoPaciente;//Lbl para el Tipo de Paciente 
     private iLabel lbl_IsNonGrato;//Lbl para el Tipo de Lista Negra  
-    private iButton btnNuevoPaciente;//Boton para el registrar
     private int idSolicitante;//return idSolicitante
     private int insertCounter;//return contador
     public int resp;//return contador
@@ -261,9 +259,6 @@ public class NewPatient {
         lbl_IsNonGrato = new iLabel("Lista Relegados".toUpperCase());
         lbl_IsNonGrato.setForeground(Color.GRAY.brighter());
         cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
-
-        btnNuevoPaciente = new iButton("NUEVO PACIENTE(+)", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
-        btnRegisterPaciente = new iButton("REGISTRAR PACIENTE", 15, Color.GRAY, Color.BLACK);//boton para registrar paciente
         ///////////////Fin de componentes de Paciente
 
     }//fin de metodo componentes paciente
@@ -300,7 +295,7 @@ public class NewPatient {
         cbo_CargarIsNonGrato();//recien agregado
 
         /////////////////componente,/////ancho,largo,posision//
-        NewPatient_Panel.addSpace(70);
+        NewPatient_Panel.addSpace(110);
         NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 83, 10);
         NewPatient_Panel.AddObject(lbl_LogoPsicologia, 482, 120, 600);
         NewPatient_Panel.newLine();
@@ -410,14 +405,11 @@ public class NewPatient {
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);
 
-        NewPatient_Panel.AddObject(lbl_NOTA, 500, 70, 10);
+        NewPatient_Panel.AddObject(lbl_NOTA, 377, 30, 10);
         NewPatient_Panel.newLine();
 
         NewPatient_Panel.AddObject(chk_boxSolicitanteDiferentePaciente, 175, 30, 10);
-        NewPatient_Panel.newLine();
-        NewPatient_Panel.AddObject(btnRegister, 175, 30, 10);
-        NewPatient_Panel.AddObject(btnNuevoPaciente, 175, 30, 600);
-        btnNuevoPaciente.setVisible(false);
+        NewPatient_Panel.AddObject(btnRegister, 190, 30, 200);
         NewPatient_Panel.newLine();
 
         if(chk_boxSolicitanteDiferentePaciente.isSelected()==false){
@@ -442,7 +434,6 @@ public class NewPatient {
             if (chk_boxSolicitanteDiferentePaciente.isSelected() == true) {
                 System.out.println("MUESTRA MENSAJE DE CHECKBOX ACTIVO");
                 LimpiarCamposPaciente();//limpia mis compos y lo haces setEnable(true)
-                btnNuevoPaciente.setVisible(true);
                 cbo_Parentesco.setEnabled(true);
                 cbo_IsNonGrato.setEnabled(true);
 
@@ -457,7 +448,6 @@ public class NewPatient {
                 txt_ActividadLaboralPaciente.setText(txt_ActividadLaboralSolicitante.getText());
                 txt_MotivoConsultaPaciente.setText(txt_MotivoConsultaSolicitante.getText());
 
-                btnNuevoPaciente.setVisible(false);
                 cbo_Parentesco.setSelectedItem("Nulo");
                 cbo_Parentesco.setEnabled(false);
                 cbo_IsNonGrato.setSelectedItem("No");
@@ -469,15 +459,7 @@ public class NewPatient {
         btnRegister.addActionListener((a) -> {
             btn_Register_MouseClicked();
         });
-
-        btnNuevoPaciente.addActionListener((a) -> {//limpia los campos de paciente para ingresar uno nuevo
-            LimpiarCamposPaciente();
-        });
-
-        btnRegisterPaciente.addActionListener((aa) -> {//boton de registrar paciente, no se ha implementado
-
-        });
-
+        
         if_.add(NewPatient_Panel);//me aniade el panel al frame
 
     }//Fin del metodo ibtnIngresarPacienteaddActionListener
