@@ -59,7 +59,7 @@ public class PatientView implements ActionListener {
             for (int i = 1; i < rr.getMetaData().getColumnCount() + 1; i++) {
                 Cols.add(rr.getMetaData().getColumnName(i));
             }
-            Cols.add("Telefonos");
+//            Cols.add("Telefonos");
 
 //          Se crea la tabla y se le da los parametros
             SearchBar_txt = new iTextField("", 3);
@@ -87,9 +87,9 @@ public class PatientView implements ActionListener {
                 try {
 
                     while (rr.next()) {//llena los rows de la tabla
-                        Object[] row = new Object[rr.getMetaData().getColumnCount()+1];
-                        for (int i = 1; i <= rr.getMetaData().getColumnCount()+1; i++) {
-                            row[i - 1] = rr.getObject(i)+"hola";
+                        Object[] row = new Object[rr.getMetaData().getColumnCount()];
+                        for (int i = 1; i <= rr.getMetaData().getColumnCount(); i++) {
+                            row[i - 1] = rr.getObject(i);
                         }
 
                         RegistrosTable.addrow(row);
@@ -99,11 +99,11 @@ public class PatientView implements ActionListener {
                 }
             }
 //               Agregar columna de botones
-            TableColumn agregarColumn;
-            agregarColumn = RegistrosTable.getColumnModel().getColumn(30);
-            agregarColumn.setCellEditor(new myeditor(RegistrosTable));
-            agregarColumn.setCellRenderer(new myrenderer(true));
-            //
+//            TableColumn agregarColumn;
+//            agregarColumn = RegistrosTable.getColumnModel().getColumn(30);
+//            agregarColumn.setCellEditor(new myeditor(RegistrosTable));
+//            agregarColumn.setCellRenderer(new myrenderer(true));
+//            //
 
             AddComponentes(scrollPane2);
         } catch (SQLException ex) {
