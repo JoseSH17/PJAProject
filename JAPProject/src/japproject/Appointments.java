@@ -175,60 +175,89 @@ public class Appointments implements ActionListener {
     {
         EditAppointments_Panel.addSpace(15);
         
+        //lbl for Psychologist name
         iLabel lbl_NombrePsicologo = new iLabel("Nombre Psicologo");
         lbl_NombrePsicologo.setForeground(ColorFonts);
+        
+        //lbl for Patients UniqueID
+        iLabel lbl_CedulaPaciente = new iLabel("Cédula Paciente");
+        lbl_CedulaPaciente.setForeground(ColorFonts);
+        
+        //lbl for Patients Address
+        iLabel lbl_Direccion = new iLabel("Dirección");
+        lbl_Direccion.setForeground(ColorFonts);
+        
+        //lbl for Patients Phone Numbers
+        iLabel lbl_Telefono = new iLabel("Teléfono");
+        lbl_Telefono.setForeground(ColorFonts);
+        
+        //lbl for Appointment Date
+        iLabel lbl_FechaCita = new iLabel("Fecha Cita");  
+        lbl_FechaCita.setForeground(ColorFonts);
+        
+        //lbl for Appointment Time
+        iLabel lbl_HoraCita = new iLabel("Hora Cita");  
+        lbl_HoraCita.setForeground(ColorFonts);
+    
+
+        
+        EditAppointments_Panel.AddObject(lbl_NombrePsicologo, 120, 30, 20);
+        EditAppointments_Panel.AddObject(lbl_CedulaPaciente, 120, 30, 140);
+        EditAppointments_Panel.AddObject(lbl_Direccion, 120, 30, 260);
+        EditAppointments_Panel.AddObject(lbl_Telefono, 120, 30, 380);
+        EditAppointments_Panel.AddObject(lbl_FechaCita, 120, 30, 500);
+        EditAppointments_Panel.AddObject(lbl_HoraCita, 120, 30, 620);
+        
+        EditAppointments_Panel.newLine();    
+        EditAppointments_Panel.addSpace(5);
+        
         iTextField txt_NombrePsicologo = new iTextField("", 15);    
         txt_NombrePsicologo.setForeground(ColorElementsFonts);
         txt_NombrePsicologo.setText(EAP.getNombrePsicologo());
-        EditAppointments_Panel.AddObject(lbl_NombrePsicologo, 120, 30, 20);
+        
         EditAppointments_Panel.AddObject(txt_NombrePsicologo, 190, 30, 150);
         EditAppointments_Panel.newLine();      
         
         EditAppointments_Panel.addSpace(5);
         
-        iLabel lbl_CedulaPaciente = new iLabel("Cédula Paciente");
-        lbl_CedulaPaciente.setForeground(ColorFonts);
+        
         iTextField txt_CedulaPaciente = new iTextField("", 15);
         txt_CedulaPaciente.setForeground(ColorElementsFonts);
         txt_CedulaPaciente.setDisabledTextColor(ColorNonEditElementsFonts);
         txt_CedulaPaciente.setEnabled(false);
         txt_CedulaPaciente.setText(EAP.getCedulaPaciente());
-        EditAppointments_Panel.AddObject(lbl_CedulaPaciente, 120, 30, 20);
+       
         EditAppointments_Panel.AddObject(txt_CedulaPaciente, 190, 30, 150);
         EditAppointments_Panel.newLine();
         
         EditAppointments_Panel.addSpace(35);
         
-        iLabel lbl_Direccion = new iLabel("Dirección");
-        lbl_Direccion.setForeground(ColorFonts);
+        
         JTextArea txt_Direccion = new JTextArea();
         txt_Direccion.setWrapStyleWord(true);
         txt_Direccion.setLineWrap(true);
         txt_Direccion.setDisabledTextColor(ColorNonEditElementsFonts);
         txt_Direccion.setEnabled(false);
         txt_Direccion.setForeground(ColorElementsFonts);
-        txt_Direccion.setText(EAP.getDireccionPaciente());
-        EditAppointments_Panel.AddObject(lbl_Direccion, 120, 30, 20);
+        txt_Direccion.setText(EAP.getDireccionPaciente());        
         EditAppointments_Panel.AddObject(txt_Direccion, 190, 60, 150);
         EditAppointments_Panel.newLine();
         
         EditAppointments_Panel.addSpace(5);
         
-        iLabel lbl_Telefono = new iLabel("Teléfono");
-        lbl_Telefono.setForeground(ColorFonts);
+        
         iTextField txt_Telefono = new iTextField("", 15);
         txt_Telefono.setForeground(ColorElementsFonts);
         txt_Telefono.setDisabledTextColor(ColorNonEditElementsFonts);
         txt_Telefono.setEnabled(false);  
         txt_Telefono.setText(EAP.getTelefonoPaciente());
-        EditAppointments_Panel.AddObject(lbl_Telefono, 120, 30, 20);
+        
         EditAppointments_Panel.AddObject(txt_Telefono, 190, 30, 150);
         EditAppointments_Panel.newLine();
         
         EditAppointments_Panel.addSpace(5);
         
-        iLabel lbl_FechaCita = new iLabel("Fecha Cita");  
-        lbl_FechaCita.setForeground(ColorFonts);
+        
         iCalendar editCalendar = new iCalendar();
         editCalendar.setForeground(ColorElementsFonts);
         
@@ -243,15 +272,13 @@ public class Appointments implements ActionListener {
         } catch (ParseException ex) {
             Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
         }
-        EditAppointments_Panel.AddObject(lbl_FechaCita, 120, 30, 20);
+        
         EditAppointments_Panel.AddObject(editCalendar, 190, 30, 150);
         EditAppointments_Panel.newLine();
         
         EditAppointments_Panel.addSpace(5);
         
-        iLabel lbl_HoraCita = new iLabel("Hora Cita");
-        lbl_HoraCita.setForeground(ColorFonts);
-        EditAppointments_Panel.AddObject(lbl_HoraCita, 120, 30, 20);
+      
         EditAppointments_Panel.newLine();
         
         EditAppointments_Panel.repaint();
