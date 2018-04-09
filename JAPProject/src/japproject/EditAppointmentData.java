@@ -104,4 +104,17 @@ public class EditAppointmentData {
         this.FechaCita = FechaString;
     }
     
+    String HoraCita;
+    
+    String getHoraCita()
+    {
+        return HoraCita;        
+    }
+    
+    void setHoraCita(String FechaString)
+    {
+        FechaString = FechaString.substring(11, 19);       
+        this.HoraCita = FechaString;
+    }
+    
 }
