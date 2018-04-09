@@ -25,7 +25,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.table.TableColumn;
+
 
 /**
  *
@@ -39,14 +39,14 @@ public class PatientView implements ActionListener {
     iTextField SearchBar_txt;
 
     //
-    public iPanel PatientView_panel;
+    public static iPanel PatientView_panel;
     public static List<String> tbl_Data = new ArrayList();
     EditPatient EP;
     //popmenu
     JPopupMenu popup;
     JMenuItem ItemEditar;
-    //
 
+    
     public PatientView(iFrame if_) {
 
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
@@ -118,11 +118,10 @@ public class PatientView implements ActionListener {
      */
     public void LlamarEditPatient(iFrame if_) {
         tbl_Data.clear();
-        PatientView_panel.dispose();
+        //PatientView_panel.dispose();
         PatientView_panel.setVisible(false);
         ItemEditarActionListener();
         EP = new EditPatient(if_);
-        System.out.println("hola");
     }
 
     public void ItemEditarActionListener() {

@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import static japproject.HomePanel.currentPanel;
+import static japproject.PatientView.PatientView_panel;
 import static japproject.JAPProject.sql;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -106,7 +107,6 @@ public class EditPatient {
     public int IdPaciente;
     public int IdSolicitante;
     public static iPanel EditPatient_Panel;
-    public PatientView PV; //Instaciamiento para llamada recíproca.
     iTextField SearchBar_txt;// para actualizar la tabla
 
     public EditPatient(iFrame if_) {
@@ -195,8 +195,6 @@ public class EditPatient {
     }
 
     public iScrollPane llenarTable(List<String> info) {
-
-        System.out.println("Lista recibida por llenarTable: " + info.toString());
         ArrayList<String> cols = new ArrayList();
 
         ArrayList<String> rows = new ArrayList();
@@ -205,32 +203,28 @@ public class EditPatient {
             rows.add(jKeyPair.split("-")[1]);
         });
         SearchBar_txt = new iTextField("", 0);
-        iTable RegistrosTable = new iTable(cols, SearchBar_txt);
-        RegistrosTable.setSize(800, 90);
-        RegistrosTable.getTableHeader().setReorderingAllowed(false);
-        RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-        RegistrosTable.getTableHeader().setResizingAllowed(false);
-        RegistrosTable.setRowSelectionAllowed(true);
-        SetColumsSizes(RegistrosTable);
-
-        System.out.println("Cols " + cols);
-
-        System.out.println("Rows " + rows);
-
-        RegistrosTable.addrow(rows.toArray());
+        iTable EditarRegistrosTable = new iTable(cols, SearchBar_txt);
+        EditarRegistrosTable.setSize(800, 90);
+        EditarRegistrosTable.getTableHeader().setReorderingAllowed(false);
+        EditarRegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        EditarRegistrosTable.getTableHeader().setResizingAllowed(false);
+        EditarRegistrosTable.setRowSelectionAllowed(true);
+        SetColumsSizes(EditarRegistrosTable);
+        
+        EditarRegistrosTable.addrow(rows.toArray());
         SearchBar_txt.setText("");
-        iScrollPane ScrollPane = new iScrollPane(RegistrosTable, null);
+        iScrollPane ScrollPane = new iScrollPane(EditarRegistrosTable, null);
         //setear valores textfiles solicitante
-        IdSolicitante = Integer.parseInt(RegistrosTable.getValueAt(0, 10).toString());
-        txt_CedulaSolicitante.setText(RegistrosTable.getValueAt(0, 1).toString());
-        txt_NombreSolicitante.setText(RegistrosTable.getValueAt(0, 2).toString());
-        txt_DireccionSolicitante.setText(RegistrosTable.getValueAt(0, 3).toString());
-        txt_TelefonoSolicitante.setText(RegistrosTable.getValueAt(0, 4).toString());
-        txt_ProfesionSolicitante.setText(RegistrosTable.getValueAt(0, 5).toString());
-        txt_ActividadLaboralSolicitante.setText(RegistrosTable.getValueAt(0, 6).toString());
-        txt_MotivoConsultaSolicitante.setText(RegistrosTable.getValueAt(0, 7).toString());
+        IdSolicitante = Integer.parseInt(EditarRegistrosTable.getValueAt(0, 10).toString());
+        txt_CedulaSolicitante.setText(EditarRegistrosTable.getValueAt(0, 1).toString());
+        txt_NombreSolicitante.setText(EditarRegistrosTable.getValueAt(0, 2).toString());
+        txt_DireccionSolicitante.setText(EditarRegistrosTable.getValueAt(0, 3).toString());
+        txt_TelefonoSolicitante.setText(EditarRegistrosTable.getValueAt(0, 4).toString());
+        txt_ProfesionSolicitante.setText(EditarRegistrosTable.getValueAt(0, 5).toString());
+        txt_ActividadLaboralSolicitante.setText(EditarRegistrosTable.getValueAt(0, 6).toString());
+        txt_MotivoConsultaSolicitante.setText(EditarRegistrosTable.getValueAt(0, 7).toString());
 
-        String TemporalReportDate = RegistrosTable.getValueAt(0, 28).toString().replace("/", "-");
+        String TemporalReportDate = EditarRegistrosTable.getValueAt(0, 28).toString().replace("/", "-");
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(TemporalReportDate);
             txt_FechaReporte.setDate(date);
@@ -239,12 +233,12 @@ public class EditPatient {
         }
 
         //setear valores textfiles paciente
-        IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString());
+        IdPaciente = Integer.parseInt(EditarRegistrosTable.getValueAt(0, 0).toString());
 
-        txt_CedulaPaciente.setText(RegistrosTable.getValueAt(0, 11).toString());
-        txt_NombrePaciente.setText(RegistrosTable.getValueAt(0, 12).toString());
+        txt_CedulaPaciente.setText(EditarRegistrosTable.getValueAt(0, 11).toString());
+        txt_NombrePaciente.setText(EditarRegistrosTable.getValueAt(0, 12).toString());
 
-        String TemporalPatientBirthDate = RegistrosTable.getValueAt(0, 13).toString().replace("/", "-");
+        String TemporalPatientBirthDate = EditarRegistrosTable.getValueAt(0, 13).toString().replace("/", "-");
 
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(TemporalPatientBirthDate);
@@ -253,19 +247,19 @@ public class EditPatient {
             Logger.getLogger(EditPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        txt_DireccionPaciente.setText(RegistrosTable.getValueAt(0, 18).toString());
-        txt_TelefonoPaciente.setText(RegistrosTable.getValueAt(0, 19).toString());
-        txt_ProfesionPaciente.setText(RegistrosTable.getValueAt(0, 20).toString());
-        txt_ActividadLaboralPaciente.setText(RegistrosTable.getValueAt(0, 21).toString());
-        txt_MotivoConsultaPaciente.setText(RegistrosTable.getValueAt(0, 22).toString());
-        txt_DetalleHorarioPaciente.setText(RegistrosTable.getValueAt(0, 25).toString());
+        txt_DireccionPaciente.setText(EditarRegistrosTable.getValueAt(0, 18).toString());
+        txt_TelefonoPaciente.setText(EditarRegistrosTable.getValueAt(0, 19).toString());
+        txt_ProfesionPaciente.setText(EditarRegistrosTable.getValueAt(0, 20).toString());
+        txt_ActividadLaboralPaciente.setText(EditarRegistrosTable.getValueAt(0, 21).toString());
+        txt_MotivoConsultaPaciente.setText(EditarRegistrosTable.getValueAt(0, 22).toString());
+        txt_DetalleHorarioPaciente.setText(EditarRegistrosTable.getValueAt(0, 25).toString());
         //set cbo
-        cbo_Parentesco.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 8).toString()) - 1);
-        cbo_ClasificacionPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 14).toString()) - 1);
-        cbo_TipoPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 16).toString()) - 1);
-        cbo_HorarioPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 23).toString()) - 1);
-        cbo_CursoPaciente.setSelectedIndex(Integer.parseInt(RegistrosTable.getValueAt(0, 26).toString()) - 1);
-        cbo_IsNonGrato.setSelectedItem(RegistrosTable.getValueAt(0, 29).toString());
+        cbo_Parentesco.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 8).toString()) - 1);
+        cbo_ClasificacionPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 14).toString()) - 1);
+        cbo_TipoPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 16).toString()) - 1);
+        cbo_HorarioPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 23).toString()) - 1);
+        cbo_CursoPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 26).toString()) - 1);
+        cbo_IsNonGrato.setSelectedItem(EditarRegistrosTable.getValueAt(0, 29).toString());
 
         //
         return ScrollPane;
@@ -274,7 +268,6 @@ public class EditPatient {
     private void btnEditarAction_MouseClicked(iFrame if_) {
         DateFormat currentDateFormatted = new SimpleDateFormat("yyyy-MM-dd");
 
-        //System.out.println("Fecha tomada de TXT formateada: " + currentDateFormatted.format(txt_FechaReporte.getText()).toString());
         ArrayList<Object> obj1 = new ArrayList();//array para guardar data
         obj1.addAll(Arrays.asList(
                 txt_CedulaSolicitante.getText(),
@@ -287,8 +280,6 @@ public class EditPatient {
                 currentDateFormatted.format(txt_FechaReporte.getDate()),
                 IdSolicitante
         ));
-
-        System.out.println("Valores de obj1 antes del UPDATE" + obj1);
 
         String query1 = "UPDATE JAW_Solicitante SET `Cedula`=?, `Nombre`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `FechaReporte`=? WHERE `IdSolicitante`=?";
 
@@ -314,7 +305,6 @@ public class EditPatient {
                 IdPaciente
         ));
         String query2 = "UPDATE  JAW_Paciente SET `Cedula`=?, `Nombre`=?, `FechaNacimiento`=?, `Direccion`=?, `Telefono`=?, `Profesion`=?, `ActividadLaboral`=?, `MotivoConsulta`=?, `IdParentesco`=?, `IdClasificacionPaciente`=?, `IdCurso`=?, `IdHorario`=?, `DetalleHorario`=?, `IdTipoPaciente`=?, `IsNonGrato`=? WHERE `IdPaciente`=?";
-        System.out.println("Valores de obj2 antes del UPDATE" + obj2);
 
         Boolean exq2 = sql.exec(query2, obj2);
         if (exq2 && exq1) {
@@ -322,7 +312,8 @@ public class EditPatient {
             JOptionPane.showMessageDialog(null, "EDITADO EXITOSAMENTE!", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             EditPatient_Panel.dispose();
             EditPatient_Panel.setVisible(false);
-            PV = new PatientView(if_);
+            PatientView_panel.setVisible(true);
+            currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL EDITAR LOS DATOS", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
