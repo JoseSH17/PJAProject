@@ -217,6 +217,8 @@ public class HomePanel {
             case "Appointments_Panel":  //If current panel is Appointments_Panel then remove it.
                 AP.Appointments_Panel.dispose(); //If current panel is Appointments_Panel then remove it. 
                 AP.Appointments_Panel.setVisible(false);
+                AP.EditAppointments_Panel.dispose();
+                AP.EditAppointments_Panel.setVisible(false);
                 break;
             case "AddAppointments_Panel":  //If current panel is AddAppointments_Panel then remove it.
                 AAP.AddAppointments_Panel.dispose(); //If current panel is AddAppointments_Panel then remove it. 
