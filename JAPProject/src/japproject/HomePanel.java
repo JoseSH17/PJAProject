@@ -25,10 +25,10 @@ import javax.swing.plaf.ColorUIResource;
 public class HomePanel {
     //Static Variables
     public static String currentPanel; //Holds current panel running
-    public static Color ColorPanels =new ColorUIResource(Color.decode("#006738"));
-    public static Color ColorFonts =  new ColorUIResource(Color.WHITE);
-    public static Color ColorElementsFonts =  new ColorUIResource(Color.BLACK);
-    public static Color ColorNonEditElementsFonts =  new ColorUIResource(Color.BLUE);
+    public static Color ColorPanels =new ColorUIResource(Color.decode("#006738")); //Color for Panels in the System
+    public static Color ColorFonts =  new ColorUIResource(Color.WHITE); //Color for elements font
+    public static Color ColorElementsFonts =  new ColorUIResource(Color.BLACK); //Color for elements inside font e.g: (iTextField font color, JTextArea)
+    public static Color ColorNonEditElementsFonts =  new ColorUIResource(Color.BLUE);  //Color for non editable text, this is set when the text is Enabled(false).
     public static iFrame if_; //This is the main iFrame container, everything will be shown in here. 
 
     public Point initialClick;
@@ -217,8 +217,8 @@ public class HomePanel {
             case "Appointments_Panel":  //If current panel is Appointments_Panel then remove it.
                 AP.Appointments_Panel.dispose(); //If current panel is Appointments_Panel then remove it. 
                 AP.Appointments_Panel.setVisible(false);
-                AP.EditAppointments_Panel.dispose();
-                AP.EditAppointments_Panel.setVisible(false);
+                AP.AddEditAppointments_Panel.dispose();
+                AP.AddEditAppointments_Panel.setVisible(false);
                 break;
             case "AddAppointments_Panel":  //If current panel is AddAppointments_Panel then remove it.
                 AAP.AddAppointments_Panel.dispose(); //If current panel is AddAppointments_Panel then remove it. 
