@@ -155,11 +155,9 @@ public final class iSQL {
             while (it.hasNext()) {
                 Object element = it.next();
                 if (this.isNumeric(element)) {
-                    ps.setInt(poc, Integer.parseInt(element.toString()));
-                    System.out.println("Valor enviado como parametro: " + element);
+                    ps.setInt(poc, Integer.parseInt(element.toString()));                    
                 } else {
-                    ps.setString(poc, element.toString());
-                    System.out.println("Valor enviado como parametro: " + element);
+                    ps.setString(poc, element.toString());                    
                 }
                 poc++;
             }
@@ -169,7 +167,7 @@ public final class iSQL {
             return true;
 
         } catch (SQLException | NumberFormatException ex) {
-            iAlert iA = new iAlert(null, ex.getMessage());
+          //  iAlert iA = new iAlert(null, ex.getMessage());
             System.out.println("Mensaje de Error SQL" + ex.getMessage());
             //JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;

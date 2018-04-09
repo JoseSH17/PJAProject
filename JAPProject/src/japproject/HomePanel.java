@@ -186,9 +186,9 @@ public class HomePanel {
                 NP.NewPatient_Panel.dispose();
                 NP.NewPatient_Panel.setVisible(false);
                 break;
-            case "PatientView_panel":      //If current panel is PatientView then remove it.           
+            case "PatientView_panel":      //If current panel is PatientView then remove it.                                           
                 PV.PatientView_panel.dispose();
-                PV.PatientView_panel.setVisible(false);
+                PV.PatientView_panel.setVisible(false);                                
                 break;
             case "EditPatient_Panel":  //If current panel is EditPatient_Panel then remove it.                
                     EditPatient_Panel.dispose();
