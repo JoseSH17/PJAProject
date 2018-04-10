@@ -16,6 +16,7 @@ import javax.swing.JMenuItem;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
 import static japproject.EditPatient.EditPatient_Panel;
+import javax.swing.ImageIcon;
 import javax.swing.plaf.ColorUIResource;
 
 /**
@@ -25,13 +26,11 @@ import javax.swing.plaf.ColorUIResource;
 public class HomePanel {
     //Static Variables
     public static String currentPanel; //Holds current panel running
-    public static Color ColorPanels =new ColorUIResource(Color.decode("#006738")); //Color for Panels in the System
+    public static Color ColorPanels =new ColorUIResource(Color.DARK_GRAY); //Color for Panels in the System
     public static Color ColorFonts =  new ColorUIResource(Color.WHITE); //Color for elements font
     public static Color ColorElementsFonts =  new ColorUIResource(Color.BLACK); //Color for elements inside font e.g: (iTextField font color, JTextArea)
     public static Color ColorNonEditElementsFonts =  new ColorUIResource(Color.BLUE);  //Color for non editable text, this is set when the text is Enabled(false).
     public static iFrame if_; //This is the main iFrame container, everything will be shown in here. 
-
-    public Point initialClick;
     
     public LoadingProgressBars lpb;  //Calls methods from Loading Progress Bars class
 
@@ -48,8 +47,9 @@ public class HomePanel {
     
     public HomePanel() {
         lpb = new LoadingProgressBars();
-        if_ = new iFrame(1200, 900, 0, 30, "", EXIT_ON_CLOSE);
+        if_ = new iFrame(1200, 900, 0, 30, "Inicio", EXIT_ON_CLOSE);
         if_.setBackground(ColorPanels);
+        if_.setIconImage(new ImageIcon(getClass().getResource("/content/iconoUlatina.PNG")).getImage());
         initComponents(); //Do not move InitComponents from this place.          
         if_.finalice();
     }
@@ -84,7 +84,7 @@ public class HomePanel {
         menuAgregarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RemovePanels();
-                NP = new NewPatient(if_);   //Calls NewPatient class to show its Panel and contents             
+                NP = new NewPatient(if_);   //Calls NewPatient class to show its Panel and contents   
             }
         });
 
@@ -95,11 +95,13 @@ public class HomePanel {
         Cursos.addActionListener((ei) -> {
             RemovePanels();
             MT = new Maintenance(if_);
+            
         });
         JMenuItem Horarios = new JMenuItem("Horarios");
         Horarios.addActionListener((ei) -> {
             RemovePanels();
             MH = new Maintenance_Horario(if_);
+            
         });
         JMenuItem TPaciente = new JMenuItem("Tipo Paciente");
         TPaciente.addActionListener((o) -> {

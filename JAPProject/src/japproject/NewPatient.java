@@ -12,6 +12,8 @@ import iComponents.iLabel;
 import iComponents.iPanel;
 import static japproject.JAPProject.sql;
 import iComponents.iTextField;
+import static japproject.HomePanel.ColorFonts;
+import static japproject.HomePanel.ColorPanels;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -114,9 +116,9 @@ public class NewPatient {
         currentPanel = "NewPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.
         //x  , y, width(largo), height(alto), Elements Margin, if_
         NewPatient_Panel = new iPanel(0, 0, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        NewPatient_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
+        NewPatient_Panel.setBackground(ColorPanels);//le doy color al panel
         Ingresar(if_);
-        if_.setIconImage(new ImageIcon(getClass().getResource("/content/iconoUlatina.PNG")).getImage());
+        
     }
 
     /**
@@ -128,50 +130,50 @@ public class NewPatient {
 
         ///Componentes para Solicitante
         lbl_LogoULatina = new iLabel("");
-        lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
+        lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/Logo_Ulatina_Negro.PNG")));
 
         lbl_TituloSolicitante = new iLabel("SOLICITANTE");
-        lbl_TituloSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_TituloSolicitante.setForeground(ColorFonts);
 
         lbl_CedulaSolicitante = new iLabel("Cédula".toUpperCase());
-        lbl_CedulaSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_CedulaSolicitante.setForeground(ColorFonts);
         txt_CedulaSolicitante = new iTextField("", 15);
         txt_CedulaSolicitante.setForeground(Color.red);
 
         lbl_NombreSolicitante = new iLabel("Nombre".toUpperCase());
-        lbl_NombreSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_NombreSolicitante.setForeground(ColorFonts);
         txt_NombreSolicitante = new iTextField("", 15);
 
         lbl_DireccionSolicitante = new iLabel("Dirección".toUpperCase());
-        lbl_DireccionSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_DireccionSolicitante.setForeground(ColorFonts);
         txt_DireccionSolicitante = new JTextArea();
         txt_DireccionSolicitante.setWrapStyleWord(true);
         txt_DireccionSolicitante.setLineWrap(true);
 
         lbl_TelefonoSolicitante = new iLabel("Teléfono".toUpperCase());
-        lbl_TelefonoSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_TelefonoSolicitante.setForeground(ColorFonts);
         txt_TelefonoSolicitante = new iTextField("", 15);
 
         lbl_ProfesionSolicitante = new iLabel("Profesión".toUpperCase());
-        lbl_ProfesionSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_ProfesionSolicitante.setForeground(ColorFonts);
         txt_ProfesionSolicitante = new iTextField("", 15);
 
         lbl_ActividadLaboralSolicitante = new iLabel("Actividad Laboral".toUpperCase());
-        lbl_ActividadLaboralSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_ActividadLaboralSolicitante.setForeground(ColorFonts);
         txt_ActividadLaboralSolicitante = new iTextField("", 15);
 
         lbl_MotivoConsultaSolicitante = new iLabel("Motivo Consulta".toUpperCase());
-        lbl_MotivoConsultaSolicitante.setForeground(Color.GRAY.brighter());
+        lbl_MotivoConsultaSolicitante.setForeground(ColorFonts);
         txt_MotivoConsultaSolicitante = new JTextArea();
         txt_MotivoConsultaSolicitante.setWrapStyleWord(true);
         txt_MotivoConsultaSolicitante.setLineWrap(true);
 
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
-        lbl_FechaReporte.setForeground(Color.GRAY.brighter());
+        lbl_FechaReporte.setForeground(ColorFonts);
         FechaReporte = new iCalendar();
 
         lbl_NOTA = new iLabel("Nota: Si el Solicitante NO es el paciente, Marque el check.".toUpperCase());
-        lbl_NOTA.setForeground(Color.GRAY.brighter());
+        lbl_NOTA.setForeground(ColorFonts);
 
         chk_boxSolicitanteDiferentePaciente = new JCheckBox();
         chk_boxSolicitanteDiferentePaciente.setText("PACIENTE != Solicitante".toUpperCase());
@@ -194,71 +196,71 @@ public class NewPatient {
 
         lbl_TituloPaciente = new iLabel("PACIENTE");
         lbl_TituloPaciente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_TituloPaciente.setForeground(Color.GRAY.brighter());
+        lbl_TituloPaciente.setForeground(ColorFonts);
 
         lbl_CedulaPaciente = new iLabel("Cédula Paciente".toUpperCase());
-        lbl_CedulaPaciente.setForeground(Color.GRAY.brighter());
+        lbl_CedulaPaciente.setForeground(ColorFonts);
         txt_CedulaPaciente = new iTextField("", 15);
 
         lbl_NombrePaciente = new iLabel("Nombre Paciente".toUpperCase());
-        lbl_NombrePaciente.setForeground(Color.GRAY.brighter());
+        lbl_NombrePaciente.setForeground(ColorFonts);
         txt_NombrePaciente = new iTextField("", 15);
 
         lbl_FechaNacimientoPaciente = new iLabel("Fecha de Nacimiento Paciente".toUpperCase());
-        lbl_FechaNacimientoPaciente.setForeground(Color.GRAY.brighter());
+        lbl_FechaNacimientoPaciente.setForeground(ColorFonts);
         FechaNacimientoPaciente = new iCalendar();
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
-        lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
+        lbl_DireccionPaciente.setForeground(ColorFonts);
         txt_DireccionPaciente = new JTextArea();
         txt_DireccionPaciente.setWrapStyleWord(true);
         txt_DireccionPaciente.setLineWrap(true);
 
         lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
-        lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
+        lbl_TelefonoPaciente.setForeground(ColorFonts);
         txt_TelefonoPaciente = new iTextField("", 15);
 
         lbl_ProfesionPaciente = new iLabel("Profesión Paciente".toUpperCase());
-        lbl_ProfesionPaciente.setForeground(Color.GRAY.brighter());
+        lbl_ProfesionPaciente.setForeground(ColorFonts);
         txt_ProfesionPaciente = new iTextField("", 15);
 
         lbl_ActividadLaboralPaciente = new iLabel("Actividad Laboral Paciente".toUpperCase());
-        lbl_ActividadLaboralPaciente.setForeground(Color.GRAY.brighter());
+        lbl_ActividadLaboralPaciente.setForeground(ColorFonts);
         txt_ActividadLaboralPaciente = new iTextField("", 15);
 
         lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
-        lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
+        lbl_MotivoConsultaPaciente.setForeground(ColorFonts);
         txt_MotivoConsultaPaciente = new JTextArea();
         txt_MotivoConsultaPaciente.setWrapStyleWord(true);
         txt_MotivoConsultaPaciente.setLineWrap(true);
 
         lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
-        lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
+        lbl_ParentescoPaciente.setForeground(ColorFonts);
         cbo_Parentesco = new JComboBox();//son de seleccion por base de datos
 
         lbl_ClasificacionPaciente = new iLabel("Clasificación Paciente".toUpperCase());
-        lbl_ClasificacionPaciente.setForeground(Color.GRAY.brighter());
+        lbl_ClasificacionPaciente.setForeground(ColorFonts);
         cbo_ClasificacionPaciente = new JComboBox();//son de seleccion por base de datos
 
         lbl_CursoPaciente = new iLabel("Curso".toUpperCase());
-        lbl_CursoPaciente.setForeground(Color.GRAY.brighter());
+        lbl_CursoPaciente.setForeground(ColorFonts);
         cbo_CursoPaciente = new JComboBox();//son de seleccion por base de datos
 
         lbl_HorarioPaciente = new iLabel("Horario Paciente".toUpperCase());
-        lbl_HorarioPaciente.setForeground(Color.GRAY.brighter());
+        lbl_HorarioPaciente.setForeground(ColorFonts);
         cbo_HorarioPaciente = new JComboBox();//son de seleccion por base de datos
 
         lbl_DetalleHorarioPaciente = new iLabel("Detalle Horario Paciente".toUpperCase());
-        lbl_DetalleHorarioPaciente.setForeground(Color.GRAY.brighter());
+        lbl_DetalleHorarioPaciente.setForeground(ColorFonts);
         txt_DetalleHorarioPaciente = new JTextArea();
         txt_DetalleHorarioPaciente.setWrapStyleWord(true);
         txt_DetalleHorarioPaciente.setLineWrap(true);
 
         lbl_TipoPaciente = new iLabel("Tipo Paciente Paciente".toUpperCase());
-        lbl_TipoPaciente.setForeground(Color.GRAY.brighter());
+        lbl_TipoPaciente.setForeground(ColorFonts);
         cbo_TipoPaciente = new JComboBox();//son de seleccion por base de datos
         lbl_IsNonGrato = new iLabel("Lista Relegados".toUpperCase());
-        lbl_IsNonGrato.setForeground(Color.GRAY.brighter());
+        lbl_IsNonGrato.setForeground(ColorFonts);
         cbo_IsNonGrato = new JComboBox();//son los de seleccion por paciente en lista negra
         ///////////////Fin de componentes de Paciente
 

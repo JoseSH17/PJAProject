@@ -289,10 +289,19 @@ public class PatientView implements ActionListener {
 
             btn = new JButton();
             btn.setOpaque(true);
-
+           
+            
+            btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.out.println("WOOOOOOOOOOOOOOOOOOOOO~~~");
+            }
+        });
+            
+            
+            
             //WHEN BUTTON IS CLICKED
             btn.addMouseListener(new MouseAdapter() {
-
+   
 
                 @Override
                 public void mouseClicked(MouseEvent o) {

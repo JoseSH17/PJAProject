@@ -115,6 +115,7 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
         setPreferredSize(ic.setComponentDimension());
         setLayout(ic.getLayOut());
         setResizable(false);
+        System.out.println("Title: " + Title);
         setTitle(Title);
         width = w;
         height = h;
@@ -123,7 +124,8 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
             setDefaultCloseOperation(CloseOperation);
         }
 
-        setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        setFont(new Font("Segoe UI", Font.BOLD, 13));
+        setForeground(Color.BLACK);
 
         Dimension windowSize = getSize();
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
