@@ -14,6 +14,7 @@ import iComponents.iPanel;
 import iComponents.iScrollPane;
 import iComponents.iTable;
 import iComponents.iTextField;
+import static japproject.HomePanel.ColorPanels;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -112,7 +113,7 @@ public class EditPatient {
     public EditPatient(iFrame if_) {
         currentPanel = "EditPatient_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.  
         EditPatient_Panel = new iPanel(0, 70, 100f, 100.0f, 0, 0, if_);
-        EditPatient_Panel.setBackground(Color.decode("#006738"));
+        EditPatient_Panel.setBackground(ColorPanels);
         AddComponentes(if_);
     }
 

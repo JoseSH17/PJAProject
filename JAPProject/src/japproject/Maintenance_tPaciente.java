@@ -17,6 +17,7 @@ import iComponents.iScrollPane;
 import iComponents.iTable;
 
 import iComponents.iTextField;
+import static japproject.HomePanel.ColorPanels;
 import static japproject.HomePanel.currentPanel;
 import static japproject.HomePanel.if_;
 import static japproject.JAPProject.sql;
@@ -56,7 +57,7 @@ public class Maintenance_tPaciente {
     public Maintenance_tPaciente(iFrame if_) {
         currentPanel = "Maintenance_TipPaciente_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_TipPaciente_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        Maintenance_TipPaciente_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
+        Maintenance_TipPaciente_Panel.setBackground(ColorPanels);//le doy color al panel
         Mantenimiento_tPaciente(if_);
     }
     

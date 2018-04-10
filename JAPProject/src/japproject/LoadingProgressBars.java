@@ -8,6 +8,7 @@ package japproject;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
@@ -28,7 +29,8 @@ public class LoadingProgressBars {
         lblIndicador = new iLabel("Accesando a base de datos local, un momento por favor...");
         lblIndicador.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.DATA_USAGE, 20, Color.BLACK));        
         LoadingFrame.AddSingleObject(lblIndicador, 390, 30, EXIT_ON_CLOSE);
-        LoadingFrame.AddSingleObject(pbSQL, 390, 30, EXIT_ON_CLOSE);       
+        LoadingFrame.AddSingleObject(pbSQL, 390, 30, EXIT_ON_CLOSE); 
+        LoadingFrame.setIconImage(new ImageIcon(getClass().getResource("/content/iconoUlatina.PNG")).getImage());
         LoadingFrame.finalice();       
     }
     

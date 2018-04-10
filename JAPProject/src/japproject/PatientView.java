@@ -13,6 +13,7 @@ import iComponents.iPanel;
 import iComponents.iScrollPane;
 import iComponents.iTable;
 import iComponents.iTextField;
+import static japproject.HomePanel.ColorPanels;
 import static japproject.HomePanel.currentPanel;
 import java.awt.Color;
 import java.awt.Component;
@@ -62,7 +63,7 @@ public class PatientView implements ActionListener {
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
-            PatientView_panel.setBackground(Color.DARK_GRAY);
+            PatientView_panel.setBackground(ColorPanels);
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
@@ -78,7 +79,7 @@ public class PatientView implements ActionListener {
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.setRowSelectionAllowed(true);
             RegistrosTable.setSize(500, 500);
-            RegistrosTable.setBackground(Color.DARK_GRAY);
+            RegistrosTable.setBackground(ColorPanels);
 
             popup = new JPopupMenu();
             ItemEditar = new JMenuItem("Editar paciente");
@@ -89,7 +90,7 @@ public class PatientView implements ActionListener {
             RegistrosTable.setComponentPopupMenu(popup);
             RegistrosTable.addMouseListener(new TableMouseListener(RegistrosTable));
 
-            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, Color.DARK_GRAY);
+            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, ColorPanels);
             scrollPane2.setViewportView(RegistrosTable);
             SetColumsSizes();
 

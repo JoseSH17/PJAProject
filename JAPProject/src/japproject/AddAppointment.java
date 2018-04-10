@@ -15,6 +15,8 @@ import iComponents.iPanel;
 import iComponents.iScrollPane;
 import iComponents.iTable;
 import iComponents.iTextField;
+import static japproject.HomePanel.ColorFonts;
+import static japproject.HomePanel.ColorPanels;
 import static japproject.HomePanel.currentPanel;
 import static japproject.JAPProject.sql;
 import java.awt.Color;
@@ -39,7 +41,7 @@ public class AddAppointment {
         try {
             currentPanel = "AddAppointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
             AddAppointments_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//Defining iPanel dimensions
-            AddAppointments_Panel.setBackground(Color.decode("#006738"));//le doy color al panel  
+            AddAppointments_Panel.setBackground(ColorPanels);//le doy color al panel  
 
             lbl_LogoULatina = new iLabel("");
             lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
@@ -52,7 +54,7 @@ public class AddAppointment {
             AddAppointments_Panel.newLine();
 
             lblSearch = new iLabel("Buscar en Tabla");
-            lblSearch.setForeground(Color.WHITE); //SearchBar for tblPatientsForAppointments
+            lblSearch.setForeground(ColorFonts); //SearchBar for tblPatientsForAppointments
             txtSearch = new iTextField("", 15);            
             AddAppointments_Panel.addSpace(20);
             AddAppointments_Panel.AddObject(lblSearch, 130, 30, 13);
@@ -71,10 +73,10 @@ public class AddAppointment {
             tblPatientsForAppointments.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             tblPatientsForAppointments.getTableHeader().setResizingAllowed(false);
             tblPatientsForAppointments.setRowSelectionAllowed(true);
-            tblPatientsForAppointments.setBackground(Color.decode("#006738"));
+            tblPatientsForAppointments.setBackground(ColorPanels);
             tblPatientsForAppointments.setSize(1100, 200);
 
-            iScrollPane scrollAgendarCitas = new iScrollPane(tblPatientsForAppointments, Color.decode("#006738"));
+            iScrollPane scrollAgendarCitas = new iScrollPane(tblPatientsForAppointments, ColorPanels);
             scrollAgendarCitas.setViewportView(tblPatientsForAppointments);
             SetColumsSizes(tblPatientsForAppointments);
 

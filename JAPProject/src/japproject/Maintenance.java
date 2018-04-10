@@ -6,6 +6,7 @@ import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iTable;
 import iComponents.iTextField;
+import static japproject.HomePanel.ColorPanels;
 import static japproject.HomePanel.currentPanel;
 import static japproject.JAPProject.sql;
 import java.awt.Color;
@@ -42,7 +43,7 @@ public class Maintenance {
     public Maintenance(iFrame if_) {
         currentPanel = "Maintenance_Curso_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Curso_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
-        Maintenance_Curso_Panel.setBackground(Color.decode("#006738"));//le doy color al panel
+        Maintenance_Curso_Panel.setBackground(ColorPanels);//le doy color al panel
         Mantenimiento_curso(if_);
     }
     

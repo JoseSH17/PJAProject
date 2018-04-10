@@ -38,7 +38,6 @@ import javax.swing.JPopupMenu;
 import static japproject.HomePanel.ColorPanels;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Locale;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerDateModel;
@@ -124,7 +123,7 @@ public class Appointments implements ActionListener {
             tblAppointments.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             tblAppointments.getTableHeader().setResizingAllowed(false);
             tblAppointments.setRowSelectionAllowed(true);
-            tblAppointments.setBackground(Color.decode("#006738"));
+            tblAppointments.setBackground(ColorPanels);
             tblAppointments.setSize(1100, 200);
 
             popup = new JPopupMenu();
@@ -140,7 +139,7 @@ public class Appointments implements ActionListener {
             tblAppointments.addMouseListener(new TableMouseListener(tblAppointments));
 
             //PopMenu(tblAppointments, if_);//metodo que crea e implementa el popmenu 
-            iScrollPane scrollCitas = new iScrollPane(tblAppointments, Color.decode("#006738"));
+            iScrollPane scrollCitas = new iScrollPane(tblAppointments, ColorPanels);
             scrollCitas.setViewportView(tblAppointments);
             SetColumsSizes();
 

@@ -12,6 +12,7 @@ import iComponents.iPanel;
 import iComponents.iScrollPane;
 import iComponents.iTable;
 import iComponents.iTextField;
+import static japproject.HomePanel.ColorPanels;
 import static japproject.HomePanel.currentPanel;
 import static japproject.JAPProject.sql;
 import java.awt.Color;
@@ -48,7 +49,7 @@ public class BlackList {
         currentPanel = "BlackList_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             BlackList_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
-            BlackList_Panel.setBackground(Color.decode("#006738"));
+            BlackList_Panel.setBackground(ColorPanels);
 
             lbl_LogoULatina = new iLabel("");
             lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
@@ -71,10 +72,10 @@ public class BlackList {
             RegistrosTable.getTableHeader().setReorderingAllowed(false);
             RegistrosTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegistrosTable.setRowSelectionAllowed(true);
-            RegistrosTable.setBackground(Color.decode("#006738"));
+            RegistrosTable.setBackground(ColorPanels);
 
             PopMenu(RegistrosTable, if_);//metodo que crea e implementa el popmenu 
-            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, Color.decode("#006738"));
+            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, ColorPanels);
             scrollPane2.setViewportView(RegistrosTable);
             SetColumsSizes(RegistrosTable);
 
