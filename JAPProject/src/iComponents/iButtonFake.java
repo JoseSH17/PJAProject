@@ -89,7 +89,7 @@ public class iButtonFake extends JLabel implements MouseListener {
         IconFontSwing.register(GoogleMaterialDesignIcons.getIconFont());
         if (ico != null)
         {
-            Icon icon = IconFontSwing.buildIcon(ico, 16, new Color(240, 240, 240));
+            Icon icon = IconFontSwing.buildIcon(ico, 16, ButtonColor);
             
             setIcon(icon);
             setIconTextGap(10);

@@ -40,8 +40,8 @@ public class iShadowPane extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Insets insets = getInsets();
-        int x = insets.left;
-        int y = insets.top;
+        int x = 9;
+        int y = 18;
         int width = getWidth() - (insets.left + insets.right);
         int height = getHeight() - (insets.top + insets.bottom);
         if (shadow == null) {

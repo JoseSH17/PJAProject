@@ -12,11 +12,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
-import static java.awt.Window.Type.UTILITY;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +39,6 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
     private int height, tmpHeight;
     private boolean isMaximized = false;
     private boolean isShadowWindowActivated = false;
-    private iFrame shwdw;
     private int tmp = 0;
 
     protected iPanel UndecoredPanel;
@@ -119,10 +116,7 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
         setTitle(Title);
         width = w;
         height = h;
-        if (CloseOperation != 999) {
-            initShadowFrame();
-            setDefaultCloseOperation(CloseOperation);
-        }
+        setDefaultCloseOperation(CloseOperation);
 
         setFont(new Font("Segoe UI", Font.BOLD, 13));
         setForeground(Color.BLACK);
@@ -141,6 +135,9 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
         lbl_maximize = new JLabel(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.TV, 16, new Color(240, 240, 240)));
         UndecoredPanel = new iPanel(0, 0, 100.0f, 30, 0, 0, this);
         addUndecoredStyle(Color.white);
+
+        UndecoredPanel.border(1, 0, 1, 0, new Color(0xeeeeee));
+        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, new Color(0xeeeeee)));
     }
 
     public iPanel getUndecoredPanel() {
@@ -149,18 +146,18 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
 
     public void setHeaderBackground(Color panelColor) {
         UndecoredPanel.setBackground(panelColor);
+
+        if (panelColor.getRed() > 230 && panelColor.getBlue() > 230 && panelColor.getGreen() > 230) {
+            panelColor = new Color(0xeeeeee);
+        }
+
+        getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, panelColor));
+
         UndecoredPanel.border(0, 0, 1, 0, panelColor.darker());
     }
 
-    @Override
-    public void setVisible(boolean bln) {
-        super.setVisible(bln);
-        if (!bln) {
-            try {
-                shwdw.setVisible(false);
-            } catch (AbstractMethodError | UnsupportedOperationException | NullPointerException ex) {
-            }
-        }
+    public void setHeaderVisible(boolean b) {
+        UndecoredPanel.setVisible(b);
     }
 
     @Override
@@ -268,7 +265,6 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
     }
 
     private void responsiveMaker() {
-        shwdw.setVisible(false);
         setVisible(false);
         if (!isMaximized) {
             GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -276,21 +272,18 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
 
             setTmpWidth(getWidth());
             setTmpHeight(getHeight());
-            setWidth((int) env.getMaximumWindowBounds().width);
-            setHeight((int) env.getMaximumWindowBounds().height);
+            setWidth(env.getMaximumWindowBounds().width);
+            setHeight(env.getMaximumWindowBounds().height);
 
             setExtendedState(MAXIMIZED_BOTH);
             isMaximized = true;
         } else {
-            setVisible(false);
             setWidth(getTmpWidth());
             setHeight(getTmpHeight());
             setMaximumSize(new Dimension(getWidth(), getHeight()));
             setExtendedState(NORMAL);
             isMaximized = false;
         }
-
-        shwdw.setVisible(true);
         setVisible(true);
 
         List<Component> compList = getAllComponents(getRootPane());
@@ -304,10 +297,10 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
                 if (ip.isResponsiveWidth() || ip.isResponsiveHeight()) {
                     if (ip.isResponsiveWidth()) {
                         ip.setBounds(ip.getHorizontal(), ip.getVertical(), getWidth(), ip.getHeight());
-                    }
-
-                    if (ip.isResponsiveHeight()) {
+                    } else if (ip.isResponsiveHeight()) {
                         ip.setBounds(ip.getHorizontal(), ip.getVertical(), ip.getWidth(), getHeight());
+                    } else if (ip.isResponsiveWidth() && ip.isResponsiveHeight()) {
+                        ip.setBounds(ip.getHorizontal(), ip.getVertical(), getWidth(), getHeight());
                     }
                 } else if (ip.isResponsiveExtendedWidth() || ip.isResponsiveExtendedHeight()) {
                     if (ip.isResponsiveExtendedWidth()) {
@@ -324,15 +317,28 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
                 }
 
             } else if (comp.getParent() instanceof iPanel) {
-                            System.out.println(comp);
+                System.out.println(comp);
 
                 iPanel iptmp = (iPanel) comp.getParent();
 
                 if (comp instanceof iScrollPane) {
-                    iScrollPane ips = (iScrollPane) comp;
-                    ips.setBounds(ips.getX(), ips.getY(), iptmp.calcWidth(ips.getresponsivePercentWidth(), 0), ips.getHeight());
-                    ips.setBounds(ips.getX(), ips.getY(), ips.getWidth(), iptmp.calcHeigth(ips.getResponsivePercentHeight(), ips.getResponsiveExtendedPixelHeight()));
-                   
+                    iScrollPane ips = (iScrollPane) comp;                   
+                    
+                    if (ips.isResponsiveWidth() && ips.isResponsiveHeight())
+                    {
+                        ips.setBounds(
+                                ips.getX(), 
+                                ips.getY(), 
+                                iptmp.calcWidth(ips.getresponsivePercentWidth(), 0), 
+                                iptmp.calcHeigth(ips.getResponsivePercentHeight())
+                        );
+                    }
+                    else if (ips.isResponsiveWidth())
+                        ips.setBounds(ips.getX(), ips.getY(), iptmp.calcWidth(ips.getresponsivePercentWidth(), 0), ips.getHeight());
+                    else if (ips.isResponsiveHeight())
+                        ips.setBounds(ips.getX(), ips.getY(), ips.getWidth(), iptmp.calcHeigth(ips.getResponsivePercentHeight(), 0));
+                    
+
                 } else if (comp instanceof iTextField) {
                     iTextField itf = (iTextField) comp;
                     switch (itf.getPositon()) {
@@ -447,7 +453,6 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
                 int X = thisX + xMoved;
                 int Y = thisY + yMoved;
                 setLocation(X, Y);
-                shwdw.setLocation(X - 9, Y - 9);
             }
         });
 
@@ -524,7 +529,6 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
             public void mouseClicked(MouseEvent me
             ) {
                 setState(ICONIFIED);
-                shwdw.setVisible(false);
             }
 
             @Override
@@ -563,58 +567,4 @@ public final class iFrame extends JFrame implements ComponentInterfaz {
     public void addSpace(int height) {
         ic.addSpace(height);
     }
-
-    public void initShadowFrame() {
-        shwdw = new iFrame(this.width + 18, this.height + 18, 4, 999);
-        shwdw.setUndecorated(true);
-        shwdw.setBackground(new Color(0, 0, 0, 0));
-        shwdw.setContentPane(new iShadowPane());
-        shwdw.setType(UTILITY);
-        shwdw.setName("0");
-        setName("Main_Frame");
-
-        shwdw.setEnabled(false);
-        // 1 verde puede mostrarse
-
-        WindowAdapter adapter = new WindowAdapter() {
-            @Override
-            public void windowGainedFocus(WindowEvent we) {
-                if (Integer.parseInt(shwdw.getName()) % 3 == 0) {
-                    shwdw.toFront();
-                    tmp++;
-                    shwdw.setName(String.valueOf(tmp));
-                }
-                toFront();
-            }
-
-            @Override
-            public void windowLostFocus(WindowEvent we) {
-                tmp++;
-                shwdw.setName(String.valueOf(tmp));
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent we) {
-                shwdw.setVisible(true);
-                requestFocus();
-            }
-        };
-
-        addWindowListener(adapter);
-        addWindowFocusListener(adapter);
-
-        shwdw.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowActivated(WindowEvent we) {
-                if (!isShadowWindowActivated) {
-                    isShadowWindowActivated = true;
-                } else {
-                    toFront();
-                }
-            }
-        });
-
-        shwdw.finalice();
-    }
-
 }

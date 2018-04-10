@@ -7,6 +7,7 @@ package iComponents;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
+import java.awt.Color;
 
 /**
  *
@@ -26,12 +27,18 @@ public class iLabel extends JLabel {
     
     public iLabel(String text) {
         super(text);
+        setOpaque(false);
     }
     
     public iLabel(String text, Icon ico) 
     {
         super(ico);
         setText(text);
+        setOpaque(false);
     }
-    
+     @Override
+    public void setBackground(Color color) {
+        setOpaque(true);
+        super.setBackground(color);
+     }    
 }

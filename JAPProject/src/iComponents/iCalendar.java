@@ -26,7 +26,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -72,6 +72,7 @@ public class iCalendar extends JTextField
         DEFAULT_DATE_FORMAT = dateFormatPattern;
         setOpaque(false);
         setForeground(new Color(73, 80, 87).brighter().brighter());
+        setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
     }
 
     public iCalendar(Date date) 
@@ -82,6 +83,7 @@ public class iCalendar extends JTextField
         addListeners();
         setOpaque(false);
         setForeground(new Color(73, 80, 87).brighter().brighter());
+        setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
     }
     
     
@@ -197,7 +199,7 @@ public class iCalendar extends JTextField
         Color todayBackColor = Color.orange;
         Color weekFontColor = Color.black;
         Color dateFontColor = Color.black;
-        Color weekendFontColor = new Color(0x777777);
+        Color weekendFontColor = new Color(0xda4e44);
 
         Color controlLineColor = new Color(73, 80, 87);
         Color controlTextColor = Color.white;
@@ -313,18 +315,18 @@ public class iCalendar extends JTextField
         private JPanel createWeekAndDayPanal() 
         {
             
-            String colname[] = { "Su", "Mo", "Tu", "We", "Th", "Fr", "Sa" };
+            String colname[] = { "dom.", "lun.", "mar.", "mie.", "jue.", "vie.", "sáb." };
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(7, 7));
             panel.setBackground(Color.white);
-            panel.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+            panel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
 
             for (int i = 0; i < 7; i++) 
             {
                 JLabel cell = new JLabel(colname[i]);
-                cell.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 14));
+                cell.setFont(new Font("Segoe UI", Font.PLAIN, 11));
                 cell.setHorizontalAlignment(JLabel.CENTER);
-                cell.setForeground(weekFontColor);
+                cell.setForeground(new Color(0x495057));
                 panel.add(cell);
             }
 
@@ -341,8 +343,6 @@ public class iCalendar extends JTextField
                     numBtn.setFont(new Font("Segoe UI", Font.PLAIN, 13));
                     
                     numBtn.setActionCommand(String.valueOf(actionCommandId));
-                    numBtn.setBackground(palletTableColor);
-                    numBtn.setForeground(dateFontColor);
                     numBtn.addActionListener((ActionEvent event) -> {
                         JButton source = (JButton) event.getSource();
                         int x = Integer.parseInt(numBtn.getActionCommand()) / 7;
@@ -356,9 +356,7 @@ public class iCalendar extends JTextField
                         
                         // debo hacer el proceso para ver si 
                         // el numero marcado es de otra fecha.
-                        
-                        
-                        
+                                                                       
                         source.setBackground(new Color(0x337ab7));
                         source.setForeground(Color.white);
                         
@@ -368,12 +366,7 @@ public class iCalendar extends JTextField
                         setDate(cal.getTime());
                         
                         dateDialog.setVisible(false);
-                    });
-
-                    if (j == 0 || j == 6)
-                        numBtn.setForeground(weekendFontColor);
-                    else
-                        numBtn.setForeground(dateFontColor);
+                    });                    
                     
                     daysButton[i][j] = numBtn;
                     panel.add(numBtn);

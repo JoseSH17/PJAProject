@@ -22,9 +22,20 @@ public final class iSQL {
     private String DATABASE_URL = "";
     private String USERNAME = "";
     private String PASSWORD = "";
+    private STATUS status;
 
     private Connection connection;
     private Properties properties;
+
+    public enum STATUS {
+        SUCCESS,
+        FAIL,
+        WARN,
+        FATAL,
+        CONNECTED,
+        UNCONNECTED,
+        UNKNOWN
+    }
 
     /**
      * Constructor de la clase SQL Crea una instancia a la base de datos.
@@ -39,10 +50,19 @@ public final class iSQL {
         this.DATABASE_URL += "jdbc:mysql://" + ip + ":3306/" + db;
         this.USERNAME = user;
         this.PASSWORD = pass;
+        this.status = STATUS.UNCONNECTED;
 
         this.connect();
     }
 
+     /**
+     *
+     * @return
+     */
+    public STATUS getStatus() {
+        return this.status;
+    }
+    
     public boolean isNumeric(Object element) {
         try {
             for (int i = 0; i < element.toString().length(); i++) {
@@ -72,18 +92,19 @@ public final class iSQL {
     public Connection connect() {
         SwingWorker sw = new SwingWorker<Boolean, Void>() {
             @Override
-            protected Boolean doInBackground()  {
+            protected Boolean doInBackground() {
                 if (connection == null) {
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         connection = DriverManager.getConnection(DATABASE_URL, getProperties());
+                        status = STATUS.CONNECTED;
                     } catch (ClassNotFoundException | SQLException e) {
                         JOptionPane.showMessageDialog(null, e.getMessage());
                         System.exit(0);
                     }
                     return false;
                 }
-                return true; 
+                return true;
             }
         };
         sw.execute();
@@ -97,8 +118,9 @@ public final class iSQL {
      * @return true si existe y-o tiene datos.
      */
     public boolean Exists(ResultSet rs) {
-        if (connection == null)
+        if (connection == null) {
             return false;
+        }
         try {
             return rs.isBeforeFirst();
         } catch (SQLException ex) {
@@ -155,9 +177,9 @@ public final class iSQL {
             while (it.hasNext()) {
                 Object element = it.next();
                 if (this.isNumeric(element)) {
-                    ps.setInt(poc, Integer.parseInt(element.toString()));                    
+                    ps.setInt(poc, Integer.parseInt(element.toString()));
                 } else {
-                    ps.setString(poc, element.toString());                    
+                    ps.setString(poc, element.toString());
                 }
                 poc++;
             }
@@ -167,12 +189,28 @@ public final class iSQL {
             return true;
 
         } catch (SQLException | NumberFormatException ex) {
-          //  iAlert iA = new iAlert(null, ex.getMessage());
+            //iAlert iA = new iAlert(null, ex.getMessage(), 2);
             System.out.println("Mensaje de Error SQL" + ex.getMessage());
             //JOptionPane.showMessageDialog(null, ex.getMessage());
             return false;
         }
-    }           
+    }
+    
+    public boolean exec(String preparedQuery) {
+        PreparedStatement ps;
+        try {
+            ps = this.connection.prepareStatement(preparedQuery);
+
+            ps.executeUpdate();
+            ps.close();
+            return true;
+
+        } catch (SQLException | NumberFormatException ex) {
+            //iAlert iA = new iAlert(null, ex.getMessage(), 1);
+             //JOptionPane.showMessageDialog(null, ex.getMessage());
+             return false;
+         }
+     }
 
     /**
      * Sentencia ùnica para SELECT, retorna un ResultSet, que podrà ser
@@ -185,8 +223,7 @@ public final class iSQL {
     public ResultSet SELECT(String preparedQuery, ArrayList<Object> objs) {
         PreparedStatement ps;
         try {
-            if (connection != null)
-            {
+            if (connection != null) {
                 ps = this.connection.prepareStatement(preparedQuery);
 
                 Iterator it = objs.iterator();
@@ -203,18 +240,22 @@ public final class iSQL {
 
                 ResultSet rs = ps.executeQuery();
                 return rs;
-            }
-            else 
-            {
+            } else {
                 return null;
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage() + "\n tratando de reconectar");
+            if (connect() != null)
+                SELECT(preparedQuery, objs);
+            else
+            {
+                JOptionPane.showMessageDialog(null, "No se pudo conectar.");
+                System.exit(0);
+            }   
         }
         return null;
     }
-    
-    
+
     /**
      * Sentencia ùnica para SELECT, retorna un ResultSet, que podrà ser
      * utilizado para crear tablas o manipular informaciòn.
@@ -227,8 +268,7 @@ public final class iSQL {
         PreparedStatement ps;
         int ReturnedValue;
         try {
-            if (connection != null)
-            {
+            if (connection != null) {
                 ps = this.connection.prepareStatement(preparedQuery);
 
                 Iterator it = objs.iterator();
@@ -244,15 +284,14 @@ public final class iSQL {
                 }
 
                 ResultSet rs = ps.executeQuery();
-                if (rs.next())
-               {
-                ReturnedValue = (int) rs.getObject(1);
-                System.out.println("Valor Retornado por metodo " + ReturnedValue);
-                return ReturnedValue;
-                } else {System.out.println("No retorna nada la funcion");}  
-            }
-            else 
-            {
+                if (rs.next()) {
+                    ReturnedValue = (int) rs.getObject(1);
+                    System.out.println("Valor Retornado por metodo " + ReturnedValue);
+                    return ReturnedValue;
+                } else {
+                    System.out.println("No retorna nada la funcion");
+                }
+            } else {
                 return 0;
             }
         } catch (SQLException ex) {
@@ -268,7 +307,14 @@ public final class iSQL {
             ResultSet rs = ps.executeQuery();
             return rs;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            JOptionPane.showMessageDialog(null, ex.getMessage() + "\n tratando de reconectar");
+            if (connect() != null)
+                SELECT(preparedQuery);
+            else
+            {
+                JOptionPane.showMessageDialog(null, "No se pudo conectar.");
+                System.exit(0);
+            }   
         }
         return null;
     }

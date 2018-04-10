@@ -317,7 +317,7 @@ public class InitComponents implements ComponentInterfaz
 
     @Override
     public void addSpace(int height) {
-        AddSingleObject(new JLabel(""), 100, height, CENTER);
+        AddSingleObject(new JLabel(""), 10, height, CENTER);
     }
     public InitComponents(int w, int h, int margin, int objectMarginTop, boolean haveMarginTop) {
         this.componentHeight = h;

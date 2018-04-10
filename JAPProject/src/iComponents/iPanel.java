@@ -10,6 +10,7 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import java.awt.Dimension;
 
 /**
  *
@@ -19,11 +20,10 @@ import javax.swing.JPanel;
 public class iPanel extends JPanel implements ComponentInterfaz {
 
     private InitComponents ic = null;
-    private boolean 
-            ResponsiveWidth, 
-            responsiveHeight, 
-            responsiveExtendedWidth, 
-            responsiveExtendedHeight, 
+    private boolean ResponsiveWidth,
+            responsiveHeight,
+            responsiveExtendedWidth,
+            responsiveExtendedHeight,
             responsiveSingleObjectWidth,
             responsiveAlwaysOnBottom;
 
@@ -32,8 +32,6 @@ public class iPanel extends JPanel implements ComponentInterfaz {
 
     private iFrame Container;
 
-    
-    
     public int getResponsiveExtendedPixelHeight() {
         return responsiveExtendedPixelHeight;
     }
@@ -57,12 +55,10 @@ public class iPanel extends JPanel implements ComponentInterfaz {
     public void setResponsiveAlwaysOnBottom(boolean responsiveAlwaysOnBottom) {
         this.responsiveAlwaysOnBottom = responsiveAlwaysOnBottom;
     }
-    
 
     public boolean isResponsiveSingleObjectWidth() {
         return responsiveSingleObjectWidth;
     }
-    
 
     public boolean isResponsiveExtendedWidth() {
         return responsiveExtendedWidth;
@@ -173,14 +169,18 @@ public class iPanel extends JPanel implements ComponentInterfaz {
      * componente.
      * @param if_ iFrame to add
      */
-    public iPanel(int horizontal, int vertical, int w, int h, int margin) 
-    {   
+    public iPanel(int horizontal, int vertical, int w, int h, int margin) {
         ic = new InitComponents(w, h, margin, 0, false);
-        
+
         setBounds(horizontal, vertical, w, h);
         setLayout(ic.getLayOut());
     }
-    
+
+    public iPanel(int horizontal, int vertical, int w, int h, int margin, int InitMarginTop) {
+        initPanel(horizontal, vertical, w, h, margin, InitMarginTop, null);
+        ResponsiveWidth = responsiveHeight = true;
+    }
+
     public iPanel(int horizontal, int vertical, float w, float h, int margin, int InitMarginTop, iFrame if_) {
         int height = (int) ((if_.getHeight() * h) / 100);
         int width = (int) ((if_.getWidth() * w) / 100);
@@ -193,13 +193,16 @@ public class iPanel extends JPanel implements ComponentInterfaz {
 
         this.horizontal = horizontal;
         this.vertical = vertical;
-
+        setLayout(null);
+        setPreferredSize(new Dimension(w, h));
         setBounds(horizontal, vertical, w, h);
-        setLayout(ic.getLayOut());
-        setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        Container = if_;
 
-        Container.add(this);
+        setFont(new Font("Segoe UI", Font.PLAIN, 13));
+
+        if (if_ != null) {
+            Container = if_;
+            Container.add(this);
+        }
     }
 
     @Override
@@ -272,16 +275,14 @@ public class iPanel extends JPanel implements ComponentInterfaz {
      * @param Position
      * @return
      */
-    public Component AddSingleObject(Component component, float width, int height, int Position) 
-    {
+    public Component AddSingleObject(Component component, float width, int height, int Position) {
         responsiveSingleObjectWidth = true;
         //lista de componentes que pueden ser responsive.
-        if (component instanceof iScrollPane)
-        {
+        if (component instanceof iScrollPane) {
             ((iScrollPane) component).setResponsiveWidth(true);
             ((iScrollPane) component).setresponsivePercentWidth(width);
-            ((iScrollPane) component).setResponsivHeight(true);
-            ((iScrollPane) component).setResponsivePercentHeight(height);
+            ((iScrollPane) component).setResponsiveHeight(true);
+            ((iScrollPane) component).setresponsivePercentHeight(height);
         }
         setResponsiveByiComponent(component, Position);
 
@@ -301,30 +302,28 @@ public class iPanel extends JPanel implements ComponentInterfaz {
      * @return
      */
     public Component AddSingleObject(Component component, float width, float height, int Position) {
-        if (component instanceof iScrollPane)
-        {
+        if (component instanceof iScrollPane) {
             ((iScrollPane) component).setResponsiveWidth(true);
             ((iScrollPane) component).setresponsivePercentWidth(width);
-            ((iScrollPane) component).setResponsivHeight(true);
-            ((iScrollPane) component).setResponsivePercentHeight(height);
+            ((iScrollPane) component).setResponsiveHeight(true);
+            ((iScrollPane) component).setresponsivePercentHeight(height);
         }
         setResponsiveByiComponent(component, Position);
         return add(ic.AddSingleObject(component, (int) ((this.getWidth() * width) / 100), (int) ((this.getHeight() * height) / 100), Position));
     }
-    
-    
-    public void setResponsiveByiComponent(Component c, int position) 
-    {
-        if (c instanceof iTextField) 
-           ((iTextField) c).setPositon(position);
-        else if (c instanceof iPasswordField)
-           ((iPasswordField) c).setPositon(position);
-        else if (c instanceof iButton)
+
+    public void setResponsiveByiComponent(Component c, int position) {
+        if (c instanceof iTextField) {
+            ((iTextField) c).setPositon(position);
+        } else if (c instanceof iPasswordField) {
+            ((iPasswordField) c).setPositon(position);
+        } else if (c instanceof iButton) {
             ((iButton) c).setPositon(position);
-        else if (c instanceof iCalendar)
+        } else if (c instanceof iCalendar) {
             ((iCalendar) c).setPositon(position);
-        else if (c instanceof iLabel)
+        } else if (c instanceof iLabel) {
             ((iLabel) c).setPositon(position);
+        }
     }
 
     @Override
@@ -343,10 +342,10 @@ public class iPanel extends JPanel implements ComponentInterfaz {
     public void setResponsiveWidth(float percent, int pixel) {
         responsiveExtendedPixelWidth = pixel;
         responsiveExtendedPercentWidth = percent;
-        
+
         int tmpWidth = (int) (100 * (Container.getWidth() - pixel) / percent);
         setComponentWidth(tmpWidth);
-        
+
         setBounds(
                 getHorizontal(),
                 getVertical(),
@@ -355,13 +354,17 @@ public class iPanel extends JPanel implements ComponentInterfaz {
         );
         responsiveExtendedWidth = true;
     }
-    
+
     public int calcWidth(float percent, int pixel) {
-        return (int) (100 * (getWidth() - pixel) / percent);
+        return (int) ((getWidth() * percent) / 100) - pixel;
     }
-    
-        public int calcHeigth(float percent, int pixel) {
-        return (int) (100 * (getHeight() - pixel) / percent);
+
+    public int calcHeigth(float percent, int pixel) {
+        return (int) ((getHeight() * percent) / 100) - pixel;
+    }
+
+    public int calcHeigth(float percent) {
+        return (int) (getHeight() * percent) / 100;
     }
 
     /**
@@ -375,10 +378,10 @@ public class iPanel extends JPanel implements ComponentInterfaz {
     public void setResponsiveHeight(float percent, int pixel) {
         responsiveExtendedPixelHeight = pixel;
         responsiveExtendedPercentHeight = percent;
-        
+
         int tmpHeight = (int) (100 * (Container.getHeight() - pixel) / percent);
         setComponentHeight(tmpHeight);
-        
+
         setBounds(
                 getHorizontal(),
                 getVertical(),

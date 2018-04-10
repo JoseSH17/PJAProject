@@ -31,13 +31,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -57,6 +54,9 @@ public class PatientView implements ActionListener {
     //popmenu
     JPopupMenu popup;
     JMenuItem ItemEditar;
+    JMenuItem ItemEditar2;
+    public iScrollPane scrollPane2;
+    
 
     public PatientView(iFrame if_) {
 
@@ -84,13 +84,15 @@ public class PatientView implements ActionListener {
             popup = new JPopupMenu();
             ItemEditar = new JMenuItem("Editar paciente");
             ItemEditar.addActionListener(this);
-
+            ItemEditar2 = new JMenuItem("Edit Resize");
+            ItemEditar2.addActionListener(this);
             popup.add(ItemEditar);
+            popup.add(ItemEditar2);
 
             RegistrosTable.setComponentPopupMenu(popup);
             RegistrosTable.addMouseListener(new TableMouseListener(RegistrosTable));
 
-            iScrollPane scrollPane2 = new iScrollPane(RegistrosTable, ColorPanels);
+            scrollPane2 = new iScrollPane(RegistrosTable, ColorPanels);
             scrollPane2.setViewportView(RegistrosTable);
             SetColumsSizes();
 
@@ -160,7 +162,7 @@ public class PatientView implements ActionListener {
 
         PatientView_panel.AddSingleObject(scrollPane2, 100.0f, 89f, CENTER);
         //scrollPane2.setResponsiveHeight(100.0f, 100);
-        scrollPane2.setResponsiveExtendedPixelHeight(208);
+        //scrollPane2.setresponsiveExtendedPixelHeight(208);
         PatientView_panel.newLine();
         PatientView_panel.finalice();
         PatientView_panel.setVisible(true);
@@ -252,7 +254,11 @@ public class PatientView implements ActionListener {
         if (menu == ItemEditar) {
             LlamarEditPatient(HomePanel.if_);
 
-        }
+        } else if (menu == ItemEditar2)
+                {
+                    scrollPane2.setSize(scrollPane2.getWidth(), scrollPane2.getHeight()/2);
+                    PatientView_panel.repaint();
+                }
 
     }
 
