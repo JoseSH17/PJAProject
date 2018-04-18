@@ -82,7 +82,7 @@ public class Maintenance_Parentesco {
     private void Mantenimiento_Parentesco(iFrame if_) {
         Componentes_Parentesco();
         
-        Maintenance_Parentesco_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+        Maintenance_Parentesco_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         Maintenance_Parentesco_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Parentesco_Panel.newLine(); 
         Maintenance_Parentesco_Panel.addSpace(5);

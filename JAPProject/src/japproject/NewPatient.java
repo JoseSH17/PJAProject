@@ -299,7 +299,7 @@ public class NewPatient {
 
         /////////////////componente,/////ancho,largo,posision//
         NewPatient_Panel.addSpace(110);
-        NewPatient_Panel.AddObject(lbl_LogoULatina, 415, 83, 10);
+        NewPatient_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         NewPatient_Panel.AddObject(lbl_LogoPsicologia, 482, 120, 600);
         NewPatient_Panel.newLine();
         NewPatient_Panel.addSpace(5);

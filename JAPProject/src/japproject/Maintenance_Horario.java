@@ -86,7 +86,7 @@ public class Maintenance_Horario {
     private void Mantenimiento_horario(iFrame if_) {
         Componentes_Horario();
         
-        Maintenance_Horario_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+        Maintenance_Horario_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         Maintenance_Horario_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Horario_Panel.newLine(); 
         Maintenance_Horario_Panel.addSpace(5);

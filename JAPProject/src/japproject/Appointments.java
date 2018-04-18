@@ -83,7 +83,7 @@ public class Appointments implements ActionListener {
             lbl_LogoPsicologia = new iLabel("");
             lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
 
-            Appointments_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+            Appointments_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
             Appointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
             Appointments_Panel.newLine();
 

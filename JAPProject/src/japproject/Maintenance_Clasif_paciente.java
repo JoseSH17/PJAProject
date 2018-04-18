@@ -86,7 +86,7 @@ public class Maintenance_Clasif_paciente {
     private void Mantenimiento_Clasificación(iFrame if_) {
         Componentes_Clasificación();
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 415, 120, 5);
+        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 618, 120, 5);
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Clasif_Paciente_Panel.newLine();
         Maintenance_Clasif_Paciente_Panel.addSpace(5);

@@ -57,7 +57,7 @@ public class BlackList {
             lbl_LogoPsicologia = new iLabel("");
             lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
 
-            BlackList_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+            BlackList_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
             BlackList_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
             BlackList_Panel.newLine();            
             
