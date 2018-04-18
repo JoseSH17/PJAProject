@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -62,7 +63,7 @@ public class EditPatient {
     private iLabel lbl_NombreSolicitante;//Lbl para el nombre del Solicitante
     private iTextField txt_NombreSolicitante;//TextField para el nombre del solicitante
     private iLabel lbl_DireccionSolicitante;//Lbl para la direccion del Solicitante
-    private iTextField txt_DireccionSolicitante;//TextField para la direccion del solicitante(cambiar por JTextArea)
+    private JTextArea txt_DireccionSolicitante;//TextField para la direccion del solicitante(cambiar por JTextArea)
     private iLabel lbl_TelefonoSolicitante;//Lbl para el telefono del Solicitante
     private iTextField txt_TelefonoSolicitante;//TextField para el telefono del solicitante
     private iLabel lbl_ProfesionSolicitante;//Lbl para la profesion del Solicitante
@@ -70,7 +71,7 @@ public class EditPatient {
     private iLabel lbl_ActividadLaboralSolicitante;//Lbl para la Actividad Laboral del Solicitante
     private iTextField txt_ActividadLaboralSolicitante;//TextField para la Actividad Laboral del solicitante
     private iLabel lbl_MotivoConsultaSolicitante;//Lbl para el Motivo Consulta del Solicitante
-    private iTextField txt_MotivoConsultaSolicitante;//TextField para el Motivo Consulta de  Solicitante(cambiar por JTextArea)
+    private JTextArea txt_MotivoConsultaSolicitante;//TextField para el Motivo Consulta de  Solicitante(cambiar por JTextArea)
     private iLabel lbl_FechaReporte;//Lbl para la FechaReporte del Solicitante
     private iCalendar txt_FechaReporte;
 
@@ -84,7 +85,7 @@ public class EditPatient {
     private iLabel lbl_FechaNacimientoPaciente;//Lbl para la Fecha de Nacimiento del Paciente
     private iCalendar txt_FechaNacimientoPaciente;//TextField para la fecha de Nacimiento del Paciente(cambiar por JDateChooser)
     private iLabel lbl_DireccionPaciente;//Lbl para la Direccion del Paciente
-    private iTextField txt_DireccionPaciente;//TextField para la Direccion del Paciente
+    private JTextArea txt_DireccionPaciente;//TextField para la Direccion del Paciente
     private iLabel lbl_TelefonoPaciente;//Lbl para la el Telefono del Paciente
     private iTextField txt_TelefonoPaciente;//TextField para el Telefono del Paciente
     private iLabel lbl_ProfesionPaciente;//Lbl para la Profesion del Paciente
@@ -92,7 +93,7 @@ public class EditPatient {
     private iLabel lbl_ActividadLaboralPaciente;//Lbl para la Actividad Laboral del Paciente
     private iTextField txt_ActividadLaboralPaciente;//TextField para la Actividad Laboral del Paciente
     private iLabel lbl_MotivoConsultaPaciente;//Lbl para la El Motivo Consulta del Paciente
-    private iTextField txt_MotivoConsultaPaciente;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
+    private JTextArea txt_MotivoConsultaPaciente;//TextField para el Motivo Consulta del Paciente(cambiar por JTextArea)
     private iLabel lbl_ParentescoPaciente;//Lbl para el Parentesco del Paciente
     private iLabel lbl_ClasificacionPaciente;//Lbl para la Clasificacion del Paciente
     private iLabel lbl_CursoPaciente;//Lbl para la el Curso del Paciente
@@ -211,7 +212,7 @@ public class EditPatient {
         EditarRegistrosTable.getTableHeader().setResizingAllowed(false);
         EditarRegistrosTable.setRowSelectionAllowed(true);
         SetColumsSizes(EditarRegistrosTable);
-        
+
         EditarRegistrosTable.addrow(rows.toArray());
         SearchBar_txt.setText("");
         iScrollPane ScrollPane = new iScrollPane(EditarRegistrosTable, null);
@@ -323,7 +324,7 @@ public class EditPatient {
     public void initSoliComponents() {
 
         lbl_LogoULatina = new iLabel("");
-        lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
+        lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.png")));
 
         lbl_LogoPsicologia = new iLabel("");
         lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
@@ -344,7 +345,9 @@ public class EditPatient {
 
         lbl_DireccionSolicitante = new iLabel("Dirección".toUpperCase());
         lbl_DireccionSolicitante.setForeground(Color.GRAY.brighter());
-        txt_DireccionSolicitante = new iTextField("", 15);
+        txt_DireccionSolicitante = new JTextArea();
+        txt_DireccionSolicitante.setWrapStyleWord(true);
+        txt_DireccionSolicitante.setLineWrap(true);
 
         lbl_TelefonoSolicitante = new iLabel("Teléfono".toUpperCase());
         lbl_TelefonoSolicitante.setForeground(Color.GRAY.brighter());
@@ -360,7 +363,9 @@ public class EditPatient {
 
         lbl_MotivoConsultaSolicitante = new iLabel("Motivo Consulta".toUpperCase());
         lbl_MotivoConsultaSolicitante.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaSolicitante = new iTextField("", 15);
+        txt_MotivoConsultaSolicitante = new  JTextArea();
+        txt_MotivoConsultaSolicitante.setWrapStyleWord(true);
+        txt_MotivoConsultaSolicitante.setLineWrap(true);
 
         lbl_FechaReporte = new iLabel("Fecha Reporte".toUpperCase());
         lbl_FechaReporte.setForeground(Color.GRAY.brighter());
@@ -394,7 +399,9 @@ public class EditPatient {
 
         lbl_DireccionPaciente = new iLabel("Dirección Paciente".toUpperCase());
         lbl_DireccionPaciente.setForeground(Color.GRAY.brighter());
-        txt_DireccionPaciente = new iTextField("", 15);
+        txt_DireccionPaciente = new  JTextArea();
+        txt_DireccionPaciente.setWrapStyleWord(true);
+        txt_DireccionPaciente.setLineWrap(true);
 
         lbl_TelefonoPaciente = new iLabel("Teléfono Paciente".toUpperCase());
         lbl_TelefonoPaciente.setForeground(Color.GRAY.brighter());
@@ -410,7 +417,9 @@ public class EditPatient {
 
         lbl_MotivoConsultaPaciente = new iLabel("Motivo Consulta Paciente".toUpperCase());
         lbl_MotivoConsultaPaciente.setForeground(Color.GRAY.brighter());
-        txt_MotivoConsultaPaciente = new iTextField("", 15);
+        txt_MotivoConsultaPaciente = new  JTextArea();
+        txt_MotivoConsultaPaciente.setWrapStyleWord(true);
+        txt_MotivoConsultaPaciente.setLineWrap(true);
 
         lbl_ParentescoPaciente = new iLabel("Parentesco Paciente".toUpperCase());
         lbl_ParentescoPaciente.setForeground(Color.GRAY.brighter());
@@ -451,7 +460,8 @@ public class EditPatient {
         cbo_CargarTipoPaciente();
         cbo_CargarIsNonGrato();
 
-        EditPatient_Panel.AddObject(lbl_LogoULatina, 415, 120, 50);
+        EditPatient_Panel.addSpace(2);
+        EditPatient_Panel.AddObject(lbl_LogoULatina, 618, 120, 50);
         EditPatient_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
         EditPatient_Panel.newLine();
 
@@ -478,128 +488,128 @@ public class EditPatient {
         EditPatient_Panel.AddObject(txt_CedulaPaciente, 230, 30, 800);//para paciente
         txt_NombrePaciente.setVisible(true);//para paciente
         txt_NombrePaciente.setEnabled(true);
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_NombreSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_NombrePaciente, 146, 30, 600);//para paciente
         lbl_CedulaPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_NombreSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_NombrePaciente, 230, 30, 800);//para paciente
         txt_CedulaPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_DireccionSolicitante, 146, 30, 50);//para el paciente
         EditPatient_Panel.AddObject(lbl_FechaNacimientoPaciente, 230, 30, 600);
         lbl_FechaNacimientoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_DireccionSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_FechaNacimientoPaciente, 230, 30, 800);//para paciente
         txt_FechaNacimientoPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_TelefonoSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_DireccionPaciente, 230, 30, 600);//para paciente
         lbl_DireccionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_TelefonoSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_DireccionPaciente, 230, 30, 800);//para paciente
         txt_DireccionPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_ProfesionSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_TelefonoPaciente, 230, 30, 600);//para paciente
         lbl_TelefonoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_ProfesionSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_TelefonoPaciente, 230, 30, 800);//para paciente
         txt_TelefonoPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_ActividadLaboralSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_ProfesionPaciente, 230, 30, 600);//para paciente
         lbl_ProfesionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_ActividadLaboralSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_ProfesionPaciente, 230, 30, 800);//para paciente
         txt_ProfesionPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_MotivoConsultaSolicitante, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_ActividadLaboralPaciente, 230, 30, 600);//para paciente
         lbl_ActividadLaboralPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_MotivoConsultaSolicitante, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_ActividadLaboralPaciente, 230, 30, 800);//para paciente
         txt_ActividadLaboralPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_FechaReporte, 146, 30, 50);
         EditPatient_Panel.AddObject(lbl_MotivoConsultaPaciente, 230, 30, 600);//para paciente
         lbl_MotivoConsultaPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_FechaReporte, 230, 30, 195);
         EditPatient_Panel.AddObject(txt_MotivoConsultaPaciente, 230, 30, 800);//para paciente
         txt_MotivoConsultaPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_ParentescoPaciente, 230, 30, 600);
         lbl_ParentescoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_Parentesco, 230, 30, 800);
         cbo_Parentesco.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_ClasificacionPaciente, 230, 30, 600);
         lbl_ClasificacionPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_ClasificacionPaciente, 230, 30, 800);
         cbo_ClasificacionPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_CursoPaciente, 230, 30, 600);
         lbl_CursoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_CursoPaciente, 230, 30, 800);
         cbo_CursoPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_HorarioPaciente, 230, 30, 600);
         lbl_HorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_HorarioPaciente, 230, 30, 800);
         cbo_HorarioPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_DetalleHorarioPaciente, 230, 30, 600);
         lbl_DetalleHorarioPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(txt_DetalleHorarioPaciente, 230, 30, 800);
         txt_DetalleHorarioPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(lbl_TipoPaciente, 230, 30, 600);
         lbl_TipoPaciente.setVisible(true);//para paciente
         EditPatient_Panel.AddObject(cbo_TipoPaciente, 230, 30, 800);
         cbo_TipoPaciente.setVisible(true);//para paciente
-        
+
         EditPatient_Panel.newLine();
         EditPatient_Panel.addSpace(5);
-        
+
         EditPatient_Panel.AddObject(btnEditarAction, 175, 30, 50);
         EditPatient_Panel.AddObject(lbl_IsNonGrato, 230, 30, 600);
         EditPatient_Panel.AddObject(cbo_IsNonGrato, 230, 30, 800);

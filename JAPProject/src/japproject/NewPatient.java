@@ -130,7 +130,7 @@ public class NewPatient {
 
         ///Componentes para Solicitante
         lbl_LogoULatina = new iLabel("");
-        lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/Logo_Ulatina_Negro.PNG")));
+        lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.png")));
 
         lbl_TituloSolicitante = new iLabel("SOLICITANTE");
         lbl_TituloSolicitante.setForeground(ColorFonts);
