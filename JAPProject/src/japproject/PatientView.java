@@ -27,8 +27,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -56,7 +59,6 @@ public class PatientView implements ActionListener {
     JMenuItem ItemEditar;
     JMenuItem ItemEditar2;
     public iScrollPane scrollPane2;
-    
 
     public PatientView(iFrame if_) {
 
@@ -104,17 +106,22 @@ public class PatientView implements ActionListener {
                         for (int i = 1; i <= rr.getMetaData().getColumnCount(); i++) {
                             row[i - 1] = rr.getObject(i);
                         }
-                          row[30]="Telefonos";            
+                        row[30] = "Telefonos";
                         RegistrosTable.addrow(row);
                     }
                 } catch (SQLException ex) {
                     System.out.println("no object fetch'd");
                 }
             }
-            // Agregar columna de botones   
-            RegistrosTable.getColumnModel().getColumn(30).setCellRenderer(new ButtonRenderer());;
-            //SET CUSTOM EDITOR TO TEAMS COLUMN
-            RegistrosTable.getColumnModel().getColumn(30).setCellEditor(new ButtonEditor(new JTextField()));
+
+            // Agregar columna de botones  
+            Action delete = new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    System.out.println("hola");
+                }
+            };
+            ButtonColumn h = new ButtonColumn(RegistrosTable,delete, 30);
+          
             //
             AddComponentes(scrollPane2);
         } catch (SQLException ex) {
@@ -139,7 +146,7 @@ public class PatientView implements ActionListener {
 
         int selectedRow = RegistrosTable.getSelectedRow();
 
-        for (int j = 0; j < RegistrosTable.getColumnCount()-1; j++) {
+        for (int j = 0; j < RegistrosTable.getColumnCount() - 1; j++) {
 
             tbl_Data.add(RegistrosTable.getColumnName(j) + "-" + RegistrosTable.getValueAt(selectedRow, j).toString());
         }
@@ -247,6 +254,10 @@ public class PatientView implements ActionListener {
 //fin de los parametros de la tabla
     }
 
+    /**
+     *
+     * @param event
+     */
     @Override
     public void actionPerformed(ActionEvent event) {
         JMenuItem menu = (JMenuItem) event.getSource();
@@ -254,108 +265,11 @@ public class PatientView implements ActionListener {
         if (menu == ItemEditar) {
             LlamarEditPatient(HomePanel.if_);
 
-        } else if (menu == ItemEditar2)
-                {
-                    scrollPane2.setSize(scrollPane2.getWidth(), scrollPane2.getHeight()/2);
-                    PatientView_panel.repaint();
-                }
-
-    }
-
-    //Metodos override para la tabla botones
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-
-        //CONSTRUCTOR
-        public ButtonRenderer() {
-            //SET BUTTON PROPERTIES
-            setOpaque(true);
-
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object obj,
-                boolean selected, boolean focused, int row, int col) {
-
-            //SET PASSED OBJECT AS BUTTON TEXT
-            setText((obj == null) ? "" : obj.toString());
-
-            return this;
+        } else if (menu == ItemEditar2) {
+            scrollPane2.setSize(scrollPane2.getWidth(), scrollPane2.getHeight() / 2);
+            PatientView_panel.repaint();
         }
 
     }
 
-//BUTTON EDITOR CLASS
-    class ButtonEditor extends DefaultCellEditor {
-
-        protected JButton btn;
-        private String lbl;
-        private Boolean clicked;
-
-        public ButtonEditor(JTextField txt) {
-            super(txt);
-
-            btn = new JButton();
-            btn.setOpaque(true);
-           
-            
-            btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("WOOOOOOOOOOOOOOOOOOOOO~~~");
-            }
-        });
-            
-            
-            
-            //WHEN BUTTON IS CLICKED
-            btn.addMouseListener(new MouseAdapter() {
-   
-
-                @Override
-                public void mouseClicked(MouseEvent o) {
-                    
-                    System.out.println("hola");
-                    clicked = true;
-                }
-            });
-        }
-
-        //OVERRIDE A COUPLE OF METHODS
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object obj,
-                boolean selected, int row, int col) {
-
-            //SET TEXT TO BUTTON,SET CLICKED TO TRUE,THEN RETURN THE BTN OBJECT
-            lbl = (obj == null) ? "" : obj.toString();
-            btn.setText(lbl);
-            clicked = true;
-            return btn;
-        }
-
-        //IF BUTTON CELL VALUE CHNAGES,IF CLICKED THAT IS
-        @Override
-        public Object getCellEditorValue() {
-
-            if (clicked) {
-                //SHOW US SOME MESSAGE
-                JOptionPane.showMessageDialog(btn, lbl + " Clicked");
-            }
-            //SET IT TO FALSE NOW THAT ITS CLICKED
-            clicked = false;
-            return new String(lbl);
-        }
-
-        @Override
-        public boolean stopCellEditing() {
-
-            //SET CLICKED TO FALSE FIRST
-            clicked = false;
-            return super.stopCellEditing();
-        }
-
-        @Override
-        protected void fireEditingStopped() {
-            // TODO Auto-generated method stub
-            super.fireEditingStopped();
-        }
-    }
 }

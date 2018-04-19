@@ -41,6 +41,7 @@ public class HomePanel {
     Maintenance_Horario MH; //Panel to Add or Edit Helper Tables
     Maintenance_tPaciente MTP; //Panel to Add or Edit Helper Tables
     Maintenance_Parentesco MP; //Panel to Add or Edit Helper Tables
+    Maintenance_psicologos MPS;//Panel to Add, Edit or delete Psico
     Appointments AP; //Panel to View and Edit appointments.
     AddAppointment AAP; //Panel to Add appointments
     BlackList BL; //Panel to View Patients in BlackList
@@ -118,12 +119,18 @@ public class HomePanel {
             RemovePanels();
             MP = new Maintenance_Parentesco(if_);
         });
+        JMenuItem Psicologos = new JMenuItem("Psicologos");
+        Psicologos.addActionListener((ei) -> {
+            RemovePanels();
+            MPS = new Maintenance_psicologos(if_);
+        });
 
         menuMantenimiento.add(Cursos);
         menuMantenimiento.add(Horarios);
         menuMantenimiento.add(TPaciente);
         menuMantenimiento.add(CPaciente);
         menuMantenimiento.add(Parentesco);
+         menuMantenimiento.add(Psicologos);
 
         JMenu menuPersonalizacion = new JMenu("Personalizar");
         menuPersonalizacion.setIcon(IconFontSwing.buildIcon(GoogleMaterialDesignIcons.BRUSH, 20, Color.cyan.darker()));
@@ -215,6 +222,10 @@ public class HomePanel {
             case "Maintenance_Parentesco_Panel":  //If current panel is Maintenance_Parentesco_Panel then remove it.
                 MP.Maintenance_Parentesco_Panel.dispose();
                 MP.Maintenance_Parentesco_Panel.setVisible(false);
+                break;
+            case "Maintenance_Psicologos_Panel":  //If current panel is Maintenance_Parentesco_Panel then remove it.
+                MPS.Maintenance_Psicologos_Panel.dispose();
+                MPS.Maintenance_Psicologos_Panel.setVisible(false);
                 break;
             case "Appointments_Panel":  //If current panel is Appointments_Panel then remove it.
                 AP.Appointments_Panel.dispose(); //If current panel is Appointments_Panel then remove it. 
