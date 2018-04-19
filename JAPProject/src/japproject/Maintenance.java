@@ -13,7 +13,6 @@ import static japproject.JAPProject.sql;
 import static japproject.Maintenance_psicologos.tbl_Data2;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -60,7 +59,7 @@ public class Maintenance {
         ItemEditar = new JMenuItem("Editar Psicologo");
         ItemEditar.addActionListener(this);
         ItemEliminar = new JMenuItem("Eliminar Psicologo");
-        ItemEliminar.addActionListener((ActionListener) this);
+        ItemEliminar.addActionListener(this);
         popup.add(ItemEditar);
         popup.add(ItemEliminar);
         Tabla();
