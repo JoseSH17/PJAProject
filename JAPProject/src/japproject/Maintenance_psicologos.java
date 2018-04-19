@@ -23,7 +23,8 @@ import java.util.List;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
-
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class Maintenance_psicologos implements ActionListener {
 
@@ -118,6 +119,7 @@ public class Maintenance_psicologos implements ActionListener {
             } catch (SQLException ex) {
                 System.out.println("no object fetch'd");
             }
+
         }
     }
 
@@ -157,29 +159,29 @@ public class Maintenance_psicologos implements ActionListener {
         NombrePsicologo_txt = new iTextField("", 15);
 
         iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
-        
-        EditButton.addActionListener((ae) -> {
-            
-             ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-        obj2.addAll(Arrays.asList(
-                NombrePsicologo_txt.getText(),
-                 tbl_Data2.get(0)     
-        ));
-        Boolean exq = sql.exec("UPDATE JAW_Psicologo SET Nombre=? WHERE Id_psicologo=?");
 
-        if (exq) {
-            JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
-            table.repaint();
-        } else {
-            JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
+        EditButton.addActionListener((ae) -> {
+
+            ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+            obj2.addAll(Arrays.asList(
+                    NombrePsicologo_txt.getText(),
+                    tbl_Data2.get(0)
+            ));
+            Boolean exq = sql.exec("UPDATE JAW_Psicologo SET Nombre=? WHERE Id_psicologo=?", obj2);
+
+            if (exq) {
+                JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
+                table.repaint();
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
 
         });
         iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
-CancelButton.addActionListener((ai) -> {
-   NombrePsicologo_txt.setText("");
-    
-});
+        CancelButton.addActionListener((ai) -> {
+            NombrePsicologo_txt.setText("");
+
+        });
         ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);
         ip2.AddObject(NombrePsicologo_txt, 200, 30, 170);
         ip2.newLine();
@@ -198,7 +200,7 @@ CancelButton.addActionListener((ai) -> {
         obj2.addAll(Arrays.asList(
                 txt_NombreCurso.getText()
         ));
-        Boolean exq = sql.exec("INSERT INTO JAW_Psicologo(Nombre) VALUES (?)");
+        Boolean exq = sql.exec("INSERT INTO JAW_Psicologo(Nombre) VALUES (?)", obj2);
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "AÑADIDO CORRECTAMENTE");
@@ -225,11 +227,17 @@ CancelButton.addActionListener((ai) -> {
         obj2.addAll(Arrays.asList(
                 tbl_Data2.get(0).toString()
         ));
-        Boolean exq = sql.exec("DELETE FROM `JAW_Curso` where `IdCurso` = ?");
+        Boolean exq = sql.exec("DELETE FROM `JAW_Psicologo` where `Id_psicologo` = ?", obj2);
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "ELIMINADO CORRECTAMENTE");
-            table.repaint();
+//            table.setVisible(true);
+//                   DefaultTableModel modelo= table.getModel()
+//            table.setModel(modelo);
+//     
+//            modelo.fireTableDataChanged();
+//
+//            jtable.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -245,6 +253,7 @@ CancelButton.addActionListener((ai) -> {
             NombrePsicologo_txt.setText(tbl_Data2.get(1).toString());
 
         } else if (menu == ItemEliminar) {
+            tbl_Data2.clear();
             ItemEditarActionListener();
             ItemEliminarActionListener();
         }
