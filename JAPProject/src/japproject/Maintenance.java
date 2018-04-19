@@ -77,35 +77,36 @@ public class Maintenance {
         Maintenance_Curso_Panel.newLine(); 
         Maintenance_Curso_Panel.addSpace(5);
         
-        Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
+                Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 500);//agrego el titulo
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(5);
         
-        Maintenance_Curso_Panel.AddObject(lbl_idCurso, 415, 30, 30);
-        Maintenance_Curso_Panel.AddObject(txt_idCurso, 415, 30, 200);//agrega el label y el textfield del id curso
+        Maintenance_Curso_Panel.AddObject(lbl_idCurso, 415, 30, 430);
+        Maintenance_Curso_Panel.AddObject(txt_idCurso, 415, 30, 600);//agrega el label y el textfield del id curso
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(5);
         
-        Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 30);
-        Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 415, 30, 200);//agrega el label y el textfield del nombre del curso
+        Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 430);
+        Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 415, 30, 600);//agrega el label y el textfield del nombre del curso
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(5);
         
-        Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 200);
+        Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 600);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
         
-        Maintenance_Curso_Panel.AddObject(btnModificar, 130, 30, 345);
+        Maintenance_Curso_Panel.AddObject(btnModificar, 130, 30, 745);
         btnModificar.addActionListener((a) -> {
             btnModificar_MouseClicked();
         });
         
-        Maintenance_Curso_Panel.AddObject(btnEliminar, 130, 30, 486);
+        Maintenance_Curso_Panel.AddObject(btnEliminar, 130, 30, 886);
         btnEliminar.addActionListener((a) -> {
             btnEliminar_MouseClicked(); 
         });
         Maintenance_Curso_Panel.newLine();
+
         
         Tabla();
         
@@ -113,10 +114,10 @@ public class Maintenance {
     } 
     
     public void Tabla(){
-        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Curso", "Nombre Curso"));
-        iPanel ip = new iPanel(215, 90, 500, 400, 4);
+                ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Curso", "Nombre Curso"));
+        iPanel ip = new iPanel(215, 90, 410, 400, 4);
         //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
-        ip.setLocation(115, 300);
+        ip.setLocation(600, 300);
         iTable table = new iTable(cols);
         ip.setBackground(Color.black);
 
@@ -137,12 +138,13 @@ public class Maintenance {
             }
         }
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 0, 500, 400);
+        scrollPane.setBounds(0, 0, 410, 400);
 
         //ip.add(btn_filter);
         ip.add(scrollPane);
         ip.finalice();
         Maintenance_Curso_Panel.add(ip);
+
     }
     
     public void btnAñadir_MouseClicked(){
