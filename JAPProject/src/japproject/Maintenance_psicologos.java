@@ -101,7 +101,7 @@ public class Maintenance_psicologos implements ActionListener {
     }
 
     private void LlenarTabla() {
-        ArrayList<String> cols = new ArrayList<>(Arrays.asList("id", "Nombre Curso"));
+        ArrayList<String> cols = new ArrayList<>(Arrays.asList("id", "Nombre Psicologo"));
         table = new iTable(cols);
 
         ResultSet rs = sql.SELECT(""
