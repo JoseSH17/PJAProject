@@ -26,6 +26,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -144,6 +146,15 @@ public class iCalendar extends JTextField
         }
         return dateFormat;
     }
+    
+    private SimpleDateFormat getUsefulDateFormat()
+    {
+        if(dateFormat == null)
+        {
+          dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        }
+        return dateFormat;
+    }
 
     public void setText(Date date) {
         setDate(date);
@@ -158,6 +169,14 @@ public class iCalendar extends JTextField
             return getDefaultDateFormat().parse(getText());
         } catch (ParseException e) {
             return new Date();
+        }
+    }
+    
+    public Date getDateUseful() {
+        try {
+            return getUsefulDateFormat().parse(getText());
+        } catch (ParseException ex) {
+             return new Date();
         }
     }
     

@@ -5,6 +5,10 @@
  */
 package japproject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  *
  * @author Jose
@@ -113,6 +117,22 @@ public class EditAppointmentData {
 
         this.FechaCita = FechaString;
     }
+    
+    String FechaCitaInsert;
+    
+    String getFechaCitaInsert(){
+    return FechaCitaInsert;
+    }
+    
+    void setFechaCitaInsert(String FechaCitaInsert) throws ParseException
+        {
+            FechaCitaInsert = FechaCitaInsert.replace("/", "-");
+            String anio = FechaCitaInsert.substring(6, 10);
+            String mes = FechaCitaInsert.substring(0, 2);
+            String dia = FechaCitaInsert.substring(3, 5);            
+            FechaCitaInsert = anio + "-" + mes + "-" + dia;
+            this.FechaCitaInsert = FechaCitaInsert;
+        }
     
     String HoraCita;
     

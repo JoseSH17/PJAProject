@@ -6,6 +6,7 @@
 package japproject;
 
 import static iComponents.ComponentInterfaz.CENTER;
+import iComponents.iButton;
 import iComponents.iCalendar;
 import iComponents.iFrame;
 import iComponents.iLabel;
@@ -54,6 +55,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.SpinnerDateModel;
@@ -312,7 +315,6 @@ public class PatientView implements ActionListener {
         PatientView_panel.newLine();
         PatientView_panel.finalice();
         PatientView_panel.setVisible(true);
-
     }
 
     public void SetColumsSizes() {
@@ -626,6 +628,17 @@ public class PatientView implements ActionListener {
     }
 
     public void CreateEditComponents() {
+        //This must be filled, this goes first
+        JComboBox jcb_Psicologo = new JComboBox();
+        ResultSet rs = sql.SELECT("SELECT Id_psicologo, Nombre FROM JAW_Psicologo");
+        try {
+            while (rs.next())
+            {
+                jcb_Psicologo.addItem(rs.getObject("Id_psicologo") + "-" + rs.getObject("Nombre"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         CitasEmbedded.addSpace(15);
         
         //lbl for Psychologist name
@@ -657,9 +670,9 @@ public class PatientView implements ActionListener {
         CitasEmbedded.newLine();
         CitasEmbedded.addSpace(15);
 
-        iTextField txt_NombrePsicologo = new iTextField("", 15);
-        txt_NombrePsicologo.setForeground(ColorElementsFonts);
-        txt_NombrePsicologo.setText(EAP.getNombrePsicologo());
+        
+        jcb_Psicologo.setForeground(ColorElementsFonts);
+        jcb_Psicologo.setSelectedIndex(Integer.parseInt(EAP.getIdPsicologo()) -1);                       
 
         iTextField txt_CedulaPaciente = new iTextField("", 15);
         txt_CedulaPaciente.setForeground(ColorElementsFonts);
@@ -701,17 +714,58 @@ public class PatientView implements ActionListener {
         } catch (ParseException ex) {
             Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        iButton CitasUpdate = new iButton("Actualizar", 2, ColorFonts, ColorElementsFonts);//boton para registrar paciente
 
-        CitasEmbedded.AddObject(txt_NombrePsicologo, 190 , 30,  scrollCitas.getLocation().x);
+        CitasUpdate.addActionListener((a) -> {
+            EAP.setIdPsicologo(jcb_Psicologo.getSelectedItem().toString().split("-")[0]);           
+            System.out.println("D: " + editCalendar.getText());
+            try {
+                EAP.setFechaCitaInsert(editCalendar.getText());
+            } catch (ParseException ex) {
+                Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            EAP.setHoraCita(spinnerEditar.getValue().toString());                    
+            try {            
+                CitasUpdateActionListener();
+            } catch (ParseException ex) {
+                Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        CitasEmbedded.AddObject(jcb_Psicologo, 190 , 30,  scrollCitas.getLocation().x);
         CitasEmbedded.AddObject(txt_CedulaPaciente, 190, 30, scrollCitas.getLocation().x + 210);
         CitasEmbedded.AddObject(txt_Direccion, 380, 40, scrollCitas.getLocation().x + 420);
         CitasEmbedded.AddObject(editCalendar, 100, 30, scrollCitas.getLocation().x + 840);
         CitasEmbedded.AddObject(spinnerEditar, 100, 30, scrollCitas.getLocation().x + 980);
         CitasEmbedded.newLine();
-
+        
+        CitasEmbedded.addSpace(15);
+        CitasEmbedded.AddObject(CitasUpdate, 120, 30, scrollCitas.getLocation().x + 1000);
+        CitasEmbedded.newLine();
         CitasEmbedded.repaint();
     }
 
+    public void CitasUpdateActionListener() throws ParseException
+    {
+       
+        System.out.println("FechaCita " + EAP.getFechaCitaInsert());
+        System.out.println("Hora Cita " + EAP.getHoraCita());
+        
+        ArrayList<Object> objs = new ArrayList();
+        objs.addAll(Arrays.asList(EAP.getIdPsicologo(), EAP.getFechaCitaInsert()+ " " +  EAP.getHoraCita(), EAP.getIdCita()));
+        
+        boolean e = sql.exec("UPDATE JAW_Citas SET IdPsicologo = ?, FechaCita = ? WHERE IdCita = ? ", objs);
+        if(e)
+        {
+            JOptionPane.showMessageDialog(null, "Cita Actualizada correctamente");
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "Error al actualizar cita");
+        }        
+    }
+    
+    
     public void ItemEliminarActionListenerCitas() {
         int selectedRow = tblAppointments.getSelectedRow();
         System.out.println("ID CITA: " + tblAppointments.getValueAt(selectedRow, 0).toString());
