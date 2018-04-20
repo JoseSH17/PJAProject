@@ -211,7 +211,9 @@ public class HomePanel {
                 break;
             case "PatientView_panel":      //If current panel is PatientView then remove it.                                           
                 PV.PatientView_panel.dispose();
-                PV.PatientView_panel.setVisible(false);                                
+                PV.PatientView_panel.setVisible(false);    
+                PV.CitasEmbedded.dispose();
+                PV.CitasEmbedded.setVisible(false);
                 break;
             case "EditPatient_Panel":  //If current panel is EditPatient_Panel then remove it.                
                     EditPatient_Panel.dispose();
