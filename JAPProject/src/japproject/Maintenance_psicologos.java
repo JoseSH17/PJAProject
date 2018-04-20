@@ -108,7 +108,7 @@ public class Maintenance_psicologos implements ActionListener {
     }
 
     private void LlenarTabla() {
-        ArrayList<String> cols = new ArrayList<>(Arrays.asList("id", "Nombre Curso"));
+        ArrayList<String> cols = new ArrayList<>(Arrays.asList("id", "Nombre Psicologo"));
         table = new iTable(cols);
 
         ResultSet rs = sql.SELECT(""
@@ -178,7 +178,6 @@ public class Maintenance_psicologos implements ActionListener {
             if (exq) {
                 JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
                 NombrePsicologo_txt.setText("");
-            txt_NombreCurso.setText("");
 //            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);

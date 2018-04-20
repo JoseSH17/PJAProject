@@ -13,13 +13,17 @@ import iComponents.iButton;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
+import iComponents.iScrollPane;
 import iComponents.iTable;
 
 import iComponents.iTextField;
 import static japproject.HomePanel.ColorPanels;
 import static japproject.HomePanel.currentPanel;
 import static japproject.JAPProject.sql;
+import static japproject.Maintenance_psicologos.tbl_Data2;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -27,109 +31,129 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
-public class Maintenance_Parentesco {
-  
+public class Maintenance_Parentesco implements ActionListener{
+
     public iPanel Maintenance_Parentesco_Panel;//creo el iPanel
-    
+
     private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
     private final String USERNAME = "icompone_jose";
     private final String PASSWORD = "m70Q(71X7k5v";
-    
+
     private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
     private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
     private iButton btnAñadir;//Boton para añadir
     private iButton btnModificar;//Boton para modificar
     private iButton btnEliminar;//Boton para eliminar
-    
+
     private iLabel lbl_Titulo_Mantenimiento;//Lbl para el Titulo de la pagina de mantenimiento en la que se encuentra
     private iLabel lbl_idParentesco;//Lbl para el id curso
     private iTextField txt_idParentesco;//TextField para el id curso
     private iLabel lbl_Descripción;//Lbl para el nombre del curso
-    private iTextField txt_Descripcion;//TextField para el nombre del curso
-    
+    iTextField txt_Descripcion;//TextField para el nombre del curso
+    iPanel ip;
+    iPanel ip2;
+    private iTable table;
+    //popmenu
+    JPopupMenu popup;
+    JMenuItem ItemEditar;
+    JMenuItem ItemEliminar;
+    public static List<String> tbl_Data2 = new ArrayList();
+
     public Maintenance_Parentesco(iFrame if_) {
         currentPanel = "Maintenance_Parentesco_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Parentesco_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Parentesco_Panel.setBackground(ColorPanels);//le doy color al panel
-        Mantenimiento_Parentesco(if_);
+        PanelTabla();
+        if_.add(Maintenance_Parentesco_Panel);
     }
-    
-    private void Componentes_Parentesco(){
+
+    private iPanel PanelTabla() {
+        ip = new iPanel(115, 300, 500, 400, 4);
+        ip.setBackground(Color.black);
+
+        //popmenu
+        popup = new JPopupMenu();
+        ItemEditar = new JMenuItem("Editar Psicologo");
+        ItemEditar.addActionListener(this);
+        ItemEliminar = new JMenuItem("Eliminar Psicologo");
+        ItemEliminar.addActionListener(this);
+        popup.add(ItemEditar);
+        popup.add(ItemEliminar);
+        Tabla();
+        table.getTableHeader().setReorderingAllowed(false);
+        table.setRowSelectionAllowed(true);
+        table.getColumnModel().getColumn(0).setWidth(0);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
+        table.setComponentPopupMenu(popup);
+        table.addMouseListener(new TableMouseListener(table));
+
+        //
+        iScrollPane scrollPane = new iScrollPane(table, null);
+        scrollPane.setBounds(0, 0, 500, 400);
+
+        ip.add(scrollPane);
+        ip.finalice();
+
+        //
+        Mantenimiento_Parentesco(ip);
+
+        return ip;
+    }
+
+    private void Componentes_Parentesco() {
         lbl_LogoULatina = new iLabel("");
         lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
         lbl_LogoPsicologia = new iLabel("");
         lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-        
+
         lbl_Titulo_Mantenimiento = new iLabel("MANTENIMIENTO PARENTESCO");
         lbl_Titulo_Mantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Titulo_Mantenimiento.setForeground(Color.GRAY.brighter());
-        
-        lbl_idParentesco = new iLabel("ID Parentesco".toUpperCase());
-        lbl_idParentesco.setForeground(Color.GRAY.brighter());
-        txt_idParentesco = new iTextField("", 15);
-        
+
         lbl_Descripción = new iLabel("Descripción".toUpperCase());
         lbl_Descripción.setForeground(Color.GRAY.brighter());
         txt_Descripcion = new iTextField("", 15);
-        
+
         btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir curso
-        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar curso
-        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar curso
     }
-    private void Mantenimiento_Parentesco(iFrame if_) {
+
+    private void Mantenimiento_Parentesco(iPanel scrollPane) {
         Componentes_Parentesco();
-        
+
         Maintenance_Parentesco_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         Maintenance_Parentesco_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
-        Maintenance_Parentesco_Panel.newLine(); 
+        Maintenance_Parentesco_Panel.newLine();
         Maintenance_Parentesco_Panel.addSpace(5);
- 
+
         Maintenance_Parentesco_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
         Maintenance_Parentesco_Panel.newLine();
         Maintenance_Parentesco_Panel.addSpace(5);
-        
-        Maintenance_Parentesco_Panel.AddObject(lbl_idParentesco, 415, 30, 30);
-        Maintenance_Parentesco_Panel.AddObject(txt_idParentesco, 415, 30, 200);//agrega el label y el textfield del id curso
-        Maintenance_Parentesco_Panel.newLine();
-        Maintenance_Parentesco_Panel.addSpace(5);
-        
+
         Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 30);
         Maintenance_Parentesco_Panel.AddObject(txt_Descripcion, 415, 30, 200);//agrega el label y el textfield del nombre del curso
         Maintenance_Parentesco_Panel.newLine();
         Maintenance_Parentesco_Panel.addSpace(5);
-        
+
         Maintenance_Parentesco_Panel.AddObject(btnAñadir, 130, 30, 200);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
-        
-        Maintenance_Parentesco_Panel.AddObject(btnModificar, 130, 30, 345);
-        btnModificar.addActionListener((a) -> {
-            btnModificar_MouseClicked();
-        });
-        
-        Maintenance_Parentesco_Panel.AddObject(btnEliminar, 130, 30, 486);
-        btnEliminar.addActionListener((a) -> {
-            btnEliminar_MouseClicked(); 
-        });
-        Maintenance_Parentesco_Panel.newLine();
-        
-        Tabla();
-        
-        if_.add(Maintenance_Parentesco_Panel);
-    } 
-    
-    public void Tabla(){
-        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Parentesco", "Descripción"));
-        iPanel ip = new iPanel(215, 90, 500, 400, 4);
-        //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
-        ip.setLocation(115, 300);
-        iTable table = new iTable(cols);
-        ip.setBackground(Color.black);
 
+        Maintenance_Parentesco_Panel.newLine();
+        Maintenance_Parentesco_Panel.add(scrollPane);
+        Maintenance_Parentesco_Panel.add(Editar());
+    }
+
+    public void Tabla() {
+        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Parentesco", "Descripción"));
+        table = new iTable(cols);
         ResultSet rs = sql.SELECT(""
                 + "SELECT `IdParentesco`, `DescripcionParentesco` "
                 + "FROM `JAW_Parentesco`");
@@ -146,59 +170,110 @@ public class Maintenance_Parentesco {
                 System.out.println("no object fetch'd");
             }
         }
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(0, 0, 500, 400);
-
-        //ip.add(btn_filter);
-        ip.add(scrollPane);
-        ip.finalice();
-        Maintenance_Parentesco_Panel.add(ip);
-    }
-    
-    public void btnAñadir_MouseClicked(){
-        try{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Parentesco(DescripcionParentesco) VALUES (?)");
-        
-        pps.setString(1 , txt_Descripcion.getText());
-        
-        pps.executeUpdate();
-        Tabla();  //Esto se supone que debe de actualizar la pagina
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-    
-    public void btnModificar_MouseClicked(){
-        try{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("UPDATE JAW_Parentesco SET DescripcionParentesco=? WHERE IdParentesco=?");
-        
-        pps.setString(1 , txt_Descripcion.getText());
-        pps.setString(2 , txt_idParentesco.getText());
-        
-        pps.executeUpdate();
-        Tabla();
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }
-    
-    public void btnEliminar_MouseClicked(){
-        try{
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-        PreparedStatement pps = con.prepareStatement("DELETE FROM `JAW_Parentesco` where `IdParentesco` = ?");
-        
-        pps.setString(1 , txt_idParentesco.getText());
-        
-        pps.executeUpdate();
-        Tabla();
-        } catch (ClassNotFoundException | SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
     }
 
+    public iPanel Editar() {
+        ip2 = new iPanel(630, 300, 420, 150, 20);
+//    ip.setBackground(Color.black);
+        iLabel NombrePsicologo_lbl = new iLabel("Parentesco");
+        txt_Descripcion = new iTextField("", 15);
+
+        iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
+
+        EditButton.addActionListener((ae) -> {
+
+            ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+            obj2.addAll(Arrays.asList(
+                    txt_Descripcion.getText(),
+                    tbl_Data2.get(0)
+            ));
+            Boolean exq = sql.exec("UPDATE JAW_Parentesco SET DescripcionParentesco=? WHERE IdParentesco=?", obj2);
+
+            if (exq) {
+                JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
+                txt_Descripcion.setText("");
+//            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL PARENTESCO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        });
+        iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
+        CancelButton.addActionListener((ai) -> {
+            txt_Descripcion.setText("");
+
+        });
+        ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);
+        ip2.AddObject(txt_Descripcion, 200, 30, 170);
+        ip2.newLine();
+        ip2.addSpace(5);
+        ip2.AddObject(EditButton, 100, 30, 76 - 1);
+        ip2.AddObject(CancelButton, 100, 30, 200);
+        ip2.newLine();
+
+        ip2.finalice();
+
+        return ip2;
+    }
+
+    public void btnAñadir_MouseClicked() {
+        ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+        obj2.addAll(Arrays.asList(
+                txt_Descripcion.getText()
+        ));
+        Boolean exq = sql.exec("INSERT INTO JAW_Parentesco(DescripcionParentesco) VALUES (?)", obj2);
+
+        if (exq) {
+            JOptionPane.showMessageDialog(null, "AÑADIDO CORRECTAMENTE");
+            txt_Descripcion.setText("");
+//            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR AL AÑADIR EL PARENTESCO", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
+    public void ItemEditarActionListener() {
+
+        int selectedRow = table.getSelectedRow();
+
+        for (int j = 0; j < table.getColumnCount(); j++) {
+
+            tbl_Data2.add(table.getValueAt(selectedRow, j).toString());
+        }
+    }
+
+    public void ItemEliminarActionListener() {
+
+        ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+        obj2.addAll(Arrays.asList(
+                tbl_Data2.get(0).toString()
+        ));
+        Boolean exq = sql.exec("DELETE FROM `JAW_Parentesco` where `IdParentesco` = ?", obj2);
+
+        if (exq) {
+            JOptionPane.showMessageDialog(null, "ELIMINADO CORRECTAMENTE");
+            txt_Descripcion.setText("");
+//            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
+        } else {
+            JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        JMenuItem menu = (JMenuItem) event.getSource();
+
+        if (menu == ItemEditar) {
+            tbl_Data2.clear();
+            ItemEditarActionListener();
+            txt_Descripcion.setText(tbl_Data2.get(1).toString());
+
+        } else if (menu == ItemEliminar) {
+            tbl_Data2.clear();
+            ItemEditarActionListener();
+            ItemEliminarActionListener();
+        }
+
+    }
 }
