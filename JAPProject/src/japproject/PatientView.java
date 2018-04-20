@@ -52,6 +52,7 @@ import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JButton;
 import javax.swing.table.TableColumnModel;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
@@ -75,7 +76,7 @@ public class PatientView implements ActionListener {
     private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
     iLabel SearchBar_lbl;
     iTextField SearchBar_txt;
-    iButton ExportDataToExcel;
+    JButton ExportDataToExcel;
     Telefonos T;
 
     //
@@ -111,7 +112,13 @@ public class PatientView implements ActionListener {
 //          Se crea la tabla y se le da los parametros
             SearchBar_txt = new iTextField("", 3);
             SearchBar_txt.addActionListener(this);
-            ExportDataToExcel = new iButton("Export to Excel...", 15, ColorPanels, ColorFonts);
+            ExportDataToExcel = new JButton("Export to Excel...");
+            ExportDataToExcel.setOpaque(false);
+            ExportDataToExcel.setContentAreaFilled(false);
+            ExportDataToExcel.setBorderPainted(false);
+            ExportDataToExcel.setForeground(ColorFonts);
+            ExportDataToExcel.setBackground(ColorPanels);
+            ExportDataToExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/excelicon.PNG")));               
             RegTable = new JTable(model);
 
             RegTable.getTableHeader().setReorderingAllowed(false);
