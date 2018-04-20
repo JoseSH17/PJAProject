@@ -56,7 +56,7 @@ public class Maintenance_psicologos implements ActionListener {
     }
 
     private iPanel PanelTabla() {
-        ip = new iPanel(115, 300, 500, 400, 4);
+        ip = new iPanel(580, 300, 500, 400, 4);
         ip.setBackground(Color.black);
 
         //popmenu
@@ -137,16 +137,16 @@ public class Maintenance_psicologos implements ActionListener {
         Maintenance_Psicologos_Panel.newLine();
         Maintenance_Psicologos_Panel.addSpace(20);
 
-        Maintenance_Psicologos_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_Psicologos_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 665);//agrego el titulo
         Maintenance_Psicologos_Panel.newLine();
         Maintenance_Psicologos_Panel.addSpace(20);
 
-        Maintenance_Psicologos_Panel.AddObject(lbl_NombreCurso, 415, 30, 115);
-        Maintenance_Psicologos_Panel.AddObject(txt_NombreCurso, 350, 30, 260);//agrega el label y el textfield del nombre del curso
+        Maintenance_Psicologos_Panel.AddObject(lbl_NombreCurso, 415, 30, 580);
+        Maintenance_Psicologos_Panel.AddObject(txt_NombreCurso, 350, 30, 725);//agrega el label y el textfield del nombre del curso
         Maintenance_Psicologos_Panel.newLine();
         Maintenance_Psicologos_Panel.addSpace(5);
 
-        Maintenance_Psicologos_Panel.AddObject(btnAñadir, 130, 30, 345);
+        Maintenance_Psicologos_Panel.AddObject(btnAñadir, 130, 30, 810);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
@@ -159,7 +159,7 @@ public class Maintenance_psicologos implements ActionListener {
     }
 
     public iPanel Editar() {
-        ip2 = new iPanel(630, 300, 420, 150, 20);
+        ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Nombre Psicologo");
         NombrePsicologo_txt = new iTextField("", 15);
@@ -212,8 +212,8 @@ public class Maintenance_psicologos implements ActionListener {
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "AÑADIDO CORRECTAMENTE");
-            NombrePsicologo_txt.setText("");
             txt_NombreCurso.setText("");
+            table.repaint();
 //            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL AÑADIR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);

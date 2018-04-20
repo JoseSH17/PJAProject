@@ -77,7 +77,7 @@ public class Maintenance_Horario implements ActionListener{
     }
     
     private iPanel PanelTabla() {
-        ip = new iPanel(115, 300, 500, 400, 4);
+        ip = new iPanel(580, 300, 500, 400, 4);
         ip.setBackground(Color.black);
 
         //popmenu
@@ -135,16 +135,16 @@ public class Maintenance_Horario implements ActionListener{
         Maintenance_Horario_Panel.newLine(); 
         Maintenance_Horario_Panel.addSpace(20);
  
-        Maintenance_Horario_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_Horario_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 665);//agrego el titulo
         Maintenance_Horario_Panel.newLine();
         Maintenance_Horario_Panel.addSpace(20);
         
-        Maintenance_Horario_Panel.AddObject(lbl_NombreHorario, 415, 30, 115);
-        Maintenance_Horario_Panel.AddObject(txt_NombreHorario, 350, 30, 260);//agrega el label y el textfield del nombre del horario
+        Maintenance_Horario_Panel.AddObject(lbl_NombreHorario, 415, 30, 580);
+        Maintenance_Horario_Panel.AddObject(txt_NombreHorario, 350, 30, 725);//agrega el label y el textfield del nombre del horario
         Maintenance_Horario_Panel.newLine();
         Maintenance_Horario_Panel.addSpace(5);
         
-        Maintenance_Horario_Panel.AddObject(btnAñadir, 130, 30, 345);
+        Maintenance_Horario_Panel.AddObject(btnAñadir, 130, 30, 810);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
@@ -203,7 +203,7 @@ public class Maintenance_Horario implements ActionListener{
         //Esto se supone que debe de actualizar la pagina
     }
     public iPanel Editar() {
-        ip2 = new iPanel(630, 300, 420, 150, 20);
+        ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Nombre Horario");
         txt_NombreHorario = new iTextField("", 15);

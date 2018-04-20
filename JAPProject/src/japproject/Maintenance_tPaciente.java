@@ -52,12 +52,8 @@ public class Maintenance_tPaciente implements ActionListener{
     private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
     private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
     private iButton btnAñadir;//Boton para añadir
-    private iButton btnModificar;//Boton para modificar
-    private iButton btnEliminar;//Boton para eliminar
     
     private iLabel lbl_Titulo_Mantenimiento;//Lbl para el Titulo de la pagina de mantenimiento en la que se encuentra
-    private iLabel lbl_idTipoPaciente;//Lbl para el id curso
-    private iTextField txt_idTipPaciente;//TextField para el id curso
     private iLabel lbl_NombreTipoPaciente;//Lbl para el nombre del curso
     private iTextField txt_NombreTipoPaciente;//TextField para el nombre del curso
     iTextField NombrePsicologo_txt;
@@ -79,7 +75,7 @@ public class Maintenance_tPaciente implements ActionListener{
     }
     
     private iPanel PanelTabla() {
-        ip = new iPanel(115, 300, 500, 400, 4);
+        ip = new iPanel(580, 300, 500, 400, 4);
         ip.setBackground(Color.black);
 
         //popmenu
@@ -136,16 +132,16 @@ public class Maintenance_tPaciente implements ActionListener{
         Maintenance_TipPaciente_Panel.newLine();
         Maintenance_TipPaciente_Panel.addSpace(20);
  
-        Maintenance_TipPaciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_TipPaciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 665);//agrego el titulo
         Maintenance_TipPaciente_Panel.newLine();
         Maintenance_TipPaciente_Panel.addSpace(20);
         
-        Maintenance_TipPaciente_Panel.AddObject(lbl_NombreTipoPaciente, 415, 30, 115);
-        Maintenance_TipPaciente_Panel.AddObject(txt_NombreTipoPaciente, 350, 30, 260);//agrega el label y el textfield del nombre del horario
+        Maintenance_TipPaciente_Panel.AddObject(lbl_NombreTipoPaciente, 415, 30, 580);
+        Maintenance_TipPaciente_Panel.AddObject(txt_NombreTipoPaciente, 350, 30, 725);//agrega el label y el textfield del nombre del horario
         Maintenance_TipPaciente_Panel.newLine();
         Maintenance_TipPaciente_Panel.addSpace(5);
         
-        Maintenance_TipPaciente_Panel.AddObject(btnAñadir, 130, 30, 345);
+        Maintenance_TipPaciente_Panel.AddObject(btnAñadir, 130, 30, 810);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
@@ -176,7 +172,7 @@ public class Maintenance_tPaciente implements ActionListener{
     }
     
     public iPanel Editar() {
-        ip2 = new iPanel(630, 300, 420, 150, 20);
+        ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Tipo Paciente");
         txt_NombreTipoPaciente = new iTextField("", 15);

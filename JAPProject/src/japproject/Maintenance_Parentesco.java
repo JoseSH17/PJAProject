@@ -75,7 +75,7 @@ public class Maintenance_Parentesco implements ActionListener{
     }
 
     private iPanel PanelTabla() {
-        ip = new iPanel(115, 300, 500, 400, 4);
+        ip = new iPanel(580, 300, 500, 400, 4);
         ip.setBackground(Color.black);
 
         //popmenu
@@ -133,16 +133,16 @@ public class Maintenance_Parentesco implements ActionListener{
         Maintenance_Parentesco_Panel.newLine();
         Maintenance_Parentesco_Panel.addSpace(20);
 
-        Maintenance_Parentesco_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_Parentesco_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 665);//agrego el titulo
         Maintenance_Parentesco_Panel.newLine();
         Maintenance_Parentesco_Panel.addSpace(20);
 
-        Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 115);
-        Maintenance_Parentesco_Panel.AddObject(txt_Descripcion, 350, 30, 260);//agrega el label y el textfield del nombre del curso
+        Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 580);
+        Maintenance_Parentesco_Panel.AddObject(txt_Descripcion, 350, 30, 725);//agrega el label y el textfield del nombre del curso
         Maintenance_Parentesco_Panel.newLine();
         Maintenance_Parentesco_Panel.addSpace(5);
 
-        Maintenance_Parentesco_Panel.AddObject(btnAñadir, 130, 30, 345);
+        Maintenance_Parentesco_Panel.AddObject(btnAñadir, 130, 30, 810);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
@@ -174,7 +174,7 @@ public class Maintenance_Parentesco implements ActionListener{
     }
 
     public iPanel Editar() {
-        ip2 = new iPanel(630, 300, 420, 150, 20);
+        ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Parentesco");
         txt_Descripcion = new iTextField("", 15);

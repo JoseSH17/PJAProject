@@ -187,8 +187,8 @@ public class Maintenance implements ActionListener {
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "AÑADIDO CORRECTAMENTE");
-            NombrePsicologo_txt.setText("");
             txt_NombreCurso.setText("");
+            table.repaint();
 //            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL AÑADIR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
