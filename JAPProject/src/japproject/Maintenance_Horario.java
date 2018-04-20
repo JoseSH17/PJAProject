@@ -24,6 +24,7 @@ import static japproject.JAPProject.sql;
 import static japproject.Maintenance.tbl_Data2;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,7 +40,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
-public class Maintenance_Horario {
+public class Maintenance_Horario implements ActionListener{
   
     public iPanel Maintenance_Horario_Panel;//creo el iPanel
     

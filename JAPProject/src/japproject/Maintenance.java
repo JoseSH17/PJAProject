@@ -27,7 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
-public class Maintenance {
+public class Maintenance implements ActionListener{
 
     public iPanel Maintenance_Curso_Panel;//creo el iPanel
     private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina

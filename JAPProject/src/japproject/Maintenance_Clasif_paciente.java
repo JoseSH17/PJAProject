@@ -25,6 +25,7 @@ import static japproject.Maintenance.tbl_Data2;
 import static japproject.Maintenance_psicologos.tbl_Data2;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,7 +41,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
-public class Maintenance_Clasif_paciente {
+public class Maintenance_Clasif_paciente implements ActionListener{
   
     public iPanel Maintenance_Clasif_Paciente_Panel;//creo el iPanel
     
