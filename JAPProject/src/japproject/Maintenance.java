@@ -13,6 +13,7 @@ import static japproject.JAPProject.sql;
 import static japproject.Maintenance_psicologos.tbl_Data2;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -46,7 +47,7 @@ public class Maintenance {
     JMenuItem ItemEliminar;
     public static List<String> tbl_Data2 = new ArrayList();
 
-    public Maintenance(iFrame if_) {
+    public Maintenance(iFrame if_) { 
         currentPanel = "Maintenance_Curso_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Curso_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Curso_Panel.setBackground(ColorPanels);//le doy color al panel
@@ -296,6 +297,7 @@ public class Maintenance {
         }
     }
     
+   
     public void actionPerformed(ActionEvent event) {
         JMenuItem menu = (JMenuItem) event.getSource();
 
