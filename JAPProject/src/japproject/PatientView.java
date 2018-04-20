@@ -48,6 +48,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import japproject.Telefonos;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
@@ -108,7 +109,7 @@ public class PatientView implements ActionListener {
             RegTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
             RegTable.setShowGrid(false);
             RegTable.setShowVerticalLines(false);
-            RegTable.setRowHeight(34);
+            RegTable.setRowHeight(28);
             
 
             popup = new JPopupMenu();
@@ -354,8 +355,9 @@ public class PatientView implements ActionListener {
     public void toExcel(JTable table, File file) throws IOException {
         try {
             Date date = new Date();
+            SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");
             WritableWorkbook workbookPacientes = Workbook.createWorkbook((file));
-            WritableSheet sheetPacientes = workbookPacientes.createSheet("Export" + date, 0);
+            WritableSheet sheetPacientes = workbookPacientes.createSheet("Exportado el " + formatting.format(date), 0);
             TableModel model = table.getModel();
             // BufferedWriter excel = new BufferedWriter(new FileWriter(file));
             // StringJoiner sj = new StringJoiner("\t");
@@ -377,7 +379,7 @@ public class PatientView implements ActionListener {
                     }
                 }
             }
-
+                
             // excel.write(sj.toString());
             //excel.newLine();
             for (int i = 0; i < model.getRowCount() - 1; i++) {
@@ -392,12 +394,15 @@ public class PatientView implements ActionListener {
                         //  sj.add(model.getValueAt(i, j).toString());;
                         Label row = new Label(j, i + 1,
                                 model.getValueAt(i, j).toString());
+                        System.out.println("Rows before adding to sheet: " + row.getString());
                         try {
+                            System.out.println("Rows on try catch adding to sheet: " + row.getString());
                             sheetPacientes.addCell(row);
                         } catch (WriteException ex) {
                             Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
+                    
                 }
                  workbookPacientes.write();
                 //excel.write(sj.toString());
