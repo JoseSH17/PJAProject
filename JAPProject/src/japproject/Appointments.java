@@ -5,12 +5,14 @@
  */
 package japproject;
 
+import static iComponents.ComponentInterfaz.CENTER;
 import iComponents.iCalendar;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iScrollPane;
 import iComponents.iTable;
+import iComponents.iTableRender.headerRender;
 import iComponents.iTextField;
 import static japproject.HomePanel.ColorElementsFonts;
 import static japproject.HomePanel.ColorFonts;
@@ -38,9 +40,19 @@ import javax.swing.JPopupMenu;
 import static japproject.HomePanel.ColorPanels;
 import java.text.ParseException;
 import java.util.Calendar;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.RowFilter;
 import javax.swing.SpinnerDateModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import jiconfont.icons.GoogleMaterialDesignIcons;
+import jiconfont.swing.IconFontSwing;
 
 /**
  *
@@ -49,33 +61,33 @@ import javax.swing.SpinnerDateModel;
 public class Appointments implements ActionListener {
 
     public iPanel Appointments_Panel; //Panel to view, edit and add appointments.
-    public iPanel AddEditAppointments_Panel; //Panel that appears only when edit an appointment is chosen.
     public iLabel lblCalendar; //lbl to indicate the user to select a date.
     public iCalendar calendar; //Calendar to filter main appointments view.
     public iTextField txtHiddenSearch; //Filter for the iTable that shows appointments, is hidden from the user.
     public JButton btnViewAll; //Removes filter from txtHidenSearch.
     public JButton btnScheduleAppointment; //Allows the user to schedule a new appointment.
-    public iTable tblAppointments; //Table to display all appointments, can be filtered as user requests.
+    public JTable tblAppointments; //Table to display all appointments, can be filtered as user requests.
     public JPopupMenu popup;
     public JMenuItem ItemEditar;
     public JMenuItem ItemEliminar;
     public EditAppointmentData EAP;
 
     private iLabel lbl_LogoULatina;//Ulatina logo lbl display
-    private iLabel lbl_LogoPsicologia;//Ulatina Psychology Dept logo lbl display
+    private iLabel lbl_LogoPsicologia;//Ulatina Psychology Dept logo lbl display    
 
     public List<String> tbl_Data = new ArrayList();
+    public String data[][];  //NUEVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+    iScrollPane scrollCitas;
+    
 
     public Appointments(iFrame if_) {
         try {
             currentPanel = "Appointments_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions. 
             this.EAP = new EditAppointmentData();
 
-            Appointments_Panel = new iPanel(0, 70, 100.0f, 50.0f, 0, 0, if_);//Defining iPanel dimensions
+            Appointments_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//Defining iPanel dimensions
             Appointments_Panel.setBackground(ColorPanels);//le doy color al panel  
 
-            AddEditAppointments_Panel = new iPanel(0, 520, 100.0f, 50.0f, 0, 0, if_);
-            AddEditAppointments_Panel.setBackground(Color.BLACK);//le doy color al panel  
 
             lbl_LogoULatina = new iLabel("");
             lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
@@ -86,8 +98,7 @@ public class Appointments implements ActionListener {
             Appointments_Panel.AddObject(lbl_LogoULatina, 618, 120, 50);
             Appointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 660);
               
-            Appointments_Panel.newLine();
-            
+            Appointments_Panel.newLine();            
 
             lblCalendar = new iLabel("Por favor seleccione una fecha: "); //Lbl Guide
             lblCalendar.setForeground(ColorFonts); //Calendar
@@ -104,7 +115,7 @@ public class Appointments implements ActionListener {
             Appointments_Panel.addSpace(40); //Leaving space from top
 
             Appointments_Panel.AddObject(lblCalendar, 190, 30, 50);
-            Appointments_Panel.AddObject(calendar, 70, 30, 193 + 47);
+            Appointments_Panel.AddObject(calendar, 100, 30, 193 + 47);
             Appointments_Panel.AddObject(btnViewAll, 140, 30, 303 + 47);
             Appointments_Panel.newLine();
             Appointments_Panel.addSpace(15);
@@ -121,14 +132,20 @@ public class Appointments implements ActionListener {
                 Cols.add(rs.getMetaData().getColumnName(i));
             }
 //          Se crea la tabla y se le da los parametros
-            tblAppointments = new iTable(Cols, txtHiddenSearch);
+            Cols.add("Tels");
+            DefaultTableModel model = new DefaultTableModel(data, Cols.toArray()); //NUEVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+            tblAppointments = new JTable(model);
+            
             tblAppointments.getTableHeader().setReorderingAllowed(false);
             tblAppointments.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
-            tblAppointments.getTableHeader().setResizingAllowed(false);
             tblAppointments.setRowSelectionAllowed(true);
-            tblAppointments.setBackground(ColorPanels);
-            tblAppointments.setSize(1100, 200);
-
+            tblAppointments.setBackground(ColorFonts);
+            
+            tblAppointments.getTableHeader().setDefaultRenderer(new headerRender());
+            tblAppointments.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
+            tblAppointments.setShowGrid(false);            
+            tblAppointments.setRowHeight(28);
+                     
             popup = new JPopupMenu();
             ItemEditar = new JMenuItem("Editar Cita");
             ItemEditar.addActionListener(this);
@@ -140,9 +157,39 @@ public class Appointments implements ActionListener {
 
             tblAppointments.setComponentPopupMenu(popup);
             tblAppointments.addMouseListener(new TableMouseListener(tblAppointments));
+                                                  
+            //This Codes adds the row sorter from iTable to the JTable
+            final TableRowSorter<TableModel> sorter = new TableRowSorter<>(tblAppointments.getModel());
+
+            tblAppointments.setRowSorter(sorter);
+            txtHiddenSearch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent de) {
+                    if (txtHiddenSearch.getText().isEmpty() || txtHiddenSearch.getText().equals(txtHiddenSearch.getHover())) {
+                        sorter.setRowFilter(null);
+                    } else {
+                        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtHiddenSearch.getText()));    //Adding "(?i)" to make regex filter Case Insensitive                    
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent de) {
+                    if (txtHiddenSearch.getText().isEmpty() || txtHiddenSearch.getText().equals(txtHiddenSearch.getHover())) {
+                        sorter.setRowFilter(null);
+                    } else {
+                        sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txtHiddenSearch.getText()));    //Adding "(?i)" to make regex filter Case Insensitive                    
+                    }
+
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent de) {
+
+                }
+            });
 
             //PopMenu(tblAppointments, if_);//metodo que crea e implementa el popmenu 
-            iScrollPane scrollCitas = new iScrollPane(tblAppointments, ColorPanels);
+            scrollCitas = new iScrollPane(tblAppointments, ColorPanels);
             scrollCitas.setViewportView(tblAppointments);
             SetColumsSizes();
 
@@ -150,24 +197,24 @@ public class Appointments implements ActionListener {
                 try {
 
                     while (rs.next()) {//llena los rows de la tabla
-                        Object[] row = new Object[rs.getMetaData().getColumnCount()];
+                        Object[] row = new Object[rs.getMetaData().getColumnCount()+1];
                         for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
                             row[i - 1] = rs.getObject(i);
-                        }
-
-                        tblAppointments.addrow(row);
+                        }                          
+                        row[9] = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PHONE, 20, Color.CYAN.darker());    
+                        model.insertRow(model.getRowCount(), row);
                     }
                 } catch (SQLException ex) {
                     System.out.println("no object fetch'd");
                 }
             }
+                   
             Appointments_Panel.addSpace(20);
-            Appointments_Panel.AddObject(scrollCitas, 1100, 200);
+            Appointments_Panel.AddSingleObject(scrollCitas, 40.0f, 20.0f, CENTER);
 
             Appointments_Panel.newLine();
             Appointments_Panel.finalice();
 
-            AddEditAppointments_Panel.finalice();
 
             CheckFirstExecution(txtHiddenSearch);
 
@@ -177,7 +224,7 @@ public class Appointments implements ActionListener {
     }
 
     public void CreateEditComponents() {
-        AddEditAppointments_Panel.addSpace(15);
+        Appointments_Panel.addSpace(15);
 
         //lbl for Psychologist name
         iLabel lbl_NombrePsicologo = new iLabel("Nombre Psicologo");
@@ -191,10 +238,6 @@ public class Appointments implements ActionListener {
         iLabel lbl_Direccion = new iLabel("Dirección");
         lbl_Direccion.setForeground(ColorFonts);
 
-        //lbl for Patients Phone Numbers
-        iLabel lbl_Telefono = new iLabel("Teléfono");
-        lbl_Telefono.setForeground(ColorFonts);
-
         //lbl for Appointment Date
         iLabel lbl_FechaCita = new iLabel("Fecha Cita");
         lbl_FechaCita.setForeground(ColorFonts);
@@ -203,15 +246,14 @@ public class Appointments implements ActionListener {
         iLabel lbl_HoraCita = new iLabel("Hora Cita");
         lbl_HoraCita.setForeground(ColorFonts);
 
-        AddEditAppointments_Panel.AddObject(lbl_NombrePsicologo, 190, 30, 20);
-        AddEditAppointments_Panel.AddObject(lbl_CedulaPaciente, 190, 30, 230);
-        AddEditAppointments_Panel.AddObject(lbl_Direccion, 190, 30, 440);
-        AddEditAppointments_Panel.AddObject(lbl_Telefono, 190, 30, 650);
-        AddEditAppointments_Panel.AddObject(lbl_FechaCita, 100, 30, 860);
-        AddEditAppointments_Panel.AddObject(lbl_HoraCita, 190, 30, 1000);
+        Appointments_Panel.AddObject(lbl_NombrePsicologo, 190, 30, 20);
+        Appointments_Panel.AddObject(lbl_CedulaPaciente, 190, 30, 230);
+        Appointments_Panel.AddObject(lbl_Direccion, 380, 30, 440);
+        Appointments_Panel.AddObject(lbl_FechaCita, 100, 30, 860);
+        Appointments_Panel.AddObject(lbl_HoraCita, 190, 30, 1000);
 
-        AddEditAppointments_Panel.newLine();
-        AddEditAppointments_Panel.addSpace(15);
+        Appointments_Panel.newLine();
+        Appointments_Panel.addSpace(15);
 
         iTextField txt_NombrePsicologo = new iTextField("", 15);
         txt_NombrePsicologo.setForeground(ColorElementsFonts);
@@ -231,12 +273,6 @@ public class Appointments implements ActionListener {
         txt_Direccion.setEnabled(false);
         txt_Direccion.setForeground(ColorElementsFonts);
         txt_Direccion.setText(EAP.getDireccionPaciente());
-
-        iTextField txt_Telefono = new iTextField("", 15);
-        txt_Telefono.setForeground(ColorElementsFonts);
-        txt_Telefono.setDisabledTextColor(ColorNonEditElementsFonts);
-        txt_Telefono.setEnabled(false);
-        txt_Telefono.setText(EAP.getTelefonoPaciente());
 
         iCalendar editCalendar = new iCalendar();
         editCalendar.setForeground(ColorElementsFonts);
@@ -264,15 +300,14 @@ public class Appointments implements ActionListener {
             Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        AddEditAppointments_Panel.AddObject(txt_NombrePsicologo, 190, 30, 20);
-        AddEditAppointments_Panel.AddObject(txt_CedulaPaciente, 190, 30, 230);
-        AddEditAppointments_Panel.AddObject(txt_Direccion, 190, 40, 440);
-        AddEditAppointments_Panel.AddObject(txt_Telefono, 190, 30, 650);
-        AddEditAppointments_Panel.AddObject(editCalendar, 100, 30, 860);
-        AddEditAppointments_Panel.AddObject(spinnerEditar, 100, 30, 1000);
-        AddEditAppointments_Panel.newLine();
+        Appointments_Panel.AddObject(txt_NombrePsicologo, 190, 30, 20);
+        Appointments_Panel.AddObject(txt_CedulaPaciente, 190, 30, 230);
+        Appointments_Panel.AddObject(txt_Direccion, 380, 40, 440);        
+        Appointments_Panel.AddObject(editCalendar, 100, 30, 860);
+        Appointments_Panel.AddObject(spinnerEditar, 100, 30, 1000);
+        Appointments_Panel.newLine();
 
-        AddEditAppointments_Panel.repaint();
+        Appointments_Panel.repaint();
     }
 
     public void CheckFirstExecution(iTextField check) {
@@ -304,21 +339,22 @@ public class Appointments implements ActionListener {
 
         for (int j = 0; j < tblAppointments.getColumnCount(); j++) {
             tbl_Data.add(tblAppointments.getColumnName(j) + "-" + tblAppointments.getValueAt(selectedRow, j).toString());
-        }
+        }        
         ArrayList<Object> Values = new ArrayList<>();
         tbl_Data.forEach((cnsmr) -> {
             Values.add(cnsmr.split("-")[1]);  //Adding only values to Values arrayList            
         });
         //Assigning Values to Encapsulated variables.
         EAP.setIdCita((String) Values.get(0));
-        EAP.setNombrePsicologo((String) Values.get(1));
-        EAP.setIdPaciente((String) Values.get(2));
-        EAP.setCedulaPaciente((String) Values.get(3));
-        EAP.setNombrePaciente((String) Values.get(4));
-        EAP.setDireccionPaciente((String) Values.get(5));
-        EAP.setTelefonoPaciente((String) Values.get(6));
+        EAP.setIdPsicologo((String) Values.get(1));
+        EAP.setNombrePsicologo((String) Values.get(2));
+        EAP.setIdPaciente((String) Values.get(3));
+        EAP.setCedulaPaciente((String) Values.get(4));
+        EAP.setNombrePaciente((String) Values.get(5));
+        EAP.setDireccionPaciente((String) Values.get(6));        
         EAP.setFechaCita((String) Values.get(7));
         EAP.setHoraCita((String) Values.get(7));
+        EAP.setIdSolicitante((String) Values.get(8));
 
         CreateEditComponents();     //Calls method in charge of creating elements in EditPanel
     }
@@ -333,25 +369,33 @@ public class Appointments implements ActionListener {
 
     public void SetColumsSizes() {
         //Code to manage columns sizes
-        tblAppointments.getColumnModel().getColumn(0).setWidth(0);
-        tblAppointments.getColumnModel().getColumn(0).setMinWidth(0);
-        tblAppointments.getColumnModel().getColumn(0).setMaxWidth(0);
+        tblAppointments.getColumnModel().getColumn(0).setWidth(0);        //IdCita
+        tblAppointments.getColumnModel().getColumn(0).setMinWidth(0);     //IdCita
+        tblAppointments.getColumnModel().getColumn(0).setMaxWidth(0);     //IdCita
 
-        tblAppointments.getColumnModel().getColumn(1).setPreferredWidth(140);
+        tblAppointments.getColumnModel().getColumn(1).setWidth(0);  //IdPsicologo
+        tblAppointments.getColumnModel().getColumn(1).setMinWidth(0);  //IdPsicologo
+        tblAppointments.getColumnModel().getColumn(1).setMaxWidth(0);  //IdPsicologo
 
-        tblAppointments.getColumnModel().getColumn(2).setWidth(0);
-        tblAppointments.getColumnModel().getColumn(2).setMinWidth(0);
-        tblAppointments.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblAppointments.getColumnModel().getColumn(2).setPreferredWidth(140); //Nombre Psicologo
+        
+        tblAppointments.getColumnModel().getColumn(3).setWidth(0);  //IdPaciente
+        tblAppointments.getColumnModel().getColumn(3).setMinWidth(0);  //IdPaciente
+        tblAppointments.getColumnModel().getColumn(3).setMaxWidth(0);  //IdPaciente               
 
-        tblAppointments.getColumnModel().getColumn(3).setPreferredWidth(140);
+        tblAppointments.getColumnModel().getColumn(4).setPreferredWidth(140); //Cedula Paciente
+        
+        tblAppointments.getColumnModel().getColumn(5).setPreferredWidth(200); //Nombre Paciente
 
-        tblAppointments.getColumnModel().getColumn(4).setPreferredWidth(200);
+        tblAppointments.getColumnModel().getColumn(6).setPreferredWidth(400); //Direccion
 
-        tblAppointments.getColumnModel().getColumn(5).setPreferredWidth(400);
+        tblAppointments.getColumnModel().getColumn(7).setPreferredWidth(100); //FechaCita
+        
+        tblAppointments.getColumnModel().getColumn(8).setWidth(0);  //IdSolicitante
+        tblAppointments.getColumnModel().getColumn(8).setMinWidth(0);  //IdSolicitante
+        tblAppointments.getColumnModel().getColumn(8).setMaxWidth(0);  //IdSolicitante
 
-        tblAppointments.getColumnModel().getColumn(6).setPreferredWidth(100);
-
-        tblAppointments.getColumnModel().getColumn(7).setPreferredWidth(150);
+        tblAppointments.getColumnModel().getColumn(9).setPreferredWidth(40); //Boton Telefonos
 
     }
 

@@ -6,19 +6,16 @@
 package japproject;
 
 import static iComponents.ComponentInterfaz.CENTER;
-import iComponents.iButton;
 import static japproject.JAPProject.sql;
 import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iScrollPane;
-import iComponents.iTable;
 import iComponents.iTableRender.headerRender;
 import iComponents.iTextField;
 import static japproject.HomePanel.ColorFonts;
 import static japproject.HomePanel.ColorPanels;
 import static japproject.HomePanel.currentPanel;
-import static japproject.HomePanel.ColorNonEditElementsFonts;
 import static japproject.HomePanel.if_;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -30,15 +27,11 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.util.StringJoiner;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.event.DocumentEvent;
@@ -46,7 +39,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import japproject.Telefonos;
 import java.awt.Color;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
@@ -117,8 +109,9 @@ public class PatientView implements ActionListener {
             ExportDataToExcel.setContentAreaFilled(false);
             ExportDataToExcel.setBorderPainted(false);
             ExportDataToExcel.setForeground(ColorFonts);
-            ExportDataToExcel.setBackground(ColorPanels);
+            ExportDataToExcel.setBackground(ColorPanels);            
             ExportDataToExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/excelicon.PNG")));               
+            
             RegTable = new JTable(model);
 
             RegTable.getTableHeader().setReorderingAllowed(false);
@@ -130,9 +123,7 @@ public class PatientView implements ActionListener {
             RegTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
             RegTable.setShowGrid(false);            
             RegTable.setRowHeight(28);
-            
-            
-
+                        
             popup = new JPopupMenu();
             ItemEditar = new JMenuItem("Editar paciente");
             ItemEditar.addActionListener(this);

@@ -21,6 +21,16 @@ public class EditAppointmentData {
         this.IdCita = IdCita;
     }
     
+    String IdPsicologo;
+    
+    String getIdPsicologo() {
+        return IdCita;
+    }
+
+    void setIdPsicologo(String IdPsicologo) {
+        this.IdPsicologo = IdPsicologo;
+    }
+    
     
     String NombrePsicologo;
     
@@ -115,6 +125,16 @@ public class EditAppointmentData {
     {
         FechaString = FechaString.substring(11, 19);       
         this.HoraCita = FechaString;
+    }
+    
+    String IdSolicitante;
+    
+    String getIdSolicitante() {
+        return IdCita;
+    }
+
+    void setIdSolicitante(String IdSolicitante) {
+        this.IdSolicitante = IdSolicitante;
     }
     
 }
