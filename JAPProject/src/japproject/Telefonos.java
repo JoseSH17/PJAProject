@@ -108,7 +108,7 @@ public class Telefonos {
         scrollPaciente = new JScrollPane(TelPaci);
         
         SolicitantesTelefonosPanel.AddSingleObject(scrollSolicitante,100.0f, 83.5f, CENTER);
-        PacientesTelefonosPanel.AddSingleObject(scrollPaciente,frameTelefonos.getWidth() , frameTelefonos.getHeight(), 0);
+        PacientesTelefonosPanel.AddSingleObject(scrollPaciente,100.0f, 83.5f, CENTER);
         paneTelefonos.addTab("Solicitante", SolicitantesTelefonosPanel);
         paneTelefonos.addTab("Paciente", PacientesTelefonosPanel);
 
