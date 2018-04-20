@@ -130,18 +130,18 @@ public class Maintenance_Parentesco implements ActionListener{
         Maintenance_Parentesco_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         Maintenance_Parentesco_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Parentesco_Panel.newLine();
-        Maintenance_Parentesco_Panel.addSpace(5);
+        Maintenance_Parentesco_Panel.addSpace(20);
 
-        Maintenance_Parentesco_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
+        Maintenance_Parentesco_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_Parentesco_Panel.newLine();
+        Maintenance_Parentesco_Panel.addSpace(20);
+
+        Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 115);
+        Maintenance_Parentesco_Panel.AddObject(txt_Descripcion, 350, 30, 260);//agrega el label y el textfield del nombre del curso
         Maintenance_Parentesco_Panel.newLine();
         Maintenance_Parentesco_Panel.addSpace(5);
 
-        Maintenance_Parentesco_Panel.AddObject(lbl_Descripción, 415, 30, 30);
-        Maintenance_Parentesco_Panel.AddObject(txt_Descripcion, 415, 30, 200);//agrega el label y el textfield del nombre del curso
-        Maintenance_Parentesco_Panel.newLine();
-        Maintenance_Parentesco_Panel.addSpace(5);
-
-        Maintenance_Parentesco_Panel.AddObject(btnAñadir, 130, 30, 200);
+        Maintenance_Parentesco_Panel.AddObject(btnAñadir, 130, 30, 345);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });

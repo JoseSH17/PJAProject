@@ -118,34 +118,22 @@ public class Maintenance implements ActionListener{
         Maintenance_Curso_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         Maintenance_Curso_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Curso_Panel.newLine();
-        Maintenance_Curso_Panel.addSpace(5);
+        Maintenance_Curso_Panel.addSpace(20);
 
         Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
         Maintenance_Curso_Panel.newLine();
-        Maintenance_Curso_Panel.addSpace(5);
+        Maintenance_Curso_Panel.addSpace(20);
 
         Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 115);
         Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 350, 30, 260);//agrega el label y el textfield del nombre del curso
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(5);
 
-        Maintenance_Curso_Panel.AddObject(btnAñadir, 110, 30, 260);
+        Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 345);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
-
-//        Maintenance_Curso_Panel.AddObject(btnModificar, 110, 30, 380);
-//        btnModificar.addActionListener((a) -> {
-//            btnModificar_MouseClicked();
-//        });
-//        
-//        Maintenance_Curso_Panel.AddObject(btnEliminar, 110, 30, 500);
-//        btnEliminar.addActionListener((a) -> {
-//            btnEliminar_MouseClicked(); 
-//        });
-//        Maintenance_Curso_Panel.newLine();
-        // Tabla();
-        //if_.add(Maintenance_Curso_Panel);
+        Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.add(scrollPane);
         Maintenance_Curso_Panel.add(Editar());
     }
