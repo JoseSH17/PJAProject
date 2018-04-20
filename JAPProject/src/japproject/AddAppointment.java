@@ -48,8 +48,8 @@ public class AddAppointment {
 
             lbl_LogoPsicologia = new iLabel("");
             lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-
-            AddAppointments_Panel.AddObject(lbl_LogoULatina, 415, 120, 10);
+ AddAppointments_Panel.addSpace(10);
+            AddAppointments_Panel.AddObject(lbl_LogoULatina, 618, 120, 50);
             AddAppointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
             AddAppointments_Panel.newLine();
 
@@ -57,8 +57,8 @@ public class AddAppointment {
             lblSearch.setForeground(ColorFonts); //SearchBar for tblPatientsForAppointments
             txtSearch = new iTextField("", 15);            
             AddAppointments_Panel.addSpace(20);
-            AddAppointments_Panel.AddObject(lblSearch, 130, 30, 13);
-            AddAppointments_Panel.AddObject(txtSearch, 250, 30, 153);
+            AddAppointments_Panel.AddObject(lblSearch, 130, 30, 50);
+            AddAppointments_Panel.AddObject(txtSearch, 250, 30, 163+50);
             AddAppointments_Panel.newLine();
 
             ResultSet rs = sql.SELECT("SELECT * FROM JAW_AgendarCita");

@@ -82,10 +82,12 @@ public class Appointments implements ActionListener {
 
             lbl_LogoPsicologia = new iLabel("");
             lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-
+            Appointments_Panel.addSpace(10);
             Appointments_Panel.AddObject(lbl_LogoULatina, 618, 120, 50);
             Appointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 660);
+              
             Appointments_Panel.newLine();
+            
 
             lblCalendar = new iLabel("Por favor seleccione una fecha: "); //Lbl Guide
             lblCalendar.setForeground(ColorFonts); //Calendar
@@ -99,13 +101,13 @@ public class Appointments implements ActionListener {
             btnViewAll = new JButton("Ver todas las citas");
             btnViewAll.setToolTipText("Elimina el filtro y muestra todas las citas");
 
-            Appointments_Panel.addSpace(20); //Leaving space from top
+            Appointments_Panel.addSpace(40); //Leaving space from top
 
             Appointments_Panel.AddObject(lblCalendar, 190, 30, 50);
-            Appointments_Panel.AddObject(calendar, 70, 30, 193+47);
-            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303+47);
+            Appointments_Panel.AddObject(calendar, 70, 30, 193 + 47);
+            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303 + 47);
             Appointments_Panel.newLine();
-            Appointments_Panel.addSpace(30);
+            Appointments_Panel.addSpace(15);
 
             btnViewAll.addActionListener((ae) -> {
                 txtHiddenSearch.setText(""); //Deletes filter defined on txtHiddenSearch and show all data
@@ -238,7 +240,7 @@ public class Appointments implements ActionListener {
 
         iCalendar editCalendar = new iCalendar();
         editCalendar.setForeground(ColorElementsFonts);
-                
+
         try {
             String TemporaryDate = EAP.getFechaCita().substring(0, 10);
             Date date;
@@ -261,7 +263,7 @@ public class Appointments implements ActionListener {
         } catch (ParseException ex) {
             Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         AddEditAppointments_Panel.AddObject(txt_NombrePsicologo, 190, 30, 20);
         AddEditAppointments_Panel.AddObject(txt_CedulaPaciente, 190, 30, 230);
         AddEditAppointments_Panel.AddObject(txt_Direccion, 190, 40, 440);

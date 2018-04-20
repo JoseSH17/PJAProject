@@ -187,6 +187,7 @@ public class Maintenance_psicologos implements ActionListener {
         iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
         CancelButton.addActionListener((ai) -> {
             NombrePsicologo_txt.setText("");
+            tbl_Data2.clear();
 
         });
         ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);

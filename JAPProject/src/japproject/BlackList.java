@@ -56,11 +56,12 @@ public class BlackList {
 
             lbl_LogoPsicologia = new iLabel("");
             lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
-
-            BlackList_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
+            BlackList_Panel.addSpace(10);
+            BlackList_Panel.AddObject(lbl_LogoULatina, 618, 120, 30);
             BlackList_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
-            BlackList_Panel.newLine();            
-            
+
+            BlackList_Panel.newLine();
+            BlackList_Panel.addSpace(25);
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaListaNegra");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
             for (int i = 1; i < rr.getMetaData().getColumnCount() + 1; i++) {
@@ -129,10 +130,10 @@ public class BlackList {
                     JMenuItem ItemEditar = new JMenuItem("Eliminar de ListaNegra");
 
                     ItemEditar.addActionListener((ae) -> {
-                       int IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString());
+                        int IdPaciente = Integer.parseInt(RegistrosTable.getValueAt(0, 0).toString());
                         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-                        obj2.addAll(Arrays.asList("No",IdPaciente));
-                        
+                        obj2.addAll(Arrays.asList("No", IdPaciente));
+
                         String query2 = "UPDATE JAW_Paciente SET `IsNonGrato` = ? WHERE `IdPaciente`=?";
 
                         Boolean exq2 = sql.exec(query2, obj2);
@@ -161,14 +162,14 @@ public class BlackList {
     public void AddComponentes(iScrollPane scrollPane2) {
         SearchBar_lbl = new iLabel("Filtrar");
         SearchBar_lbl.setForeground(Color.WHITE); //Search txt to filter table results in real time.
-                
-        BlackList_Panel.AddObject(SearchBar_lbl, 200, 30, 10);
-        BlackList_Panel.AddObject(SearchBar_txt, 200, 30, 150);//agrego el titulo para poner verlo con
+
+        BlackList_Panel.AddObject(SearchBar_lbl, 200, 30, 30);
+        BlackList_Panel.AddObject(SearchBar_txt, 200, 30, 110);//agrego el titulo para poner verlo con
         SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         BlackList_Panel.newLine();
 
         BlackList_Panel.addSpace(20);
-        BlackList_Panel.AddSingleObject(scrollPane2, 95.5f, 70f, CENTER);
+        BlackList_Panel.AddSingleObject(scrollPane2, 95.5f, 67f, CENTER);
         BlackList_Panel.newLine();
         BlackList_Panel.finalice();
         BlackList_Panel.setVisible(true);
