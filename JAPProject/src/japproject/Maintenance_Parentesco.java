@@ -55,7 +55,8 @@ public class Maintenance_Parentesco implements ActionListener{
     private iLabel lbl_idParentesco;//Lbl para el id curso
     private iTextField txt_idParentesco;//TextField para el id curso
     private iLabel lbl_Descripción;//Lbl para el nombre del curso
-    iTextField txt_Descripcion;//TextField para el nombre del curso
+    private iTextField txt_Descripcion;//TextField para el nombre del curso
+    iTextField NombrePsicologo_txt;
     iPanel ip;
     iPanel ip2;
     private iTable table;

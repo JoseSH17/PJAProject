@@ -27,17 +27,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 
-public class Maintenance implements ActionListener{
+public class Maintenance implements ActionListener {
 
     public iPanel Maintenance_Curso_Panel;//creo el iPanel
+    private final String DATABASE_URL = "jdbc:mysql://icomponents.net:3306/icompone_jose";
+    private final String USERNAME = "icompone_jose";
+    private final String PASSWORD = "m70Q(71X7k5v";
     private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
     private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
     private iButton btnAñadir;//Boton para añadir
 
     private iLabel lbl_Titulo_Mantenimiento;//Lbl para el Titulo de la pagina de mantenimiento en la que se encuentra
     private iLabel lbl_NombreCurso;//Lbl para el nombre del curso
-    iTextField txt_NombreCurso;//TextField para el nombre del curso
-
+    private iTextField txt_NombreCurso;//TextField para el nombre del curso
+    iTextField NombrePsicologo_txt;
     iPanel ip;
     iPanel ip2;
     private iTable table;
@@ -57,7 +60,7 @@ public class Maintenance implements ActionListener{
     }
 
     private iPanel PanelTabla() {
-        ip = new iPanel(115, 300, 500, 400, 4);
+        ip = new iPanel(580, 300, 500, 400, 4);
         ip.setBackground(Color.black);
 
         //popmenu
@@ -120,16 +123,16 @@ public class Maintenance implements ActionListener{
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(20);
 
-        Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 665);//agrego el titulo
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(20);
 
-        Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 115);
-        Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 350, 30, 260);//agrega el label y el textfield del nombre del curso
+        Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 580);
+        Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 350, 30, 725);//agrega el label y el textfield del nombre del curso
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(5);
 
-        Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 345);
+        Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 810);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
@@ -163,9 +166,9 @@ public class Maintenance implements ActionListener{
 //    public void btnAñadir_MouseClicked(){
 //        try{
 //        Class.forName("com.mysql.jdbc.Driver");
+//        ArrayList<Object> obj2 = new ArrayList();//array para guardar data
 //        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
 //        PreparedStatement pps = con.prepareStatement("INSERT INTO JAW_Curso(NombreCurso) VALUES (?)");
-//        
 //        pps.setString(1 , txt_NombreCurso.getText());
 //        
 //        pps.executeUpdate();
@@ -174,6 +177,7 @@ public class Maintenance implements ActionListener{
 //            JOptionPane.showMessageDialog(null, e.getMessage());
 //        }
 //    }
+    
     public void btnAñadir_MouseClicked() {
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
         obj2.addAll(Arrays.asList(
@@ -183,16 +187,17 @@ public class Maintenance implements ActionListener{
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "AÑADIDO CORRECTAMENTE");
-            table.repaint();
+            NombrePsicologo_txt.setText("");
+            txt_NombreCurso.setText("");
+//            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL AÑADIR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
-        //Esto se supone que debe de actualizar la pagina
     }
 
     public iPanel Editar() {
-        ip2 = new iPanel(630, 300, 420, 150, 20);
+        ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Nombre Curso");
         txt_NombreCurso = new iTextField("", 15);
@@ -234,21 +239,6 @@ public class Maintenance implements ActionListener{
         return ip2;
     }
 
-//    public void btnModificar_MouseClicked(){
-//        try{
-//        Class.forName("com.mysql.jdbc.Driver");
-//        Connection con = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
-//        PreparedStatement pps = con.prepareStatement("UPDATE JAW_Curso SET NombreCurso=? WHERE IdCurso=?");
-//        
-//        pps.setString(1 , txt_NombreCurso.getText());
-//        pps.setString(2 , txt_idCurso.getText());
-//        
-//        pps.executeUpdate();
-//        Tabla();
-//        } catch (ClassNotFoundException | SQLException e) {
-//            JOptionPane.showMessageDialog(null, e.getMessage());
-//        }
-//    }
     public void ItemEditarActionListener() {
 
         int selectedRow = table.getSelectedRow();
@@ -268,13 +258,7 @@ public class Maintenance implements ActionListener{
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "ELIMINADO CORRECTAMENTE");
-//            table.setVisible(true);
-//                   DefaultTableModel modelo= table.getModel()
-//            table.setModel(modelo);
-//     
-//            modelo.fireTableDataChanged();
-//
-//            jtable.setVisible(true);
+
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }

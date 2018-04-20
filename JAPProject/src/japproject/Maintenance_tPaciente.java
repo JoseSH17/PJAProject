@@ -59,7 +59,8 @@ public class Maintenance_tPaciente implements ActionListener{
     private iLabel lbl_idTipoPaciente;//Lbl para el id curso
     private iTextField txt_idTipPaciente;//TextField para el id curso
     private iLabel lbl_NombreTipoPaciente;//Lbl para el nombre del curso
-    iTextField txt_NombreTipoPaciente;//TextField para el nombre del curso
+    private iTextField txt_NombreTipoPaciente;//TextField para el nombre del curso
+    iTextField NombrePsicologo_txt;
     iPanel ip;
     iPanel ip2;
     private iTable table;

@@ -56,7 +56,8 @@ public class Maintenance_Horario implements ActionListener{
     
     private iLabel lbl_Titulo_Mantenimiento;//Lbl para el Titulo de la pagina de mantenimiento 
     private iLabel lbl_NombreHorario;//Lbl para el nombre del curso
-    iTextField txt_NombreHorario;//TextField para el nombre del curso
+    private iTextField txt_NombreHorario;//TextField para el nombre del curso
+    iTextField NombrePsicologo_txt;
     
     iPanel ip;
     iPanel ip2;
