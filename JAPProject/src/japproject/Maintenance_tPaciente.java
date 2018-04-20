@@ -146,13 +146,14 @@ public class Maintenance_tPaciente implements ActionListener{
             btnAñadir_MouseClicked();
         });
         Maintenance_TipPaciente_Panel.newLine();
+
         Maintenance_TipPaciente_Panel.add(scrollPane);
         Maintenance_TipPaciente_Panel.add(Editar());
     } 
     
     public void Tabla(){
         ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Tipo Paciente", "Nombre Tipo Paciente"));
-        iTable table = new iTable(cols);
+        table = new iTable(cols);
         ResultSet rs = sql.SELECT(""
                 + "SELECT `IdTipoPaciente`, `NombreTipoPaciente` "
                 + "FROM `JAW_TipoPaciente`");
