@@ -59,6 +59,9 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Cell;
 
 
 /**
@@ -68,6 +71,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 public class PatientView implements ActionListener {
 
     public JTable RegTable;  //NUEVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+    private iLabel lbl_LogoULatina;//Lbl para el logo de Ulatina
+    private iLabel lbl_LogoPsicologia;//Lbl para el logo de Psicologia
     iLabel SearchBar_lbl;
     iTextField SearchBar_txt;
     iButton ExportDataToExcel;
@@ -84,12 +89,16 @@ public class PatientView implements ActionListener {
     public iScrollPane scrollPane2;
     public String data[][];  //NUEVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
-    public PatientView(iFrame if_) {
-
+    public PatientView(iFrame if_) {        
         currentPanel = "PatientView_panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.        
         try {
             PatientView_panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);
             PatientView_panel.setBackground(ColorPanels);
+            
+            lbl_LogoULatina = new iLabel("");
+            lbl_LogoULatina.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO ULATINA.PNG")));
+            lbl_LogoPsicologia = new iLabel("");
+            lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
 
             ResultSet rr = sql.SELECT("SELECT * FROM JAW_VistaPacientes");//query que selecciona todo de la vista                       
             ArrayList<String> Cols = new ArrayList();
@@ -262,13 +271,18 @@ public class PatientView implements ActionListener {
         SearchBar_lbl = new iLabel("BUSQUEDA".toUpperCase());
         SearchBar_lbl.setForeground(ColorFonts);
 
+        PatientView_panel.AddObject(lbl_LogoULatina, 618, 120, 10);
+        PatientView_panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
+        PatientView_panel.newLine();
+        PatientView_panel.addSpace(15);
+                
         PatientView_panel.AddObject(SearchBar_lbl, 200, 30, 10);
         PatientView_panel.AddObject(SearchBar_txt, 200, 30, 150);//agrego el titulo para poner verlo con
         PatientView_panel.AddObject(ExportDataToExcel, 250, 30, if_.getWidth() - 280); //Se agrega boton que se encarga de exportar data a Excel.
         SearchBar_lbl.setVisible(true);//lo desactivo para mantener el titulo sin verlo, cuando marque el check se mostrara (true) el titulo
         PatientView_panel.newLine();
 
-        PatientView_panel.AddSingleObject(scrollPane2, 100.0f, 93f, CENTER);
+        PatientView_panel.AddSingleObject(scrollPane2, 100.0f, 83.5f, CENTER);
         PatientView_panel.newLine();
         PatientView_panel.finalice();
         PatientView_panel.setVisible(true);
@@ -408,5 +422,76 @@ public class PatientView implements ActionListener {
         }
     }
 
+    public static void deleteColumn( Sheet sheet, int columnToDelete ){
+        int maxColumn = 0;
+        for ( int r=0; r < sheet.getLastRowNum()+1; r++ ){
+            Row row = sheet.getRow( r );
+
+            // if no row exists here; then nothing to do; next!
+            if ( row == null )
+                continue;
+
+            // if the row doesn't have this many columns then we are good; next!
+            int lastColumn = row.getLastCellNum();
+            if ( lastColumn > maxColumn )
+                maxColumn = lastColumn;
+
+            if ( lastColumn < columnToDelete )
+                continue;
+
+            for ( int x=columnToDelete+1; x < lastColumn + 1; x++ ){
+                Cell oldCell    = row.getCell(x-1);
+                if ( oldCell != null )
+                    row.removeCell( oldCell );
+
+                Cell nextCell   = row.getCell( x );
+                if ( nextCell != null ){
+                    Cell newCell    = row.createCell( x-1, nextCell.getCellType() );
+                    cloneCell(newCell, nextCell);
+                }
+            }
+        }
+
+
+        // Adjust the column widths
+        for ( int c=0; c < maxColumn; c++ ){
+            sheet.setColumnWidth( c, sheet.getColumnWidth(c+1) );
+        }
+    }
+
+
+    /*
+     * Takes an existing Cell and merges all the styles and forumla
+     * into the new one
+     */
+    private static void cloneCell( Cell cNew, Cell cOld ){
+        cNew.setCellComment( cOld.getCellComment() );
+        cNew.setCellStyle( cOld.getCellStyle() );
+
+        switch ( cNew.getCellType() ){
+            case Cell.CELL_TYPE_BOOLEAN:{
+                cNew.setCellValue( cOld.getBooleanCellValue() );
+                break;
+            }
+            case Cell.CELL_TYPE_NUMERIC:{
+                cNew.setCellValue( cOld.getNumericCellValue() );
+                break;
+            }
+            case Cell.CELL_TYPE_STRING:{
+                cNew.setCellValue( cOld.getStringCellValue() );
+                break;
+            }
+            case Cell.CELL_TYPE_ERROR:{
+                cNew.setCellValue( cOld.getErrorCellValue() );
+                break;
+            }
+            case Cell.CELL_TYPE_FORMULA:{
+                cNew.setCellFormula( cOld.getCellFormula() );
+                break;
+            }
+        }
+
+    }
+    
 
 }
