@@ -219,16 +219,16 @@ public class EditPatient {
         SearchBar_txt.setText("");
         iScrollPane ScrollPane = new iScrollPane(EditarRegistrosTable, null);
         //setear valores textfiles solicitante
-        IdSolicitante = Integer.parseInt(EditarRegistrosTable.getValueAt(0, 10).toString());
-        txt_CedulaSolicitante.setText(EditarRegistrosTable.getValueAt(0, 1).toString());
-        txt_NombreSolicitante.setText(EditarRegistrosTable.getValueAt(0, 2).toString());
-        txt_DireccionSolicitante.setText(EditarRegistrosTable.getValueAt(0, 3).toString());
-        txt_TelefonoSolicitante.setText(EditarRegistrosTable.getValueAt(0, 4).toString());
+        IdSolicitante = Integer.parseInt(EditarRegistrosTable.getValueAt(0, 1).toString());
+        txt_CedulaSolicitante.setText(EditarRegistrosTable.getValueAt(0, 2).toString());
+        txt_NombreSolicitante.setText(EditarRegistrosTable.getValueAt(0, 3).toString());
+        txt_DireccionSolicitante.setText(EditarRegistrosTable.getValueAt(0, 4).toString());
+     
         txt_ProfesionSolicitante.setText(EditarRegistrosTable.getValueAt(0, 5).toString());
         txt_ActividadLaboralSolicitante.setText(EditarRegistrosTable.getValueAt(0, 6).toString());
         txt_MotivoConsultaSolicitante.setText(EditarRegistrosTable.getValueAt(0, 7).toString());
 
-        String TemporalReportDate = EditarRegistrosTable.getValueAt(0, 28).toString().replace("/", "-");
+        String TemporalReportDate = EditarRegistrosTable.getValueAt(0, 28-1).toString().replace("/", "-");
         try {
             Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(TemporalReportDate);
             txt_FechaReporte.setDate(date);
@@ -237,7 +237,7 @@ public class EditPatient {
         }
 
         //setear valores textfiles paciente
-        IdPaciente = Integer.parseInt(EditarRegistrosTable.getValueAt(0, 0).toString());
+        IdPaciente = Integer.parseInt(EditarRegistrosTable.getValueAt(0, 10).toString());
 
         txt_CedulaPaciente.setText(EditarRegistrosTable.getValueAt(0, 11).toString());
         txt_NombrePaciente.setText(EditarRegistrosTable.getValueAt(0, 12).toString());
@@ -252,18 +252,18 @@ public class EditPatient {
         }
 
         txt_DireccionPaciente.setText(EditarRegistrosTable.getValueAt(0, 18).toString());
-        txt_TelefonoPaciente.setText(EditarRegistrosTable.getValueAt(0, 19).toString());
-        txt_ProfesionPaciente.setText(EditarRegistrosTable.getValueAt(0, 20).toString());
-        txt_ActividadLaboralPaciente.setText(EditarRegistrosTable.getValueAt(0, 21).toString());
-        txt_MotivoConsultaPaciente.setText(EditarRegistrosTable.getValueAt(0, 22).toString());
-        txt_DetalleHorarioPaciente.setText(EditarRegistrosTable.getValueAt(0, 25).toString());
+        txt_TelefonoPaciente.setText(EditarRegistrosTable.getValueAt(0, 19-2).toString());
+        txt_ProfesionPaciente.setText(EditarRegistrosTable.getValueAt(0, 19).toString());
+        txt_ActividadLaboralPaciente.setText(EditarRegistrosTable.getValueAt(0, 20).toString());
+        txt_MotivoConsultaPaciente.setText(EditarRegistrosTable.getValueAt(0, 21).toString());
+        txt_DetalleHorarioPaciente.setText(EditarRegistrosTable.getValueAt(0, 24).toString());
         //set cbo
-        cbo_Parentesco.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 8).toString()) - 1);
-        cbo_ClasificacionPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 14).toString()) - 1);
-        cbo_TipoPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 16).toString()) - 1);
-        cbo_HorarioPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 23).toString()) - 1);
-        cbo_CursoPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 26).toString()) - 1);
-        cbo_IsNonGrato.setSelectedItem(EditarRegistrosTable.getValueAt(0, 29).toString());
+        cbo_Parentesco.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 8).toString()) );
+        cbo_ClasificacionPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 14).toString()) -2);
+        cbo_TipoPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 16).toString()) );
+        cbo_HorarioPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 22).toString()));
+        cbo_CursoPaciente.setSelectedIndex(Integer.parseInt(EditarRegistrosTable.getValueAt(0, 25).toString()) );
+        cbo_IsNonGrato.setSelectedItem(EditarRegistrosTable.getValueAt(0, 28).toString());
 
         //
         return ScrollPane;
@@ -705,7 +705,7 @@ public class EditPatient {
 
         RegistrosTable.getColumnModel().getColumn(27).setPreferredWidth(140);
         RegistrosTable.getColumnModel().getColumn(28).setPreferredWidth(140);
-        RegistrosTable.getColumnModel().getColumn(29).setPreferredWidth(140);
+//        RegistrosTable.getColumnModel().getColumn(29).setPreferredWidth(140);
 //fin de los parametros de la tabla
 
     }
