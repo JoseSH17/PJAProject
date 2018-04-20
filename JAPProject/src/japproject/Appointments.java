@@ -83,8 +83,8 @@ public class Appointments implements ActionListener {
             lbl_LogoPsicologia = new iLabel("");
             lbl_LogoPsicologia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/content/LOGO DE PSICOLOGIA.PNG")));
 
-            Appointments_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
-            Appointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);
+            Appointments_Panel.AddObject(lbl_LogoULatina, 618, 120, 50);
+            Appointments_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 660);
             Appointments_Panel.newLine();
 
             lblCalendar = new iLabel("Por favor seleccione una fecha: "); //Lbl Guide
@@ -101,10 +101,11 @@ public class Appointments implements ActionListener {
 
             Appointments_Panel.addSpace(20); //Leaving space from top
 
-            Appointments_Panel.AddObject(lblCalendar, 190, 30, 3);
-            Appointments_Panel.AddObject(calendar, 70, 30, 193);
-            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303);
+            Appointments_Panel.AddObject(lblCalendar, 190, 30, 50);
+            Appointments_Panel.AddObject(calendar, 70, 30, 193+47);
+            Appointments_Panel.AddObject(btnViewAll, 140, 30, 303+47);
             Appointments_Panel.newLine();
+            Appointments_Panel.addSpace(30);
 
             btnViewAll.addActionListener((ae) -> {
                 txtHiddenSearch.setText(""); //Deletes filter defined on txtHiddenSearch and show all data
