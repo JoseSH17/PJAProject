@@ -47,19 +47,24 @@ public class Maintenance {
     JMenuItem ItemEliminar;
     public static List<String> tbl_Data2 = new ArrayList();
 
-    public Maintenance(iFrame if_) { 
+    public Maintenance(iFrame if_) {
         currentPanel = "Maintenance_Curso_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Curso_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Curso_Panel.setBackground(ColorPanels);//le doy color al panel
 
+        PanelTabla();
+        if_.add(Maintenance_Curso_Panel);
+    }
+
+    private iPanel PanelTabla() {
         ip = new iPanel(115, 300, 500, 400, 4);
         ip.setBackground(Color.black);
 
         //popmenu
         popup = new JPopupMenu();
-        ItemEditar = new JMenuItem("Editar Psicologo");
+        ItemEditar = new JMenuItem("Editar Curso");
         ItemEditar.addActionListener(this);
-        ItemEliminar = new JMenuItem("Eliminar Psicologo");
+        ItemEliminar = new JMenuItem("Eliminar Curso");
         ItemEliminar.addActionListener(this);
         popup.add(ItemEditar);
         popup.add(ItemEliminar);
@@ -81,7 +86,8 @@ public class Maintenance {
 
         //
         Mantenimiento_curso(ip);
-        if_.add(Maintenance_Curso_Panel);
+
+        return ip;
     }
 
     private void Componentes_Curso() {
@@ -202,7 +208,7 @@ public class Maintenance {
             JOptionPane.showMessageDialog(null, "AÑADIDO CORRECTAMENTE");
             table.repaint();
         } else {
-            JOptionPane.showMessageDialog(null, "ERROR AL AÑADIR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "ERROR AL AÑADIR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
         //Esto se supone que debe de actualizar la pagina
@@ -296,8 +302,8 @@ public class Maintenance {
             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-   
+
+    @Override
     public void actionPerformed(ActionEvent event) {
         JMenuItem menu = (JMenuItem) event.getSource();
 

@@ -68,15 +68,19 @@ public class Maintenance_Clasif_paciente {
         currentPanel = "Maintenance_Clasif_Paciente_Panel";  //Assign the value of currentPanel for RemovePanels method which handles panel transitions.   
         Maintenance_Clasif_Paciente_Panel = new iPanel(0, 70, 100.0f, 100.0f, 0, 0, if_);//le doy propiedades al iPanel
         Maintenance_Clasif_Paciente_Panel.setBackground(ColorPanels);//le doy color al panel
-        
+        PanelTabla();
+        if_.add(Maintenance_Clasif_Paciente_Panel);
+    }
+    
+    private iPanel PanelTabla() {
         ip = new iPanel(115, 300, 500, 400, 4);
         ip.setBackground(Color.black);
 
         //popmenu
         popup = new JPopupMenu();
-        ItemEditar = new JMenuItem("Editar Psicologo");
+        ItemEditar = new JMenuItem("Editar Clasificación");
         ItemEditar.addActionListener(this);
-        ItemEliminar = new JMenuItem("Eliminar Psicologo");
+        ItemEliminar = new JMenuItem("Eliminar Clasificación");
         ItemEliminar.addActionListener(this);
         popup.add(ItemEditar);
         popup.add(ItemEliminar);
@@ -98,7 +102,8 @@ public class Maintenance_Clasif_paciente {
 
         //
         Mantenimiento_Clasificación(ip);
-        if_.add(Maintenance_Clasif_Paciente_Panel);
+
+        return ip;
     }
     
     private void Componentes_Clasificación(){
@@ -164,6 +169,7 @@ public class Maintenance_Clasif_paciente {
 //        Tabla();
         
         //if_.add(Maintenance_Clasif_Paciente_Panel);
+        Maintenance_Clasif_Paciente_Panel.newLine();
         Maintenance_Clasif_Paciente_Panel.add(scrollPane);
         Maintenance_Clasif_Paciente_Panel.add(Editar());
     } 
@@ -218,7 +224,7 @@ public class Maintenance_Clasif_paciente {
     public iPanel Editar() {
         ip2 = new iPanel(630, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
-        iLabel NombrePsicologo_lbl = new iLabel("Nombre Curso");
+        iLabel NombrePsicologo_lbl = new iLabel("Clasificación Paciente");
         txt_NombreClasifPaciente = new iTextField("", 15);
 
         iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
@@ -303,6 +309,7 @@ public class Maintenance_Clasif_paciente {
         }
     }
     
+    @Override
     public void actionPerformed(ActionEvent event) {
         JMenuItem menu = (JMenuItem) event.getSource();
 
