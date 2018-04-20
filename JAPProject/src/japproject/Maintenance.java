@@ -184,7 +184,6 @@ public class Maintenance implements ActionListener {
                 txt_NombreCurso.getText()
         ));
         Boolean exq = sql.exec("INSERT INTO JAW_Curso(NombreCurso) VALUES (?)", obj2);
-
         if (exq) {
             JOptionPane.showMessageDialog(null, "AÑADIDO CORRECTAMENTE");
             txt_NombreCurso.setText("");
