@@ -7,7 +7,6 @@ package japproject;
 
 import iComponents.iFrame;
 import java.awt.Color;
-import java.awt.Point;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JButton;
 import javax.swing.JMenu;
@@ -16,7 +15,10 @@ import javax.swing.JMenuItem;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
 import static japproject.EditPatient.EditPatient_Panel;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.plaf.ColorUIResource;
 
 /**
@@ -30,6 +32,9 @@ public class HomePanel {
     public static Color ColorFonts =  new ColorUIResource(Color.WHITE); //Color for elements font
     public static Color ColorElementsFonts =  new ColorUIResource(Color.BLACK); //Color for elements inside font e.g: (iTextField font color, JTextArea)
     public static Color ColorNonEditElementsFonts =  new ColorUIResource(Color.BLUE);  //Color for non editable text, this is set when the text is Enabled(false).
+    
+    public int width;
+    public int height;
     public static iFrame if_; //This is the main iFrame container, everything will be shown in here. 
     
     public LoadingProgressBars lpb;  //Calls methods from Loading Progress Bars class
@@ -47,12 +52,21 @@ public class HomePanel {
     BlackList BL; //Panel to View Patients in BlackList
     
     public HomePanel() {
-        lpb = new LoadingProgressBars();
-        if_ = new iFrame(1200, 900, 0, 30, "Inicio", EXIT_ON_CLOSE);
+        lpb = new LoadingProgressBars();        
+        getScreenDimensions(); //Gets the screen dimensions, supports scenario where user has more than 1 monitor.       
+        if_ = new iFrame(width, height, 0, 30, "Inicio", EXIT_ON_CLOSE);
         if_.setBackground(ColorPanels);
         if_.setIconImage(new ImageIcon(getClass().getResource("/content/iconoUlatina.PNG")).getImage());
+        if_.setExtendedState( if_.getExtendedState()|JFrame.MAXIMIZED_BOTH ); //Maximizing Frame through code since frame creationg leaves elements out of screen (iComponents bug)
         initComponents(); //Do not move InitComponents from this place.          
-        if_.finalice();
+        if_.finalice();        
+    }
+    
+    private void getScreenDimensions()
+    {
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        width = gd.getDisplayMode().getWidth();
+        height = gd.getDisplayMode().getHeight();
     }
 
     private void initComponents() {
