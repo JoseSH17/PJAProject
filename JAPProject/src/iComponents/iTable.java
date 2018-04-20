@@ -79,7 +79,7 @@ public class iTable extends JTable {
                 if (txt.getText().isEmpty() || txt.getText().equals(txt.getHover())) {
                     sorter.setRowFilter(null);
                 } else {
-                    sorter.setRowFilter(RowFilter.regexFilter(txt.getText()));
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txt.getText()));
                 }
             }
 
@@ -88,7 +88,7 @@ public class iTable extends JTable {
                 if (txt.getText().isEmpty() || txt.getText().equals(txt.getHover())) {
                     sorter.setRowFilter(null);
                 } else {
-                    sorter.setRowFilter(RowFilter.regexFilter(txt.getText()));
+                    sorter.setRowFilter(RowFilter.regexFilter("(?i)" + txt.getText()));
                 }
 
             }
