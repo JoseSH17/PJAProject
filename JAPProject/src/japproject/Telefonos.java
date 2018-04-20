@@ -49,6 +49,7 @@ public class Telefonos {
 
         paneTelefonos = new JTabbedPane();
         SolicitantesTelefonosPanel = new iPanel(frameTelefonos.getHeight(), frameTelefonos.getWidth(), 0, 0, 0);
+        SolicitantesTelefonosPanel.setBackground(Color.RED);
         PacientesTelefonosPanel = new iPanel(frameTelefonos.getHeight(), frameTelefonos.getWidth(), 0, 0, 0);
 
         //Tabla de solicitante
@@ -79,8 +80,10 @@ public class Telefonos {
             }
         }
         
-         TelPaci = new iTable(cols);
-        
+         
+        //tabal paciente
+        ArrayList<String> cols2 = new ArrayList<>(Arrays.asList("Num. Telefono", "Tipo"));
+         TelPaci = new iTable(cols2);
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data de id de Paciente
         if (IdPaciente == -1) {
             System.out.println("no se indicaron ids para el paciente");
@@ -107,7 +110,12 @@ public class Telefonos {
         scrollSolicitante = new JScrollPane(TelSoli);
         scrollPaciente = new JScrollPane(TelPaci);
         
-        SolicitantesTelefonosPanel.AddSingleObject(scrollSolicitante,100.0f, 83.5f, CENTER);
+        //Add Componentes Solicitantes 
+        SolicitantesTelefonosPanel.AddSingleObject(scrollSolicitante,100f, 83f, CENTER);
+        SolicitantesTelefonosPanel.newLine();
+        SolicitantesTelefonosPanel.finalice();
+        //
+        
         PacientesTelefonosPanel.AddSingleObject(scrollPaciente,100.0f, 83.5f, CENTER);
         paneTelefonos.addTab("Solicitante", SolicitantesTelefonosPanel);
         paneTelefonos.addTab("Paciente", PacientesTelefonosPanel);
