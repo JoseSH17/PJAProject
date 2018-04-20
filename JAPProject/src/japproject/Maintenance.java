@@ -140,11 +140,7 @@ public class Maintenance implements ActionListener{
 
     public void Tabla() {
         ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Curso", "Nombre Curso"));
-        //iPanel ip = new iPanel(115, 300, 500, 400, 4);
-        //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
-        //ip.setLocation(115, 300);
         table = new iTable(cols);
-        //ip.setBackground(Color.black);
 
         ResultSet rs = sql.SELECT(""
                 + "SELECT `IdCurso`, `NombreCurso` "
@@ -162,13 +158,6 @@ public class Maintenance implements ActionListener{
                 System.out.println("no object fetch'd");
             }
         }
-        //JScrollPane scrollPane = new JScrollPane(table);
-        //scrollPane.setBounds(0, 0, 500, 400);
-
-        //ip.add(btn_filter);
-        //ip.add(scrollPane);
-        //ip.finalice();
-        //Maintenance_Curso_Panel.add(ip);
     }
 
 //    public void btnAñadir_MouseClicked(){

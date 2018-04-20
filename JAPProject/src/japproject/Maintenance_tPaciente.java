@@ -173,6 +173,7 @@ public class Maintenance_tPaciente implements ActionListener{
             }
         }
     }
+    
     public iPanel Editar() {
         ip2 = new iPanel(630, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
