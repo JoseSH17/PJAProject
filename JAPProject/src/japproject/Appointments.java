@@ -11,7 +11,6 @@ import iComponents.iFrame;
 import iComponents.iLabel;
 import iComponents.iPanel;
 import iComponents.iScrollPane;
-import iComponents.iTable;
 import iComponents.iTableRender.headerRender;
 import iComponents.iTextField;
 import static japproject.HomePanel.ColorElementsFonts;
@@ -40,7 +39,8 @@ import javax.swing.JPopupMenu;
 import static japproject.HomePanel.ColorPanels;
 import java.text.ParseException;
 import java.util.Calendar;
-import javax.swing.JScrollPane;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -78,6 +78,7 @@ public class Appointments implements ActionListener {
     public List<String> tbl_Data = new ArrayList();
     public String data[][];  //NUEVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
     iScrollPane scrollCitas;
+    Telefonos T;
     
 
     public Appointments(iFrame if_) {
@@ -134,6 +135,7 @@ public class Appointments implements ActionListener {
 //          Se crea la tabla y se le da los parametros
             Cols.add("Tels");
             DefaultTableModel model = new DefaultTableModel(data, Cols.toArray()); //NUEVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+            
             tblAppointments = new JTable(model);
             
             tblAppointments.getTableHeader().setReorderingAllowed(false);
@@ -145,6 +147,8 @@ public class Appointments implements ActionListener {
             tblAppointments.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
             tblAppointments.setShowGrid(false);            
             tblAppointments.setRowHeight(28);
+            
+            
                      
             popup = new JPopupMenu();
             ItemEditar = new JMenuItem("Editar Cita");
@@ -208,9 +212,24 @@ public class Appointments implements ActionListener {
                     System.out.println("no object fetch'd");
                 }
             }
+            
+            
+            // Agregar columna de botones  
+            Action wadap = new AbstractAction() {
+                public void actionPerformed(ActionEvent e) {
+                    int selectedRow = tblAppointments.getSelectedRow();
+
+                    int IdSolicitante = (int) tblAppointments.getValueAt(selectedRow, 8); //Value is static here, must change it if model is updated or DB View is updated
+
+                    int IdPaciente = (int) tblAppointments.getValueAt(selectedRow, 3); //Value is static here, must change it if model is updated or DB View is updated                 
+
+                    T = new Telefonos(IdSolicitante, IdPaciente);   //Calling Telefonos frame                 
+                }
+            };
+            ButtonColumn h = new ButtonColumn(tblAppointments, wadap, 9);
                    
             Appointments_Panel.addSpace(20);
-            Appointments_Panel.AddSingleObject(scrollCitas, 40.0f, 20.0f, CENTER);
+            Appointments_Panel.AddSingleObject(scrollCitas, 41.5f, 20.0f, CENTER);
 
             Appointments_Panel.newLine();
             Appointments_Panel.finalice();
@@ -389,7 +408,7 @@ public class Appointments implements ActionListener {
 
         tblAppointments.getColumnModel().getColumn(6).setPreferredWidth(400); //Direccion
 
-        tblAppointments.getColumnModel().getColumn(7).setPreferredWidth(100); //FechaCita
+        tblAppointments.getColumnModel().getColumn(7).setPreferredWidth(140); //FechaCita
         
         tblAppointments.getColumnModel().getColumn(8).setWidth(0);  //IdSolicitante
         tblAppointments.getColumnModel().getColumn(8).setMinWidth(0);  //IdSolicitante
