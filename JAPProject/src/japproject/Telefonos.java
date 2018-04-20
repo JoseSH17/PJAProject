@@ -6,6 +6,7 @@
 package japproject;
 
 import iComponents.iPanel;
+import iComponents.iTable;
 import javax.swing.JFrame;
 import static japproject.HomePanel.ColorFonts;
 import static japproject.HomePanel.ColorPanels;
@@ -16,6 +17,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
@@ -35,24 +37,43 @@ public class Telefonos {
     private iPanel PacientesTelefonosPanel;
 
     public Telefonos(int IdSolicitante, int IdPaciente) {
-        frameTelefonos =  new JFrame("Telefonos");        
-        frameTelefonos.setResizable(false);        
+        frameTelefonos = new JFrame("Telefonos");
+        frameTelefonos.setResizable(false);
         frameTelefonos.setIconImage(new ImageIcon(getClass().getResource("/content/iconoUlatina.PNG")).getImage());
-        
-        
+
         paneTelefonos = new JTabbedPane();
-        SolicitantesTelefonosPanel =  new iPanel(frameTelefonos.getHeight(), frameTelefonos.getWidth(),0,0,0);
-        PacientesTelefonosPanel =  new iPanel(frameTelefonos.getHeight(), frameTelefonos.getWidth(),0,0,0);
+        SolicitantesTelefonosPanel = new iPanel(frameTelefonos.getHeight(), frameTelefonos.getWidth(), 0, 0, 0);
+        PacientesTelefonosPanel = new iPanel(frameTelefonos.getHeight(), frameTelefonos.getWidth(), 0, 0, 0);
+
+        //Tabla de solicitante
+        ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Tipo Paciente", "Nombre Tipo Paciente"));
         
+        iTable TelSoli = new iTable(cols);
+//
         ArrayList<Object> obj1 = new ArrayList();//array para guardar data de id de Solicitante
         if (IdSolicitante == -1) {
             System.out.println("no se indicaron ids para el solicitante");
         } else {
             obj1.addAll(Arrays.asList(IdSolicitante));
             ResultSet rsS = sql.SELECT("Select * from JAW_Telefonos WHERE Propietario = 'Solicitante' AND IdRelacion = ?", obj1);
+            if (sql.Exists(rsS)) {//verifica que el query sea valido
+                try {
+
+                    while (rsS.next()) {//llena los rows de la tabla
+                        Object[] row = new Object[rsS.getMetaData().getColumnCount() + 1];
+                        for (int i = 1; i <= rsS.getMetaData().getColumnCount(); i++) {
+                            row[i - 1] = rsS.getObject(i);
+                        }
+                        row[28] = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PHONE, 20, Color.CYAN.darker());
+                        model.insertRow(model.getRowCount(), row);
+                    }
+
+                } catch (SQLException ex) {
+                    System.out.println("no object fetch'd");
+                }
+            }
         }
-        
-        
+
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data de id de Paciente
         if (IdPaciente == -1) {
             System.out.println("no se indicaron ids para el paciente");
@@ -60,13 +81,13 @@ public class Telefonos {
             obj2.addAll(Arrays.asList(IdPaciente));
             ResultSet rsP = sql.SELECT("Select * from JAW_Telefonos WHERE Propietario = 'Paciente' AND IdRelacion = ?", obj2);
         }
-               
+
         paneTelefonos.addTab("Solicitante", SolicitantesTelefonosPanel);
-        paneTelefonos.addTab("Paciente", PacientesTelefonosPanel);                                
-                
-        frameTelefonos.add(paneTelefonos);      
+        paneTelefonos.addTab("Paciente", PacientesTelefonosPanel);
+
+        frameTelefonos.add(paneTelefonos);
         frameTelefonos.setSize(400, 350);
-        frameTelefonos.setPreferredSize(new Dimension(400,350));
+        frameTelefonos.setPreferredSize(new Dimension(600, 500));
         frameTelefonos.pack();
         frameTelefonos.setVisible(true);
     }
