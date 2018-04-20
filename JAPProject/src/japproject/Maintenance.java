@@ -118,45 +118,29 @@ public class Maintenance implements ActionListener{
         Maintenance_Curso_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         Maintenance_Curso_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Curso_Panel.newLine();
-        Maintenance_Curso_Panel.addSpace(5);
+        Maintenance_Curso_Panel.addSpace(20);
 
         Maintenance_Curso_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
         Maintenance_Curso_Panel.newLine();
-        Maintenance_Curso_Panel.addSpace(5);
+        Maintenance_Curso_Panel.addSpace(20);
 
         Maintenance_Curso_Panel.AddObject(lbl_NombreCurso, 415, 30, 115);
         Maintenance_Curso_Panel.AddObject(txt_NombreCurso, 350, 30, 260);//agrega el label y el textfield del nombre del curso
         Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.addSpace(5);
 
-        Maintenance_Curso_Panel.AddObject(btnAñadir, 110, 30, 260);
+        Maintenance_Curso_Panel.AddObject(btnAñadir, 130, 30, 345);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
-
-//        Maintenance_Curso_Panel.AddObject(btnModificar, 110, 30, 380);
-//        btnModificar.addActionListener((a) -> {
-//            btnModificar_MouseClicked();
-//        });
-//        
-//        Maintenance_Curso_Panel.AddObject(btnEliminar, 110, 30, 500);
-//        btnEliminar.addActionListener((a) -> {
-//            btnEliminar_MouseClicked(); 
-//        });
-//        Maintenance_Curso_Panel.newLine();
-        // Tabla();
-        //if_.add(Maintenance_Curso_Panel);
+        Maintenance_Curso_Panel.newLine();
         Maintenance_Curso_Panel.add(scrollPane);
         Maintenance_Curso_Panel.add(Editar());
     }
 
     public void Tabla() {
         ArrayList<String> cols = new ArrayList<>(Arrays.asList("ID Curso", "Nombre Curso"));
-        //iPanel ip = new iPanel(115, 300, 500, 400, 4);
-        //iPanel ip = new iPanel(0, 70, 50.0f, 50.0f, 0, 0, if_);
-        //ip.setLocation(115, 300);
         table = new iTable(cols);
-        //ip.setBackground(Color.black);
 
         ResultSet rs = sql.SELECT(""
                 + "SELECT `IdCurso`, `NombreCurso` "
@@ -174,13 +158,6 @@ public class Maintenance implements ActionListener{
                 System.out.println("no object fetch'd");
             }
         }
-        //JScrollPane scrollPane = new JScrollPane(table);
-        //scrollPane.setBounds(0, 0, 500, 400);
-
-        //ip.add(btn_filter);
-        //ip.add(scrollPane);
-        //ip.finalice();
-        //Maintenance_Curso_Panel.add(ip);
     }
 
 //    public void btnAñadir_MouseClicked(){

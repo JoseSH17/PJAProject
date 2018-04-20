@@ -135,23 +135,18 @@ public class Maintenance_Clasif_paciente implements ActionListener{
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoULatina, 618, 120, 5);
         Maintenance_Clasif_Paciente_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_Clasif_Paciente_Panel.newLine();
-        Maintenance_Clasif_Paciente_Panel.addSpace(5);
+        Maintenance_Clasif_Paciente_Panel.addSpace(20);
  
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 10);//agrego el titulo
+        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_Clasif_Paciente_Panel.newLine();
+        Maintenance_Clasif_Paciente_Panel.addSpace(20);
+        
+        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_NombreClasifPaciente, 415, 30, 115);
+        Maintenance_Clasif_Paciente_Panel.AddObject(txt_NombreClasifPaciente, 350, 30, 260);//agrega el label y el textfield del nombre del clasificación
         Maintenance_Clasif_Paciente_Panel.newLine();
         Maintenance_Clasif_Paciente_Panel.addSpace(5);
         
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_idClasifPaciente, 415, 30, 30);
-        Maintenance_Clasif_Paciente_Panel.AddObject(txt_idTClasifPaciente, 415, 30, 200);//agrega el label y el textfield del id clasificación
-        Maintenance_Clasif_Paciente_Panel.newLine();
-        Maintenance_Clasif_Paciente_Panel.addSpace(5);
-        
-        Maintenance_Clasif_Paciente_Panel.AddObject(lbl_NombreClasifPaciente, 415, 30, 30);
-        Maintenance_Clasif_Paciente_Panel.AddObject(txt_NombreClasifPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del clasificación
-        Maintenance_Clasif_Paciente_Panel.newLine();
-        Maintenance_Clasif_Paciente_Panel.addSpace(5);
-        
-        Maintenance_Clasif_Paciente_Panel.AddObject(btnAñadir, 130, 30, 200);
+        Maintenance_Clasif_Paciente_Panel.AddObject(btnAñadir, 130, 30, 345);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });

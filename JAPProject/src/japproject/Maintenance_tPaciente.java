@@ -133,18 +133,18 @@ public class Maintenance_tPaciente implements ActionListener{
         Maintenance_TipPaciente_Panel.AddObject(lbl_LogoULatina, 618, 120, 10);
         Maintenance_TipPaciente_Panel.AddObject(lbl_LogoPsicologia, 486, 120, 600);//añade los logos oficiales de la clinica y de la universidad latina
         Maintenance_TipPaciente_Panel.newLine();
-        Maintenance_TipPaciente_Panel.addSpace(5);
+        Maintenance_TipPaciente_Panel.addSpace(20);
  
-        Maintenance_TipPaciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 5);//agrego el titulo
+        Maintenance_TipPaciente_Panel.AddObject(lbl_Titulo_Mantenimiento, 415, 30, 200);//agrego el titulo
+        Maintenance_TipPaciente_Panel.newLine();
+        Maintenance_TipPaciente_Panel.addSpace(20);
+        
+        Maintenance_TipPaciente_Panel.AddObject(lbl_NombreTipoPaciente, 415, 30, 115);
+        Maintenance_TipPaciente_Panel.AddObject(txt_NombreTipoPaciente, 350, 30, 260);//agrega el label y el textfield del nombre del horario
         Maintenance_TipPaciente_Panel.newLine();
         Maintenance_TipPaciente_Panel.addSpace(5);
         
-        Maintenance_TipPaciente_Panel.AddObject(lbl_NombreTipoPaciente, 415, 30, 30);
-        Maintenance_TipPaciente_Panel.AddObject(txt_NombreTipoPaciente, 415, 30, 200);//agrega el label y el textfield del nombre del horario
-        Maintenance_TipPaciente_Panel.newLine();
-        Maintenance_TipPaciente_Panel.addSpace(5);
-        
-        Maintenance_TipPaciente_Panel.AddObject(btnAñadir, 130, 30, 200);
+        Maintenance_TipPaciente_Panel.AddObject(btnAñadir, 130, 30, 345);
         btnAñadir.addActionListener((a) -> {
             btnAñadir_MouseClicked();
         });
@@ -173,6 +173,7 @@ public class Maintenance_tPaciente implements ActionListener{
             }
         }
     }
+    
     public iPanel Editar() {
         ip2 = new iPanel(630, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
