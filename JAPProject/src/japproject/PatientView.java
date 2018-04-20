@@ -48,12 +48,18 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import japproject.Telefonos;
 import java.awt.Color;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.table.TableColumnModel;
 import jiconfont.icons.GoogleMaterialDesignIcons;
 import jiconfont.swing.IconFontSwing;
-import jxl.*;
-import jxl.write.*;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 
 /**
  *
@@ -102,14 +108,13 @@ public class PatientView implements ActionListener {
             RegTable.getTableHeader().setReorderingAllowed(false);
             RegTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
             RegTable.setRowSelectionAllowed(true);
-            RegTable.setSize(500, 500);
             RegTable.setBackground(ColorFonts);
             
             RegTable.getTableHeader().setDefaultRenderer(new headerRender());
             RegTable.setFont(new java.awt.Font("Segoe UI", java.awt.Font.PLAIN, 13));
-            RegTable.setShowGrid(false);
-            RegTable.setShowVerticalLines(false);
+            RegTable.setShowGrid(false);            
             RegTable.setRowHeight(28);
+            
             
 
             popup = new JPopupMenu();
@@ -135,7 +140,7 @@ public class PatientView implements ActionListener {
                         for (int i = 1; i <= rr.getMetaData().getColumnCount(); i++) {
                             row[i - 1] = rr.getObject(i);
                         }
-                        row[28] = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PHONE, 20, Color.CYAN.darker());
+                        row[29] = IconFontSwing.buildIcon(GoogleMaterialDesignIcons.PHONE, 20, Color.CYAN.darker());
                         model.insertRow(model.getRowCount(), row);
                     }
 
@@ -149,14 +154,14 @@ public class PatientView implements ActionListener {
                 public void actionPerformed(ActionEvent e) {
                     int selectedRow = RegTable.getSelectedRow();
 
-                    int IdSolicitante = (int) RegTable.getValueAt(selectedRow, 0); //Value is static here, must change it if model is updated or DB View is updated
+                    int IdSolicitante = (int) RegTable.getValueAt(selectedRow, 1); //Value is static here, must change it if model is updated or DB View is updated
 
-                    int IdPaciente = (int) RegTable.getValueAt(selectedRow, 9); //Value is static here, must change it if model is updated or DB View is updated                 
+                    int IdPaciente = (int) RegTable.getValueAt(selectedRow, 10); //Value is static here, must change it if model is updated or DB View is updated                 
 
                     T = new Telefonos(IdSolicitante, IdPaciente);   //Calling Telefonos frame                 
                 }
             };
-            ButtonColumn h = new ButtonColumn(RegTable, delete, 28);
+            ButtonColumn h = new ButtonColumn(RegTable, delete, 29);
             AddComponentes(scrollPane2);
 
             ExportDataToExcel.addActionListener((a) -> {
@@ -271,64 +276,66 @@ public class PatientView implements ActionListener {
     }
 
     public void SetColumsSizes() {
-        RegTable.getColumnModel().getColumn(0).setWidth(0);  //IdSolicitante
-        RegTable.getColumnModel().getColumn(0).setMinWidth(0); //IdSolicitante
-        RegTable.getColumnModel().getColumn(0).setMaxWidth(0); //IdSolicitante
+        RegTable.getColumnModel().getColumn(0).setWidth(140);  //Numero de Expediente
+        
+        RegTable.getColumnModel().getColumn(1).setWidth(0);  //IdSolicitante
+        RegTable.getColumnModel().getColumn(1).setMinWidth(0); //IdSolicitante
+        RegTable.getColumnModel().getColumn(1).setMaxWidth(0); //IdSolicitante
 
-        RegTable.getColumnModel().getColumn(1).setPreferredWidth(140); //CedulaSolicitante
-        RegTable.getColumnModel().getColumn(2).setPreferredWidth(140); //Nombre Solicitante
-        RegTable.getColumnModel().getColumn(3).setPreferredWidth(140); //Direccion Solicitante
+        RegTable.getColumnModel().getColumn(2).setPreferredWidth(140); //CedulaSolicitante
+        RegTable.getColumnModel().getColumn(3).setPreferredWidth(140); //Nombre Solicitante
+        RegTable.getColumnModel().getColumn(4).setPreferredWidth(140); //Direccion Solicitante
         //RegTable.getColumnModel().getColumn(4).setPreferredWidth(140); //Telefono Solicitante ELIMINADA DE VISTA
-        RegTable.getColumnModel().getColumn(4).setPreferredWidth(140); //Profesion Solicitante
-        RegTable.getColumnModel().getColumn(5).setPreferredWidth(180); //Actividad Laboral Solicitante
-        RegTable.getColumnModel().getColumn(6).setPreferredWidth(180); //MotivoConsulta Solicitante
+        RegTable.getColumnModel().getColumn(5).setPreferredWidth(140); //Profesion Solicitante
+        RegTable.getColumnModel().getColumn(6).setPreferredWidth(180); //Actividad Laboral Solicitante
+        RegTable.getColumnModel().getColumn(7).setPreferredWidth(180); //MotivoConsulta Solicitante
 
-        RegTable.getColumnModel().getColumn(7).setWidth(0); //IdParentesco
-        RegTable.getColumnModel().getColumn(7).setMinWidth(0); //IdParentesco
-        RegTable.getColumnModel().getColumn(7).setMaxWidth(0); //IdParentesco
+        RegTable.getColumnModel().getColumn(8).setWidth(0); //IdParentesco
+        RegTable.getColumnModel().getColumn(8).setMinWidth(0); //IdParentesco
+        RegTable.getColumnModel().getColumn(8).setMaxWidth(0); //IdParentesco
 
-        RegTable.getColumnModel().getColumn(8).setPreferredWidth(140); //Parentesco
+        RegTable.getColumnModel().getColumn(9).setPreferredWidth(140); //Parentesco
 
-        RegTable.getColumnModel().getColumn(9).setWidth(0); //IdPaciente
-        RegTable.getColumnModel().getColumn(9).setMinWidth(0); //IdPaciente
-        RegTable.getColumnModel().getColumn(9).setMaxWidth(0); //IdPaciente
+        RegTable.getColumnModel().getColumn(10).setWidth(0); //IdPaciente
+        RegTable.getColumnModel().getColumn(10).setMinWidth(0); //IdPaciente
+        RegTable.getColumnModel().getColumn(10).setMaxWidth(0); //IdPaciente
 
-        RegTable.getColumnModel().getColumn(10).setPreferredWidth(140); //Cedula Paciente
-        RegTable.getColumnModel().getColumn(11).setPreferredWidth(140); //Nombre del Paciente
-        RegTable.getColumnModel().getColumn(12).setPreferredWidth(140); //Fecha de Nacimiento
+        RegTable.getColumnModel().getColumn(11).setPreferredWidth(140); //Cedula Paciente
+        RegTable.getColumnModel().getColumn(12).setPreferredWidth(140); //Nombre del Paciente
+        RegTable.getColumnModel().getColumn(13).setPreferredWidth(140); //Fecha de Nacimiento
 
-        RegTable.getColumnModel().getColumn(13).setWidth(0);  //IdClasificacionPaciente
-        RegTable.getColumnModel().getColumn(13).setMinWidth(0); //IdClasificacionPaciente
-        RegTable.getColumnModel().getColumn(13).setMaxWidth(0); //IdClasificacionPaciente
+        RegTable.getColumnModel().getColumn(14).setWidth(0);  //IdClasificacionPaciente
+        RegTable.getColumnModel().getColumn(14).setMinWidth(0); //IdClasificacionPaciente
+        RegTable.getColumnModel().getColumn(14).setMaxWidth(0); //IdClasificacionPaciente
 
-        RegTable.getColumnModel().getColumn(14).setPreferredWidth(140); //Clasifiacion Paciente
+        RegTable.getColumnModel().getColumn(15).setPreferredWidth(140); //Clasifiacion Paciente
 
-        RegTable.getColumnModel().getColumn(15).setWidth(0); //IdTipoPaciente
-        RegTable.getColumnModel().getColumn(15).setMinWidth(0); //IdTipoPaciente
-        RegTable.getColumnModel().getColumn(15).setMaxWidth(0); //IdTipoPaciente 
+        RegTable.getColumnModel().getColumn(16).setWidth(0); //IdTipoPaciente
+        RegTable.getColumnModel().getColumn(16).setMinWidth(0); //IdTipoPaciente
+        RegTable.getColumnModel().getColumn(16).setMaxWidth(0); //IdTipoPaciente 
 
-        RegTable.getColumnModel().getColumn(16).setPreferredWidth(140); //Tipo Paciente
-        RegTable.getColumnModel().getColumn(17).setPreferredWidth(400); //Direccion
+        RegTable.getColumnModel().getColumn(17).setPreferredWidth(140); //Tipo Paciente
+        RegTable.getColumnModel().getColumn(18).setPreferredWidth(400); //Direccion
         //RegTable.getColumnModel().getColumn(19).setPreferredWidth(140); //Telefono Paciente ELIMINADA DE VISTA
-        RegTable.getColumnModel().getColumn(18).setPreferredWidth(140); //Profesion        
-        RegTable.getColumnModel().getColumn(19).setPreferredWidth(140); //Actividad Laboral        
-        RegTable.getColumnModel().getColumn(20).setPreferredWidth(200); //Motivo de la Consulta
+        RegTable.getColumnModel().getColumn(19).setPreferredWidth(140); //Profesion        
+        RegTable.getColumnModel().getColumn(20).setPreferredWidth(140); //Actividad Laboral        
+        RegTable.getColumnModel().getColumn(21).setPreferredWidth(200); //Motivo de la Consulta
 
-        RegTable.getColumnModel().getColumn(21).setWidth(0); //IdHorario
-        RegTable.getColumnModel().getColumn(21).setMinWidth(0); //IdHorario
-        RegTable.getColumnModel().getColumn(21).setMaxWidth(0); //IdHorario
+        RegTable.getColumnModel().getColumn(22).setWidth(0); //IdHorario
+        RegTable.getColumnModel().getColumn(22).setMinWidth(0); //IdHorario
+        RegTable.getColumnModel().getColumn(22).setMaxWidth(0); //IdHorario
 
-        RegTable.getColumnModel().getColumn(22).setPreferredWidth(140); //Horario
-        RegTable.getColumnModel().getColumn(23).setPreferredWidth(140); //DetalleHorario
+        RegTable.getColumnModel().getColumn(23).setPreferredWidth(140); //Horario
+        RegTable.getColumnModel().getColumn(24).setPreferredWidth(140); //DetalleHorario
 
-        RegTable.getColumnModel().getColumn(24).setWidth(0); //IdCurso
-        RegTable.getColumnModel().getColumn(24).setMinWidth(0); //IdCurso
-        RegTable.getColumnModel().getColumn(24).setMaxWidth(0); //IdCurso
+        RegTable.getColumnModel().getColumn(25).setWidth(0); //IdCurso
+        RegTable.getColumnModel().getColumn(25).setMinWidth(0); //IdCurso
+        RegTable.getColumnModel().getColumn(25).setMaxWidth(0); //IdCurso
 
-        RegTable.getColumnModel().getColumn(25).setPreferredWidth(240); //Curso
-        RegTable.getColumnModel().getColumn(26).setPreferredWidth(140); //Fecha Llamada
-        RegTable.getColumnModel().getColumn(27).setPreferredWidth(140); //Lista Relegados
-        RegTable.getColumnModel().getColumn(28).setPreferredWidth(40); //Columna Botones Telefonos
+        RegTable.getColumnModel().getColumn(26).setPreferredWidth(240); //Curso
+        RegTable.getColumnModel().getColumn(27).setPreferredWidth(140); //Fecha Llamada
+        RegTable.getColumnModel().getColumn(28).setPreferredWidth(140); //Lista Relegados
+        RegTable.getColumnModel().getColumn(29).setPreferredWidth(40); //Columna Botones Telefonos
 
 //fin de los parametros de la tabla
     }
@@ -355,68 +362,51 @@ public class PatientView implements ActionListener {
     public void toExcel(JTable table, File file) throws IOException {
         try {
             Date date = new Date();
-            SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");
-            WritableWorkbook workbookPacientes = Workbook.createWorkbook((file));
-            WritableSheet sheetPacientes = workbookPacientes.createSheet("Exportado el " + formatting.format(date), 0);
-            TableModel model = table.getModel();
-            // BufferedWriter excel = new BufferedWriter(new FileWriter(file));
-            // StringJoiner sj = new StringJoiner("\t");
-
-            for (int i = 0; i < model.getColumnCount() - 1; i++) {
+            SimpleDateFormat formatting = new SimpleDateFormat("dd-MM-yyyy");                 
+            HSSFWorkbook fWorkbook = new HSSFWorkbook();                                            //CREATE WORKBOOK USING APACHE POI
+            HSSFSheet fSheet = fWorkbook.createSheet("Exportado el " + formatting.format(date));    //CREATE SHEET USING APACHE POI
+            TableModel model =  table.getModel();
+            TableColumnModel tcm = table.getColumnModel();
+            HSSFRow hRow = fSheet.createRow((short) 0);
+            for (int i = 0; i < tcm.getColumnCount() - 1; i++) {
                 if (RegTable.getColumnModel().getColumn(i).getWidth() == 0
                         && RegTable.getColumnModel().getColumn(i).getMinWidth() == 0
                         && RegTable.getColumnModel().getColumn(i).getMaxWidth() == 0) //Checking if column is hidden in model, if it is then don't export it
                 {
-                    System.out.println("Column: " + RegTable.getColumnName(i) + "is not exported to excel because is hidden");
+                   // System.out.println("Column: " + model.getColumnName(i) + "is not exported to excel because is hidden");
                 } else {
-                    Label column = new Label(i, 0, model.getColumnName(i));
-                    try {
-                        sheetPacientes.addCell(column);
-
-                        //sj.add(model.getColumnName(i));
-                    } catch (WriteException ex) {
-                        Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                         
+                         HSSFCell cell = hRow.createCell((short) i);
+                         cell.setCellValue(tcm.getColumn(i).getHeaderValue().toString());
                 }
             }
                 
-            // excel.write(sj.toString());
-            //excel.newLine();
-            for (int i = 0; i < model.getRowCount() - 1; i++) {
-                // sj = new StringJoiner("\t");
+            for (int i = 0; i < RegTable.getRowCount(); i++) {
+                HSSFRow fRow = fSheet.createRow((short) i+1);                    
                 for (int j = 0; j < model.getColumnCount() - 1; j++) {
                     if (RegTable.getColumnModel().getColumn(j).getWidth() == 0
                             && RegTable.getColumnModel().getColumn(j).getMinWidth() == 0
                             && RegTable.getColumnModel().getColumn(j).getMaxWidth() == 0) //Checking if column is hidden in model, if it is then don't export it
                     {
-                        System.out.println("Column: " + RegTable.getColumnName(i) + "is not exported to excel because is hidden");
+                       // System.out.println("Column: " + model.getColumnName(i) + "is not exported to excel because is hidden");
                     } else {
-                        //  sj.add(model.getValueAt(i, j).toString());;
-                        Label row = new Label(j, i + 1,
-                                model.getValueAt(i, j).toString());
-                        System.out.println("Rows before adding to sheet: " + row.getString());
-                        try {
-                            System.out.println("Rows on try catch adding to sheet: " + row.getString());
-                            sheetPacientes.addCell(row);
-                        } catch (WriteException ex) {
-                            Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                       HSSFCell cell = fRow.createCell((short) j);
+                       cell.setCellValue(model.getValueAt(i, j).toString());
                     }
-                    
                 }
-                 workbookPacientes.write();
-                //excel.write(sj.toString());
-                //excel.newLine();
-            }
-            try {
-                workbookPacientes.close();
-                //excel.close();
-            } catch (WriteException ex) {
-                Logger.getLogger(PatientView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+                
+                
+                FileOutputStream fileOutputStream;
+                fileOutputStream = new FileOutputStream(file);
+                BufferedOutputStream bos = new BufferedOutputStream(fileOutputStream);                                
+                fWorkbook.write(bos);
+                bos.close();
+                fileOutputStream.close();
+            }            
         } catch (IOException e) {
             System.out.println(e);
         }
     }
+
+
 }
