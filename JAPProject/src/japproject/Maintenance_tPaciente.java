@@ -175,7 +175,7 @@ public class Maintenance_tPaciente implements ActionListener{
         ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Tipo Paciente");
-        txt_NombreTipoPaciente = new iTextField("", 15);
+        NombrePsicologo_txt = new iTextField("", 15);
 
         iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
 
@@ -183,14 +183,14 @@ public class Maintenance_tPaciente implements ActionListener{
 
             ArrayList<Object> obj2 = new ArrayList();//array para guardar data
             obj2.addAll(Arrays.asList(
-                    txt_NombreTipoPaciente.getText(),
+                    NombrePsicologo_txt.getText(),
                     tbl_Data2.get(0)
             ));
             Boolean exq = sql.exec("UPDATE JAW_TipoPaciente SET NombreTipoPaciente=? WHERE IdTipoPaciente=?", obj2);
 
             if (exq) {
                 JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
-                txt_NombreTipoPaciente.setText("");
+                NombrePsicologo_txt.setText("");
 //            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL TIPO PACIENTE", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -199,11 +199,11 @@ public class Maintenance_tPaciente implements ActionListener{
         });
         iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
         CancelButton.addActionListener((ai) -> {
-            txt_NombreTipoPaciente.setText("");
+            NombrePsicologo_txt.setText("");
 
         });
         ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);
-        ip2.AddObject(txt_NombreTipoPaciente, 200, 30, 170);
+        ip2.AddObject(NombrePsicologo_txt, 200, 30, 170);
         ip2.newLine();
         ip2.addSpace(5);
         ip2.AddObject(EditButton, 100, 30, 76 - 1);
@@ -251,7 +251,7 @@ public class Maintenance_tPaciente implements ActionListener{
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "ELIMINADO CORRECTAMENTE");
-                txt_NombreTipoPaciente.setText("");
+                NombrePsicologo_txt.setText("");
 //            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR EL TIPO PACIENTE", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -265,7 +265,7 @@ public class Maintenance_tPaciente implements ActionListener{
         if (menu == ItemEditar) {
             tbl_Data2.clear();
             ItemEditarActionListener();
-            txt_NombreTipoPaciente.setText(tbl_Data2.get(1).toString());
+            NombrePsicologo_txt.setText(tbl_Data2.get(1).toString());
 
         } else if (menu == ItemEliminar) {
             tbl_Data2.clear();

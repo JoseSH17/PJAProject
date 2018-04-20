@@ -103,16 +103,11 @@ public class Maintenance implements ActionListener {
         lbl_Titulo_Mantenimiento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbl_Titulo_Mantenimiento.setForeground(Color.GRAY.brighter());
 
-//        lbl_idCurso = new iLabel("ID Curso".toUpperCase());
-//        lbl_idCurso.setForeground(Color.GRAY.brighter());
-//        txt_idCurso = new iTextField("", 15);
         lbl_NombreCurso = new iLabel("Nombre Curso".toUpperCase());
         lbl_NombreCurso.setForeground(Color.GRAY.brighter());
         txt_NombreCurso = new iTextField("", 15);
 
         btnAñadir = new iButton("Añadir", 2, Color.GRAY, Color.BLACK);//boton para añadir curso
-//        btnModificar = new iButton("Modificar", 2, Color.GRAY, Color.BLACK);//boton para editar curso
-//        btnEliminar = new iButton("Eliminar", 2, Color.GRAY, Color.BLACK);//boton para eliminar curso
     }
 
     private void Mantenimiento_curso(iPanel scrollPane) {
@@ -178,7 +173,51 @@ public class Maintenance implements ActionListener {
 //        }
 //    }
     
-    public void btnAñadir_MouseClicked() {
+
+    public iPanel Editar() {
+        ip2 = new iPanel(1095, 300, 420, 150, 20);
+//    ip.setBackground(Color.black);
+        iLabel NombrePsicologo_lbl = new iLabel("Nombre Curso");
+        NombrePsicologo_txt = new iTextField("", 15);
+
+        iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
+
+        EditButton.addActionListener((ae) -> {
+
+            ArrayList<Object> obj2 = new ArrayList();//array para guardar data
+            obj2.addAll(Arrays.asList(
+                    NombrePsicologo_txt.getText(),
+                    tbl_Data2.get(0)
+            ));
+            Boolean exq = sql.exec("UPDATE JAW_Curso SET NombreCurso=? WHERE IdCurso=?", obj2);
+
+            if (exq) {
+                JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
+                table.repaint();
+            } else {
+                JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+
+        });
+        iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
+        CancelButton.addActionListener((ai) -> {
+            NombrePsicologo_txt.setText("");
+
+        });
+        ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);
+        ip2.AddObject(NombrePsicologo_txt, 200, 30, 170);
+        ip2.newLine();
+        ip2.addSpace(5);
+        ip2.AddObject(EditButton, 100, 30, 76 - 1);
+        ip2.AddObject(CancelButton, 100, 30, 200);
+        ip2.newLine();
+
+        ip2.finalice();
+
+        return ip2;
+    }
+
+        public void btnAñadir_MouseClicked() {
         ArrayList<Object> obj2 = new ArrayList();//array para guardar data
         obj2.addAll(Arrays.asList(
                 txt_NombreCurso.getText()
@@ -194,50 +233,7 @@ public class Maintenance implements ActionListener {
         }
 
     }
-
-    public iPanel Editar() {
-        ip2 = new iPanel(1095, 300, 420, 150, 20);
-//    ip.setBackground(Color.black);
-        iLabel NombrePsicologo_lbl = new iLabel("Nombre Curso");
-        txt_NombreCurso = new iTextField("", 15);
-
-        iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
-
-        EditButton.addActionListener((ae) -> {
-
-            ArrayList<Object> obj2 = new ArrayList();//array para guardar data
-            obj2.addAll(Arrays.asList(
-                    txt_NombreCurso.getText(),
-                    tbl_Data2.get(0)
-            ));
-            Boolean exq = sql.exec("UPDATE JAW_Curso SET NombreCurso=? WHERE IdCurso=?", obj2);
-
-            if (exq) {
-                JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
-                table.repaint();
-            } else {
-                JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-
-        });
-        iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
-        CancelButton.addActionListener((ai) -> {
-            txt_NombreCurso.setText("");
-
-        });
-        ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);
-        ip2.AddObject(txt_NombreCurso, 200, 30, 170);
-        ip2.newLine();
-        ip2.addSpace(5);
-        ip2.AddObject(EditButton, 100, 30, 76 - 1);
-        ip2.AddObject(CancelButton, 100, 30, 200);
-        ip2.newLine();
-
-        ip2.finalice();
-
-        return ip2;
-    }
-
+    
     public void ItemEditarActionListener() {
 
         int selectedRow = table.getSelectedRow();
@@ -257,7 +253,8 @@ public class Maintenance implements ActionListener {
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "ELIMINADO CORRECTAMENTE");
-
+            NombrePsicologo_txt.setText("");
+            txt_NombreCurso.setText("");
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR EL CURSO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -270,7 +267,7 @@ public class Maintenance implements ActionListener {
         if (menu == ItemEditar) {
             tbl_Data2.clear();
             ItemEditarActionListener();
-            txt_NombreCurso.setText(tbl_Data2.get(1).toString());
+            NombrePsicologo_txt.setText(tbl_Data2.get(1).toString());
 
         } else if (menu == ItemEliminar) {
             tbl_Data2.clear();

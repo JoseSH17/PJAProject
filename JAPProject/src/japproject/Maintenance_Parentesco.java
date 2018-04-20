@@ -80,9 +80,9 @@ public class Maintenance_Parentesco implements ActionListener{
 
         //popmenu
         popup = new JPopupMenu();
-        ItemEditar = new JMenuItem("Editar Psicologo");
+        ItemEditar = new JMenuItem("Editar Parentesco");
         ItemEditar.addActionListener(this);
-        ItemEliminar = new JMenuItem("Eliminar Psicologo");
+        ItemEliminar = new JMenuItem("Eliminar Parentesco");
         ItemEliminar.addActionListener(this);
         popup.add(ItemEditar);
         popup.add(ItemEliminar);
@@ -177,7 +177,7 @@ public class Maintenance_Parentesco implements ActionListener{
         ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Parentesco");
-        txt_Descripcion = new iTextField("", 15);
+        NombrePsicologo_txt = new iTextField("", 15);
 
         iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
 
@@ -185,14 +185,14 @@ public class Maintenance_Parentesco implements ActionListener{
 
             ArrayList<Object> obj2 = new ArrayList();//array para guardar data
             obj2.addAll(Arrays.asList(
-                    txt_Descripcion.getText(),
+                    NombrePsicologo_txt.getText(),
                     tbl_Data2.get(0)
             ));
             Boolean exq = sql.exec("UPDATE JAW_Parentesco SET DescripcionParentesco=? WHERE IdParentesco=?", obj2);
 
             if (exq) {
                 JOptionPane.showMessageDialog(null, "EDITADO CORRECTAMENTE");
-                txt_Descripcion.setText("");
+                NombrePsicologo_txt.setText("");
 //            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
             } else {
                 JOptionPane.showMessageDialog(null, "ERROR AL EDITAR EL PARENTESCO", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -201,11 +201,11 @@ public class Maintenance_Parentesco implements ActionListener{
         });
         iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
         CancelButton.addActionListener((ai) -> {
-            txt_Descripcion.setText("");
+            NombrePsicologo_txt.setText("");
 
         });
         ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);
-        ip2.AddObject(txt_Descripcion, 200, 30, 170);
+        ip2.AddObject(NombrePsicologo_txt, 200, 30, 170);
         ip2.newLine();
         ip2.addSpace(5);
         ip2.AddObject(EditButton, 100, 30, 76 - 1);
@@ -254,7 +254,7 @@ public class Maintenance_Parentesco implements ActionListener{
 
         if (exq) {
             JOptionPane.showMessageDialog(null, "ELIMINADO CORRECTAMENTE");
-            txt_Descripcion.setText("");
+            NombrePsicologo_txt.setText("");
 //            Maintenance_psicologos h = new Maintenance_psicologos(HomePanel.if_);
         } else {
             JOptionPane.showMessageDialog(null, "ERROR AL ELIMINAR EL PSICOLOGO", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -268,7 +268,7 @@ public class Maintenance_Parentesco implements ActionListener{
         if (menu == ItemEditar) {
             tbl_Data2.clear();
             ItemEditarActionListener();
-            txt_Descripcion.setText(tbl_Data2.get(1).toString());
+            NombrePsicologo_txt.setText(tbl_Data2.get(1).toString());
 
         } else if (menu == ItemEliminar) {
             tbl_Data2.clear();

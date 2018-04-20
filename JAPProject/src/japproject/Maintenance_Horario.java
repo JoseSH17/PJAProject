@@ -206,7 +206,7 @@ public class Maintenance_Horario implements ActionListener{
         ip2 = new iPanel(1095, 300, 420, 150, 20);
 //    ip.setBackground(Color.black);
         iLabel NombrePsicologo_lbl = new iLabel("Nombre Horario");
-        txt_NombreHorario = new iTextField("", 15);
+        NombrePsicologo_txt = new iTextField("", 15);
 
         iButton EditButton = new iButton("Editar", 15, Color.WHITE, Color.BLACK);
 
@@ -214,7 +214,7 @@ public class Maintenance_Horario implements ActionListener{
 
             ArrayList<Object> obj2 = new ArrayList();//array para guardar data
             obj2.addAll(Arrays.asList(
-                    txt_NombreHorario.getText(),
+                    NombrePsicologo_txt.getText(),
                     tbl_Data2.get(0)
             ));
             Boolean exq = sql.exec("UPDATE JAW_Horario SET NombreHorario=? WHERE IdHorario=?", obj2);
@@ -229,11 +229,11 @@ public class Maintenance_Horario implements ActionListener{
         });
         iButton CancelButton = new iButton("Cancelar", 15, Color.WHITE, Color.BLACK);
         CancelButton.addActionListener((ai) -> {
-            txt_NombreHorario.setText("");
+            NombrePsicologo_txt.setText("");
 
         });
         ip2.AddObject(NombrePsicologo_lbl, 200, 30, 50);
-        ip2.AddObject(txt_NombreHorario, 200, 30, 170);
+        ip2.AddObject(NombrePsicologo_txt, 200, 30, 170);
         ip2.newLine();
         ip2.addSpace(5);
         ip2.AddObject(EditButton, 100, 30, 76 - 1);
@@ -282,7 +282,7 @@ public class Maintenance_Horario implements ActionListener{
         if (menu == ItemEditar) {
             tbl_Data2.clear();
             ItemEditarActionListener();
-            txt_NombreHorario.setText(tbl_Data2.get(1).toString());
+            NombrePsicologo_txt.setText(tbl_Data2.get(1).toString());
 
         } else if (menu == ItemEliminar) {
             tbl_Data2.clear();
